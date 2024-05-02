@@ -34,9 +34,7 @@ tags: [excalidraw]
 
 #Composition ^0biOIcQ7
 
-#Arrow/Parquet ^aJbZAFoD
-
-Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB) ^0FMM8sFN
+#Arrow ^aJbZAFoD
 
 1 ^0SwKtWTN
 
@@ -150,7 +148,7 @@ column ^aGzNAZnV
 {
 	"type": "excalidraw",
 	"version": 2,
-	"source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.0.25",
+	"source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.1.6",
 	"elements": [
 		{
 			"type": "rectangle",
@@ -218,8 +216,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "TZsNZri_U-xh2HFyslafq",
 			"originalText": "𝐵",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -331,8 +328,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "UJ0bsgWBuMhkySHZJX4lQ",
 			"originalText": "𝐶",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -400,8 +396,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "EhiuOZT7eakPYgi3vhz0I",
 			"originalText": "𝐴",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -513,8 +508,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "k4y4ZE1ogBy4HO-cdDVGO",
 			"originalText": "𝐵",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -582,8 +576,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "SAWlZ4cI4kDcEUY0uzUuU",
 			"originalText": "𝐴",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -695,8 +688,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "cG2OVw-E4A3S5jcEbP_h2",
 			"originalText": "𝐶",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -764,8 +756,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "_sZMH9GB6IJqljzgR9oJd",
 			"originalText": "𝑋",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -877,8 +868,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "SgzEAO3dS4ZQEmbOUcQuT",
 			"originalText": "𝑌",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -946,8 +936,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "dAKwUD1kN6QseNR9JRzkI",
 			"originalText": "𝑌",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -1059,8 +1048,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "t66aLqrwzwHtJ-UzWOG46",
 			"originalText": "𝑍",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1128,8 +1116,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "fAnuDYJI-qkH2TSEJOBac",
 			"originalText": "𝐴",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -1241,8 +1228,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "kZrNQwn-IavHGdlX_hP72",
 			"originalText": "𝑍",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "arrow",
@@ -1393,8 +1379,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "#Composition",
-			"lineHeight": 1.25,
-			"baseline": 32
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1425,8 +1410,8 @@ column ^aGzNAZnV
 		},
 		{
 			"type": "text",
-			"version": 542,
-			"versionNonce": 1769442941,
+			"version": 590,
+			"versionNonce": 289525882,
 			"isDeleted": false,
 			"id": "aJbZAFoD",
 			"fillStyle": "solid",
@@ -1435,67 +1420,29 @@ column ^aGzNAZnV
 			"roughness": 2,
 			"opacity": 100,
 			"angle": 0,
-			"x": -744.7182119497484,
-			"y": 439.0458054566773,
+			"x": -749.4291494497484,
+			"y": 482.9598679566773,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 286.5599060058594,
+			"width": 125.13597106933594,
 			"height": 45,
 			"seed": 1665727293,
 			"groupIds": [],
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1714487832493,
+			"updated": 1714659698512,
 			"link": null,
 			"locked": false,
 			"fontSize": 36,
 			"fontFamily": 1,
-			"text": "#Arrow/Parquet",
-			"rawText": "#Arrow/Parquet",
+			"text": "#Arrow",
+			"rawText": "#Arrow",
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "#Arrow/Parquet",
-			"lineHeight": 1.25,
-			"baseline": 32
-		},
-		{
-			"type": "text",
-			"version": 416,
-			"versionNonce": 549839251,
-			"isDeleted": false,
-			"id": "0FMM8sFN",
-			"fillStyle": "solid",
-			"strokeWidth": 2,
-			"strokeStyle": "solid",
-			"roughness": 1,
-			"opacity": 100,
-			"angle": 0,
-			"x": -749.4907200991154,
-			"y": 498.8313917683421,
-			"strokeColor": "#1e1e1e",
-			"backgroundColor": "transparent",
-			"width": 768.1194458007812,
-			"height": 25,
-			"seed": 34235283,
-			"groupIds": [],
-			"frameId": null,
-			"roundness": null,
-			"boundElements": [],
-			"updated": 1714488163618,
-			"link": null,
-			"locked": false,
-			"fontSize": 20,
-			"fontFamily": 1,
-			"text": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
-			"rawText": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
-			"textAlign": "left",
-			"verticalAlign": "top",
-			"containerId": null,
-			"originalText": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"originalText": "#Arrow",
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1568,8 +1515,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "lqkbdPLJdnlEtO-HjZ0WJ",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1642,8 +1588,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "02B4k5xZctS-IAQQ9pjSj",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1716,8 +1661,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "kfZW8BbQ3RQi48J0fjjK-",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1790,8 +1734,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "6aDo6sZ-YyTa00L3cQ4-4",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1864,8 +1807,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "rSaZUK0YiIwWMArC9EUBl",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -1938,8 +1880,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "zsipAtLhrydUw5XhAzbZy",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2012,8 +1953,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "QJKhBMuQyOqDIxVVRfwev",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2086,8 +2026,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "o02S-k9dLVsK_qRr6r1-N",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2160,8 +2099,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "MOQU5Ly9DrOTENUrEkpHg",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2234,8 +2172,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "u80GegQIiJZV_zrGss_0u",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2308,8 +2245,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "x8v_8qPQJe8oWrXdWreCw",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2382,8 +2318,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "cDHWhXYJ3ogMqaLVjn6-i",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2456,8 +2391,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "XS8JhudK4MH7-XCrXO04k",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2530,8 +2464,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "JtFV4WpGjLJ4skB_adApj",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2604,8 +2537,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "Svot2zB2ebMt-Z6ekU1dw",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -2641,8 +2573,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "lon",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -2678,8 +2609,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "lat",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -2715,8 +2645,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "alt",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -2752,8 +2681,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "[{\n  lon: 0,\n  lat: 0,\n  alt: 0,\n}, {\n  lon: 1,\n  lat: 1,\n  alt: 1,\n}, {\n  lon: 2,\n  lat: 2,\n  alt: 2,\n}, {\n  lon: 3,\n  lat: 3,\n  alt: 3,\n},\n... ]",
-			"lineHeight": 1.25,
-			"baseline": 443
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2826,8 +2754,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "pp6nfxc4bUDLKtuNZ7jsH",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2900,8 +2827,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "GKHRKO2bmfjr9ALIZ_PO5",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -2974,8 +2900,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "xUX2QPTgFPlCdn3mNSwN2",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3048,8 +2973,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "qXfX09QTKV9hnTHOWFVX5",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3122,8 +3046,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "8abrcy17h_NdEzy8Z6Rls",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3196,8 +3119,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "-8grDC6bCVVHesdmXlBJl",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3270,8 +3192,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "HBVoe6_Y_7Xgq3dDDCzew",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3344,8 +3265,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "pgX4HoXxEeiio0kJAwmp0",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3418,8 +3338,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "OnaPhf9TTYaA7d6tWIUcc",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3492,8 +3411,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "bL2ecwJsnjIvk6TiaF0DJ",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3566,8 +3484,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "b6iMwgjIMSdpv0FadsGyP",
 			"originalText": "1",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3640,8 +3557,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "MmEUtRd-IM-JFJOIXJaZR",
 			"originalText": "2",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3714,8 +3630,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "60XI1wpox6TxLeIgXCtLi",
 			"originalText": "3",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3788,8 +3703,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "azH35sltmcN_1ItOWfm8C",
 			"originalText": "4",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -3862,8 +3776,7 @@ column ^aGzNAZnV
 			"verticalAlign": "middle",
 			"containerId": "uz4FaklHlZFh5yrbdiRmb",
 			"originalText": "5",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -3899,8 +3812,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "lon",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -3936,8 +3848,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "lat",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -3973,8 +3884,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "alt",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "text",
@@ -4010,8 +3920,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "Buffer Setups\n\nColumnar ->   [[a, a, a, a], [b, b, b, b], [c, c, c, c]]\nInterleave -> [a, b, c, a, b, c, a, b, c, a, b, c]\nSeparate ->   [a, a, a, a] [b, b, b, b] [c, c, c, c]\n\n\nVector -> [a, b, c]\n\nMatrix -> [ [a, b, c], [a, b, c] ]",
-			"lineHeight": 1.2,
-			"baseline": 235
+			"lineHeight": 1.2
 		},
 		{
 			"type": "rectangle",
@@ -4076,8 +3985,7 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "standard row ",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
 		},
 		{
 			"type": "rectangle",
@@ -4142,8 +4050,43 @@ column ^aGzNAZnV
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": "column",
-			"lineHeight": 1.25,
-			"baseline": 18
+			"lineHeight": 1.25
+		},
+		{
+			"type": "text",
+			"version": 417,
+			"versionNonce": 1357921126,
+			"isDeleted": true,
+			"id": "0FMM8sFN",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -749.4907200991154,
+			"y": 498.8313917683421,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "transparent",
+			"width": 768.1194458007812,
+			"height": 25,
+			"seed": 34235283,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": null,
+			"boundElements": [],
+			"updated": 1714659695872,
+			"link": null,
+			"locked": false,
+			"fontSize": 20,
+			"fontFamily": 1,
+			"text": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
+			"rawText": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
+			"textAlign": "left",
+			"verticalAlign": "top",
+			"containerId": null,
+			"originalText": "Arrow = memory/over wire     Parquet = Chunked Arrow On disk (File sys/DB)",
+			"lineHeight": 1.25
 		}
 	],
 	"appState": {
@@ -4161,10 +4104,10 @@ column ^aGzNAZnV
 		"currentItemTextAlign": "left",
 		"currentItemStartArrowhead": null,
 		"currentItemEndArrowhead": "arrow",
-		"scrollX": 924.8532980511452,
-		"scrollY": -472.32012842603814,
+		"scrollX": 1551.0230496804124,
+		"scrollY": 901.4241293376133,
 		"zoom": {
-			"value": 1.3038002551374719
+			"value": 0.5
 		},
 		"currentItemRoundness": "sharp",
 		"gridSize": null,
@@ -4179,7 +4122,8 @@ column ^aGzNAZnV
 			"clip": true,
 			"name": true,
 			"outline": true
-		}
+		},
+		"objectsSnapModeEnabled": false
 	},
 	"files": {}
 }
