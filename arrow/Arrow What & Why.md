@@ -22,3 +22,5 @@ The Apache Arrow specification [defines](https://arrow.apache.org/docs/format/C
 The Arrow columnar format provides analytical performance and data locality guarantees in exchange for comparatively more expensive mutation operations.
 
 ---
+
+Next: [[Format]]
