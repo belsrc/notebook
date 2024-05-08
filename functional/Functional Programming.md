@@ -16,7 +16,7 @@ tags:
 
 ## Tell Me What You Are Doing, Not How To Do It: Declarative vs Imperative
 
-You'll hear something to the effect of "imperative is **_how_** something is done and declarative is **_what_** is done" a lot. While that is essentially true, it does little to actually explain it. As any post on the subject does, let's jump to some metaphors. As someone that does a lot of work on their own car, I'll use changing the oil as the example.
+You'll hear something to the effect of "[imperative](https://en.wikipedia.org/wiki/Imperative_programming) is **_how_** something is done and [declarative](https://en.wikipedia.org/wiki/Declarative_programming) is **_what_** is done" a lot. While that is essentially true, it does little to actually explain it. As any post on the subject does, let's jump to some metaphors. As someone that does a lot of work on their own car, I'll use changing the oil as the example.
 
 **Imperative**
 
@@ -61,7 +61,7 @@ Giving each function the array `[45, 68, 34]`, they will both return `147`, agai
 
 ## No Need to Wonder: Pure Functions
 
-A pure function is any function that, given the input $x$, will always return the same output and produce no side-effects outside of its scope. More formally:
+A [pure function](https://en.wikipedia.org/wiki/Pure_function) is any function that, given the input $x$, will always return the same output and produce no side-effects outside of its scope. More formally:
 
 > a function from a set $X$ to a set $Y$ assigns to each element of $X$ exactly one element of $Y$
 >
@@ -85,7 +85,7 @@ displayResult(add(5, 6));
 displayResult(11);
 ```
 
-This aspect of pure functions is referred to as "referential transparency." A function is called referentially transparent if it can be replaced with its corresponding result without changing the program's behavior. For, hopefully, obvious reasons, having a side-effect in `add` from the example above would break this contract. Side-effects are any externally visible (observable) change. This includes, but is not limited to, changing a global variable, outputting to `console`, saving to a database, making an API call, etc. Now, an application that doesn't make any external requests or save anything that the user does isn't very practical, or useful. The goal of using pure functions isn't to completely eliminate side-effects, but to isolate them from the rest of the application's code.
+This aspect of pure functions is referred to as "[referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)." Also sometimes referred as [Idempotence](https://en.wikipedia.org/wiki/Idempotence). A function is called referentially transparent if it can be replaced with its corresponding result without changing the program's behavior. For, hopefully, obvious reasons, having a side-effect in `add` from the example above would break this contract. Side-effects are any externally visible (observable) change. This includes, but is not limited to, changing a global variable, outputting to `console`, saving to a database, making an API call, etc. Now, an application that doesn't make any external requests or save anything that the user does isn't very practical, or useful. The goal of using pure functions isn't to completely eliminate side-effects, but to isolate them from the rest of the application's code.
 
 ```js
 let counter = 0;
@@ -112,10 +112,11 @@ There are a number of advantages to using pure functions in your application:
 - Thanks to referential transparency, code is easier to understand (reason about) given any input.
 - Pure functions can always be memoized by their inputs, as $x \to y$ is always the same.
 - Makes parallelization easier (threads, webworkers, Promises) as it doesn't rely on shared memory.
+- Functions that have no side effects allow for compiler optimization techniques.
 
 ## Give A Function, Take A Function: Higher Order Function (HOF)
 
-A Higher Order Function is any function that takes one or more functions as arguments or returns a function as its result. Most people make use of them while, maybe, not even knowing what they are or that they have a specific name. As one of the core languages that JS was modeled after, Scheme, a lot of native functions use HOFs.
+A [Higher Order Function](https://en.wikipedia.org/wiki/Higher-order_function) is any function that takes a function (one or more) as an argument or returns a function as its result. Most people make use of them while, maybe, not even knowing what they are or that they have a specific name. As one of the core languages that JS was modeled after, Scheme, a lot of native functions use HOFs.
 
 ```js
 // Function as an argument
@@ -157,7 +158,7 @@ Array.reduce(func(accumulator, item, index, array));
 
 ## Piecemeal Functions: Currying
 
-Currying is a technique where a function that takes multiple arguments (_n_-ary) is transformed into a series of functions, each taking one argument (unary). $f(n\textrm{ arity})→f(n-1\textrm{ arity})→\text{etc}$ . Arity (/ˈæɹɪti/) is just a fancy (pinkies out) way of referring to the number of arguments that a function takes. `nullary` (0), `unary` (1), `binary` (2), `ternary` (3), `n-ary` (n) are all terms that are commonly used to describe functions solely on their number of arguments.
+[Currying](https://en.wikipedia.org/wiki/Currying) is a technique where a function that takes _n_-number of  arguments (_n_-ary) is transformed into a series of functions, each taking one argument (unary). $f(n\textrm{ arity})→f(n-1\textrm{ arity})→\text{etc}$ . Arity (/ˈæɹɪti/) is just a fancy (pinkies out) way of referring to the number of arguments that a function takes. `nullary` (0), `unary` (1), `binary` (2), `ternary` (3), `n-ary` (n) are all terms that are commonly used to describe functions solely on their number of arguments.
 
 In a curried function, each function call returns another function that expects the next argument until all arguments are provided, and then the final result is returned. Currying a function is just taking it and converting it to a series of closures. It makes the function more modular and flexible by allowing you to partially apply arguments, creating new functions with fewer parameters.
 
@@ -198,8 +199,8 @@ const transaction = autoCurry((tax, price, payment) => payment - price * (1 + ta
 const buySmashBros = transaction(0.07, 43.95);
 const buyWitcherThree = transaction(0.07, 38.30);
 const customerOneChange = buySmashBros(60);   // → 12.97
-const customerTwoChang = buyWitcherThree(50); // → 9.02
-const customerThreeChang = buySmashBros(100); // → 52.97
+const customerTwoChange = buyWitcherThree(50); // → 9.02
+const customerThreeChange = buySmashBros(100); // → 52.97
 ```
 
 Auto-curry is usually a lot more flexible to use as well.
@@ -211,7 +212,7 @@ transaction(0.07, 43.95)(60); // → 12.97
 transaction(0.07)(43.95)(60); // → 12.97
 ```
 
-You may have noticed in the examples above that the "main" piece of data that is being acted upon is the last arguement. This is a convention know as "data last." This just means that we want put all of our "boilerplate" arguments first and lastly the data. This makes it so that we can do all of the basic partial application as soon as possible and then just keep reusing that final function. Having the data last in curried functions also lets us use them as one off functions or easily plug them into things like array methods.
+You may have noticed in the examples above that the "main" piece of data that is being acted upon is the last argument. This is a convention know as "data last." This just means that we want to put all of our "boilerplate" arguments first and lastly the data. This makes it so that we can do all of the basic partial application as soon as possible and then just keep reusing that final function. Having the data last in curried functions also lets us use them as one off functions or easily plug them into things like array methods like `map`.
 
 ```js
 const transactionTotal = tax => price => price * (1 + tax);
@@ -237,7 +238,7 @@ This is a change from the defacto "data first" which is usually taught in school
 
 ## Nesting Functions: Composition and Compose
 
-Function composition is a technique where you combine two or more functions to create a new function. It involves applying one function to the result of another function. The result of the first function becomes the input for the next function, and so on.
+[Function composition](https://en.wikipedia.org/wiki/Function_composition_(computer_science)) is a technique where you combine two or more functions to create a new function. It involves applying one function to the result of another function. The result of the first function becomes the input for the next function, and so on. And it based on the [mathematical concept](https://en.wikipedia.org/wiki/Function_composition) of the same name.
 
 Let's say you have two functions: $f(x)$ and $g(x)$. Function composition, denoted as $(f ∘ g)(x)$, means you apply $g$ to $x$ first, and then you apply $f$ to the result. In other words, $(f ∘ g)(x) = f(g(x))$.
 
@@ -253,7 +254,11 @@ This works alright for simple things but can get confusing when you need to do s
 some(long(funcs(list(val))));
 ```
 
-The `compose` function is a higher-order function that facilitates function composition. It takes `n` number of functions you want to compose as arguments and returns a new function that performs the composition, in a right-to-left order. The output of the rightmost function is used as the input to the function to its left, and this process continues until all functions have been applied. Compose is also associative. `compose(f, compose(g, h)) === compose(compose(f, g), h)`.
+The `compose` function is a higher-order function that facilitates function composition. It takes `n` number of functions you want to compose as arguments and returns a new function that performs the composition, in a right-to-left order. The output of the rightmost function is used as the input to the function to its left, and this process continues until all functions have been applied. 
+
+Compose is also associative. 
+
+`compose(f, compose(g, h)) === compose(compose(f, g), h) === compose(f, g, h)`
 
 
 ```js
@@ -268,7 +273,7 @@ const addOneAndDouble = compose(double, addOne);
 console.log(addOneAndDouble(3)); // Output: 8
 ```
 
-This also highlights another aspect of functional programming, __point-free style__. Point-free style, also known as tacit programming, "is a programming paradigm in which function definitions do not identify the arguments (or "points") on which they operate." <sup>[(*)](https://en.wikipedia.org/wiki/Tacit_programming)</sup> Point-free is largely used during function composition but can also be used with a variety of HOFs.
+This also highlights another aspect of functional programming, __point-free style__. Point-free style, also known as [tacit programming](https://en.wikipedia.org/wiki/Tacit_programming), "is a programming paradigm in which function definitions do not identify the arguments (or "points") on which they operate." Point-free is largely used during function composition but can also be used with a variety of HOFs.
 
 ```js
 const double = val => val * 2;
@@ -303,7 +308,7 @@ const activeUsers = getActiveUsersByPage(currentPage)(users);
 
 ## Reversed Compose: Pipe
 
-Pipe is functionally the same as `compose`. The only difference is where `compose` is right-to-left, `pipe` is left-to-right. This makes it easier for some to reason about the flow.
+Pipe is functionally the same as `compose`. The only difference is where `compose` is right-to-left, `pipe` is left-to-right. This makes it easier for some to read as its their normal (language) the flow.
 
 ```js
 const pipe = (g, f) => (x) => f(g(x));
