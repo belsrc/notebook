@@ -3,14 +3,20 @@ tags:
   - notes
   - nvim
 ---
-## Movement
+## Navigating
 
-| Key | Action     |
-| --- | ---------- |
-| `h` | Move left  |
-| `l` | Move right |
-| `k` | Move up    |
-| `j` | Move down  |
+| Key         | Action                         |
+| ----------- | ------------------------------ |
+| `h`         | Move left                      |
+| `l`         | Move right                     |
+| `k`         | Move up                        |
+| `j`         | Move down                      |
+| `w`         | Move to start of next word     |
+| `e`         | Move to end of next word       |
+| `b`         | Move to start of previous word |
+| `0`         | Move to start of line          |
+| `$`         | Move to end of line            |
+| `shift + 0` | Move to start of next line     |
 
 ## Exiting
 
@@ -28,6 +34,8 @@ Pressing `i` changes to "Insert Mode", typing occurs to the _left_ of current cu
 
 Pressing `shift + a` changes to "Append Mode", this moves the cursor to the end of the line and allows input.
 
+## Deletion
+
 Pressing `dw` will delete from the current cursor to the next word (delete word), including the space between. This doesn't _have_ to be at the start of the word.
 
     > This is a [t]est for example sake -> This is a for example sake
@@ -43,13 +51,53 @@ Pressing `de` will delete from the current cursor to the end of the current word
 Pressing `d$` will delete from the current cursor to the end of the line.
 
     > This is a test[ ]for example sake -> This is a test
-    
+
+Pressing `dd` deletes an entire line.
 
 ## Operators & Motions
 
-Many commands are a combination of a operator and a motion. For example the delete operator `d`.  `d <motion>`
+Many commands are a combination of a operator and a motion. There are several possible motions.
 
-Typing a number before a motion repeats it _n_ times.
+| Motions     | Description                                             |
+| ----------- | ------------------------------------------------------- |
+| `w`         | To the start of next word, **excluding** first char     |
+| `e`         | To the end of next word, **including** the last char    |
+| `b`         | To start of previous word, **including** the first char |
+| `0`         | To start of line, **including** the first char          |
+| `$`         | To the end of line, **including** the last char         |
+| `shift + 0` | To start of next line                                   |
+
+Pressing the motion in Normal mode, with no operator, will just move the cursor similarly.
+
+You can add a number before a motion to repeat it _N_ number of times
+
+`2w` will move the cursor twos forward.
+`3e` will move the cursor to the end of the third word forward
+
+These can be combined with operators as well.
+
+`d2w` to delete two words forward. Or `2dd` to delete two lines.
+
+Change command format: `operator [number] motion`
+
+### Undo and Redo
+
+`u` to Undo the last command.
+`shift + u` to undo all changes on that line.
+
+`ctrl + r` to redo a command.
+
+### Put Command
+
+`p` command puts the previously deleted text after the cursor.
+
+`dd` on a line, then move your cursor to the line above where you want it. Press `p` and it will be placed below.
+
+Using `shif + p` will put it **before** your current line.
+
+### Replace Command
+
+`r<char>` to replace the character at the cursor with the one given.
 
 
 
@@ -57,5 +105,44 @@ Typing a number before a motion repeats it _n_ times.
 
 
 
-`w` moves to start of next word
-`e` moves to end of next word
+
+
+`gx` while cursor is over a link to open in browser
+
+`shift + v` Visual Mode
+
+
+nvim
++
+neovide
++
+nvchad
+
+
+
++
+lazy.nvim (if it doesnt come with nvchad)
+
+`:Lazy` opens the Lazy GUI
+
++
+telescope.nvim (if it doesnt come with nvchad)
+
++
+treesitter.nvim (if it doesnt come with nvchad)
+
+
+`vim.keymap.set('', '<C-p>, fn, {})`
+`C-p` = Ctrl + p
+
+
+
+
+https://www.youtube.com/watch?v=zHTeCSVAFNY'
+
+
+
+cssls
+eslint
+html
+jsonls
