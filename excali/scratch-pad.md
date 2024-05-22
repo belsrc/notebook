@@ -221,7 +221,7 @@ alt ^HR9j7L4a
 Columnar Layout ^emcLwUO6
 
 When you think of a table representation, it is two dimensional with columns and rows. 
-However when it’s physically stored on a disc it has to be aranged as a linear, one 
+However when it’s physically stored on a disc it has to be arranged as a linear, one 
 dimensional succession of bits. ^Rr56RSGs
 
 Normal Table Layout ^KtXzgqKj
@@ -6728,8 +6728,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		},
 		{
 			"type": "text",
-			"version": 229,
-			"versionNonce": 800362566,
+			"version": 231,
+			"versionNonce": 1223061022,
 			"isDeleted": false,
 			"id": "Rr56RSGs",
 			"fillStyle": "solid",
@@ -6738,8 +6738,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": -10.671356592778693,
-			"y": 1685.9584518739418,
+			"x": -10.544817840285532,
+			"y": 1686.1180007357807,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
 			"width": 861.6793212890625,
@@ -6749,17 +6749,17 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1715352299439,
+			"updated": 1716396996554,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 1,
-			"text": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be aranged as a linear, one \ndimensional succession of bits.",
-			"rawText": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be aranged as a linear, one \ndimensional succession of bits.",
+			"text": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be arranged as a linear, one \ndimensional succession of bits.",
+			"rawText": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be arranged as a linear, one \ndimensional succession of bits.",
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be aranged as a linear, one \ndimensional succession of bits.",
+			"originalText": "When you think of a table representation, it is two dimensional with columns and rows. \nHowever when it’s physically stored on a disc it has to be arranged as a linear, one \ndimensional succession of bits.",
 			"lineHeight": 1.25
 		},
 		{
@@ -9269,8 +9269,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		},
 		{
 			"type": "arrow",
-			"version": 883,
-			"versionNonce": 1961813190,
+			"version": 887,
+			"versionNonce": 1038791966,
 			"isDeleted": false,
 			"id": "drbUB2DKUjhyAQTBLC54F",
 			"fillStyle": "solid",
@@ -9290,18 +9290,18 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1715359736359,
+			"updated": 1716396902239,
 			"link": null,
 			"locked": false,
 			"startBinding": {
 				"elementId": "hHgs3Dm09R2M1DiNdRM1j",
-				"focus": 0.07268301779984693,
-				"gap": 9.81512926206642
+				"gap": 9.81512926206642,
+				"focus": 0.07268301779984693
 			},
 			"endBinding": {
 				"elementId": "mxK2e2dZdCTgjhy1ihjB3",
-				"focus": -0.019378203670198366,
-				"gap": 13.898088802365237
+				"gap": 13.898088802365237,
+				"focus": -0.019378203670198366
 			},
 			"lastCommittedPoint": null,
 			"startArrowhead": null,
@@ -9319,8 +9319,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		},
 		{
 			"type": "arrow",
-			"version": 931,
-			"versionNonce": 1629809478,
+			"version": 935,
+			"versionNonce": 1199211934,
 			"isDeleted": false,
 			"id": "k5oP22_bwTFBXr3ek4n2S",
 			"fillStyle": "solid",
@@ -9340,18 +9340,18 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1715359736359,
+			"updated": 1716396902239,
 			"link": null,
 			"locked": false,
 			"startBinding": {
 				"elementId": "LIJwefYU_ZH73uZOvwAbs",
-				"focus": 0.03742545645039164,
-				"gap": 11.747323542329923
+				"gap": 11.747323542329923,
+				"focus": 0.03742545645039164
 			},
 			"endBinding": {
 				"elementId": "21FT_hU7BcShCmZKRLAXa",
-				"focus": -0.010072014718100073,
-				"gap": 11.967916799661452
+				"gap": 11.967916799661452,
+				"focus": -0.010072014718100073
 			},
 			"lastCommittedPoint": null,
 			"startArrowhead": null,
@@ -9369,8 +9369,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		},
 		{
 			"type": "arrow",
-			"version": 852,
-			"versionNonce": 124473798,
+			"version": 856,
+			"versionNonce": 581973534,
 			"isDeleted": false,
 			"id": "lu7syoiPlm5JEXoju4UmP",
 			"fillStyle": "solid",
@@ -9390,18 +9390,18 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1715359736359,
+			"updated": 1716396902239,
 			"link": null,
 			"locked": false,
 			"startBinding": {
 				"elementId": "wegEo2IuNPYh4EO0tWLxk",
-				"focus": -0.018894294211278903,
-				"gap": 11.069709966911887
+				"gap": 11.069709966911887,
+				"focus": -0.018894294211278903
 			},
 			"endBinding": {
 				"elementId": "CNblpcv04VxrjtzA3oloE",
-				"focus": 0.015168383105889503,
-				"gap": 12.583929140948385
+				"gap": 12.583929140948385,
+				"focus": 0.015168383105889503
 			},
 			"lastCommittedPoint": null,
 			"startArrowhead": null,
@@ -9446,8 +9446,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		},
 		{
 			"type": "text",
-			"version": 110,
-			"versionNonce": 1844933318,
+			"version": 325,
+			"versionNonce": 69131522,
 			"isDeleted": false,
 			"id": "Lhp9LM6z",
 			"fillStyle": "solid",
@@ -9456,8 +9456,8 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": -1435.9544549577292,
-			"y": 1340.9956715371982,
+			"x": -1287.5506728626804,
+			"y": 1450.9528436556266,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
 			"width": 531.359619140625,
@@ -9467,7 +9467,7 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1715353796145,
+			"updated": 1716396927211,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
@@ -9568,10 +9568,10 @@ In a column-oriented storage, it is laid out one column at a time ^jilNKSwF
 		"currentItemTextAlign": "left",
 		"currentItemStartArrowhead": null,
 		"currentItemEndArrowhead": "arrow",
-		"scrollX": 602.0535539723127,
-		"scrollY": -1489.9015928649444,
+		"scrollX": 1348.476373603079,
+		"scrollY": -468.9422855741127,
 		"zoom": {
-			"value": 1.0500175084452055
+			"value": 0.710009765625
 		},
 		"currentItemRoundness": "sharp",
 		"gridSize": null,

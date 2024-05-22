@@ -68,11 +68,8 @@ A [pure function](https://en.wikipedia.org/wiki/Pure_function) is any function t
 > _Wikipedia - Function (mathematics)_
 
 Or, shortened, "A function from $X$ to $Y$ assigns $X$ to exactly one $Y$."
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://belsrc.github.io/gist-images/functions/function-assoc-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://belsrc.github.io/gist-images/functions/function-assoc-light.png">
-  <img alt="Functor dependency tree" src="https://belsrc.github.io/gist-images/functions/function-assoc-light.png">
-</picture>
+
+![](function-assoc-dark.png)
 
 This is the basic $y = f(x)$ that is taught in Algebra. Given the function $f(x) = 2x + 2$ , $f(5)$ will always be $12$. Since the result of a pure function never changes, this allows us to swap out the function call with the result and not change the application.
 
