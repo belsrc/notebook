@@ -27,3 +27,51 @@ C:\"Program Files (x86)"\FontForgeBuilds\fontforge -script font-patcher P:\codeF
 
 
 `:e $MYVIMRC` opens the nvim init.lua
+
+
+
+```
+~/.config/nvim/init.lua 
+~/.config/alacritty/alacritty.toml
+
+%APPDATA%\alacritty\alacritty.toml
+```
+
+```toml
+# Colors (One Dark)
+
+# Default colors
+[colors.primary]
+background = '#282c34'
+foreground = '#abb2bf'
+
+# Normal colors
+[colors.normal]
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
+
+# Bright colors
+[colors.bright]
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'
+
+[font]
+normal = { family = "Dank Mono", style = "Regular" }
+size = 16
+
+[window]
+dimensions = { columns = 240, lines = 60 }
+padding = { x = 12, y = 12 }
+```
