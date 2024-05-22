@@ -35,35 +35,35 @@ tags:
 
 ### Variables
 
-  | $\lambda$ | JS    |
-  | --------- | ----- |
-  | $x$       | `x`   |
-  | $(a)$     | `(a)` |
+| $\lambda$ | JS    |
+| --------- | ----- |
+| $x$       | `x`   |
+| $(a)$     | `(a)` |
 
 
 ### Application
 
   Applying a function to its arguments in λ-calculus is just juxtaposition, a space between. In λ-calculus all functions are unary (/ˈyo͞onərē/), which means they have a single argument. So in the case of applying multiple arguments, the functions are curried.
 
-  | $\lambda$     | JS        |
-  | ------------- | --------- |
-  | $f~a$         | `f(a)`    |
-  | $f ~ a ~ b$   | `f(a)(b)` |
+| $\lambda$   | JS        |
+| ----------- | --------- |
+| $f~a$       | `f(a)`    |
+| $f ~ a ~ b$ | `f(a)(b)` |
 
 
 ### Grouping
 
   Parens can be used to disambiguate parts of the function.
 
-  | $\lambda$ | JS          |
-  | --------- | ----------- |
-  | $(f~a)~b$ | `(f(a))(b)` |
+| $\lambda$ | JS          |
+| --------- | ----------- |
+| $(f~a)~b$ | `(f(a))(b)` |
 
   Since function application is **left-associative** (meaning it's left to right), they are unneeded in this case. But parens can be used to force evaluation in a different order.
 
-  | $\lambda$ | JS        |
-  | --------- | --------- |
-  | $f~(a~b)$ | `f(a(b))` |
+| $\lambda$ | JS        |
+| --------- | --------- |
+| $f~(a~b)$ | `f(a(b))` |
 
 
 ##### Syntax Shorthand
@@ -105,19 +105,19 @@ tags:
 
 ### Cross Comparisons
 
-  | Type          | $\lambda$               | JS            | Notes                                |
-  |---------------|-------------------------|---------------|--------------------------------------|
-  | Variables¹    | $x$                     | `x`           |                                      |
-  | Variables²    | $(x)$                   | `(x)`         |                                      |
-  | Application¹  | $f\:a$                  | `f(a)`        |                                      |
-  | Application²  | $f\:a\:b$               | `f(a)(b)`     | Curried                              |
-  | Application³  | $(f\:a)\:b$             | `(f(a))(b)`   | Uneeded. Left Associative            |
-  | Application⁴  | $f\:(a\:b)$             | `f((a)(b))`   | Force different order                |
-  | Abstractions¹ | $\lambda a.b$           | `a => b`      |                                      |
-  | Abstractions² | $\lambda a.b\:x$        | `a => b(x)`   | Is greedy. Swallows all to the right |
-  | Abstractions³ | $\lambda a.(b\:x)$      | `a => (b(x))` | Disambiguate. But not needed         |
-  | Abstractions⁴ | $(\lambda a.b)\:x$      | `(a => b)(x)` | Apply `a => b` to `x`                |
-  | Abstractions⁵ | $\lambda a.\lambda b.a$ | `a => b => a` | Nested functions.                    |
+| Type          | $\lambda$               | JS            | Notes                                |
+| ------------- | ----------------------- | ------------- | ------------------------------------ |
+| Variables¹    | $x$                     | `x`           |                                      |
+| Variables²    | $(x)$                   | `(x)`         |                                      |
+| Application¹  | $f\:a$                  | `f(a)`        |                                      |
+| Application²  | $f\:a\:b$               | `f(a)(b)`     | Curried                              |
+| Application³  | $(f\:a)\:b$             | `(f(a))(b)`   | Uneeded. Left Associative            |
+| Application⁴  | $f\:(a\:b)$             | `f((a)(b))`   | Force different order                |
+| Abstractions¹ | $\lambda a.b$           | `a => b`      |                                      |
+| Abstractions² | $\lambda a.b\:x$        | `a => b(x)`   | Is greedy. Swallows all to the right |
+| Abstractions³ | $\lambda a.(b\:x)$      | `a => (b(x))` | Disambiguate. But not needed         |
+| Abstractions⁴ | $(\lambda a.b)\:x$      | `(a => b)(x)` | Apply `a => b` to `x`                |
+| Abstractions⁵ | $\lambda a.\lambda b.a$ | `a => b => a` | Nested functions.                    |
 
 
 ## $\beta$-Reduction
