@@ -9,11 +9,11 @@ For each bit, if both are `1`, the resulting bit is `1`. If either or both are `
 
 Given the following two values:
 
-![](setup-dark.png)
+![](../images/bitwise/setup-dark.png)
 
 Performing the bitwise AND would visually look like:
 
-![](and-dark.png)
+![](../images/bitwise/and-dark.png)
 
 ```
 22 & 93 === 20
@@ -27,7 +27,7 @@ const isEven = (n: number) => (n & 1) === 0;
 
 Another use is for checking bit masks. Say you had a user config of (yes | no) states.
 
-![](mask-dark.png)
+![](../images/bitwise/mask-dark.png)
 
 ```js
 const userOptions = 0b0000;
@@ -51,11 +51,11 @@ For each bit, if either or both are `1`, the resulting bit is `1`. If both are `
 
 Given the following two values:
 
-![](setup-dark.png)
+![](../images/bitwise/setup-dark.png)
 
 Performing the bitwise OR would visually look like:
 
-![](or-dark.png)
+![](../images/bitwise/or-dark.png)
 
 ```
 22 | 93 === 95
@@ -137,11 +137,11 @@ The exclusive OR is slightly different to the OR in that only one of the two bit
 
 Given the following two values:
 
-![](setup-dark.png)
+![](../images/bitwise/setup-dark.png)
 
 Performing the bitwise XOR would visually look like:
 
-![](xor-dark.png)
+![](../images/bitwise/xor-dark.png)
 
 ```
 22 ^ 93 === 75
@@ -176,15 +176,15 @@ console.log(hasFlag(userConfig, SHOULD_SHOW_A));
 
 When shifting, as the name would suggest, each bit is shifting, left or right, one place. And a `0` is added to the left or right respectively. As a result, the left-most or right-most bit is lost.
 
-![](shift-double-dark.png)
+![](../images/bitwise/shift-double-dark.png)
 
 We are now effectly multiplying by 2 each time. But what happens when we lose the most significant digit?
 
-![](shift-drop-dark.png)
+![](../images/bitwise/shift-drop-dark.png)
 
 Shifting to the right works the same but in the opposite direction.
 
-![](shift-half-dark.png)
+![](../images/bitwise/shift-half-dark.png)
 
 Since it only operates on whole numbers, the result of a shift right on an odd number is "rounded" down.
 
@@ -192,7 +192,7 @@ Since it only operates on whole numbers, the result of a shift right on an odd n
 
 A RGBA code is actually four 8-bit integers "packed" together.
 
-![](rgb-dark.png)
+![](../images/bitwise/rgb-dark.png)
 
 ```
 83, 155, 245, 255
@@ -203,7 +203,7 @@ const rgbaCode = 0b01010011100110111111010111111111;
 
 To "unpack" them, we can use a combination of right shift and an AND bit mask. The mask will take the first 8 bits.
 
-![](alpha-mask-dark.png)
+![](../images/bitwise/alpha-mask-dark.png)
 
 ```js
 const VALUE_MASK = 0b00000000000000000000000011111111;
@@ -221,7 +221,7 @@ const alpha = rgbaCode & VALUE_MASK;
 
 And then to get the rest we just need to shift the original code over 8, 16, 24 (respectively) and then AND them against the mask.
 
-![](rgb-shift-dark.png)
+![](../images/bitwise/rgb-shift-dark.png)
 
 ```js
 const blueBits = rgbaCode >> 8;

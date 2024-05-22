@@ -15,7 +15,7 @@ const buffer = new ArrayBuffer(3);
 // -> [hex] 00 00 00
 ```
 
-![](byte-array/buffer-dark.png)
+![](../images/byte-array/buffer-dark.png)
 
 
 ## DataView
@@ -42,7 +42,7 @@ colorView.getUint8(2);
 // -> 245
 ```
 
-![](data-view-dark.png)
+![](../images/byte-array/data-view-dark.png)
 
 
 ## TypedArray
@@ -97,7 +97,7 @@ console.log(str);
 // -> 01010011 10011011 11110101
 ```
 
-![](typed-array-dark.png)
+![](../images/byte-array/typed-array-dark.png)
 
 If the values are known before creation, you can use an array directly in the constructor
 ```js
@@ -201,7 +201,7 @@ There is also Float32Array, Float64Array, BigUint64Array and BigInt64Array that 
 _All JavaScript numbers are stored in a a 64-bit floating-point format.
 number (the fraction) is stored in bits 0 to 51, the exponent in bits 52 to 62, and the sign in bit 63_
 
-![](range-layout-dark.png)
+![](../images/byte-array/range-layout-dark.png)
 
 ## Strings
 

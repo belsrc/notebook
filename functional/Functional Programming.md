@@ -69,7 +69,7 @@ A [pure function](https://en.wikipedia.org/wiki/Pure_function) is any function t
 
 Or, shortened, "A function from $X$ to $Y$ assigns $X$ to exactly one $Y$."
 
-![](function-assoc-dark.png)
+![](../images/functions/function-assoc-dark.png)
 
 This is the basic $y = f(x)$ that is taught in Algebra. Given the function $f(x) = 2x + 2$ , $f(5)$ will always be $12$. Since the result of a pure function never changes, this allows us to swap out the function call with the result and not change the application.
 

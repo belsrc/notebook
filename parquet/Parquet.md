@@ -3,17 +3,17 @@
 
 The goal is to keep I/O to a minimum by reading from a disk only the data required for the query. When you think of a table representation, it is two dimensional with columns and rows. However when it’s physically stored on a disc it has to be arranged as a linear, one dimensional succession of bits.
 
-![](../images/normal-table-layout.png)
+![](../images/arrow/normal-table-layout.png)
 
-![](../images/columnar-table-layout.png)
+![](../images/arrow/columnar-table-layout.png)
 
 Organizing the table in a row layout means writing each row one after another. This interleaves data of different types, as you write a value for the first column in the first row, followed by the value of the second column of a different type in the first row.
 
-![](../images/normal-table-disk.png)
+![](../images/arrow/normal-table-disk.png)
 
 In a column layout, you write all the values of the first column for all the rows first, then the values for the second column, and so on.
 
-![](../images/columnar-disk.png)
+![](../images/arrow/columnar-disk.png)
 
 
 There are several advantages to columnar formats.

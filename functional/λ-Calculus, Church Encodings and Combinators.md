@@ -20,7 +20,7 @@ tags:
 
 ## $\lambda$-Calculus Syntax
 
-![](lambda-syntax-dark.png)
+![](../images/math/lambda-syntax-dark.png)
 
 
 ### Use
@@ -138,7 +138,7 @@ tags:
 
   $x$ is the $\beta$-normal form
 
-![](lambda-beta-dark.png)
+![](../images/math/lambda-beta-dark.png)
 
 
 ## Combinatory Logic
@@ -347,7 +347,7 @@ tags:
 
 ## Booleans
 
-  ![](lambda-boolean-dark.png)
+  ![](../images/math/lambda-boolean-dark.png)
 
   Its function application. If its "true" then it selects the first expression. If its "false" it selects the second expression.
 

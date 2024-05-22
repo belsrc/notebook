@@ -8,13 +8,13 @@ tags:
 
 Allows you to plot a point based on it's distance from the origin. Points are expressed as $(x, y)$.
 
-![](cartesian-dark.png)
+![](../images/math/cartesian-dark.png)
 
 ## Polar Coordinates
 
 Allows you to plot a point based on its distance and angle from a center point. Points are expressed as $(r, \theta)$.
 
-![](polar-dark.png)
+![](../images/math/polar-dark.png)
 
 It is usually easier to think about a shape in polar coordinates and then convert it to Cartesian when are visualizing it.
 
@@ -24,7 +24,7 @@ $\theta = 360\degree / n\smash-sides$
 
 $360\degree / 8 = 45\degree$
 
-![](polar-angle-dark.png)
+![](../images/math/polar-angle-dark.png)
 
 So, if we know $r$ (how large we want it) and we can calculate $\theta$, then we can convert it back to cartesian.
 
