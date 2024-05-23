@@ -5,14 +5,6 @@
 4. JetBrains Mono - All ligs. Consistent glyphs, a little too heavy
 5. Geist - All ligs. Consistent glyphs, a little too heavy
 
-
-
-
-Getting started with Kickstarter (one of nvim's core maintainers)
-https://www.youtube.com/watch?v=m8C0Cq9Uv9o
-
-
-
 `./font-patcher ~/Downloads/DankMono-491/ttf/DankMono-Regular.ttf`
 
 ```
@@ -23,6 +15,19 @@ C:\"Program Files (x86)"\FontForgeBuilds\fontforge -script font-patcher P:\codeF
 
 
 
+alacritty
++
+tmux
++
+nvim
++
+kickstart.nvim (merge into the nice things from nvchad)
++
+obsidian.nvim
+
+
+Getting started with Kickstarter (one of nvim's core maintainers)
+https://www.youtube.com/watch?v=m8C0Cq9Uv9o
 
 
 
@@ -75,3 +80,4 @@ size = 16
 dimensions = { columns = 240, lines = 60 }
 padding = { x = 12, y = 12 }
 ```
+

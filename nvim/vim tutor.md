@@ -78,58 +78,75 @@ These can be combined with operators as well.
 
 `d2w` to delete two words forward. Or `2dd` to delete two lines.
 
-Change command format: `operator [number] motion`
+Motion format: `operator [number] motion`
 
-### Undo and Redo
+### Undo and Redo Commands
 
-`u` to Undo the last command.
+`u` to Undo the last operator.
 `shift + u` to undo all changes on that line.
 
 `ctrl + r` to redo a command.
 
 ### Put Command
 
-`p` command puts the previously deleted text after the cursor.
+`p` operator puts the previously deleted text after the cursor.
 
 `dd` on a line, then move your cursor to the line above where you want it. Press `p` and it will be placed below.
 
-Using `shif + p` will put it **before** your current line.
+Using `shift + p` will put it **before** your current line.
 
 ### Replace Command
 
 `r<char>` to replace the character at the cursor with the one given.
 
+### Change Operator
+
+`ce` change until the end of the word.
+This basically is a combination of `de` followed by `i`.
+
+The Change operator uses the same Motions as the Delete operator.
+
+`c [number] motion`
+
+### Cursor Location and File Status
+
+`ctrl - g` (`<C-g>`) will show the file name and position in the file in the footer of the window. May also see the cursor position on the right of the footer if the `ruler` option is turned on.
+
+`[<line number: cursor position]`
+
+`G` to move to the end of the file.
+
+`gg` to move to the start of the file.
+
+You can press `<number> G` to go to the given line number.
+
+### Search Command
+
+<ln: 498>
 
 
 
 
 
-
-
+`zz` to center the current cursor position.
 
 `gx` while cursor is over a link to open in browser
 
 `shift + v` Visual Mode
 
-
-nvim
-+
-neovide
-+
-nvchad
-
-
-
-+
-lazy.nvim (if it doesnt come with nvchad)
-
 `:Lazy` opens the Lazy GUI
 
-+
-telescope.nvim (if it doesnt come with nvchad)
 
+alacritty
 +
-treesitter.nvim (if it doesnt come with nvchad)
+tmux
++
+nvim
++
+kickstart.nvim (merge into the nice things from nvchad)
++
+obsidian.nvim
+
 
 
 `vim.keymap.set('', '<C-p>, fn, {})`
