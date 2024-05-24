@@ -32,7 +32,7 @@ Pressing `x` when your cursor is over a character, deletes that character.
 
 Pressing `i` changes to "Insert Mode", typing occurs to the _left_ of current cursor placement.
 
-Pressing `shift + a` changes to "Append Mode", this moves the cursor to the end of the line and allows input.
+Pressing `shift a` changes to "Append Mode", this moves the cursor to the end of the line and allows input.
 
 ## Deletion
 
@@ -83,9 +83,9 @@ Motion format: `operator [number] motion`
 ### Undo and Redo Commands
 
 `u` to Undo the last operator.
-`shift + u` to undo all changes on that line.
+`shift u` to undo all changes on that line.
 
-`ctrl + r` to redo a command.
+`ctrl r` to redo a command.
 
 ### Put Command
 
@@ -110,7 +110,7 @@ The Change operator uses the same Motions as the Delete operator.
 
 ### Cursor Location and File Status
 
-`ctrl - g` (`<C-g>`) will show the file name and position in the file in the footer of the window. May also see the cursor position on the right of the footer if the `ruler` option is turned on.
+`ctrl g` (`<C-g>`) will show the file name and position in the file in the footer of the window. May also see the cursor position on the right of the footer if the `ruler` option is turned on.
 
 `[<line number: cursor position]`
 
@@ -122,7 +122,50 @@ You can press `<number> G` to go to the given line number.
 
 ### Search Command
 
-<ln: 498>
+`/<phrase>` to search for the entered text.
+If there is multiple occurrences:
+`n` to go to next.
+`N` to go to previous.
+
+This searches the document top down.
+
+To search the document in the reverse order use `?<phrase>` instead.
+
+Use `ctrl - o` (`<C-o>`) to go to the older position. And `ctrl i` (`<C-i>`) to go to the newer position. 
+
+
+### Matching Parentheses
+
+Place the cursor on an opening `(`, `[` or `{` and press `%`. The cursor will move to the matching closing symbol. Depending on your setup, the matching symbols will also be highlighted.
+
+
+### Substitute Command
+
+`:s/<old>/<new>` to replace the first occurrence of `old` with `new` for the current line.
+
+Using `:s/<old>/<new>/g` will replace all occurrences on the current line.
+
+The changes won't be committed until you hit `enter`.
+
+**Mnemonic**: 
+
+> Substitute "this" for "that".
+
+ > Substitute "this" for "that" globally. _(Not happy with that since its not truly global)_
+
+
+You can use `:#,#s/<old>/<new>/g` to replace all occurrences from the first line number (`#`) to the second line number, inclusively.
+
+`:%s/<old>/<new>/g` to change every occurrence in the entire file.
+
+`:%s/<old>/<new>/gc` to find every occurrence in the entire file with a prompt whether to replace it or not.
+
+The `c` (confirm) flag can be added to all of the other substitutes command as well.
+
+
+### External Commands
+
+Ln: 611
 
 
 
@@ -147,6 +190,9 @@ kickstart.nvim (merge into the nice things from nvchad)
 +
 obsidian.nvim
 
+
+I think kickstart has this already
+https://github.com/folke/which-key.nvim
 
 
 `vim.keymap.set('', '<C-p>, fn, {})`
