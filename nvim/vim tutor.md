@@ -3,6 +3,27 @@ tags:
   - notes
   - nvim
 ---
+## Definitions of Word
+
+This should me noted at the start. There is a difference between a word (usually the lower case command) and WORD (usually the uppercase command).
+
+A "word" is:
+- A sequence of letters, digits, underscores, and some special ASCII characters (as specified in the default value of the `iskeyword` option: `@,48–57,_,192–255`).
+- Or a sequence of non-blank characters that are not included in the `iskeyword` option.
+- Or an empty line.
+
+A "WORD" is:
+- A sequence of non-blank characters.
+- Or an empty line.
+
+```
+ w  w    w  w
+| || |  | || |
+abc@#$  def%^&
+|    |  |    |
+ WORD    WORD
+```
+
 ## Navigating
 
 | Key         | Action                         |
@@ -12,11 +33,65 @@ tags:
 | `k`         | Move up                        |
 | `j`         | Move down                      |
 | `w`         | Move to start of next word     |
+| `W`         | Move to start of next WORD     |
 | `e`         | Move to end of next word       |
+| `E`         | Move to end of next WORD       |
 | `b`         | Move to start of previous word |
+| `B`         | Move to start of previous WORD |
 | `0`         | Move to start of line          |
 | `$`         | Move to end of line            |
 | `shift + 0` | Move to start of next line     |
+
+### Difference In Navigation Commands
+
+```
+`w` movement
+
+Start    w     ww  w w  w w
+|        |     ||  | |  | |
+function fooBar(obj, obj) {
+```
+
+```
+`W` movement
+
+Start    W           W    W
+|        |           |    |
+function fooBar(obj, obj) {
+```
+
+```
+`b` movement
+
+b        b     bb  b b  b Start
+|        |     ||  | |  | |
+function fooBar(obj, obj) {
+```
+
+```
+`B` movement
+
+B        B           B    Start
+|        |           |    |
+function fooBar(obj, obj) {
+```
+
+```
+`e` movement
+
+Start  e      ee  ee   ee e
+|      |      ||  ||   || |
+function fooBar(obj, obj) {
+```
+
+```
+`E` movement
+
+Start  E           E    E E
+|      |           |    | |
+function fooBar(obj, obj) {
+```
+
 
 ## Exiting
 
@@ -26,9 +101,19 @@ tags:
 | `:q!`      | Quit and discard |
 | `:wq`      | Quit and save    |
 
+NOTE: Need a Modes table
+`i` Insert Mode
+`v` Visual Selection Mode (use normal navigation to select text. Can use commands afterwards like `d` to delete the selection)
+`a` Insert (Append Before) Mode
+`A` Insert (Append After) Mode
+`R` Replace Mode
+
+
 ## Editing
 
-Pressing `x` when your cursor is over a character, deletes that character.
+Pressing `x` when your cursor is over a character, deletes that character. So it's like backspace but since it removes the character under the cursor, it "moves" towards the right.
+
+Pressing `X` functions like normal backspace. Removing the character to the left of the cursor.
 
 Pressing `i` changes to "Insert Mode", typing occurs to the _left_ of current cursor placement.
 
@@ -99,6 +184,10 @@ Using `shift + p` will put it **before** your current line.
 
 `r<char>` to replace the character at the cursor with the one given.
 
+### Replace Mode
+
+`R` enters into Replace Mode. In this mode each new character typed will replace the character under the cursor and advance the cursor by one. Hitting `esc` exits the mode.
+
 ### Change Operator
 
 `ce` change until the end of the word.
@@ -147,13 +236,6 @@ Using `:s/<old>/<new>/g` will replace all occurrences on the current line.
 
 The changes won't be committed until you hit `enter`.
 
-**Mnemonic**: 
-
-> Substitute "this" for "that".
-
- > Substitute "this" for "that" globally. _(Not happy with that since its not truly global)_
-
-
 You can use `:#,#s/<old>/<new>/g` to replace all occurrences from the first line number (`#`) to the second line number, inclusively.
 
 `:%s/<old>/<new>/g` to change every occurrence in the entire file.
@@ -165,7 +247,88 @@ The `c` (confirm) flag can be added to all of the other substitutes command as w
 
 ### External Commands
 
-Ln: 611
+`:!<command>` this allows you to execute any external shell command.
+
+As an example `:!ls -la`.
+
+
+### Writing (Saving) Files
+
+To save changes in a new file use:
+
+`:w <file-name>`
+
+You can also save just a portion of the current file.
+
+Press `v` to enter Visual Character Mode. Then you `h, j, k, l` to select the text that you want to save. After that press `:`. You will see `:'<,'>` appear at the bottom of the screen.
+
+Now type the same `:w <file-name>` and press enter.
+
+
+## Retrieving File Contents
+
+You can retrieve the contents of a file and place them _below_ the cursor using:
+
+`:r <file_name>`
+
+You can also read the output of an external command.
+
+`:r !<command>`
+
+
+## Open Command
+
+Pressing `o` will add a new line below the current cursor line and put you into Insert mode. This is similar to doing `A` followed by `return`.
+
+To open a line ABOVE your cursor use `O`
+
+
+### Copy and Paste
+
+Enter Visual Mode by typing `V`, then you can use the standard navigation to select text. Use the `y` operator (Yank) to copy the selected text.
+
+Then you can use `p` to the put the text after the cursor.
+
+`y` can also be used as an operator. i.e. `yw` will copy a word.
+
+You can use `P` to put before the cursor.
+
+
+### Set Options
+
+`:set ic` to "Ignore Case" when searching
+
+`:set hls` (hlsearch) to "highlight search" which highlights all matches
+
+`:set is` (incsearch)  to highlight partial matches
+
+Can turn them off using `no__`
+
+`:set noic`
+
+You can invert the current using `inv__`
+
+`:set invic`
+
+
+### Help
+
+You can use `F1` or `:help` to open the help window. You can use `ctrl w, ctrl w` to switch between the two windows.
+
+
+### Completion
+
+You can use `ctrl d` and `tab` for command autocompletion. 
+
+For example, run `:!ls` to list files. Now `:e` and then `ctrl d` to see a list of commands starting with `e`. You can use `tab` to cycle through the available commands.
+
+
+### References
+
+`:Tutor`
+
+https://neovim.io/doc/user/vimindex.html
+
 
 
 
@@ -173,9 +336,9 @@ Ln: 611
 
 `zz` to center the current cursor position.
 
-`gx` while cursor is over a link to open in browser
+`gx` Open file path or URI under cursor
 
-`shift + v` Visual Mode
+`gf` Go to file under cursor
 
 `:Lazy` opens the Lazy GUI
 
@@ -189,10 +352,6 @@ nvim
 kickstart.nvim (merge into the nice things from nvchad)
 +
 obsidian.nvim
-
-
-I think kickstart has this already
-https://github.com/folke/which-key.nvim
 
 
 `vim.keymap.set('', '<C-p>, fn, {})`
