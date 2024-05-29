@@ -47,7 +47,11 @@ pair.0;
 pair.1;
 ```
 
-- Rust compiler can almost always infer the types that you are using. So you rarely need to provide them.
+- Rust compiler can almost always infer the types that you are using. So you rarely need to provide them. But if it is needed:
+
+```rust
+let pair: (char, i32) = ('a', 17);
+```
 
 - Tuples can be destructured (JS-familiar).
 
@@ -99,7 +103,7 @@ let x = 42;
 let x = { 42 };
 ```
 
-- Can have multiple statements in a block. The final one is called the tail. This is what the whole block with evaluate to.
+- Can have multiple statements in a block. The final one is called the tail. This is what the whole block will evaluate to.
 
 ```rust
 let x = {
@@ -112,6 +116,8 @@ let x = {
 // x = 3
 ```
 
+- The "tail" is why omitting the semicolon at the end of a function is the same as returning
+
 ```rust
 // these are equivalent
 fn dice_roll() -> i32 {
@@ -121,8 +127,6 @@ fn dice_roll() -> i32 {
 fn dice_roll() -> i32 {
   4 // notice the missing semicolon
 }
-
-// The "tail" is why omitting the semicolon at the end of a function is the same as returning
 ```
 
 - `if` conditionals are also expressions.
@@ -201,6 +205,44 @@ let y = Number { value: 3, odd: true };
 // order doesn't matter
 ```
 
+- You can spread a struct into another.
+
+```rust
+struct Point {
+  x: f64,
+  y: f64,
+}
+
+let p1 = Point { x: 1.0, y: 3.0 };
+
+let p2 = Point {
+  x: 14.0,
+  ..p1 // can only happen in the last postion
+};
+```
+
+- Structs can be destructured.
+
+```rust
+let p = Point { x: 3.0, y: 6.0 };
+let Point { x, y } = p;
+
+let Point { x, .. } = p;
+// this throws away `v.y`
+```
+
+- `let` patterns can be used as conditions
+
+```rust
+fn print_number(n: Number) {
+  if let Number { odd: true, value } = n {
+    println!("Odd number: {}", value);
+  } else if let Number { odd: false, value } = n {
+    println!("Even number: {}", value);
+  }
+}
+```
+
 - `match` arms are patterns. A match has to be exhaustive. An `_` can be used as a catch-all.
 
 ```rust
@@ -248,7 +290,7 @@ n.odd = false;
 // error: cannot assign to `n.odd` as `n` is not declared to be mutable
 ```
 
-- `mut` makes a variable binding mutable.
+- `mut` makes a variable binding mutable. (Variable bindings are immutable by default.)
 
 ```rust
 let mut n = Number {
@@ -269,6 +311,45 @@ fn foobar<T>(arg: T) {
 fn left_right<L, R>(left: L, right: R) {
   // do work
 };
+```
+
+- Type parameters can have constraints.
+
+```rust
+fn print<T: Display>(value: T) {
+  println!("value = {}", value);
+}
+```
+
+- Which is shorthand for the longer version
+
+```rust
+fn print<T>(value: T)
+where
+  T: Display,
+{
+  println!("value = {}", value);
+}
+```
+
+- They can also be more complicated, requiring a type parameter to implement multiple traits.
+
+```rust
+fn compare<T>(left: T, right: T)
+where
+  T: Debug + PartialEq,
+{
+  println!("{:?} {} {:?}", left, if left == right { "==" } else { "!=" }, right);
+}
+```
+
+- Structs can also me generic
+
+```rust
+struct Pair<T> {
+  a: T,
+  b: T,
+}
 ```
 
 - Standard library type `Vec`, which is a **Heap** allocated array, is generic
@@ -443,6 +524,59 @@ let s = str::from_utf8(melon)?;  // <- the `?`
 // println!("{}", s);
 // Ok(())
 
-// Does the same thing as the match example above. And is the normal error handling pattern in Rust
+// Does the same thing as the match example above. And is the normal error handling pattern in Rust. Where you are just trying to write the happy path.
 ```
 
+- Iterators are computed lazily, on demand. So an iterator from 1...∞ can fit in RAM.
+
+```rust
+let natural_numbers = 1..;
+```
+
+- This is call a "range", the most basic iterator. They can be open at the bottom or the top. Or you can specify both exactly. Computation only happens when the iterator is called.
+
+```rust
+// 0 or greater
+(0..).contains(&100);
+// 20 or less than 20
+(..=20).contains(&20));
+// only 3, 4, 5
+(3..6).contains(&4));
+```
+
+- Anything that is iterable can be used in a for loop.
+
+```rust
+// with a vec
+for i in vec![52, 49, 21] {
+  println!("I like number {}", i);
+}
+
+// with a slice
+for i in &[52, 49, 21] {
+  println!("I like number {}", i);
+}
+
+// or an actual iterator
+for c in "rust".chars() {
+  println!("Give me a {}", c);
+}
+```
+
+> [!Error] Insert Traits
+
+> [!Error] Lifetimes
+
+> [!Error] Dereference
+
+> [!Error] Closures & Returning Closures
+
+
+
+cut out lifetimes, closures and traits
+
+
+### References
+
+- https://www.youtube.com/watch?v=br3GIIQeefY
+- https://fasterthanli.me/articles/a-half-hour-to-learn-rust#owned-types-vs-reference-types
