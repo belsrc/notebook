@@ -1,7 +1,7 @@
 ---
 tags:
-  - notes
   - typed-array
+gardening: 🌳
 ---
 ## ArrayBuffer
 

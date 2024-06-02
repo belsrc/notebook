@@ -1,7 +1,7 @@
 ---
 tags:
   - rust
-  - notes
+gardening: 🌱
 ---
 **Has only two rules:**
 1. Data has one owner

@@ -1,7 +1,9 @@
 ---
 tags:
   - rust
-reference: https://github.com/rust-lang/rustlings
+gardening: 🌱
+reference:
+  - https://github.com/rust-lang/rustlings
 ---
 ## Variables
 

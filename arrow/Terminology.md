@@ -1,5 +1,4 @@
 ---
 tags:
   - arrow
-  - notes
 ---

@@ -1,7 +1,11 @@
 ---
 tags:
   - css
-  - notes
+gardening: 🌳
+reference: 
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/container
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/@container
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
 ---
 Container Queries allow you to write styles that apply to the children of a container element when that container matches certain conditions.
 
@@ -86,11 +90,3 @@ You can then target that container by name using the `@container` at-rule:
   /* <stylesheet> */
 }
 ```
-
-
-### References
-
-- https://frontendmasters.com/blog/what-you-need-to-know-about-modern-css-spring-2024-edition/#toc-45
-- https://developer.mozilla.org/en-US/docs/Web/CSS/@container
-- https://developer.mozilla.org/en-US/docs/Web/CSS/container
-- https://developer.mozilla.org/en-US/docs/Web/CSS/container-type

@@ -1,7 +1,9 @@
 ---
 tags:
-  - notes
   - nvim
+gardening: 🌿
+reference:
+  - https://github.com/pinnheads/neovim-tutor
 ---
 ## Definitions of Word
 
@@ -15,6 +17,8 @@ A "word" is:
 A "WORD" is:
 - A sequence of non-blank characters.
 - Or an empty line.
+
+> [!Error] Make Image
 
 ```
  w  w    w  w
@@ -43,6 +47,8 @@ abc@#$  def%^&
 | `shift + 0` | Move to start of next line     |
 
 ### Difference In Navigation Commands
+
+> [!Error] Make Images For These
 
 ```
 `w` movement
@@ -326,8 +332,6 @@ For example, run `:!ls` to list files. Now `:e` and then `ctrl d` to see a list 
 ### References
 
 `:Tutor`
-
-https://neovim.io/doc/user/vimindex.html
 
 
 

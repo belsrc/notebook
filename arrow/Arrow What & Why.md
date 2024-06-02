@@ -1,7 +1,7 @@
 ---
 tags:
   - arrow
-  - notes
+gardening: 🌿
 ---
 ### What is Arrow?
 

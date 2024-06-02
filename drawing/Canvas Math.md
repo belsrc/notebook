@@ -1,8 +1,8 @@
 ---
 tags:
-  - notes
   - drawing
   - math
+gardening: 🌱
 ---
 ## Cartesian Coordinates
 

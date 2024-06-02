@@ -1,7 +1,9 @@
 ---
 tags:
   - css
-  - notes
+gardening: 🌳
+reference: 
+  - https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
 ---
 Cascade layers enable more explicit control of your CSS files to prevent style-specificity conflicts. This is particularly useful for large codebases, design systems, and when managing third party styles in applications.
 
@@ -117,10 +119,3 @@ If you write styles inside a layer and then add nested layers, the rules outside
 In this example, the paragraph will remain `green`.
 
 Marking a property definition as `!important` raises its priority. In cascade layers, adding in `!important` reverses the sorting order such that competing `!important` styles in a layer defined earlier win over `!important` styles in later layers. Additionally, the use of `!important` within a layer will also win over an unlayered style.
-
-
-### References
-
-- https://frontendmasters.com/blog/what-you-need-to-know-about-modern-css-spring-2024-edition/#toc-45
-- https://www.smashingmagazine.com/2022/01/introduction-css-cascade-layers/
-- https://developer.mozilla.org/en-US/docs/Web/CSS/@layer

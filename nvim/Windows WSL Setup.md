@@ -2,6 +2,7 @@
 tags:
   - nvim
   - guide
+gardening: 🌱
 ---
 
 Open PowerShell

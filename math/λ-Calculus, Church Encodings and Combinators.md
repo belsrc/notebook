@@ -1,9 +1,10 @@
 ---
 tags:
-  - notes
-  - "#functional"
+  - functional
+  - math
   - lambda
   - combinators
+gardening: 🌿
 ---
 > [!CAUTION]
 > NEED A INTRO TO LAMBDA CALC.

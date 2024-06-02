@@ -1,7 +1,10 @@
 ---
 tags:
   - rust
-  - notes
+gardening: 🌿
+reference:
+  - https://www.youtube.com/watch?v=br3GIIQeefY
+  - https://fasterthanli.me/articles/a-half-hour-to-learn-rust
 ---
 ## Rust for the Impatient
 
@@ -570,13 +573,3 @@ for c in "rust".chars() {
 > [!Error] Dereference
 
 > [!Error] Closures & Returning Closures
-
-
-
-cut out lifetimes, closures and traits
-
-
-### References
-
-- https://www.youtube.com/watch?v=br3GIIQeefY
-- https://fasterthanli.me/articles/a-half-hour-to-learn-rust#owned-types-vs-reference-types

@@ -1,8 +1,8 @@
 ---
 tags:
-  - notes
   - typescript
   - set-theory
+gardening: 🌿
 ---
 ## Element
 

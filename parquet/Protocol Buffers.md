@@ -2,7 +2,9 @@
 tags:
   - parquet
   - protobuf
-  - notes
+gardening: 🌳
+reference:
+  - https://en.wikipedia.org/wiki/Protocol_Buffers
 ---
 ## Overview
 
@@ -47,8 +49,3 @@ message Polyline {
 The "Point" message defines two mandatory data items, _x_ and _y_. The data item _label_ is optional. Each data item has a tag. The tag is defined after the equal sign. For example, _x_ has the tag 1.
 
 The "Line" and "Polyline" messages, which both use Point, demonstrate how composition works in Protocol Buffers. Polyline has a _repeated_ field, and thus Polyline behaves like a set of points (of unspecified number).
-
-
-### References
-
-https://en.wikipedia.org/wiki/Protocol_Buffers

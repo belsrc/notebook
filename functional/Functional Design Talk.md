@@ -1,11 +1,12 @@
 ---
 tags:
-  - notes
   - functional
   - talk
+reference:
+  - https://www.youtube.com/watch?v=hYSxlN_d2-g
+gardening: 🌳
 ---
 ## Functional Design: Applying past software architecture and design by Janet Carr
-https://www.youtube.com/watch?v=hYSxlN_d2-g
 
 - Recursion over looping (via recursion for low loops or trampolines for large loops)
 

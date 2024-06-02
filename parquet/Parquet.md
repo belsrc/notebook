@@ -1,4 +1,12 @@
-
+---
+tags:
+  - parquet
+gardening: 🌱
+reference:
+  - https://sympathetic.ink/2024/01/24/Chapter-1-The-birth-of-Parquet.html
+  - https://sympathetic.ink/2013/09/11/Dremel-made-simple-with-Parquet.html
+  - https://github.com/apache/parquet-format
+---
 ## Motivation
 
 The goal is to keep I/O to a minimum by reading from a disk only the data required for the query. When you think of a table representation, it is two dimensional with columns and rows. However when it’s physically stored on a disc it has to be arranged as a linear, one dimensional succession of bits.
@@ -92,17 +100,3 @@ message ExMap {
   ...
 }
 ```
-
-
-
-
-
-
-
-
-
-- https://sympathetic.ink/2024/01/24/Chapter-1-The-birth-of-Parquet.html
-
-- https://sympathetic.ink/2013/09/11/Dremel-made-simple-with-Parquet.html
-
-- https://github.com/apache/parquet-format

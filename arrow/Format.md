@@ -1,9 +1,8 @@
 ---
 tags:
   - arrow
-  - notes
+gardening: 🌿
 ---
-
 ```js
 [
   { lon: 1, lat: 0, alt: 10 },

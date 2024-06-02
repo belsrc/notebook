@@ -1,5 +1,7 @@
 ---
 tags:
   - go
+gardening: 🌱
+reference:
+  - https://github.com/mauricioabreu/golings
 ---
-https://github.com/mauricioabreu/golings

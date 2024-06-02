@@ -1,7 +1,7 @@
 ---
 tags:
-  - notes
   - bitwise
+gardening: 🌳
 ---
 ## bitwise AND (`&`)
 

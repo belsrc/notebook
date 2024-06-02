@@ -1,8 +1,9 @@
 ---
 tags:
   - functional
-  - notes
-  - wip
+  - math
+  - lambda
+gardening: 🌱
 ---
 First, lets define "calculus"
 

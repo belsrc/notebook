@@ -1,7 +1,10 @@
 ---
 tags:
   - functional
-  - notes
+  - math
+  - lambda
+  - combinators
+gardening: 🌿
 ---
 Combinatory logic is a theoretical framework in mathematical logic and the study of lambda calculus. It deals with expressing computations using function combinators, which are abstract, pure functions with no free variables. Combinatory logic was developed by Moses Schönfinkel and Haskell Curry in the early 20th century and is a fundamental part of the foundations of functional programming.
 

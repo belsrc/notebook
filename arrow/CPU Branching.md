@@ -3,7 +3,6 @@ tags:
   - cpu
   - arrow
   - parquet
-  - notes
 ---
 
 

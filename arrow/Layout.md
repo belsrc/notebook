@@ -1,7 +1,9 @@
 ---
 tags:
   - arrow
-  - notes
+gardening: 🌱
+reference:
+  - https://arrow.apache.org/docs/format/Columnar.html
 ---
 ### Validity bitmaps
 All array types, with the exception of union types (more on these later), utilize a dedicated memory buffer, known as the validity (or “null”) bitmap, to encode the nullness or non-nullness of each value slot.
