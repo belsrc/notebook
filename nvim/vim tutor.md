@@ -342,6 +342,8 @@ https://neovim.io/doc/user/vimindex.html
 
 `:Lazy` opens the Lazy GUI
 
+`\` to open sidebar file explorer
+
 
 alacritty
 +
