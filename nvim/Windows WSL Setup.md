@@ -20,7 +20,7 @@ Open PowerShell
 `zsh` (init script stuff. Add and exit)
 
 `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-	(will ask to make zsh, pick yes)
+	(will ask to make zsh default, pick yes)
 	
 `echo $SHELL` (should output "/bin/zsh")
 
