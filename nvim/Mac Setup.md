@@ -45,8 +45,6 @@ Unless you want to set zsh as default for all terminals. May also need to copy p
 	`:q`
 	`:checkhealth` (to check other install aspects)
 
-Install Alacritty from https://alacritty.org/
-
 Install your NerdFont of choice - https://www.nerdfonts.com/
 
 `nvim ~/.config/nvim/init.lua`
@@ -89,3 +87,21 @@ In config, change this line to the following: `plugins=(git zsh-autosuggestions 
 This is ~Ln 80 (in the current version)
 
 `source ~/.zshrc`
+
+`curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin`
+
+https://github.com/GiuseppeCesarano/kitty-theme-OneDark
+Copy OneDark.conf to `~/.config/kitty/`
+Add `include ./OneDark.conf` to the top of `~/.config/kitty/kitty.conf`
+
+
+
+
+
+
+#### Related Configs
+
+- `~/.config/kitty/*`
+- `~/.config/nvim/*`
+- `~/.zshrc`
+- `~/.p10k.zsh`
