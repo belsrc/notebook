@@ -74,57 +74,62 @@ Open PowerShell
 	`:q`
 	`:checkhealth` (to check other install aspects)
 
-(back in windows) Install alacritty
-	https://alacritty.org
-
-Install a NerdFont
+(back in windows) Install a NerdFont
 	https://www.nerdfonts.com
 
-Edit `%APPDATA%\alacritty\alacritty.toml`
+`git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k`
 
-```toml
-[shell]
-program = "Ubuntu"
+`nvim ~/.zshrc`
+Change to: `ZSH_THEME="powerlevel10k/powerlevel10k"` save and quit
+`source ~/.zshrc`
 
-[window]
-dimensions = { columns = 240, lines = 60 }
-padding = { x = 12, y = 12 }
-opacity = 0.98
-blur = true
+Run through the prompt.
+1. Do you see X icon (3 or 4 ?s) - Input your answer.
+2. Do these icons overlap - Your Answer
+3. Prompt Style - Rainbow
+4. Char Set - Unicode
+5. Current Time - 12hr
+6. Prompt Separators - Angled
+7. Prompt Head - Sharp
+8. Prompt Tail - Flat
+9. Prompt Height - Two Lines
+10. Prompt Connection - Solid
+11. Prompt Frame - Full
+12. Connection & Frame Color - Lightest
+13. Prompt Spacing - Sparse
+14. Icons - Many Icons
+15. Prompt Flow - Concise
+16. Enable Transient Prompt - No
+17. Instant Prompt Mode - Verbose
+18. Write File - Yes
 
-[font]
-# Name of installed NerdFont
-normal = { family = "Dank Mono Nerd Font", style = "Regular" }
-size = 12
+`git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`
 
-# Colors (One Dark)
-# Or whatever theme you want
-[colors.primary]
-background = '#282c34'
-foreground = '#abb2bf'
+`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
 
-[colors.normal]
-black   = '#1e2127'
-red     = '#e06c75'
-green   = '#98c379'
-yellow  = '#d19a66'
-blue    = '#61afef'
-magenta = '#c678dd'
-cyan    = '#56b6c2'
-white   = '#abb2bf'
+`nvim ~/.zshrc`
 
-[colors.bright]
-black   = '#5c6370'
-red     = '#e06c75'
-green   = '#98c379'
-yellow  = '#d19a66'
-blue    = '#61afef'
-magenta = '#c678dd'
-cyan    = '#56b6c2'
-white   = '#ffffff'
-```
+In config, change this line to the following: `plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)`
+This is ~Ln 80 (in the current version)
 
-Next time you open Alacritty, it will use the WSL.
+`source ~/.zshrc`
+
+https://apps.microsoft.com/detail/9n0dx20hk701?rtc=1&hl=en-us&gl=US
+Install Windows Terminal
+
+Click the down chevron, select "Settings"
+- Startup > Default Profile -> Ubuntu
+- Defaults > Appearance > Font Face -> Select your Nerd Font
+- Open JSON File > https://github.com/yosukes-dev/one-dark-windows-terminal
+	- Follow directions
+
+
+
+
+
+
+
+---
 
 
 `wsl: explorer.exe .` (opens the Linux ~/ folder in Windows)
@@ -143,3 +148,8 @@ https://github.com/nvim-lua/kickstart.nvim
 https://vimcolorschemes.com/
 
 https://learn.microsoft.com/en-us/windows/wsl/setup/environment#set-up-your-linux-username-and-password
+
+
+Windows Terminal Config
+
+`%LocalAppData%\Packages\Microsoft.WindowsTerminal_<some hash>\LocalState\settings.json`

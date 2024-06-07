@@ -1,4 +1,4 @@
-(zsh installed by default)
+(zsh installed by default on Mac)
 
 `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 

@@ -348,6 +348,12 @@ For example, run `:!ls` to list files. Now `:e` and then `ctrl d` to see a list 
 
 `\` to open sidebar file explorer
 
+`<leader>sf` - Search Files
+
+`<leader>s/` - Search Buffer
+
+`<leader>ds` - Document Symbols (functions, etc)
+
 
 alacritty
 +
