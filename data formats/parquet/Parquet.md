@@ -1,11 +1,13 @@
 ---
 tags:
   - parquet
+  - data
 gardening: 🌱
 reference:
   - https://sympathetic.ink/2024/01/24/Chapter-1-The-birth-of-Parquet.html
   - https://sympathetic.ink/2013/09/11/Dremel-made-simple-with-Parquet.html
   - https://github.com/apache/parquet-format
+category: data
 ---
 ## Motivation
 

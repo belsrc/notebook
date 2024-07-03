@@ -2,9 +2,11 @@
 tags:
   - parquet
   - protobuf
+  - data
 gardening: 🌳
 reference:
   - https://en.wikipedia.org/wiki/Protocol_Buffers
+category: data
 ---
 ## Overview
 
