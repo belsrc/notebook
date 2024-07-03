@@ -15,7 +15,8 @@ const buffer = new ArrayBuffer(3);
 // -> [hex] 00 00 00
 ```
 
-![](../images/byte-array/buffer-dark.png)
+![](../../images/byte-array/buffer-dark.png)
+
 
 
 ## DataView
@@ -42,7 +43,7 @@ colorView.getUint8(2);
 // -> 245
 ```
 
-![](../images/byte-array/data-view-dark.png)
+![](../../images/byte-array/data-view-dark.png)
 
 
 ## TypedArray
@@ -97,7 +98,7 @@ console.log(str);
 // -> 01010011 10011011 11110101
 ```
 
-![](../images/byte-array/typed-array-dark.png)
+![](../../images/byte-array/typed-array-dark.png)
 
 If the values are known before creation, you can use an array directly in the constructor
 ```js
@@ -187,21 +188,21 @@ _There is also the difference in object methods but, that should go without sayi
 
 ## Data Types and Ranges
 
-| Type         | Bytes  | Bits (Binary)                      | Exponent Range           | Human Range                  |
-| ------------ | -------| ---------------------------------- | ------------------------ | ---------------------------- |
-| Uint8        | 1 byte | `11111111`                         | $0 \to 2^8 - 1$          | $0 \to 255$                  |
-| Int8         | 1 byte | `11111111`                         | $-2^7 \to 2^7 - 1$       | $-128 \to 127$               |
-| Uint16       | 2 byte | `1111111111111111`                 | $0 \to 2^{16} - 1$       | $0 \to 65535$                |
-| Int16        | 2 byte | `1111111111111111`                 | $-2^{15} \to 2^{15} - 1$ | $-32768 \to 32767$           |
-| Uint32       | 4 byte | `11111111111111111111111111111111` | $0 \to 2^{32} - 1$       | $0 \to 4294967295$           |
-| Int32        | 4 byte | `11111111111111111111111111111111` | $-2^{31} \to 2^{31} - 1$ | $-2147483648 \to 2147483647$ |
+| Type   | Bytes  | Bits (Binary)                      | Exponent Range           | Human Range                  |
+| ------ | ------ | ---------------------------------- | ------------------------ | ---------------------------- |
+| Uint8  | 1 byte | `11111111`                         | $0 \to 2^8 - 1$          | $0 \to 255$                  |
+| Int8   | 1 byte | `11111111`                         | $-2^7 \to 2^7 - 1$       | $-128 \to 127$               |
+| Uint16 | 2 byte | `1111111111111111`                 | $0 \to 2^{16} - 1$       | $0 \to 65535$                |
+| Int16  | 2 byte | `1111111111111111`                 | $-2^{15} \to 2^{15} - 1$ | $-32768 \to 32767$           |
+| Uint32 | 4 byte | `11111111111111111111111111111111` | $0 \to 2^{32} - 1$       | $0 \to 4294967295$           |
+| Int32  | 4 byte | `11111111111111111111111111111111` | $-2^{31} \to 2^{31} - 1$ | $-2147483648 \to 2147483647$ |
 
 There is also Float32Array, Float64Array, BigUint64Array and BigInt64Array that match the pattern above.
 
 _All JavaScript numbers are stored in a a 64-bit floating-point format.
 number (the fraction) is stored in bits 0 to 51, the exponent in bits 52 to 62, and the sign in bit 63_
 
-![](../images/byte-array/range-layout-dark.png)
+![](../../images/byte-array/range-layout-dark.png)
 
 ## Strings
 

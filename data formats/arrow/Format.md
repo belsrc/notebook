@@ -20,6 +20,6 @@ const lonColumn = [1, 2, 3, 4, 5];
 const latColumn = [0, 9, 8, 7, 6];
 ```
 
-![](../images/arrow/arrow-column-layout.png)
+![](../../images/arrow/arrow-column-layout.png)
 
 ---

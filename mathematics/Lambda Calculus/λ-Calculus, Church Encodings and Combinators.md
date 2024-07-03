@@ -21,7 +21,7 @@ gardening: 🌿
 
 ## $\lambda$-Calculus Syntax
 
-![](../images/math/lambda-syntax-dark.png)
+![](../../images/math/lambda-syntax-dark.png)
 
 
 ### Use
@@ -139,7 +139,7 @@ gardening: 🌿
 
   $x$ is the $\beta$-normal form
 
-![](../images/math/lambda-beta-dark.png)
+![](../../images/math/lambda-beta-dark.png)
 
 
 ## Combinatory Logic
@@ -348,7 +348,7 @@ gardening: 🌿
 
 ## Booleans
 
-  ![](../images/math/lambda-boolean-dark.png)
+  ![](../../images/math/lambda-boolean-dark.png)
 
   Its function application. If its "true" then it selects the first expression. If its "false" it selects the second expression.
 
