@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Statuses.md",
+                "file": "languages/rust/Rustlings.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Statuses.md",
+                "file": "languages/rust/Rustlings.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Statuses.md",
+                "file": "languages/rust/Rustlings.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Statuses.md"
+                "file": "languages/rust/Rustlings.md"
               }
             }
           },
@@ -159,8 +159,26 @@
   },
   "active": "e2ae2dfa7e1e075a",
   "lastOpenFiles": [
-    "data formats/parquet/Parquet.md",
+    "languages/rust/Rust for the Impatient - NoBoilerplate.md",
+    "languages/rust/Rust Borrow Checker.md",
+    "languages/rust/Refs.md",
+    "mathematics/Canvas Math.md",
+    "mathematics/Symbology.md",
+    "images/arrow/normal-table-disk.png",
+    "images/arrow/normal-table-layout.png",
+    "images/arrow/columnar-table-layout.png",
+    "images/arrow/arrow-column-layout.png",
+    "images/arrow/columnar-disk.png",
+    "images/logic/a-nor-b.png",
+    "images/logic/a-nand-b.png",
+    "images/logic/a-imp-b.png",
+    "images/logic/a-and-b.png",
+    "images/logic/a.png",
+    "programming/functional/Functional Programming.md",
+    "programming/functional/Functional Design Talk.md",
+    "programming/functional/FP Jargon to Normal.md",
     "Statuses.md",
+    "data formats/parquet/Parquet.md",
     "data formats/Protocol Buffers.md",
     "languages/rust/1. Rust CLI & Cargo.md",
     "data formats/arrow/Types.md",
@@ -169,41 +187,23 @@
     "data formats/arrow/Format.md",
     "data formats/arrow/CPU Branching.md",
     "data formats/arrow/Arrow What & Why.md",
-    "languages/rust/Refs.md",
     "languages/css/Cascade Layers.md",
-    "programming/functional/FP Jargon to Normal.md",
     "languages/javascipt/Bitwise Explanation.md",
     "languages/javascipt/JS Bit Arrays Explanation.md",
     "languages/javascipt",
     "programming/functional/Hindley-Milner Type System.md",
-    "programming/functional/Functional Programming.md",
-    "programming/functional/Functional Design Talk.md",
     "development/nvim/Windows WSL Setup.md",
     "programming",
     "development/nvim/vim tutor.md",
     "development/nvim/Setup.md",
     "development/nvim/Mnemonics.md",
-    "development/nvim/Mac Setup.md",
     "development",
-    "mathematics/Lambda Calculus/Combinatory Logic.md",
     "data formats",
-    "mathematics/Lambda Calculus/Lambda Calculus.md",
-    "mathematics/Lambda Calculus/λ-Calculus, Church Encodings and Combinators.md",
     "mathematics/Lambda Calculus",
     "languages/go",
     "languages/gleam",
     "languages/zig",
     "languages",
-    "mathematics",
-    "images/logic/b-without-a.png",
-    "images/logic/a-nand-b.png",
-    "images/logic/a-and-b.png",
-    "images/logic/a-imp-b.png",
-    "images/logic/a-without-b.png",
-    "images/logic/a-xnor-b.png",
-    "images/logic/a-xor-b.png",
-    "images/logic/not-b.png",
-    "images/logic/b.png",
-    "images/logic/a-nor-b.png"
+    "mathematics"
   ]
 }
