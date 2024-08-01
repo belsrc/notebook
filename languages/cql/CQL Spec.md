@@ -11,7 +11,7 @@ gardening: 🌳
 ---
 The Common Query Language (CQL) is a generic filter grammar that can be used to specify how resource instances in a source collection of any item type, including features, can be filtered to identify a results set.
 
-#### Expressions
+### Expressions
 
 A CQL filter expression is an expression that defines a logically connected set of predicates that are evaluated for each item of a collection.
 
@@ -19,7 +19,7 @@ A predicate is an expression that evaluates to the Boolean values of `TRUE` or
 
 If a predicate evaluates to `TRUE` for an item, the item qualifies for further processing such as presentation in the result set, being passed on to the next predicate in the filter for further evaluation, and so forth.
 
-#### Literal Values and Property References
+### Literal Values and Property References
 
 A literal value is any part of a CQL filter expression that is used exactly as it is specified in the expression. Character strings, numbers, booleans, spatial geometries or temporal geometries.
 
@@ -57,7 +57,7 @@ Properties in an object being evaluated in the CQL filter expression can be refe
 filter=prop1=10 AND prop2>45
 ```
 
-#### Binary Comparison
+### Binary Comparison
 
 A binary comparison predicate evaluates two scalar expressions to determine if the expressions satisfy the specified comparison operator. Both scalar expressions need to evaluate to the same type of literal.
 
@@ -69,7 +69,7 @@ avg(windSpeed) < 4
 balance-150.0 > 0
 ```
 
-#### Logical Operators
+### Logical Operators
 
 Sub-expressions can be put together with logical operators to form more complex expressions.
 
@@ -77,7 +77,7 @@ Sub-expressions can be put together with logical operators to form more complex 
 - OR
 - NOT
 
-#### Binary Comparison Operators
+### Binary Comparison Operators
 
 - equal to ($=$) 
 - less than ($<$)
@@ -85,7 +85,7 @@ Sub-expressions can be put together with logical operators to form more complex 
 - greater than ($>$)
 - greater than or equal to ($>=$)
 
-#### Like
+### Like
 
 The `LIKE` predicate tests whether a string value matches the specified pattern.
 
@@ -103,7 +103,7 @@ name LIKE 'Smith.' SINGLECHAR '.' NOCASE true
 STATE_NAME LIKE 'N%'
 ```
 
-#### Between
+### Between
 
 The `BETWEEN` predicate tests whether a numeric value lies within the specified range. The between operator is inclusive.
 
@@ -111,7 +111,7 @@ The `BETWEEN` predicate tests whether a numeric value lies within the specified
 depth BETWEEN 100.0 and 150.0
 ```
 
-#### In
+### In
 
 The `IN` list predicate tests, for equality, the value of a scalar expression against a list of values of the same type.
 
@@ -123,7 +123,7 @@ cityName IN ('Toronto','Franfurt','Tokyo','New York') NOCASE false
 category NOT IN (1,2,3,4)
 ```
 
-#### Null
+### Null
 
 The `NULL` predicate tests whether the value of a scalar expression is null.
 
@@ -131,7 +131,7 @@ The `NULL` predicate tests whether the value of a scalar expression is null.
 geometry IS NOT NULL
 ```
 
-#### Spatial
+### Spatial
 
 A _spatial predicate_ evaluates two geometry-valued expressions to determine if the expressions satisfy the requirements of the specified spatial operator.
 
@@ -145,7 +145,7 @@ CQL uses Well-Known-Text (WKT) to encode geometry literals. Since WKT does not p
   filter=INTERSECTS(geometry,POLYGON((1379213.867288 3610774.164192,1379233.837424 3610769.696029,1379246.149564 3610812.389132,1379226.494235 3610816.884823,1379213.867288 3610774.164192)))
 ```
 
-#### Temporal
+### Temporal
 
 A temporal predicate evaluates two time-valued expressions to determine if the expressions satisfy the requirements of the specified temporal operator.
 
@@ -153,7 +153,7 @@ A temporal predicate evaluates two time-valued expressions to determine if the e
 event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 ```
 
-#### Enhanced Spatial
+### Enhanced Spatial
 
 - ∩ - intersection; operation on two or more sets
 - ∧ - and; logical intersection
@@ -185,7 +185,7 @@ event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 
 ![](../../images/cql/cql-crosses.png)
 
-#### Enhanced Temporal
+### Enhanced Temporal
 
 CQL supports date and timestamps as time instants, but even the smallest "instant" has a duration and can also be evaluated as an interval. For the purposes of determining the temporal relationship between two temporal expressions, an instant is treated as the interval from the beginning to the end of the instant.
 
@@ -226,7 +226,7 @@ CQL supports date and timestamps as time instants, but even the smallest "instan
 touchdown DURING 1969-07-16T13:32:00Z/1969-07-24T16:50:35Z
 ```
 
-#### Arithmetic Expressions
+### Arithmetic Expressions
 
 An arithmetic expression is an expression composed of an arithmetic operand (a property name, a number or a function that returns a number), an arithmetic operator (i.e. one of `+`,`-`,`*`,`/`) and another arithmetic operand.
 
@@ -234,7 +234,7 @@ An arithmetic expression is an expression composed of an arithmetic operand (a p
 vehicle_height > (bridge_height-1)
 ```
 
-#### Arrays
+### Arrays
 
 Both array expressions are evaluated as sets. No inherent order is implied in a array of values.
 
