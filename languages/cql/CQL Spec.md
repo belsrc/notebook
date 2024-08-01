@@ -173,8 +173,11 @@ event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 | CROSSES          | CROSSES(a,b) ⟺ [I(a) ∩ I(b) = ∅) ∧ (a ∩ b ≠ a) ∧ (a ∩ b ≠ b)]                          |
 | INTERSECTS       | INTERSECTS(a,b) ⟺ ! a DISJOINT b                                                       |
 | CONTAINS         | CONTAINS(a,b) ⟺ b CONTAINS a                                                           |
+
 ![](../../images/cql/cql-touches.png)
+
 ![](../../images/cql/cql-within.png)
+
 > [!note]
 > If geometry **_a_** `CONTAINS` geometry **_b_**, then geometry **_b_** is `WITHIN` geometry **_a_**.
 
