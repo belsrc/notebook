@@ -51,7 +51,7 @@ POLYGON((43.5845 -79.5442, 43.6079 -79.4893, ...))
 1969-07-20T20:17:40Z
 ```
 
-Properties in an object being evaluated in the CQL filter expression can be referenced by their name. The data type of the literal value needs match the expected data type for the expression within which the property name reference appears. For example, a property name used in a scalar expression has to be a queryable of type `string`, `number`, `integer` or `boolean`.
+Properties in an object being evaluated in the CQL filter expression can be referenced by their name. The data type of the literal value needs to match the expected data type for the expression within which the property name reference appears. For example, a property name used in a scalar expression has to be a queryable of type `string`, `number`, `integer` or `boolean`.
 
 ```cql
 filter=prop1=10 AND prop2>45
