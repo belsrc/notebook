@@ -189,66 +189,73 @@ event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 
 CQL supports date and timestamps as time instants, but even the smallest "instant" has a duration and can also be evaluated as an interval. For the purposes of determining the temporal relationship between two temporal expressions, an instant is treated as the interval from the beginning to the end of the instant.
 
-- `AFTER`: If a interval T₁ is `AFTER` another temporal entity T₂, then the beginning of T₁ is after the end of T₂.
+> [!note]
+> There is some terminology that needs to be laid out before the function definitions.
+> - <ins>entity</ins>: A temporal interval or instant.
+> - <ins>instant</ins>: A temporal entity with zero extent or duration
+> - <ins>interval</ins>: A temporal entity with an extent or duration
+> - <ins>proper interval</ins>: A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different
+
+- `AFTER`: If a <ins>entity</ins> T₁ is `AFTER` another <ins>entity</ins> T₂, then the beginning of T₁ is after the end of T₂.
 
 	![](../../images/cql/cql-after.png)
 
-- `BEFORE`: If a interval T₁ is `BEFORE` another temporal entity T₂, then the end of T₁ is before the beginning of T₂.
+- `BEFORE`: If a <ins>entity</ins> T₁ is `BEFORE` another temporal <ins>entity</ins> T₂, then the end of T₁ is before the beginning of T₂.
 
 
 	![](../../images/cql/cql-before.png)
 
-- `BEGINS`: If an interval T₁ `BEGINS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is before the end of T₂.
+- `BEGINS`: If an <ins>proper interval</ins> T₁ `BEGINS` another <ins>proper interval</ins> T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is before the end of T₂.
 
 
 	![](../../images/cql/cql-begins.png)
 
-- `BEGUNBY`: If an interval T₁ is `BEGUNBY` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is after the end of T₂.
+- `BEGUNBY`: If an <ins>proper interval</ins> T₁ is `BEGUNBY` another <ins>proper interval</ins> T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is after the end of T₂.
 
 
 	![](../../images/cql/cql-begun-by.png)
 
-- `TCONTAINS`: If an interval T₁ `TCONTAINS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is after the end of T₂.
+- `TCONTAINS`: If an <ins>proper interval</ins> T₁ `TCONTAINS` another <ins>proper interval</ins> T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is after the end of T₂.
 
 
 	![](../../images/cql/cql-t-contains.png)
 
-- `DURING`: If an interval T₁ is `DURING` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
+- `DURING`: If an <ins>proper interval</ins> T₁ is `DURING` another <ins>proper interval</ins> T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
 
 
 	![](../../images/cql/cql-during.png)
 
-- `ENDS`: If an interval T₁ `ENDS` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+- `ENDS`: If an <ins>proper interval</ins> T₁ `ENDS` another <ins>proper interval</ins> T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
 
 
 	![](../../images/cql/cql-ends.png)
 
-- `ENDEDBY`: If an interval T₁ is `ENDEDBY` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+- `ENDEDBY`: If an <ins>proper interval</ins> T₁ is `ENDEDBY` another <ins>proper interval</ins> T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
 
 
 	![](../../images/cql/cql-ended-by.png)
 
-- `TEQUALS`: If an interval T₁ is `TEQUALS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+- `TEQUALS`: If an <ins>proper interval</ins> T₁ is `TEQUALS` another <ins>proper interval</ins> T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
 
 
 	![](../../images/cql/cql-equals.png)
 
-- `MEETS`: If an interval T₁ `MEETS` another interval T₂, then the end of T₁ is coincident with the beginning of T₂. 
+- `MEETS`: If an <ins>proper interval</ins> T₁ `MEETS` another <ins>proper interval</ins> T₂, then the end of T₁ is coincident with the beginning of T₂. 
 
 
 	![](../../images/cql/cql-meets.png)
 
-- `METBY`: If a interval T₁ is `METBY` another interval T₂, then the beginning of T₁ is coincident with the end of T₂.
+- `METBY`: If a <ins>proper interval</ins> T₁ is `METBY` another <ins>proper interval</ins> T₂, then the beginning of T₁ is coincident with the end of T₂.
 
 
 	![](../../images/cql/cql-met-by.png)
 
-- `TOVERLAPS`: If an interval T₁ `TOVERLAPS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, the end of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
+- `TOVERLAPS`: If an <ins>proper interval</ins> T₁ `TOVERLAPS` another <ins>proper interval</ins> T₂, then the beginning of T₁ is before the beginning of T₂, the end of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
 
 
 	![](../../images/cql/cql-t-overlaps.png)
 
-- `OVERLAPPEDBY`: If an interval T₁ is `OVERLAPPEDBY` another interval T₂, then the beginning of T₁ is after the beginning of T₂, the beginning of T₁ is before the end of T₂, and the end of T₁ is after the end of T₂.
+- `OVERLAPPEDBY`: If an <ins>proper interval</ins> T₁ is `OVERLAPPEDBY` another <ins>proper interval</ins> T₂, then the beginning of T₁ is after the beginning of T₂, the beginning of T₁ is before the end of T₂, and the end of T₁ is after the end of T₂.
 
 
 	![](../../images/cql/cql-overlapped-by.png)
@@ -276,10 +283,10 @@ vehicle_height > (bridge_height-1)
 
 Both array expressions are evaluated as sets. No inherent order is implied in a array of values.
 
-- `AEQUALS` evaluates to `TRUE`, if both sets are identical; otherwise the predicate evaluates to `FALSE`.
-- `ACONTAINS` evaluates to `TRUE`, if the first set is a superset of the second set; otherwise the predicate evaluates to `FALSE`.
-- `CONTAINED BY` evaluates to `TRUE`, if the first set is a subset of the second set; otherwise the predicate evaluates to `FALSE`.
-- `AOVERLAPS` evaluates to `TRUE`, if both sets share at least one common element; otherwise the predicate evaluates to `FALSE`.
+- `AEQUALS` evaluates to `TRUE`, if both set S₁ and set S₂ are identical; otherwise the predicate evaluates to `FALSE`.
+- `ACONTAINS` evaluates to `TRUE`, if set S₁ is a superset of set S₂; otherwise the predicate evaluates to `FALSE`.
+- `CONTAINED BY` evaluates to `TRUE`, if set S₁ is a subset of set S₂; otherwise the predicate evaluates to `FALSE`.
+- `AOVERLAPS` evaluates to `TRUE`, if set S₁ and set S₂ share at least one common element; otherwise the predicate evaluates to `FALSE`.
 
 ```cql
 layer:ids ACONTAINS ["layers-ca","layers-us"]
