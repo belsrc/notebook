@@ -284,9 +284,20 @@ vehicle_height > (bridge_height-1)
 Both array expressions are evaluated as sets. No inherent order is implied in a array of values.
 
 - `AEQUALS` evaluates to `TRUE`, if both set S₁ and set S₂ are identical; otherwise the predicate evaluates to `FALSE`.
+
+	$A = B$
+
 - `ACONTAINS` evaluates to `TRUE`, if set S₁ is a superset of set S₂; otherwise the predicate evaluates to `FALSE`.
+
+	$A \supset B$
+
 - `CONTAINED BY` evaluates to `TRUE`, if set S₁ is a subset of set S₂; otherwise the predicate evaluates to `FALSE`.
+
+	$A \subset B$
+
 - `AOVERLAPS` evaluates to `TRUE`, if set S₁ and set S₂ share at least one common element; otherwise the predicate evaluates to `FALSE`.
+
+	$\exists a : a\in A \land a \in B$
 
 ```cql
 layer:ids ACONTAINS ["layers-ca","layers-us"]
