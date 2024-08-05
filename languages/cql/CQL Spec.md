@@ -189,31 +189,69 @@ event_date ANYINTERACTS 1969-07-16T05:32:00Z/1969-07-24T16:50:35Z
 
 CQL supports date and timestamps as time instants, but even the smallest "instant" has a duration and can also be evaluated as an interval. For the purposes of determining the temporal relationship between two temporal expressions, an instant is treated as the interval from the beginning to the end of the instant.
 
-- `AFTER`: If a temporal entity T₁ is `AFTER` another temporal entity T₂, then the beginning of T₁ is after the end of T₂.
+- `AFTER`: If a interval T₁ is `AFTER` another temporal entity T₂, then the beginning of T₁ is after the end of T₂.
 
-- `BEFORE`: If a temporal entity T₁ is `BEFORE` another temporal entity T₂, then the end of T₁ is before the beginning of T₂.
+	![](../../images/cql/cql-after.png)
 
-- `BEGINS`: If a interval T₁ `BEGINS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is before the end of T₂.
+- `BEFORE`: If a interval T₁ is `BEFORE` another temporal entity T₂, then the end of T₁ is before the beginning of T₂.
 
-- `BEGUNBY`: If a interval T₁ is `BEGUNBY` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is after the end of T₂.
 
-- `TCONTAINS`: If a interval T₁ is `TCONTAINS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is after the end of T₂.
+	![](../../images/cql/cql-before.png)
 
-- `DURING`: If a interval T₁ is `DURING` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
+- `BEGINS`: If an interval T₁ `BEGINS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is before the end of T₂.
 
-- `ENDEDBY`: If a interval T₁ is `ENDEDBY` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
 
-- `ENDS`: If a interval T₁ is `ENDS` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+	![](../../images/cql/cql-begins.png)
 
-- `TEQUALS`: If a interval T₁ is `TEQUALS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+- `BEGUNBY`: If an interval T₁ is `BEGUNBY` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is after the end of T₂.
 
-- `MEETS`: If a interval T₁ is `MEETS` another interval T₂, then the end of T₁ is coincident with the beginning of T₂. 
+
+	![](../../images/cql/cql-begun-by.png)
+
+- `TCONTAINS`: If an interval T₁ `TCONTAINS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is after the end of T₂.
+
+
+	![](../../images/cql/cql-t-contains.png)
+
+- `DURING`: If an interval T₁ is `DURING` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
+
+
+	![](../../images/cql/cql-during.png)
+
+- `ENDS`: If an interval T₁ `ENDS` another interval T₂, then the beginning of T₁ is after the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+
+
+	![](../../images/cql/cql-ends.png)
+
+- `ENDEDBY`: If an interval T₁ is `ENDEDBY` another interval T₂, then the beginning of T₁ is before the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+
+
+	![](../../images/cql/cql-ended-by.png)
+
+- `TEQUALS`: If an interval T₁ is `TEQUALS` another interval T₂, then the beginning of T₁ is coincident with the beginning of T₂, and the end of T₁ is coincident with the end of T₂.
+
+
+	![](../../images/cql/cql-equals.png)
+
+- `MEETS`: If an interval T₁ `MEETS` another interval T₂, then the end of T₁ is coincident with the beginning of T₂. 
+
+
+	![](../../images/cql/cql-meets.png)
 
 - `METBY`: If a interval T₁ is `METBY` another interval T₂, then the beginning of T₁ is coincident with the end of T₂.
 
-- `TOVERLAPS`: If a interval T₁ is `TOVERLAPS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, the end of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
 
-- `OVERLAPPEDBY`: If a interval T₁ is `OVERLAPPEDBY` another interval T₂, then the beginning of T₁ is after the beginning of T₂, the beginning of T₁ is before the end of T₂, and the end of T₁ is after the end of T₂.
+	![](../../images/cql/cql-met-by.png)
+
+- `TOVERLAPS`: If an interval T₁ `TOVERLAPS` another interval T₂, then the beginning of T₁ is before the beginning of T₂, the end of T₁ is after the beginning of T₂, and the end of T₁ is before the end of T₂.
+
+
+	![](../../images/cql/cql-t-overlaps.png)
+
+- `OVERLAPPEDBY`: If an interval T₁ is `OVERLAPPEDBY` another interval T₂, then the beginning of T₁ is after the beginning of T₂, the beginning of T₁ is before the end of T₂, and the end of T₁ is after the end of T₂.
+
+
+	![](../../images/cql/cql-overlapped-by.png)
 
 > [!note]
 > Reference: https://www.w3.org/TR/owl-time/#properties
