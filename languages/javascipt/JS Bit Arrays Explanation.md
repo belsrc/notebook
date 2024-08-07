@@ -1,7 +1,7 @@
 ---
 tags:
   - typed-array
-gardening: 🌳
+gardening: 🌿
 ---
 ## ArrayBuffer
 
@@ -250,3 +250,18 @@ const str = new TextDecoder().decode(text);
 
 // -> Hello world
 ```
+
+
+#### New Reading
+
+  https://2ality.com/2024/06/array-buffers-es2024.html
+  https://exploringjs.com/impatient-js/ch_typed-arrays.html
+  https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/
+  https://hacks.mozilla.org/2017/06/a-cartoon-intro-to-arraybuffers-and-sharedarraybuffers/
+  https://hacks.mozilla.org/2017/06/avoiding-race-conditions-in-sharedarraybuffers-with-atomics/
+  https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/
+  https://hacks.mozilla.org/2019/08/webassembly-interface-types/
+  https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/
+  https://hacks.mozilla.org/2017/07/memory-in-webassembly-and-why-its-safer-than-you-think/
+  https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/
+  https://hacks.mozilla.org/2017/02/a-crash-course-in-assembly/
