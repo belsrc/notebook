@@ -4,6 +4,7 @@ tags:
 gardening: 🌱
 reference:
   - https://arrow.apache.org/docs/format/Columnar.html
+  - https://arrow.apache.org/docs/format/Columnar.html#fixed-size-list-layout
 category: data
 ---
 ### Validity bitmaps
