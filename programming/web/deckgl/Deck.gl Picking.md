@@ -4,13 +4,73 @@ tags:
 reference:
   - https://deck.gl/docs/developer-guide/custom-layers/picking
   - https://github.com/visgl/deck.gl/blob/57119698d781cc70bd7611dad023ab61d6497c0a/modules/core/src/lib/picking/pick-info.ts#L25
+  - https://github.com/visgl/deck.gl/blob/57119698d781cc70bd7611dad023ab61d6497c0a/modules/core/src/lib/layer.ts#L404
 gardening: 🌿
 ---
+## Color Picking
+
 Deck.gl implements picking on the GPU using a technique we refer to as "color picking". When deck.gl needs to determine what is under the mouse, all pickable layers are rendered into an off-screen buffer, but in a special mode activated by a GLSL uniform. In this mode, the shaders of the core layers render picking colors instead of their normal visual colors.
 
 Each object in each layer gets its own picking color assigned. The picking color is determined using `layer.encodePickingColor()` that converts the index of an object of a given layer into a 3-byte color array. The color buffer allows us to distinguish between 16M unique colors per layer, and between 256 different layers.
 
 After the picking buffer is rendered, deck.gl looks at the color of the pixel under the pointer, and decodes it back to the index number using `layer.decodePickingColor()`.
+
+### encodePickingColor
+
+Converts a "sub-feature index" number to a color.
+
+```ts
+encodePickingColor(index: number): [r: number, g: number, b: number];
+```
+
+It encodes the given index using a combination of [bitwise AND (`&`)](Bitwise%20Explanation.md#bitwise%20AND%20(`&`)) and  [bitwise right shifts](Bitwise%20Explanation.md#Logical%20Shifting%20(`<<`,%20`>>`)).
+
+```js
+function encode(index) {
+  const target = new Array(3);
+
+  target[0] = (index + 1) & 255;
+  target[1] = ((index + 1) >> 8) & 255;
+  target[2] = (((index + 1) >> 8) >> 8) & 255;
+
+  return target;
+}
+
+encode(0)
+//>> [1, 0, 0]
+
+encode(1)
+//>> [2, 0, 0]
+
+encode(255)
+//>> [0, 1, 0]
+
+encode(511)
+//>> [0, 2, 0]
+
+encode(65535)
+//>> [0, 0, 1]
+```
+
+### decodePickingColor
+
+Converts a color to a "sub-feature index" number.
+
+```ts
+decodePickingColor(Uint8Array(color: [r: number, g: number, b: number])): number;
+```
+
+Decoding is just the reverse operation from above.
+
+```js
+function decode(color) {
+  const [r, g, b] = color;
+
+  return r + g * 256 + b * 65536 - 1; 
+}
+```
+
+## Pointer Events
 
 Once an object is picked, the `layer.getPickingInfo()` method is called first on the layer that directly rendered the picked object, to modify or add additional fields to the info.
 

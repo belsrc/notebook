@@ -188,7 +188,7 @@ Shifting to the right works the same but in the opposite direction.
 
 Since it only operates on whole numbers, the result of a shift right on an odd number is "rounded" down.
 
-## Using Logical Shift to [Un]Pack RGBA Codes
+## Using Logical Shift to (Un)Pack RGBA Codes
 
 A RGBA code is actually four 8-bit integers "packed" together.
 
