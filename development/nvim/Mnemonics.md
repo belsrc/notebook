@@ -10,6 +10,7 @@ tags:
 - `a` - Append
 - `A` - Big Append, AA, Append After
 - `v` - Visual
+- `R` - Replace
 
 #### Navigation
 
@@ -34,3 +35,19 @@ tags:
 `O` - Open Line Above, Shift (upper) `o`
 
 `X` - Backspace. X = remove. Standard UI
+
+`f<symbol>` = find first symbol
+
+`%` = find matching symbol
+
+`f{v%d` = `f`ind next `{`, enter `v`isual mode, select to matching `}` (inclusive) and then `d`elete
+
+Can use `F` to find backwards
+
+`va{` = `v`isual `a`round `{`, select the same as above.
+
+`va{V` = select the body (above) and the definition (rest of fn), complete fn delete
+
+`vaw` = `v`isual `a`round `w`ord, select just word
+
+`vi'` = `v`isual `i`nside `'`. Can be any symbol.

@@ -354,16 +354,12 @@ For example, run `:!ls` to list files. Now `:e` and then `ctrl d` to see a list 
 
 `<leader>ds` - Document Symbols (functions, etc)
 
+`~` - toggle case
 
-alacritty
-+
-tmux
-+
-nvim
-+
-kickstart.nvim (merge into the nice things from nvchad)
-+
-obsidian.nvim
+`C-v` or `C-q` (on win) - Vertical Selection
+
+`c` - change. `cb` - change back word, `cw` - change word
+
 
 
 `vim.keymap.set('', '<C-p>, fn, {})`
@@ -375,8 +371,3 @@ obsidian.nvim
 https://www.youtube.com/watch?v=zHTeCSVAFNY'
 
 
-
-cssls
-eslint
-html
-jsonls
