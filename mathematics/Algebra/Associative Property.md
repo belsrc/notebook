@@ -130,10 +130,10 @@ $$
 
 ## Non-associative Operations
 
-A binary operation $\cdot$ on a set $S$ that does not satisfy the associative law is called non-associative.
+A binary operation $*$ on a set $S$ that does not satisfy the associative law is called non-associative.
 
 $$
-(x \cdot y) \cdot z \neq x \cdot (y \cdot z) \text{ } \text{ for some } x,y,z \in S
+(x \cdot y) \cdot z \neq x \cdot (y \cdot z) \text{ }\exists\text{ } x,y,z \in S
 $$
 
 For such an operation the order of evaluation _does_ matter.
