@@ -12,13 +12,16 @@ A similar property exists for binary relations; a binary relation is said to be 
 
 ## Definition
 
-A binary operation $\cdot$ on a set $S$ is called commutative if:
+A binary operation $*$ on a set $S$ is called commutative if:
+
 $$
-x * y = y * x \;\;\;\forall\: x,y \in S
+x * y = y * x \text{ }\forall\text{ } x,y \in S
 $$
+
 In other words, an operation is commutative if every two elements commute. An operation that does not satisfy the above property is called noncommutative.
 
 One says $\text{x commutes with y}$ or that $\text{x and y commute}$ under $*$ if:
+
 $$
 x * y = y * x
 $$
@@ -41,20 +44,27 @@ $$
 Commutativity is a property of some logical connectives of truth-functional propositional logic. The following logical equivalences demonstrate that commutativity is a property of particular connectives. The following are truth-functional tautologies.
 
 #### Commutativity of conjunction
+
 $$
-(P \:\wedge\: Q) \leftrightarrow (Q \:\wedge\: P)
+(P \wedge Q) \leftrightarrow (Q \wedge P)
 $$
+
 #### Commutativity of disjunction
+
 $$
-(P \:\vee\: Q) \leftrightarrow (Q \:\vee\: P)
+(P \vee Q) \leftrightarrow (Q \vee P)
 $$
+
 #### Commutativity of Implication
+
 $$
 (P \to (Q \to R)) \leftrightarrow (Q \to (P \to R))
 $$
+
 #### Commutativity of equivalence
+
 $$
-(P \:\leftrightarrow\: Q) \leftrightarrow (Q \:\leftrightarrow\: P)
+(P \leftrightarrow Q) \leftrightarrow (Q \leftrightarrow P)
 $$
 
 ## Mathematical Structures and Commutativity
