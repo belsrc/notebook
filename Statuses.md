@@ -1,20 +1,18 @@
 
 ```dataview
-TABLE WITHOUT ID file.link as Name, gardening as Garden, category as Category
+TABLE WITHOUT ID file.link as Name, gardening as Garden, join(tags) as Tags
 WHERE gardening = "🌱"
-SORT category
+SORT file.name ASC
 ```
 
-
 ```dataview
-TABLE WITHOUT ID file.link as Name, gardening as Garden, category as Category
+TABLE WITHOUT ID file.link as Name, gardening as Garden, join(tags) as Tags
 WHERE gardening = "🌿"
-SORT category
+SORT file.name ASC
 ```
 
-
 ```dataview
-TABLE WITHOUT ID file.link as Name, gardening as Garden, category as Category
+TABLE WITHOUT ID file.link as Name, gardening as Garden, join(tags) as Tags
 WHERE gardening = "🌳"
-SORT category
+SORT file.name ASC
 ```
