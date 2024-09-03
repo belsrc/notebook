@@ -17,11 +17,19 @@ $$
 \text{curry} : [(X \times Y) \to Z] \to (X \to [Y \to Z])
 $$
 
+```ts
+curry: <X, Y, Z>(fn: (x: X, y: Y) => Z) => (x: X) => (y: Y) => Z
+```
+
 Currying is related to, but not the same as, partial application. The example above can be used to illustrate partial application; it is quite similar. Partial application is the function $\text{apply}$ that takes the pair $f$ and $x$ together as arguments and returns $f_x$. Using the same notation as above, partial application has the signature:
 
 $$
 \text{apply} : ([(X \times Y) \to Z] \times X) \to [Y \to Z]
 $$
+
+```ts
+partial: <X, Y, Z>(fn: (x: X, y: Y) => Z, x: X) => (y: Y) => Z
+```
 
 Currying is useful in both practical and theoretical settings. In functional programming languages, it provides a way of automatically managing how arguments are passed to functions and exceptions. In theoretical computer science, it provides a way to study functions with multiple arguments in simpler theoretical models which provide only one argument.
 
