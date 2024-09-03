@@ -28,7 +28,7 @@ $$
 $$
 
 ```ts
-partial: <X, Y, Z>(fn: (x: X, y: Y) => Z, x: X) => (y: Y) => Z
+apply: <X, Y, Z>(fn: (x: X, y: Y) => Z, x: X) => (y: Y) => Z
 ```
 
 Currying is useful in both practical and theoretical settings. In functional programming languages, it provides a way of automatically managing how arguments are passed to functions and exceptions. In theoretical computer science, it provides a way to study functions with multiple arguments in simpler theoretical models which provide only one argument.
