@@ -3,7 +3,7 @@ tags:
   - math
   - algebra
   - comp-sci
-gardening: 🌱
+gardening: 🌳
 reference:
   - https://en.wikipedia.org/wiki/Currying
 ---
