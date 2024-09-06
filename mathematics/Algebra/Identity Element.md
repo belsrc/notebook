@@ -2,7 +2,7 @@
 tags:
   - math
   - algebra
-gardening: 🌱
+gardening: 🌳
 reference:
   - https://en.wikipedia.org/wiki/Identity_element
 ---
