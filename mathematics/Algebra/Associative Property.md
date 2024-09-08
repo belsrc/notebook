@@ -18,7 +18,7 @@ $$
 
 Even though the parentheses were rearranged on each line, the values of the expressions were not altered. Since this holds true when performing addition and multiplication on an real number, it can be said that "addition and multiplication of real numbers are associative operations."
 
-Associativity is not the same as [commutativity](mathematics/algebra/Commutative%20Property), which addresses whether the order of two operands affects the result.
+Associativity is not the same as [commutativity](../../mathematics/algebra/Commutative%20Property), which addresses whether the order of two operands affects the result.
 
 Many operations are non-associative; some examples include subtraction, exponentiation and the vector cross product. The addition of floating point numbers in computer science is not associative and the choice of how to associate an expression can have significant effect on rounding errors.
 

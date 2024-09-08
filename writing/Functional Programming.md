@@ -82,7 +82,7 @@ displayResult(add(5, 6));
 displayResult(11);
 ```
 
-This aspect of pure functions is referred to as "[referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)." Also sometimes referred as [Idempotence](https://en.wikipedia.org/wiki/Idempotence). A function is called referentially transparent if it can be replaced with its corresponding result without changing the program's behavior. For, hopefully, obvious reasons, having a side-effect in `add` from the example above would break this contract. Side-effects are any externally visible (observable) change. This includes, but is not limited to, changing a global variable, outputting to `console`, saving to a database, making an API call, etc. Now, an application that doesn't make any external requests or save anything that the user does isn't very practical, or useful. The goal of using pure functions isn't to completely eliminate side-effects, but to isolate them from the rest of the application's code.
+This aspect of pure functions is referred to as "[referential transparency](../computer%20science/programming%20lang%20theory/Referential%20Transparency.md)." Also sometimes referred as [Idempotence](../mathematics/algebra/Idempotence.md). A function is called referentially transparent if it can be replaced with its corresponding result without changing the program's behavior. For, hopefully, obvious reasons, having a side-effect in `add` from the example above would break this contract. Side-effects are any externally visible (observable) change. This includes, but is not limited to, changing a global variable, outputting to `console`, saving to a database, making an API call, etc. Now, an application that doesn't make any external requests or save anything that the user does isn't very practical, or useful. The goal of using pure functions isn't to completely eliminate side-effects, but to isolate them from the rest of the application's code.
 
 ```js
 let counter = 0;
@@ -155,7 +155,7 @@ Array.reduce(func(accumulator, item, index, array));
 
 ## Piecemeal Functions: Currying
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is a technique where a function that takes _n_-number of  arguments (_n_-ary) is transformed into a series of functions, each taking one argument (unary). $f(n\textrm{ arity})→f(n-1\textrm{ arity})→\text{etc}$ . Arity (/ˈæɹɪti/) is just a fancy (pinkies out) way of referring to the number of arguments that a function takes. `nullary` (0), `unary` (1), `binary` (2), `ternary` (3), `n-ary` (n) are all terms that are commonly used to describe functions solely on their number of arguments.
+[Currying](../mathematics/algebra/Curry.md) is a technique where a function that takes _n_-number of  arguments (_n_-ary) is transformed into a series of functions, each taking one argument (unary). $f(n\textrm{ arity})→f(n-1\textrm{ arity})→\text{etc}$ . Arity (/ˈæɹɪti/) is just a fancy (pinkies out) way of referring to the number of arguments that a function takes. `nullary` (0), `unary` (1), `binary` (2), `ternary` (3), `n-ary` (n) are all terms that are commonly used to describe functions solely on their number of arguments.
 
 In a curried function, each function call returns another function that expects the next argument until all arguments are provided, and then the final result is returned. Currying a function is just taking it and converting it to a series of closures. It makes the function more modular and flexible by allowing you to partially apply arguments, creating new functions with fewer parameters.
 
