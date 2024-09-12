@@ -16,7 +16,7 @@ gardening: 🌿
 
   > A particular method or system of calculation or reasoning.
 
-  What you're probably used to hearing refered to as just "calculus" is actually refering to differential calculus and integral calculus (or as the group infinitesimal calculus). This is your intro to derivatives, integrals, etc.
+  What you're probably used to hearing referred to as just "calculus" is actually referring to differential calculus and integral calculus (or as the group infinitesimal calculus). This is your intro to derivatives, integrals, etc.
 
 
 ## $\lambda$-Calculus Syntax

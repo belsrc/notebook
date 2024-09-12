@@ -12,6 +12,8 @@ tags:
 - `v` - Visual
 - `R` - Replace
 
+(`C-v` or `C-q` (on win) - Vertical Selection)
+
 #### Navigation
 
 `w` - Walk "word"
@@ -51,3 +53,21 @@ Can use `F` to find backwards
 `vaw` = `v`isual `a`round `w`ord, select just word
 
 `vi'` = `v`isual `i`nside `'`. Can be any symbol.
+
+`c` = change
+
+`cb` = change back word
+
+`cw` = change word
+
+`gx`  = Goto Execute (file path or URI)
+
+`gf` = Goto file under cursor
+
+`gd` = Goto definition
+
+-----------------------------------------
+
+`zz` to center the current cursor position.
+
+`~` - toggle case

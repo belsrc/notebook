@@ -1,7 +1,7 @@
 ---
 tags:
   - nvim
-gardening: 🌿
+gardening: 🌳
 reference:
   - https://github.com/pinnheads/neovim-tutor
 ---
@@ -18,15 +18,7 @@ A "WORD" is:
 - A sequence of non-blank characters.
 - Or an empty line.
 
-> [!Error] Make Image
-
-```
- w  w    w  w
-| || |  | || |
-abc@#$  def%^&
-|    |  |    |
- WORD    WORD
-```
+![](../../images/nvim/wW-move-dark.png)
 
 ## Navigating
 
@@ -48,56 +40,17 @@ abc@#$  def%^&
 
 ### Difference In Navigation Commands
 
-> [!Error] Make Images For These
+![](../../images/nvim/w-move-dark.png)
 
-```
-`w` movement
+![](../../images/nvim/big-w-move-dark.png)
 
-Start    w     ww  w w  w w
-|        |     ||  | |  | |
-function fooBar(obj, obj) {
-```
+![](../../images/nvim/b-move-dark.png)
 
-```
-`W` movement
+![](../../images/nvim/big-b-move-dark.png)
 
-Start    W           W    W
-|        |           |    |
-function fooBar(obj, obj) {
-```
+![](../../images/nvim/e-move-dark.png)
 
-```
-`b` movement
-
-b        b     bb  b b  b Start
-|        |     ||  | |  | |
-function fooBar(obj, obj) {
-```
-
-```
-`B` movement
-
-B        B           B    Start
-|        |           |    |
-function fooBar(obj, obj) {
-```
-
-```
-`e` movement
-
-Start  e      ee  ee   ee e
-|      |      ||  ||   || |
-function fooBar(obj, obj) {
-```
-
-```
-`E` movement
-
-Start  E           E    E E
-|      |           |    | |
-function fooBar(obj, obj) {
-```
-
+![](../../images/nvim/big-e-move-dark.png)
 
 ## Exiting
 
@@ -113,7 +66,6 @@ NOTE: Need a Modes table
 `a` Insert (Append Before) Mode
 `A` Insert (Append After) Mode
 `R` Replace Mode
-
 
 ## Editing
 
@@ -228,11 +180,9 @@ To search the document in the reverse order use `?<phrase>` instead.
 
 Use `ctrl - o` (`<C-o>`) to go to the older position. And `ctrl i` (`<C-i>`) to go to the newer position. 
 
-
 ### Matching Parentheses
 
 Place the cursor on an opening `(`, `[` or `{` and press `%`. The cursor will move to the matching closing symbol. Depending on your setup, the matching symbols will also be highlighted.
-
 
 ### Substitute Command
 
@@ -250,13 +200,11 @@ You can use `:#,#s/<old>/<new>/g` to replace all occurrences from the first line
 
 The `c` (confirm) flag can be added to all of the other substitutes command as well.
 
-
 ### External Commands
 
 `:!<command>` this allows you to execute any external shell command.
 
 As an example `:!ls -la`.
-
 
 ### Writing (Saving) Files
 
@@ -270,7 +218,6 @@ Press `v` to enter Visual Character Mode. Then you `h, j, k, l` to select the te
 
 Now type the same `:w <file-name>` and press enter.
 
-
 ## Retrieving File Contents
 
 You can retrieve the contents of a file and place them _below_ the cursor using:
@@ -281,13 +228,11 @@ You can also read the output of an external command.
 
 `:r !<command>`
 
-
 ## Open Command
 
 Pressing `o` will add a new line below the current cursor line and put you into Insert mode. This is similar to doing `A` followed by `return`.
 
 To open a line ABOVE your cursor use `O`
-
 
 ### Copy and Paste
 
@@ -298,7 +243,6 @@ Then you can use `p` to the put the text after the cursor.
 `y` can also be used as an operator. i.e. `yw` will copy a word.
 
 You can use `P` to put before the cursor.
-
 
 ### Set Options
 
@@ -316,58 +260,12 @@ You can invert the current using `inv__`
 
 `:set invic`
 
-
 ### Help
 
 You can use `F1` or `:help` to open the help window. You can use `ctrl w, ctrl w` to switch between the two windows.
-
 
 ### Completion
 
 You can use `ctrl d` and `tab` for command autocompletion. 
 
 For example, run `:!ls` to list files. Now `:e` and then `ctrl d` to see a list of commands starting with `e`. You can use `tab` to cycle through the available commands.
-
-
-### References
-
-`:Tutor`
-
-
-
-
-
-
-`zz` to center the current cursor position.
-
-`gx` Open file path or URI under cursor
-
-`gf` Go to file under cursor
-
-`:Lazy` opens the Lazy GUI
-
-`\` to open sidebar file explorer
-
-`<leader>sf` - Search Files
-
-`<leader>s/` - Search Buffer
-
-`<leader>ds` - Document Symbols (functions, etc)
-
-`~` - toggle case
-
-`C-v` or `C-q` (on win) - Vertical Selection
-
-`c` - change. `cb` - change back word, `cw` - change word
-
-
-
-`vim.keymap.set('', '<C-p>, fn, {})`
-`C-p` = Ctrl + p
-
-
-
-
-https://www.youtube.com/watch?v=zHTeCSVAFNY'
-
-
