@@ -11,7 +11,7 @@ tags:
 
 **HOF** → HOF (HOF should be common since React says HOC)
 
-**lenses** → accessors
+**lenses** → accessors → getters/setters
 
 **functors/monads** → interfaces/control structures
 
