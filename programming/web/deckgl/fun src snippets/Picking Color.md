@@ -46,5 +46,5 @@ So basically you count up the first index, when it hits `255 (+1)`, reset the fi
 
 And the reverse is just multiplication by the "break-points".
 
-> [!TODO]
+> [!WARNING]
 > Break it down by bits. Rewrite decode via shifting?
