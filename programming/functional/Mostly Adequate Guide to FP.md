@@ -22,7 +22,7 @@ const result = conjoin(
 );
 ```
 
-There is benefit to calling a spade a spade. Has we scrutinized our custom functions more closely, we would have discovered that we're just working with simple addition (`conjoin`) and multiplication (`breed`).
+There is benefit to calling a spade a spade. Had we scrutinized our custom functions more closely, we would have discovered that we're just working with simple addition (`conjoin`) and multiplication (`breed`).
 
 There's really nothing special about these two functions other than their names.
 
@@ -244,7 +244,7 @@ const map = curry((f, arr) => arr.map(f));
 The pattern I've followed is a simple, but important one. I've strategically positioned the data we're operating on (String, Array) as the last argument. It will become clear as to why upon use.
 
 > [!NOTE]
-> Since it wasn't really covered later, the above concept is called "data last". This allows us to add all of the arguments that are more likely to be static first. And then finally, the value that is ultimately going to be acted up.
+> Since it wasn't really covered later, the above concept is called "[data last](../../programming/functional/Data%20Last)". This allows us to add all of the arguments that are more likely to be static first. And then finally, the value that is ultimately going to be acted up.
 
 Currying is useful for many things. We can make new function just by giving our base function some arguments. We also have the ability to transform any function that works on single elements into a function that works on arrays simply by wrapping it with `map`.
 

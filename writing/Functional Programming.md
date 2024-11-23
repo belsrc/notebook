@@ -209,7 +209,7 @@ transaction(0.07, 43.95)(60); // → 12.97
 transaction(0.07)(43.95)(60); // → 12.97
 ```
 
-You may have noticed in the examples above that the "main" piece of data that is being acted upon is the last argument. This is a convention know as "data last." This just means that we want to put all of our "boilerplate" arguments first and lastly the data. This makes it so that we can do all of the basic partial application as soon as possible and then just keep reusing that final function. Having the data last in curried functions also lets us use them as one off functions or easily plug them into things like array methods like `map`.
+You may have noticed in the examples above that the "main" piece of data that is being acted upon is the last argument. This is a convention know as "[data last](../programming/functional/Data%20Last)." This just means that we want to put all of our "boilerplate" arguments first and lastly the data. This makes it so that we can do all of the basic partial application as soon as possible and then just keep reusing that final function. Having the [data last](../programming/functional/Data%20Last) in curried functions also lets us use them as one off functions or easily plug them into things like array methods like `map`.
 
 ```js
 const transactionTotal = tax => price => price * (1 + tax);
