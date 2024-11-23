@@ -223,7 +223,7 @@ We can run any pure function in parallel since it does not need access to shared
 The concept is simple: You can call a function with fewer arguments than it expects. It returns a function that takes the remaining arguments.
 
 > [!NOTE]
-> This isn't, strictly speaking, correct. [Currying](mathematics/Algebra/Curry.md) is always one by one. [Partial](mathematics/Algebra/Curry.md#contrast-with-partial-function-application) is the function being wrapped plus one argument. And then takes the rest one by one.
+> This isn't, strictly speaking, correct. [Currying](../../mathematics/Algebra/Curry.md) is always one by one. [Partial](../../mathematics/Algebra/Curry.md#contrast-with-partial-function-application) is the function being wrapped plus one argument. And then takes the rest one by one.
 
 ```js
 const add = x => y => x + y;
@@ -244,7 +244,7 @@ const map = curry((f, arr) => arr.map(f));
 The pattern I've followed is a simple, but important one. I've strategically positioned the data we're operating on (String, Array) as the last argument. It will become clear as to why upon use.
 
 > [!NOTE]
-> Since it wasn't really covered later, the above concept is called "[data last](../../programming/functional/Data%20Last)". This allows us to add all of the arguments that are more likely to be static first. And then finally, the value that is ultimately going to be acted up.
+> Since it wasn't really covered later, the above concept is called "[data last](../../programming/functional/Data%20Last.md)". This allows us to add all of the arguments that are more likely to be static first. And then finally, the value that is ultimately going to be acted up.
 
 Currying is useful for many things. We can make new function just by giving our base function some arguments. We also have the ability to transform any function that works on single elements into a function that works on arrays simply by wrapping it with `map`.
 
