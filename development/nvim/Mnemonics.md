@@ -3,71 +3,86 @@ tags:
   - nvim
   - mnemonic
 ---
+## Modes
 
-#### Modes
-
-- `i` - Insert
-- `a` - Append
-- `A` - Big Append, AA, Append After
-- `v` - Visual
-- `R` - Replace
+- `i` : Insert
+- `I` : Insert Start Line
+- `a` : Append
+- `A` : Append End Line
+- `v` : Visual
+- `V` : Visual Line
+- `R` : Replace
 
 (`C-v` or `C-q` (on win) - Vertical Selection)
 
-#### Navigation
+## Navigation
 
-`w` - Walk "word"
-`W` - Big Walk, Walk "WORD"
-`b` - Backward "word"
-`B` - Big Backwards, Backward "WORD"
-`e` - End "word"
-`E` - Big End Word, End "WORD"
+- `w` : Walk "word"
+- `W` : Big Walk, Walk "WORD"
+- `b` : Backwards "word"
+- `B` : Big Backwards, Backward "WORD"
+- `e` : End "word"
+- `E` : Big End Word, End "WORD"
 
-#### Commands
+## Visual `v`
 
- `:s/<old>/<new>` - Substitute "this" for "that".
+`va{` : `v`isual `a`round `{`, select the same as above.
 
- `:s/<old>/<new>/g` - Substitute "this" for "that" globally.
-	 _(Not happy with that since its not truly global)_
+`viw` : `v`isual `i`nside `w`ord, select just word
 
-`:r <file_name | !external_command>` - Retrieve content | Read content
+`vi'` : `v`isual `i`nside `'`. Can be any symbol.
 
-`o` - Open Line _(Kind of dumb)_
+`va{V` : select the body (above) and the definition (rest of fn), complete fn delete
 
-`O` - Open Line Above, Shift (upper) `o`
+## Change `c`
 
-`X` - Backspace. X = remove. Standard UI
+`cb` : change back word
 
-`f<symbol>` = find first symbol
+`cw` : change word
 
-`%` = find matching symbol
+`ciw` : change inside word (deletes word and enters insert)
 
-`f{v%d` = `f`ind next `{`, enter `v`isual mode, select to matching `}` (inclusive) and then `d`elete
+`ci{` : change inside {}
+
+`caw` : change around word
+
+`ca{` : change around {}
+
+## Goto `g`
+
+`gx` : goto Execute (file path or URI)
+
+`gf` : goto file under cursor
+
+`gd` : goto definition
+
+## Find `f`
+
+`f<symbol>` : find first symbol
 
 Can use `F` to find backwards
 
-`va{` = `v`isual `a`round `{`, select the same as above.
+`f{v%d` : find next `{`, enter `v`isual mode, select to matching `}` (inclusive) and then `d`elete
 
-`va{V` = select the body (above) and the definition (rest of fn), complete fn delete
+## Uncategorized
 
-`vaw` = `v`isual `a`round `w`ord, select just word
+`o` : Open Line _(Kind of dumb)_
 
-`vi'` = `v`isual `i`nside `'`. Can be any symbol.
+`O` : Open Line Above, Shift (upper) `o`
 
-`c` = change
+`X` : Backspace. X = remove. Standard UI
 
-`cb` = change back word
+`%` : find matching symbol
 
-`cw` = change word
+`zz` : to center the current cursor position.
 
-`gx`  = Goto Execute (file path or URI)
+`~` : toggle case
 
-`gf` = Goto file under cursor
+## Commands
 
-`gd` = Goto definition
+ `:s/<old>/<new>` : Substitute "this" for "that".
 
------------------------------------------
+ `:s/<old>/<new>/g` : Substitute "this" for "that" globally.
+	 _(Not happy with that since its not truly global)_
 
-`zz` to center the current cursor position.
-
-`~` - toggle case
+`:r <file_name | !external_command>` : Retrieve content | Read content
