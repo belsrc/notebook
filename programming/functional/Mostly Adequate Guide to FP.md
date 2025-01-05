@@ -212,7 +212,7 @@ Contrary to "typical" methods and procedures in imperative programming rooted de
 
 Pure functions make testing much easier. We don't have to mock a "real" payment gateway or setup and assert the state of the world after each test. We simply give the function input and assert output. In fact. We find the functional community pioneering new test tools that can blast our functions with generated input and assert that properties hold on the output.
 
-Many believe the biggest win when working with pure functions is [referential transparency](../computer%20science/programming%20lang%20theory/Referential%20Transparency.md). Code is referentially transparent when it can be substituted for its evaluated value without changing the behavior of the program.
+Many believe the biggest win when working with pure functions is [referential transparency](../../computer%20science/programming%20lang%20theory/Referential%20Transparency.md). Code is referentially transparent when it can be substituted for its evaluated value without changing the behavior of the program.
 
 We can use a technique called _equational reasoning_ wherein one substitutes "equals for equals" to reason about code. This ability to reason about code is terrify for refactoring and understanding code in general.
 
