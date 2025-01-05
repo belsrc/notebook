@@ -1,6 +1,8 @@
 ---
 tags:
   - functional
+  - language
+  - comp-sci
 gardening: 🌿
 ---
 "As a type inference method, Hindley-Milner is able to deduce the types of variables, expressions and functions from programs written in an entirely untyped style." [(\*)](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) It is the core type system for several functional languages.

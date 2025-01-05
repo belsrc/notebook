@@ -212,7 +212,7 @@ Contrary to "typical" methods and procedures in imperative programming rooted de
 
 Pure functions make testing much easier. We don't have to mock a "real" payment gateway or setup and assert the state of the world after each test. We simply give the function input and assert output. In fact. We find the functional community pioneering new test tools that can blast our functions with generated input and assert that properties hold on the output.
 
-Many believe the biggest win when working with pure functions is _referential transparency_. Code is referentially transparent when it can be substituted for its evaluated value without changing the behavior of the program.
+Many believe the biggest win when working with pure functions is [referential transparency](../computer%20science/programming%20lang%20theory/Referential%20Transparency.md). Code is referentially transparent when it can be substituted for its evaluated value without changing the behavior of the program.
 
 We can use a technique called _equational reasoning_ wherein one substitutes "equals for equals" to reason about code. This ability to reason about code is terrify for refactoring and understanding code in general.
 
@@ -394,7 +394,7 @@ Types are the meta language that enables people from different backgrounds to co
 
 When working with pure functions, type signatures have an expressive power. In a single, compact line, they expose behavior and intention. We can derive "free theorems" from them. Types can be inferred so there's no need to explicit type annotations. They can be turned to fine point precision or left general and abstract. Type signatures thus play an important part in functional programming - much more than you might first expect.
 
-Hindley-Milner type signatures are quite simple, but warrants a quick explanation and some practice to fully absorb the little language.
+[Hindley-Milner](../../computer%20science/type%20theory/Hindley-Milner%20Type%20System) type signatures are quite simple, but warrants a quick explanation and some practice to fully absorb the little language.
 
 ```js
 // capitalize :: String -> String

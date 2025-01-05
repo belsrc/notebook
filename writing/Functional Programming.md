@@ -106,7 +106,7 @@ console.log(counter);            // → 0
 
 There are a number of advantages to using pure functions in your application:
 - Makes code easier to refactor as they are self-contained and self documenting.
-- Thanks to referential transparency, code is easier to understand (reason about) given any input.
+- Thanks to [referential transparency](../computer%20science/programming%20lang%20theory/Referential%20Transparency.md), code is easier to understand (reason about) given any input.
 - Pure functions can always be memoized by their inputs, as $x \to y$ is always the same.
 - Makes parallelization easier (threads, webworkers, Promises) as it doesn't rely on shared memory.
 - Functions that have no side effects allow for compiler optimization techniques.
