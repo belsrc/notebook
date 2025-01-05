@@ -571,8 +571,8 @@ class World {
 
 // Usage
 const systemPriority = {
-  MOVEMENT: 1,
-  HEALTH: 10,
+  MOVEMENT: 1,
+  HEALTH: 10,
 } as const;
 
 const world = new World();
@@ -1110,6 +1110,9 @@ Entity 1 moved to (34.333333333333336, 34.333333333333336)
 ...
 ```
 
+> [!INFO]
+> Stackblitz project containing the above example:
+> https://stackblitz.com/edit/vitejs-vite-rykt2trb
 
 ## Further Optimizations
 
