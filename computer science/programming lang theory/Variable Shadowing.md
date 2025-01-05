@@ -1,6 +1,7 @@
 ---
 tags:
   - comp-sci
+  - language
 gardening: 🌳
 reference:
   - https://en.wikipedia.org/wiki/Variable_shadowing
