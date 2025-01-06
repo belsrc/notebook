@@ -28,7 +28,7 @@ However, this simplicity can also lead to hidden bugs, as propagating values bet
 ### Pros
 
 - **Decoupling/SoC:** The separation of logic from data simplifies modifications and extensions. Systems handle logic, while components store data.
-- **Performance:** Systems can function efficiently by using arrays of components, which enables better utilization of CPU cache locality and parallelism.
+- **Performance:** Systems can function efficiently by using arrays of components, which enables better utilization of [CPU cache](../../computer%20science/CPU%20Cache.md) [locality](../../computer%20science/Locality%20of%20Reference%20and%20Memory%20Locality.md) and parallelism.
 - **Flexibility/Scalability:** Introducing new behaviors is straightforward—simply add new systems and components.
 - **Reusability:** Components and systems can frequently be reused across different entities and projects.
 
@@ -624,7 +624,7 @@ worker.postMessage({ entities, deltaTime });
 
 ### Data-Oriented Design
 
-Object-oriented structures can distribute data throughout memory, which may reduce cache efficiency. By adopting a data-oriented design that utilizes flat arrays to store components, memory locality can be improved.
+Object-oriented structures can distribute data throughout memory, which may reduce [CPU cache](../../computer%20science/CPU%20Cache.md) efficiency. By adopting a data-oriented design that utilizes flat arrays to store components, [memory locality](../../computer%20science/Locality%20of%20Reference%20and%20Memory%20Locality.md) can be improved.
 
 #### Example
 
