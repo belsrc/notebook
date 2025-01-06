@@ -626,6 +626,11 @@ worker.postMessage({ entities, deltaTime });
 
 Object-oriented structures can distribute data throughout memory, which may reduce [CPU cache](../../computer%20science/CPU%20Cache.md) efficiency. By adopting a data-oriented design that utilizes flat arrays to store components, [memory locality](../../computer%20science/Locality%20of%20Reference%20and%20Memory%20Locality.md) can be improved.
 
+> [!NOTE] A note on locality
+> Memory locality refers to the manner in which data is accessed in memory during program execution. It is essential for optimizing performance in modern systems.
+> 
+> This refers to the tendency of a program to access memory locations that are close to one another in a short period of time. When a program accesses a specific memory location (for example, an element in an array), it is likely to access nearby locations soon thereafter (such as the next few elements in the array).
+
 #### Example
 
 ```ts
