@@ -22,7 +22,7 @@ The locality of reference, also known as the principle of locality, refers to th
 
 ## Memory Locality
 
-Memory locality refers to the manner in which data is accessed in memory during program execution. It is essential for optimizing performance in modern systems, particularly concerning caches.
+Memory locality refers to the manner in which data is accessed in memory during program execution. It is essential for optimizing performance in modern systems, particularly concerning [caches](Locality%20of%20References%20and%20Memory%20Locality).
 
 **Focus:**  
 Understanding how data is accessed in memory, including caches and RAM. This involves optimizing memory hierarchies to minimize access times.
