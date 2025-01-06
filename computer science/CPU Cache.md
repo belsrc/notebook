@@ -33,7 +33,7 @@ This caching mechanism speeds up data processing by reducing the time the CPU sp
 
 ## Cache Optimizations
 
-Cache optimization involves two key principles: [temporal locality and spatial locality](../computer%20science/Locality%20of%20Reference.md). Temporal locality refers to the tendency of programs to access the same memory locations repeatedly within a short time frame. Spatial locality indicates that programs are likely to access memory locations that are physically near to each other.
+Cache optimization involves two key principles: [temporal locality and spatial locality](Locality%20of%20Reference%20and%20Memory%20Locality.md). Temporal locality refers to the tendency of programs to access the same memory locations repeatedly within a short time frame. Spatial locality indicates that programs are likely to access memory locations that are physically near to each other.
 
 ## Key Performance Metrics
 
