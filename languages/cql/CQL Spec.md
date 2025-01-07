@@ -80,6 +80,7 @@ Sub-expressions can be put together with logical operators to form more complex 
 ## Binary Comparison Operators
 
 - equal to ($=$) 
+- not equal to ($<>$)
 - less than ($<$)
 - less than or equal to ($<=$)
 - greater than ($>$)
