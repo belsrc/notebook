@@ -36,6 +36,18 @@ Memory locality is important in performance tuning, system architecture, and cac
 **Example:**  
 A loop that iterates through an array demonstrates memory locality, as it accesses consecutive elements in memory, which aligns with the operation of hardware caches.
 
+### Visualizing Locality
+
+Good memory locality would be something like:
+
+
+![](../../images/comp-sci/good-locality-dark.png)
+
+While bad memory locality would be:
+
+
+![](../../images/comp-sci/bad-locality-dark.png)
+
 ### In Practice
 
 Although a distinction exists between the two terms, they often overlap. "Memory locality" specifically refers to the hardware-level implementation of locality principles, while "locality of reference" is a broader concept related to program execution.

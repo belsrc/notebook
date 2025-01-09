@@ -22,7 +22,10 @@ _Values given are for an AMD Ryzen 7 7900X. Values will vary based on CPU._
 - **Cache Hit:** A cache hit occurs when the CPU requests data that is already stored in the cache. In this case, the CPU can quickly retrieve the data, which is much faster than obtaining it from main memory.
 - **Cache Miss:** A cache miss happens when the requested data is not found in the cache. In this situation, the CPU must fetch the data from the slower main memory. Once the data is retrieved, it may be stored in the cache for future access.
 
-This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy
+This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy.
+
+
+![](../../images/comp-sci/good-locality-dark.png)
 
 ## Types of Cache Misses
 
