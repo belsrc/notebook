@@ -3,6 +3,9 @@ tags:
   - cpu
 gardening: 🌳
 date: 2025-01-05
+reference:
+  - https://en.wikipedia.org/wiki/CPU_cache
+  - https://en.wikipedia.org/wiki/Locality_of_reference
 ---
 A CPU cache is a small, high-speed memory that is located inside or near the CPU. It stores copies of data from frequently accessed locations in the main memory (RAM), which helps reduce the time the CPU spends waiting for data to be retrieved from the slower main memory.
 
@@ -25,6 +28,7 @@ _Values given are for an AMD Ryzen 7 7900X. Values will vary based on CPU._
 This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy.
 
 
+_Simplified example_
 ![](../../images/comp-sci/good-locality-dark.png)
 
 ## Types of Cache Misses
@@ -34,17 +38,28 @@ This caching mechanism speeds up data processing by reducing the time the CPU sp
 3. **Capacity Miss**: This occurs when the cache cannot hold all the data required by the program, leading to the eviction of older data. 
 4. **Coherence Miss**: This is relevant in multi-core processors, where it is necessary to maintain data consistency across different caches.
 
-## Cache Optimizations
+## Cache Line
 
-Cache optimization involves two key principles: [temporal locality and spatial locality](Locality%20of%20Reference%20and%20Memory%20Locality.md). Temporal locality refers to the tendency of programs to access the same memory locations repeatedly within a short time frame. Spatial locality indicates that programs are likely to access memory locations that are physically near to each other.
+Data are transferred between memory and cache in blocks of fixed size, called _cache lines_ or _cache blocks_. A cache line is a small, fixed-size block of memory utilized by a CPU cache to store data. When data is retrieved from main memory, it is stored in these cache lines. The size of cache lines typically ranges from 32 to 128 bytes, depending on the architecture. The entire cache line represents the smallest unit of memory that the cache can manage.
+
+When a cache line is copied from memory into the cache, a cache entry is created. This entry includes the copied data (Data Block), the requested memory location (Tag) as well as additional meta data. When the processor needs to read from or write to a memory location, it first checks the cache for a corresponding entry. The cache searches for the contents of the requested memory location within any cache lines that may contain that address.
+
+If the processor finds the memory location in the cache, this is called a cache hit. In this case, the processor can immediately read from or write to the data within the cache line. However, if the memory location is not found in the cache, this is referred to as a cache miss. In the event of a cache miss, the cache allocates a new entry, copies the required data from the main memory, and then fulfills the request using the data now stored in the cache.
+
+The CPU cache operates on the principle of [spatial locality](Locality%20of%20Reference%20and%20Memory%20Locality.md), which means that when a program accesses a memory location, it is likely to access nearby memory locations shortly thereafter. To enhance performance, the CPU retrieves an entire block of adjacent memory (the cache line), rather than just the requested byte. This strategy helps prepare for future memory requests, improving overall efficiency.
+
+For example, if a cache line is 64 bytes, and the CPU requests data at address `0x100`, the cache might fetch the block from `0x100` to `0x13F`.
+
+> [!NOTE]
+> Maybe add Cache Line Structure (H3) and image?
 
 ## Key Performance Metrics
 
 1. **Hit Rate**: Percentage of memory requests served by the cache.
 2. **Miss Rate**: Percentage of memory requests not served by the cache.
-3. **Latency**: The time taken to fetch data from the cache compared to main memory.
+3. **Latency**: The time taken to fetch data from the cache compared to main memory (CPU stall).
 
-## Cache Eviction Policies
+## Eviction Policies
 
 When a cache reaches its full capacity, it must determine which data to remove in order to free up space. The following are common eviction policies:
 1. **Least Recently Used (LRU)**: This policy evicts the data that has not been accessed for the longest time.
