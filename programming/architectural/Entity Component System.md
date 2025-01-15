@@ -827,110 +827,6 @@ type EntityComponents = {
 
 // ---
 
-class World {
-  #entities: Map<number, Entity>;
-  #archetypes: Map<string, Set<number>>;
-  #components: Partial<Record<
-    keyof EntityComponents, 
-    (Component | undefined)[]
-  >>;
-  #currentEntityId: number;
-
-  constructor() {
-    this.#entities = new Map();
-    this.#archetypes = new Map();
-    this.#components = {};
-    this.#currentEntityId = 0;
-  }
-
-  createEntity() {
-    const entity = new Entity(this.#currentEntityId++);
-
-    this.#entities.set(entity.id, entity);
-    this.updateArchetype(entity);
-
-    return entity;
-  }
-
-  deleteEntity(entity: Entity) {
-    this.#entities.delete(entity.id);
-
-    for (const [_, entityMap] of Object.entries(this.#components)) {
-      entityMap[entity.id] = undefined;
-    }
-  }
-
-  addComponent(entity: Entity, component: Component) {
-    const componentType =
-      component.constructor.name as keyof EntityComponents;
-
-    if (!this.#components[componentType]) {
-      this.#components[componentType] = [];
-    }
-
-    this.#components[componentType][entity.id] = component;
-    this.updateArchetype(entity);
-  }
-
-  getComponent<T>(componentType: keyof EntityComponents, entityId?: number) {
-    if (!entityId) {
-      return (this.#components[componentType] || null) as T | null;
-    }
-
-    return (
-      this.#components[componentType]?.[entityId] || null
-    ) as T | null;
-  }
-
-  removeComponent(entity: Entity, componentType: keyof EntityComponents) {
-    if (this.#components[componentType]) {
-      this.#components[componentType][entity.id] = undefined;
-    }
-
-    this.updateArchetype(entity);
-  }
-
-  updateArchetype(entity: Entity) {
-    const components = Object.keys(this.#components).filter(
-      (type) => this.#components[type as keyof EntityComponents]?.[entity.id]
-    );
-
-    const archetypeKey = components.sort().join(',');
-
-    for (const archetype of this.#archetypes.values()) {
-      archetype.delete(entity.id);
-    }
-
-    if (!this.#archetypes.has(archetypeKey)) {
-      this.#archetypes.set(archetypeKey, new Set());
-    }
-
-    this.#archetypes.get(archetypeKey)?.add(entity.id);
-  }
-
-  query(...componentTypes: string[]) {
-    const queriedComponents = new Set(componentTypes);
-    const matchingEntities: Set<number> = new Set();
-
-    for (const [key, entities] of this.#archetypes) {
-      const archetypeComponents = new Set(key.split(','));
-
-      if (
-        [...queriedComponents]
-          .every((type) => archetypeComponents.has(type))
-      ) {
-        for (const entityId of entities) {
-          matchingEntities.add(entityId);
-        }
-      }
-    }
-
-    return matchingEntities;
-  }
-}
-
-// ---
-
 abstract class System {
   name: string;
 
@@ -1037,6 +933,143 @@ class HealthSystem {
 
 // ---
 
+export class World {
+  #currentEntityId: number;
+  #entities: Record<number, Entity>;
+
+  // Group entities by their component composition
+  #archetypes: Record<string, Set<number>>;
+
+  // Each component type stores a sparse array
+  #components: Partial<
+    Record<keyof EntityComponents, (Component | undefined)[]>
+  >;
+
+  // List of systems ordered by priority
+  #systems: { system: System; priority: number }[];
+
+  constructor() {
+    // If you expect to have 1000+ keys, use Map. Until then,
+    // objects are faster in JS. Same for #archetypes & #components.
+    this.#entities = {};
+    this.#archetypes = {};
+    this.#components = {};
+    this.#systems = [];
+    this.#currentEntityId = 0;
+  }
+
+  createEntity() {
+    const entity = new Entity(this.#currentEntityId++);
+
+    this.#entities[entity.id] = entity;
+    this.updateArchetype(entity);
+
+    return entity;
+  }
+
+  deleteEntity(entity: Entity) {
+    delete this.#entities[entity.id];
+
+    for (const [_, entityMap] of Object.entries(this.#components)) {
+      entityMap[entity.id] = undefined;
+    }
+  }
+
+  addComponent(entity: Entity, component: Component) {
+    const componentType = component.constructor.name as keyof EntityComponents;
+
+    if (!this.#components[componentType]) {
+      this.#components[componentType] = [];
+    }
+
+    this.#components[componentType][entity.id] = component;
+    this.updateArchetype(entity);
+  }
+
+  getComponent<T>(componentType: keyof EntityComponents, entityId?: number) {
+    if (!entityId) {
+      return (this.#components[componentType] || null) as T | null;
+    }
+
+    return (this.#components[componentType]?.[entityId] || null) as T | null;
+  }
+
+  removeComponent(entity: Entity, componentType: keyof EntityComponents) {
+    if (this.#components[componentType]) {
+      this.#components[componentType][entity.id] = undefined;
+    }
+
+    this.updateArchetype(entity);
+  }
+
+  updateArchetype(entity: Entity) {
+    const components = Object.keys(this.#components).filter(
+      (type) => this.#components[type as keyof EntityComponents]?.[entity.id]
+    );
+
+    // Archetype identifier
+    const archetypeKey = components.sort().join(',');
+
+    // Remove entity from all archetypes
+    for (const archetype of Object.values(this.#archetypes)) {
+      archetype.delete(entity.id);
+    }
+
+    // Add entity to its new archetypes
+    if (!this.#archetypes[archetypeKey]) {
+      this.#archetypes[archetypeKey] = new Set();
+    }
+
+    this.#archetypes[archetypeKey]?.add(entity.id);
+  }
+
+  query(...componentTypes: string[]) {
+    const queriedComponents = new Set(componentTypes);
+    const matchingEntities: Set<number> = new Set();
+
+    for (const [key, entities] of Object.entries(this.#archetypes)) {
+      // Split the archetype key into individual components in order
+      // to match them separately. This lets an entity that has 
+      // "Position,Velocity,Health" as components match a query that 
+      // is "Postion,Velocity".
+      const archetypeComponents = new Set(key.split(','));
+
+      if (
+        [...queriedComponents].every((type) => archetypeComponents.has(type))
+      ) {
+        for (const entityId of entities) {
+          matchingEntities.add(entityId);
+        }
+      }
+    }
+
+    return matchingEntities;
+  }
+
+  addSystem(system: System, priority: number) {
+    this.#systems.push({ system, priority });
+
+    // Higher priority first
+    this.#systems.sort((a, b) => b.priority - a.priority);
+  }
+
+  update(deltaTime: number) {
+    for (const { system } of this.#systems) {
+      if (system.update) {
+        system.update(this, deltaTime);
+      }
+    }
+  }
+}
+
+// ---
+
+const systemPriority = {
+  COLLISION: 8,
+  MOVEMENT: 9,
+  HEALTH: 10,
+} as const;
+
 const eventManager = new EventManager();
 const world = new World();
 
@@ -1044,11 +1077,6 @@ const world = new World();
 const positionPool = new Pool(10, () => new Position(0, 0));
 const velocityPool = new Pool(10, () => new Velocity(0, 0));
 const healthPool = new Pool(10, () => new Health(100, 100));
-
-// Create systems
-const movementSystem = new MovementSystem();
-const collisionSystem = new CollisionSystem(eventManager);
-const healthSystem = new HealthSystem(eventManager);
 
 // Create entities
 const player = world.createEntity();
@@ -1062,6 +1090,11 @@ world.addComponent(player, healthPool.acquire());
 world.addComponent(enemy, positionPool.acquire());
 world.addComponent(enemy, velocityPool.acquire());
 world.addComponent(enemy, healthPool.acquire());
+
+// Add systems
+world.addSystem(new MovementSystem(), systemPriority.MOVEMENT);
+world.addSystem(new CollisionSystem(eventManager), systemPriority.COLLISION);
+world.addSystem(new HealthSystem(eventManager), systemPriority.HEALTH);
 
 // Assign initial values
 world.getComponent<Position>('Position', player.id)!.x = 0;
@@ -1079,8 +1112,7 @@ let elapsed = 0;
 function gameLoop(deltaTime: number) {
   console.log(`\n=== Frame ${elapsed / deltaTime} ===`);
 
-  movementSystem.update(world, deltaTime);
-  collisionSystem.update(world, deltaTime);
+  world.update(deltaTime);
   elapsed += deltaTime;
 
   // Stop after 5 seconds
@@ -1118,6 +1150,10 @@ Entity 1 moved to (34.333333333333336, 34.333333333333336)
 > [!INFO]
 > Stackblitz project containing the above example:
 > https://stackblitz.com/edit/vitejs-vite-rykt2trb
+
+> [!WARNING]
+> Personal note: Most of this doesn't need to be based on OOP or class structures. It becomes simpler when using plain objects for components and functions for systems. However, in TypeScript, the class hierarchy makes it easier to demonstrate examples without having to fight the type system. The only exception is the World class.
+
 
 ## Further Optimizations
 
