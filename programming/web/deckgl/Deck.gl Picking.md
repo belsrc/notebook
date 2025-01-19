@@ -23,7 +23,7 @@ Converts a "sub-feature index" number to a color.
 encodePickingColor(index: number): [r: number, g: number, b: number];
 ```
 
-It encodes the given index using a combination of [bitwise AND (`&`)](/languages/javascript/Bitwise%20Explanation.md#bitwise%20AND%20(`&`)) and  [bitwise right shifts](/languages/javascript/Bitwise%20Explanation.md#Logical%20Shifting%20(`<<`,%20`>>`)).
+It encodes the given index using a combination of [bitwise AND (`&`)](../../../computer%20science/Bitwise%20Explanation.md#bitwise%20AND%20(`&`)) and  [bitwise right shifts](../../../computer%20science/Bitwise%20Explanation.md#Logical%20Shifting%20(`<<`,%20`>>`)).
 
 ```js
 function encode(index) {
