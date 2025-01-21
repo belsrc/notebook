@@ -1,7 +1,7 @@
 ---
 tags:
   - functional
-gardening: 🌱
+gardening: 🌳
 ---
 "Data last" is a design approach in functional programming where the data operated on is passed as the last argument to a function. In other words, the arguments are ordered from the least to the most significant.
 
@@ -34,7 +34,7 @@ transform(data);
 
 ### Facilitates Partial Application
 
-Functions can be [curried](../../mathematics/algebra/Curry), making it easy to pass initial parameters to configure the function, which will then be ready to accept data later.
+Functions can be [curried](../../mathematics/algebra/Curry.md), making it easy to pass initial parameters to configure the function, which will then be ready to accept data later.
 
 ```js
 const transformData = curry((conf, data) => { /*...*/ });
