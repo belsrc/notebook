@@ -40,7 +40,7 @@ _Simplified example_
 
 ## Cache Line
 
-Data are transferred between memory and cache in blocks of fixed size, called _cache lines_ or _cache blocks_. A cache line is a small, fixed-size block of memory utilized by a CPU cache to store data. When data is retrieved from main memory, it is stored in these cache lines. The size of cache lines typically ranges from 32 to 128 bytes, depending on the architecture. The entire cache line represents the smallest unit of memory that the cache can manage.
+Data is transferred between memory and cache in blocks of fixed size, called _cache lines_ or _cache blocks_. A cache line is a small, fixed-size block of memory utilized by a CPU cache to store data. When data is retrieved from main memory, it is stored in these cache lines. The size of cache lines typically ranges from 32 to 128 bytes, depending on the architecture. The entire cache line represents the smallest unit of memory that the cache can manage.
 
 When a cache line is copied from memory into the cache, a cache entry is created. This entry includes the copied data (Data Block), the requested memory location (Tag) as well as additional meta data. When the processor needs to read from or write to a memory location, it first checks the cache for a corresponding entry. The cache searches for the contents of the requested memory location within any cache lines that may contain that address.
 
@@ -48,7 +48,7 @@ If the processor finds the memory location in the cache, this is called a cache 
 
 The CPU cache operates on the principle of [spatial locality](Locality%20of%20Reference%20and%20Memory%20Locality.md), which means that when a program accesses a memory location, it is likely to access nearby memory locations shortly thereafter. To enhance performance, the CPU retrieves an entire block of adjacent memory (the cache line), rather than just the requested byte. This strategy helps prepare for future memory requests, improving overall efficiency.
 
-For example, if a cache line is 64 bytes, and the CPU requests data at address `0x100`, the cache might fetch the block from `0x100` to `0x13F`.
+For example, if a cache line is 64 bytes, and the CPU requests data at address `0x000`, the cache might fetch the block from `0x000` to `0x03F`.
 
 > [!NOTE]
 > Maybe add Cache Line Structure (H3) and image?
@@ -65,3 +65,16 @@ When a cache reaches its full capacity, it must determine which data to remove i
 1. **Least Recently Used (LRU)**: This policy evicts the data that has not been accessed for the longest time.
 2. **First In, First Out (FIFO)**: This approach removes the oldest data in the cache first.
 3. **Random Replacement**: With this method, a cache line is chosen at random to be evicted, regardless of how long it has been stored.
+
+
+Alignment??
+
+Affinity??
+
+Off-topic: Branching/Predictions??
+
+Off-topic: SIMD
+https://youtu.be/Ge3aKEmZcqY?t=7436
+https://youtu.be/RrHGX1wwSYM?t=2562
+
+For Fun: Speed Chart??
