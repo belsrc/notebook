@@ -315,4 +315,8 @@ Since, given the "quick and dirty" above, only `-1` will result in `0`<sup>(*)</
 
 
 
-Check and add some of the stuff from https://cp-algorithms.com/algebra/bit-manipulation.html
+Check and add some of the stuff from:
+- https://cp-algorithms.com/algebra/bit-manipulation.html
+- https://sudorudo.medium.com/bitwise-for-dummies-c1b996c21cbc
+- https://www.geeksforgeeks.org/introduction-to-bitwise-algorithms-data-structures-and-algorithms-tutorial/
+- https://www.alexhyett.com/bitwise-operators/
