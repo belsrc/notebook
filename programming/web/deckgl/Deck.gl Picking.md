@@ -31,7 +31,7 @@ function encode(index) {
 
   target[0] = (index + 1) & 255;
   target[1] = ((index + 1) >> 8) & 255;
-  target[2] = (((index + 1) >> 8) >> 8) & 255;
+  target[2] = ((index + 1) >> 16) & 255;
 
   return target;
 }
@@ -66,7 +66,7 @@ Decoding is just the reverse operation from above.
 function decode(color) {
   const [r, g, b] = color;
 
-  return r + g * 256 + b * 65536 - 1; 
+  return r + (g << 8) + (b << 16) - 1;
 }
 ```
 
