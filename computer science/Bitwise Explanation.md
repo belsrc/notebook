@@ -5,7 +5,7 @@ gardening: 🌿
 ---
 ## bitwise AND (`&`)
 
-For each bit, if both are `1`, the resulting bit is `1`. If either or both are `0`, the resulting bit is `0`.
+For each bit, if both are `1`, the resulting bit is `1`. If either or both are `0`, the resulting bit is `0`. i.e. it does a logical AND on each bit individually.
 
 Given the following two values:
 
@@ -47,7 +47,7 @@ console.log(hasFlag(userConfig, SHOULD_SHOW_B));
 
 ## bitwise OR (`|`)
 
-For each bit, if either or both are `1`, the resulting bit is `1`. If both are `0`, the resulting bit is `0`.
+For each bit, if either or both are `1`, the resulting bit is `1`. If both are `0`, the resulting bit is `0`. i.e. it does a logical OR on each bit individually.
 
 Given the following two values:
 
@@ -231,7 +231,7 @@ And so on and so forth.
 
 ```js
 const VALUE_MASK = 0b00000000000000000000000011111111;
-const rgbaCode = 0b01010011100110111111010111111111;
+const rgbaCode = 0b01010011100110111111010111111111; // 1402729983
 
 const alpha = rgbaCode & VALUE_MASK;
 // 0b00000000000000000000000011111111 -> 255
