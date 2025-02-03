@@ -6,6 +6,9 @@ date: 2025-01-05
 reference:
   - https://en.wikipedia.org/wiki/CPU_cache
   - https://en.wikipedia.org/wiki/Locality_of_reference
+  - https://gameprogrammingpatterns.com/data-locality.html
+  - https://www.nic.uoregon.edu/~khuck/ts/acumem-report/manual_html/ch05s01.html
+  - https://en.algorithmica.org/hpc/cpu-cache/cache-lines/
 ---
 A CPU cache is a small, high-speed memory that is located inside or near the CPU. It stores copies of data from frequently accessed locations in the main memory (RAM), which helps reduce the time the CPU spends waiting for data to be retrieved from the slower main memory.
 
@@ -44,14 +47,13 @@ Data is transferred between memory and cache in blocks of fixed size, called _c
 
 When a cache line is copied from memory into the cache, a cache entry is created. This entry includes the copied data (Data Block), the requested memory location (Tag) as well as additional meta data. When the processor needs to read from or write to a memory location, it first checks the cache for a corresponding entry. The cache searches for the contents of the requested memory location within any cache lines that may contain that address.
 
+![](../../images/comp-sci/cache-line-dark.png)
+
 If the processor finds the memory location in the cache, this is called a cache hit. In this case, the processor can immediately read from or write to the data within the cache line. However, if the memory location is not found in the cache, this is referred to as a cache miss. In the event of a cache miss, the cache allocates a new entry, copies the required data from the main memory, and then fulfills the request using the data now stored in the cache.
 
 The CPU cache operates on the principle of [spatial locality](Locality%20of%20Reference%20and%20Memory%20Locality.md), which means that when a program accesses a memory location, it is likely to access nearby memory locations shortly thereafter. To enhance performance, the CPU retrieves an entire block of adjacent memory (the cache line), rather than just the requested byte. This strategy helps prepare for future memory requests, improving overall efficiency.
 
 For example, if a cache line is 64 bytes, and the CPU requests data at address `0x000`, the cache might fetch the block from `0x000` to `0x03F`.
-
-> [!NOTE]
-> Maybe add Cache Line Structure (H3) and image?
 
 ## Key Performance Metrics
 
@@ -66,15 +68,93 @@ When a cache reaches its full capacity, it must determine which data to remove i
 2. **First In, First Out (FIFO)**: This approach removes the oldest data in the cache first.
 3. **Random Replacement**: With this method, a cache line is chosen at random to be evicted, regardless of how long it has been stored.
 
+## Alignment
 
-Alignment??
+Alignment refers to the positioning of data in memory relative to the CPU’s word size and cache line boundaries. Proper alignment ensures that data fits neatly within these boundaries, preventing inefficiencies. A piece of data is considered aligned if its memory address is a multiple of its size; for example, a 4-byte integer is aligned if its memory address is divisible by 4 (e.g., `0x1004`, `0x1008`).
 
-Affinity??
+The word size of a CPU is the natural unit of data that it processes (e.g., 32-bit or 64-bit). Alignment typically requires data to be positioned at word-size boundaries to meet the CPU’s requirements. To maintain this alignment, compilers may insert padding between struct members or after the end of a struct, ensuring that each member meets its alignment requirement.
 
-Off-topic: Branching/Predictions??
+Different data types have varying alignment requirements:
 
-Off-topic: SIMD
-https://youtu.be/Ge3aKEmZcqY?t=7436
-https://youtu.be/RrHGX1wwSYM?t=2562
+- **1-byte types** (e.g., `char`): No alignment needed.
+- **2-byte types** (e.g., `short`): Must be aligned to 2-byte boundaries.
+- **4-byte types** (e.g., `int`, `float`): Must be aligned to 4-byte boundaries.
+- **8-byte types** (e.g., `double`, `long long`): Must be aligned to 8-byte boundaries.
 
-For Fun: Speed Chart??
+> [!NOTE]
+> Add alignment image
+
+A developer can manually add padding to ensure proper alignment, a practice often used in a concept called "Data-oriented Design." However, when adding padding manually, it's important to avoid over-aligning the data. For instance, aligning a 1-byte variable to a 64-byte boundary results in 63 bytes of unused space.
+
+```c
+struct PaddedStruct {
+  int a;       // 4 bytes
+  char pad[4]; // 4 bytes of padding
+  double b;    // 8 bytes
+};
+```
+
+## Off-topic: Branching/Predictions
+
+Modern CPUs utilize pipelines to execute multiple instructions at the same time. However, branch instructions, such as conditional jumps, create uncertainty because the CPU cannot immediately determine which path the program will take.
+
+```c
+if (x > 0) {
+  doSomething();
+} else {
+   doSomethingElse();
+}
+```
+
+For example, the CPU cannot decide whether to execute `doSomething()` or `doSomethingElse()` until it evaluates the expression `x > 0`.
+
+Without branch prediction, the CPU would need to wait for the result of `x > 0`, leading to a stall in the pipeline. Branch prediction helps maintain a full pipeline by guessing the most likely outcome of the branch instruction.
+
+Modern CPUs utilize hardware-based **branch predictors** that monitor the history of branch instructions.
+
+- **Branch History Table (BHT):** This is a table within the CPU that records the outcomes of recent branches. Each entry in the table corresponds to a specific branch instruction and indicates whether it was taken or not.
+- **Two-Bit Predictor:** This is a common technique where two bits are assigned to each branch to track the pattern of taken and not-taken outcomes. This method helps reduce mispredictions for branches that exhibit consistent behavior.
+
+Once the CPU predicts the outcome of a branch, it begins to execute instructions along the predicted path **speculatively**. If the prediction turns out to be correct, the results are retained. However, if the prediction is incorrect, the speculative results are discarded, and the pipeline is flushed, resulting in a penalty known as a "branch misprediction penalty."
+
+**Speculative**
+![](../../images/comp-sci/branch-prediction-dark.png)
+
+**Correct Prediction**
+![](../../images/comp-sci/correct-prediction-dark.png)
+
+**Misprediction**
+![](../../images/comp-sci/misprediction-dark.png)
+
+### Branchless Programming
+
+Branchless programming is a technique used to eliminate conditional branches (e.g., `if`, `else`, `switch`) in performance-critical code. It replaces these branches with mathematical operations, bitwise operations, or lookups to avoid branch misprediction penalties and enhance CPU pipeline efficiency.
+
+```c
+// branched
+int min(int a, int b) {
+  return (a < b) ? a : b;
+}
+
+// branchless arithmetic
+int min(int a, int b) {
+  return a * (a < b) 
+       + b * (b <= a);
+}
+
+// branched
+int is_even(int x) {
+  return (x % 2 == 0) ? 1 : 0;
+}
+
+// branchless bitwise
+int is_even(int x) {
+  return !(x & 1);
+}
+```
+
+## For Fun: Speed Chart
+
+![](../../images/comp-sci/cpu-speeds-dark.png)
+
+_Full chart: http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/#rabbitref-Wikipedia.BranchPredictor_

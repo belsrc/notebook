@@ -7,6 +7,7 @@ reference:
   - https://en.wikipedia.org/wiki/Locality_of_reference
   - https://www.geeksforgeeks.org/locality-of-reference-and-cache-operation-in-cache-memory/
   - https://www.geeksforgeeks.org/difference-between-spatial-locality-and-temporal-locality/
+  - https://gameprogrammingpatterns.com/data-locality.html
 ---
 ## Locality of Reference
 
