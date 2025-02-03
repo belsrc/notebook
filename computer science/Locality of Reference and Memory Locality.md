@@ -42,12 +42,12 @@ A loop that iterates through an array demonstrates memory locality, as it access
 Good memory locality would be something like:
 
 
-![](../../images/comp-sci/good-locality-dark.png)
+![](../images/comp-sci/good-locality-dark.png)
 
 While bad memory locality would be:
 
 
-![](../../images/comp-sci/bad-locality-dark.png)
+![](../images/comp-sci/bad-locality-dark.png)
 
 ### In Practice
 
