@@ -47,7 +47,7 @@ Data is transferred between memory and cache in blocks of fixed size, called _c
 
 When a cache line is copied from memory into the cache, a cache entry is created. This entry includes the copied data (Data Block), the requested memory location (Tag) as well as additional meta data. When the processor needs to read from or write to a memory location, it first checks the cache for a corresponding entry. The cache searches for the contents of the requested memory location within any cache lines that may contain that address.
 
-![](../../images/comp-sci/cache-line-dark.png)
+![](../images/comp-sci/cache-line-dark.png)
 
 If the processor finds the memory location in the cache, this is called a cache hit. In this case, the processor can immediately read from or write to the data within the cache line. However, if the memory location is not found in the cache, this is referred to as a cache miss. In the event of a cache miss, the cache allocates a new entry, copies the required data from the main memory, and then fulfills the request using the data now stored in the cache.
 
@@ -118,13 +118,13 @@ Modern CPUs utilize hardware-based **branch predictors** that monitor the histor
 Once the CPU predicts the outcome of a branch, it begins to execute instructions along the predicted path **speculatively**. If the prediction turns out to be correct, the results are retained. However, if the prediction is incorrect, the speculative results are discarded, and the pipeline is flushed, resulting in a penalty known as a "branch misprediction penalty."
 
 **Speculative**
-![](../../images/comp-sci/branch-prediction-dark.png)
+![](../images/comp-sci/branch-prediction-dark.png)
 
 **Correct Prediction**
-![](../../images/comp-sci/correct-prediction-dark.png)
+![](../images/comp-sci/correct-prediction-dark.png)
 
 **Misprediction**
-![](../../images/comp-sci/misprediction-dark.png)
+![](../images/comp-sci/misprediction-dark.png)
 
 ### Branchless Programming
 
@@ -155,6 +155,6 @@ int is_even(int x) {
 
 ## For Fun: Speed Chart
 
-![](../../images/comp-sci/cpu-speeds-dark.png)
+![](../images/comp-sci/cpu-speeds-dark.png)
 
 _Full chart: http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/#rabbitref-Wikipedia.BranchPredictor_
