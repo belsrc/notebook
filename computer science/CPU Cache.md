@@ -32,7 +32,7 @@ This caching mechanism speeds up data processing by reducing the time the CPU sp
 
 
 _Simplified example_
-![](../../images/comp-sci/good-locality-dark.png)
+![](../images/comp-sci/good-locality-dark.png)
 
 ## Types of Cache Misses
 
