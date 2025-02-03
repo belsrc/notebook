@@ -30,9 +30,9 @@ _Values given are for an AMD Ryzen 7 7900X. Values will vary based on CPU._
 
 This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy.
 
+![](../images/comp-sci/good-locality-dark.png)
 
 _Simplified example_
-![](../images/comp-sci/good-locality-dark.png)
 
 ## Types of Cache Misses
 
@@ -118,12 +118,15 @@ Modern CPUs utilize hardware-based **branch predictors** that monitor the histor
 Once the CPU predicts the outcome of a branch, it begins to execute instructions along the predicted path **speculatively**. If the prediction turns out to be correct, the results are retained. However, if the prediction is incorrect, the speculative results are discarded, and the pipeline is flushed, resulting in a penalty known as a "branch misprediction penalty."
 
 **Speculative**
+
 ![](../images/comp-sci/branch-prediction-dark.png)
 
 **Correct Prediction**
+
 ![](../images/comp-sci/correct-prediction-dark.png)
 
 **Misprediction**
+
 ![](../images/comp-sci/misprediction-dark.png)
 
 ### Branchless Programming
