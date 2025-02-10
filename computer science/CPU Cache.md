@@ -82,8 +82,13 @@ Different data types have varying alignment requirements:
 - **4-byte types** (e.g., `int`, `float`): Must be aligned to 4-byte boundaries.
 - **8-byte types** (e.g., `double`, `long long`): Must be aligned to 8-byte boundaries.
 
-> [!NOTE]
-> Add alignment image
+**Bad Alignment**
+
+![](../images/comp-sci/bad-alignment-dark.png)
+
+**Good Alignment**
+
+![](../images/comp-sci/good-alignment-dark.png)
 
 A developer can manually add padding to ensure proper alignment, a practice often used in a concept called "Data-oriented Design." However, when adding padding manually, it's important to avoid over-aligning the data. For instance, aligning a 1-byte variable to a 64-byte boundary results in 63 bytes of unused space.
 
