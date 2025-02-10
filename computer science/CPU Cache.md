@@ -84,11 +84,35 @@ Different data types have varying alignment requirements:
 
 **Bad Alignment**
 
-![](../images/comp-sci/bad-alignment-dark.png)
+```c
+struct Student {
+  char f_initial;
+  int score;
+  char l_initial;
+  int semester;
+};
+
+printf("size of Student: %zu\n", sizeof(Student));
+// size of Student: 16
+```
+
+![](../images/comp-sci/bad-alignment-chart-dark.png)
 
 **Good Alignment**
 
-![](../images/comp-sci/good-alignment-dark.png)
+```c
+struct OptStudent {
+  int semester;
+  int score;
+  char f_initial;
+  char l_initial;
+};
+
+printf("size of OptStudent: %zu\n", sizeof(OptStudent));
+// size of OptStudent: 12
+```
+
+![](../images/comp-sci/good-alignment-chart-dark.png)
 
 A developer can manually add padding to ensure proper alignment, a practice often used in a concept called "Data-oriented Design." However, when adding padding manually, it's important to avoid over-aligning the data. For instance, aligning a 1-byte variable to a 64-byte boundary results in 63 bytes of unused space.
 
