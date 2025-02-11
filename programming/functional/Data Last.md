@@ -3,21 +3,27 @@ tags:
   - functional
 gardening: 🌳
 ---
-"Data last" is a design approach in functional programming where the data operated on is passed as the last argument to a function. In other words, the arguments are ordered from the least to the most significant.
+"Data last" is a coding pattern commonly used in functional programming. It improves function composition, partial application, and overall code readability by requiring that the data being manipulated is passed as the last argument to a function. In this approach, the arguments are organized from the least significant to the most significant.
 
-Instead of a data first approach:
+In various programming paradigms, you may be accustomed to writing functions where the data is the first parameter. For example:
 
 ```js
 transform(data, config);
 ```
 
-One would instead write:
+![](../../images/functions/data-first-dark.png)
+
+However, in the "data last" style, we rearrange the function parameters so that the data appears last, following the configuration parameters.
+
+Here’s the same function written in a data-last style:
 
 ```js
 transform(config, data);
 ```
 
-## Benefits
+![](../../images/functions/data-last-dark.png)
+
+## Why Use Data Last?
 
 ### Enables Function Composition
 
@@ -25,9 +31,10 @@ By having data last, functions can be chained or composed more effectively.
 
 ```js
 const f = curry((d, c) => e);
-const g = curry((a, b) => c);
+const g = curry((b, a) => c);
 
 const transform = compose(f(x), g(y));
+// transform: a -> e
 
 transform(data);
 ```
