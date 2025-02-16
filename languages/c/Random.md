@@ -135,3 +135,55 @@ char *str2 = "Snek";
 printf("%s %s\n", str1, str2);
 ```
 
+#### Forward Declaration
+
+##### Recursive Reference
+
+```c
+typedef struct Node {
+  int value;
+  node_t *next; // error: unknown type name 'node_t'
+} node_t;
+```
+
+In order to get around this 
+
+```c
+typedef struct Node node_t;
+
+typedef struct Node {
+  int value;
+  node_t *next;
+} node_t;
+```
+
+##### Circular Reference
+
+```c
+struct Person {
+  char *name;
+  computer_t *computer; // error: unknown type name 'computer_t'
+} person_t;
+
+struct Computer {
+  char *brand;
+  person_t *owner; // error: expected specifier-qualifier-list before 'person_t'
+} computer_t;
+```
+
+Fix
+
+```c
+typedef struct Computer computer_t;
+typedef struct Person person_t;
+
+struct Person {
+  char *name;
+  computer_t *computer;
+};
+
+struct Computer {
+  char *brand;
+  person_t *owner;
+}; // notice no typedef
+```
