@@ -98,6 +98,10 @@ printf("size of Student: %zu\n", sizeof(Student));
 
 ![](../images/comp-sci/bad-alignment-chart-dark.png)
 
+If we examine the memory addresses for each field, it becomes clearer.
+
+![](../images/comp-sci/bad-alignment-size-dark.png)
+
 **Good Alignment**
 
 ```c
@@ -113,6 +117,9 @@ printf("size of OptStudent: %zu\n", sizeof(OptStudent));
 ```
 
 ![](../images/comp-sci/good-alignment-chart-dark.png)
+The size for the good alignment.
+
+![](../images/comp-sci/good-alignment-size-dark.png)
 
 A developer can manually add padding to ensure proper alignment, a practice often used in a concept called "Data-oriented Design." However, when adding padding manually, it's important to avoid over-aligning the data. For instance, aligning a 1-byte variable to a 64-byte boundary results in 63 bytes of unused space.
 
