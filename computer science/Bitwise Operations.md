@@ -35,13 +35,13 @@ Another application of the **AND** operator is in checking bit masks. For exampl
 ![](../images/bitwise/mask-dark.png)
 
 ```js
-const userOptions = 0b0000;
+const userOptions = 0; // 0b0000
 ```
 
 Then you can check options based on a bit mask.
 
 ```js
-const SHOULD_SHOW_B = 0b0100;
+const SHOULD_SHOW_B = 1 << 2; // 0b0100
 
 const hasFlag = (flags, mask) => !!(flags & mask);
 
@@ -70,7 +70,7 @@ Performing the bitwise **OR** would visually look like:
 Using the example of user options mentioned earlier, the **OR** operator can be utilized to turn options ON.
 
 ```js
-const SHOULD_SHOW_B = 0b0100;
+const SHOULD_SHOW_B = 1 << 2; // 0b0100
 
 const hasFlag = (flags, mask) => !!(flags & mask);
 const turnOnFlag = (flags, mask) => flags | mask;
@@ -91,7 +91,7 @@ console.log(hasFlag(userConfig, SHOULD_SHOW_B));
 By combining both **AND** and **OR** operators in the configuration example mentioned earlier, we can toggle the user settings.
 
 ```js
-const SHOULD_SHOW_A = 0b1000;
+const SHOULD_SHOW_A = 1 << 3; // 0b1000
 
 const hasFlag = (flags, mask) => !!(flags & mask);
 const turnOnFlag = (flags, mask) => flags | mask;
@@ -120,10 +120,10 @@ console.log(hasFlag(userConfig, SHOULD_SHOW_A));
 Or if we want to perform a comprehensive check to determine if **any** of the options are set. This way, we can skip processing if none are necessary. We can combine both **AND** and **OR** operators in this check.
 
 ```js
-const SHOULD_SHOW_A = 0b1000;
-const SHOULD_SHOW_B = 0b0100;
-const SHOULD_SHOW_C = 0b0010;
-const SHOULD_SHOW_D = 0b0001;
+const SHOULD_SHOW_A = 1 << 3; // 0b1000
+const SHOULD_SHOW_B = 1 << 2; // 0b0100
+const SHOULD_SHOW_C = 1 << 1; // 0b0010
+const SHOULD_SHOW_D = 1 << 0; // 0b0001
 
 const hasAnyFlag = (flags) => !!(flags & (SHOULD_SHOW_A | SHOULD_SHOW_B | SHOULD_SHOW_C | SHOULD_SHOW_D));
 // SHOULD_SHOW_A | SHOULD_SHOW_B | SHOULD_SHOW_C | SHOULD_SHOW_D === 0b1111
@@ -157,7 +157,7 @@ Performing the bitwise XOR would visually look like:
 While the toggling example mentioned above does work, it's more complex than necessary for simply changing a bit from `1` to `0` or vice versa. Fortunately, the **XOR** operation can handle this for us more effectively.
 
 ```js
-const SHOULD_SHOW_A = 0b1000;
+const SHOULD_SHOW_A = 1 << 3; // 0b1000
 
 const hasFlag = (flags, mask) => !!(flags & mask);
 
