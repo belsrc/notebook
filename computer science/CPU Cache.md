@@ -31,7 +31,7 @@ _Values given are for an AMD Ryzen 7 7900X. Values will vary based on CPU._
 
 This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy.
 
-![](../images/comp-sci/good-locality-dark.png)
+![](../images/comp-sci/cache-hit-miss-dark.png)
 
 _Simplified example_
 
