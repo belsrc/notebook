@@ -5,8 +5,11 @@ tags:
 gardening: 🌱
 date: 2025-02-09
 reference:
+  - https://en.algorithmica.org/hpc/cpu-cache/alignment/
+  - https://www.nic.uoregon.edu/~khuck/ts/acumem-report/manual_html/ch05s01.html
+  - https://en.algorithmica.org/hpc/cpu-cache/cache-lines/
 ---
-
+- Deeper dive into alignment and cache lines (links in refs)
 
 ```c
 	typedef struct Coordinate {

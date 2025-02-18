@@ -117,7 +117,7 @@ printf("size of OptStudent: %zu\n", sizeof(OptStudent));
 ```
 
 ![](../images/comp-sci/good-alignment-chart-dark.png)
-The size for the good alignment.
+And the addresses for the good alignment.
 
 ![](../images/comp-sci/good-alignment-size-dark.png)
 
