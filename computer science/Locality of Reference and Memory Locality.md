@@ -8,6 +8,8 @@ reference:
   - https://www.geeksforgeeks.org/locality-of-reference-and-cache-operation-in-cache-memory/
   - https://www.geeksforgeeks.org/difference-between-spatial-locality-and-temporal-locality/
   - https://gameprogrammingpatterns.com/data-locality.html
+  - https://www.geeksforgeeks.org/computer-organization-locality-and-cache-friendly-code/
+  - https://medium.com/@prabh27/the-principle-of-locality-fcd0788c2667
 ---
 ## Locality of Reference
 
@@ -37,18 +39,6 @@ Memory locality is important in performance tuning, system architecture, and cac
 **Example:**  
 A loop that iterates through an array demonstrates memory locality, as it accesses consecutive elements in memory, which aligns with the operation of hardware caches.
 
-### Visualizing Locality
-
-Good memory locality would be something like:
-
-
-![](../images/comp-sci/good-locality-dark.png)
-
-While bad memory locality would be:
-
-
-![](../images/comp-sci/bad-locality-dark.png)
-
 ### In Practice
 
 Although a distinction exists between the two terms, they often overlap. "Memory locality" specifically refers to the hardware-level implementation of locality principles, while "locality of reference" is a broader concept related to program execution.
@@ -69,9 +59,13 @@ Cache systems take advantage of temporal locality by keeping recently accessed d
 
 ## Visualizing the Concepts  
 
-Spatial locality is like flipping through the pages of a book in sequential order.  
+![](../images/comp-sci/locality-row-major-dark.png)
 
-Temporal locality involves frequently referencing the same page when solving a problem.
+![](../images/comp-sci/locality-column-major-dark.png)
+
+In the row-major loop, a cache miss occurs only when `A` increments in the outer loop. Since `A[n]` and `B[0-3]` are all stored within the same cache line, this demonstrates good spatial locality. In contrast, the column-major example requires fetching a new cache line for each iteration of the inner loop, which indicates poor spatial locality.
+
+In both examples, the inner loop exhibits strong temporal locality with the outer loop's variable, as it is used repeatedly in the `sum` assignment.
 
 ### Spatial Locality Example
 
