@@ -7,6 +7,9 @@ date: 2025-01-05
 reference:
   - https://en.wikipedia.org/wiki/Branch_predictor
   - https://en.wikipedia.org/wiki/Predication_(computer_architecture)
+  - https://blog.cloudflare.com/branch-predictor/
+  - https://en.algorithmica.org/hpc/pipelining/branching/
+  - https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array#answer-11227902
 ---
 Modern CPUs utilize pipelines to execute multiple instructions at the same time. However, branch instructions, such as conditional jumps, create uncertainty because the CPU cannot immediately determine which path the program will take.
 
