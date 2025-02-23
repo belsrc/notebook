@@ -128,3 +128,75 @@ address of human struct: 0x7ffda01ee1a8
 
 size of size_t: 8
 ```
+
+```c
+typedef struct {
+  char monster_type;
+  int32_t level;
+  int8_t health;
+} monster_t;
+
+monster_t monsters [3] = {
+	{ monster_type: 'F', level: 21, health: 100 },
+	{ monster_type: 'F', level: 16, health: 100 },
+	{ monster_type: 'F', level: 29, health: 100 }
+};
+```
+
+```
+Monster size: 12
+---------------------
+Monster array size: 36
+---------------------
+Monster 0 type: 1 / 0x7fffb502c8a0
+Monster 0 level: 4 / 0x7fffb502c8a4
+Monster 0 health: 1 / 0x7fffb502c8a8
+---------------------
+Monster 1 type: 1 / 0x7fffb502c8ac
+Monster 1 level: 4 / 0x7fffb502c8b0
+Monster 1 health: 1 / 0x7fffb502c8b4
+---------------------
+Monster 2 type: 1 / 0x7fffb502c8b8
+Monster 2 level: 4 / 0x7fffb502c8bc
+Monster 2 health: 1 / 0x7fffb502c8c0
+---------------------
+```
+
+[Array of Structs Example](https://onecompiler.com/c/439vmwak6)
+
+
+
+```c
+typedef struct {
+  char monster_types [3];
+  int32_t levels [3];
+  int8_t healths [3];
+} monster_t;
+
+monster_t monsters = {
+	monster_types: {'F', 'F', 'F'},
+	levels: {21, 16, 29},
+	healths: {100, 100, 100},
+};
+```
+
+```
+Monsters size: 20
+---------------------
+Monster 0 type: 1 / 0x7ffe25690d90
+Monster 1 type: 1 / 0x7ffe25690d91
+Monster 2 type: 1 / 0x7ffe25690d92
+---------------------
+Monster 0 level: 4 / 0x7ffe25690d98
+Monster 1 level: 4 / 0x7ffe25690d9c
+Monster 2 level: 4 / 0x7ffe25690da0
+---------------------
+Monster 0 health: 1 / 0x7ffe25690dac
+Monster 1 health: 1 / 0x7ffe25690dad
+Monster 2 health: 1 / 0x7ffe25690dae
+---------------------
+```
+
+[Struct of Arrays Example](https://onecompiler.com/c/439vpf4w7)
+
+Went from 36 bytes for an AoS to 20 bytes just moving to SoA.
