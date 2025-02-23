@@ -1,3 +1,11 @@
+---
+tags:
+  - language
+  - c
+gardening: 🌱
+date: 2025-02-10
+reference:
+---
 #### Pointers
 
 `&` address at operator.

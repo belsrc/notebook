@@ -1,3 +1,11 @@
+---
+tags:
+  - language
+  - c
+gardening: 🌱
+date: 2025-02-15
+reference:
+---
 Pointers are variables that contain an address of a piece of memory.
 
 Your applications memory can be thought of as a large array of these addresses.
@@ -85,4 +93,47 @@ x, y, tst, sts, z addresses:
 at index: 24 - 0x7ffdf6cbc1b0
 at index++: 41 - 0x7ffdf6cbc1b4
 at (index++)++ index: -980684792 - 0x7ffdf6cbc1b8
+```
+
+#### "Polymorphic" Addresses
+
+The address to a structure variable is the address to the first item.
+
+```c
+int arr[3] = {1, 2, 3};
+    
+printf("Array address: %p\n", &arr);
+printf("First element address: %p\n\n", &arr[0]);
+
+// Array address: 0x7fff297cc24c
+// First element address: 0x7fff297cc24c
+```
+
+```c
+typedef struct Character {
+  int health;
+  int level;
+} character_t;
+
+character_t player = {health: 89, level: 5};
+    
+printf("Struct address: %p\n", &player);
+printf("Health address: %p\n\n", &player.health);
+
+// Struct address: 0x7fff297cc244
+// Health address: 0x7fff297cc244
+```
+
+Which means you can pass the "container" to a function that expects a pointer to whatever the first item is.
+
+```c
+int tester(int *val) {
+  printf("Passed value and address: %d : %p\n", *val, val);
+}
+
+tester(&player);
+tester(&player.health);
+
+// Passed value and address: 89 : 0x7fff297cc244
+// Passed value and address: 89 : 0x7fff297cc244
 ```
