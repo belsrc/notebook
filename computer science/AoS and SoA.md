@@ -3,10 +3,14 @@ tags:
   - comp-sci
   - cpu
   - memory
-gardening: 🌱
+gardening: 🌳
 date: 2025-02-22
 reference:
   - https://en.algorithmica.org/hpc/cpu-cache/aos-soa/
+  - https://en.wikipedia.org/wiki/AoS_and_SoA
+  - https://www.geeksforgeeks.org/c-array-of-structure/
+  - https://www.tutorialspoint.com/cprogramming/c_arrays_of_structures.htm
+  - https://www.theprofessionalprogrammer.com/2018/04/arrays-of-structures-or-structures-of.html
 ---
 ## Array of Structures (AoS)
 

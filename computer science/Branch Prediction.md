@@ -2,7 +2,7 @@
 tags:
   - cpu
   - comp-sci
-gardening: 🌿
+gardening: 🌳
 date: 2025-01-05
 reference:
   - https://en.wikipedia.org/wiki/Branch_predictor
