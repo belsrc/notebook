@@ -26,10 +26,10 @@ _Values given are for an AMD Ryzen 7 7900X. Values will vary based on CPU._
 
 ## How Does a Cache Work?
 
+The caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy. Cache reads can be split into two groups:
+
 - **Cache Hit:** A cache hit occurs when the CPU requests data that is already stored in the cache. In this case, the CPU can quickly retrieve the data, which is much faster than obtaining it from main memory.
 - **Cache Miss:** A cache miss happens when the requested data is not found in the cache. In this situation, the CPU must fetch the data from the slower main memory. Once the data is retrieved, it may be stored in the cache for future access.
-
-This caching mechanism speeds up data processing by reducing the time the CPU spends waiting for data retrieval. Modern systems often read blocks of lower memory into the next level of the memory hierarchy. If this process displaces currently used memory, the operating system attempts to predict which data will be accessed the least and moves it down the memory hierarchy.
 
 ![](../images/comp-sci/cache-hit-miss-dark.png)
 
@@ -71,9 +71,9 @@ When a cache reaches its full capacity, it must determine which data to remove i
 
 ## Alignment
 
-Alignment refers to the positioning of data in memory relative to the CPU’s word size and cache line boundaries. Proper alignment ensures that data fits neatly within these boundaries, preventing inefficiencies. A piece of data is considered aligned if its memory address is a multiple of its size; for example, a 4-byte integer is aligned if its memory address is divisible by 4 (e.g., `0x1004`, `0x1008`).
+Alignment refers to the positioning of data in memory relative to the CPU's word size and cache line boundaries. Proper alignment ensures that data fits neatly within these boundaries, preventing inefficiencies. A piece of data is considered aligned if its memory address is a multiple of its size; for example, a 4-byte integer is aligned if its memory address is divisible by 4 (e.g., `0x1004`, `0x1008`).
 
-The word size of a CPU is the natural unit of data that it processes (e.g., 32-bit or 64-bit). Alignment typically requires data to be positioned at word-size boundaries to meet the CPU’s requirements. To maintain this alignment, compilers may insert padding between struct members or after the end of a struct, ensuring that each member meets its alignment requirement.
+The word size of a CPU is the natural unit of data that it processes (e.g., 32-bit or 64-bit). Alignment typically requires data to be positioned at word-size boundaries to meet the CPU's requirements. To maintain this alignment, compilers may insert padding between struct members or after the end of a struct, ensuring that each member meets its alignment requirement.
 
 Different data types have varying alignment requirements:
 

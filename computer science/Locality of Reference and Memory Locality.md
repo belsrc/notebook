@@ -11,9 +11,9 @@ reference:
   - https://www.geeksforgeeks.org/computer-organization-locality-and-cache-friendly-code/
   - https://medium.com/@prabh27/the-principle-of-locality-fcd0788c2667
 ---
-## Locality of Reference
+## Principle of Locality
 
-The locality of reference, also known as the principle of locality, refers to the tendency of a processor to repeatedly access the same set of memory locations within a short timeframe. There are two main types of reference locality: temporal and spatial.
+The principle of locality, also known as the locality of reference, refers to the tendency of a processor to repeatedly access the same set of memory locations within a short timeframe. There are two main types of reference locality: temporal and spatial.
 
 **Focus:** This concept pertains to access patterns during program execution, including both data and instruction references.
 
@@ -51,24 +51,6 @@ Spatial locality refers to the tendency of a program to access memory locations 
 
 Modern processors take advantage of spatial locality by preloading blocks of memory, known as cache lines, from RAM into the CPU cache. For example, iterating through an array in order (as in `for (int i = 0; i < n; i++)`) ensures sequential access, which can improve performance.
 
-## Temporal Locality
-
-Temporal locality refers to the tendency of a program to access the same memory location multiple times within a short time frame. Variables or instructions that are frequently used, such as loop counters or often called functions, demonstrate temporal locality. When a piece of data is loaded into the cache, it is advantageous to use that data again soon in order to avoid accessing the slower main memory.
-
-Cache systems take advantage of temporal locality by keeping recently accessed data readily available. For example, consider a program that uses a variable in multiple iterations of a loop, like in the expression `sum += x`, where `x` is reused in each iteration.
-
-## Visualizing the Concepts  
-
-![](../images/comp-sci/locality-row-major-dark.png)
-
-![](../images/comp-sci/locality-column-major-dark.png)
-
-In the row-major loop, a cache miss occurs only when `A` increments in the outer loop. Since `A[n]` and `B[0-3]` are all stored within the same cache line, this demonstrates good spatial locality. In contrast, the column-major example requires fetching a new cache line for each iteration of the inner loop, which indicates poor spatial locality.
-
-In both examples, the inner loop exhibits strong temporal locality with the outer loop's variable, as it is used repeatedly in the `sum` assignment.
-
-### Spatial Locality Example
-
 ```c
 int array[1000];
 
@@ -79,7 +61,11 @@ for (int i = 0; i < 1000; i++) {
 
 The loop accesses `array[0]`, `array[1]`, `array[2]`, and so on, in sequence. Since memory for arrays is allocated contiguously, accessing elements in order takes advantage of spatial locality. When one element is loaded into the cache, the adjacent elements are also loaded (due to cache lines). This results in fewer cache misses, faster memory access.
 
-### Temporal Locality Example
+## Temporal Locality
+
+Temporal locality refers to the tendency of a program to access the same memory location multiple times within a short time frame. Variables or instructions that are frequently used, such as loop counters or often called functions, demonstrate temporal locality. When a piece of data is loaded into the cache, it is advantageous to use that data again soon in order to avoid accessing the slower main memory.
+
+Cache systems take advantage of temporal locality by keeping recently accessed data readily available. For example, consider a program that uses a variable in multiple iterations of a loop, like in the expression `sum += x`, where `x` is reused in each iteration.
 
 ```c
 int sum = 0;
@@ -91,6 +77,16 @@ for (int i = 0; i < 1000; i++) {
 ```
 
 The variable `sum` is accessed repeatedly within the loop. Once `sum` is loaded into the cache, it stays there for repeated use, minimizing memory fetch operations. This results in improved efficiency as `sum` remains in the CPU cache throughout the loop.
+
+## Visualizing the Concepts  
+
+![](../images/comp-sci/locality-row-major-dark.png)
+
+![](../images/comp-sci/locality-column-major-dark.png#invert_light)
+
+In the row-major loop, a cache miss occurs only when `A` increments in the outer loop. Since `A[n]` and `B[0-3]` are all stored within the same cache line, this demonstrates good spatial locality. In contrast, the column-major example requires fetching a new cache line for each iteration of the inner loop, which indicates poor spatial locality.
+
+In both examples, the inner loop exhibits strong temporal locality with the outer loop's variable, as it is used repeatedly in the `sum` assignment.
 
 ### Combined Locality Example
 

@@ -179,6 +179,97 @@ console.log(hasFlag(userConfig, SHOULD_SHOW_A));
 // --> false
 ```
 
+## Bitwise Not (`~`)
+
+The bitwise NOT operator is a "two's compliment" operation. See below. The quick and dirty way to think about is that if the operand is positive: 
+
+> Add one and then flip the sign
+
+`~0 -> -(0 + 1) -> -1`
+
+```js
+~0
+// >> -1
+```
+
+`~342 -> -(342 + 1) -> -343`
+
+```js
+~342
+// >> -343
+```
+
+And if the operand is negative:
+
+> Flip the sign and then subtract one
+
+`~(-1) -> -(-1) - 1 -> 0`
+
+```js
+~(-1)
+// >> 0
+```
+
+```js
+~(-743)
+// >> 742
+```
+
+A fairly common use case is using it to determine if an array index was found.
+
+```js
+const idx = [].findIndex(x => <condition>)
+
+if(~idx) {
+  // ...
+}
+```
+
+Using the "quick and dirty" approach mentioned above, only `-1` results in `0` (¹), making it falsey. So the condition will execute only when an index is found, unlike the more verbose condition `if(idx > -1)`.
+
+**⁽¹⁾** Actually, that's not entirely accurate. Due to how the number system operates, `~Number.MAX_SAFE_INTEGER` will evaluate to `0`. While I believe the likelihood of an array containing `9007199254740991` elements is low, it's still important to point this out.
+
+## Twos Complement
+
+Two's complement is a method for representing both positive and negative integers in binary form. For an n-bit number:
+
+- **Positive numbers** are represented in standard binary format, including leading zeros if necessary.
+- **Negative numbers** are represented by the following steps:
+    1. **Inverting** all the bits of the corresponding positive number.
+    2. **Adding one** to the inverted number.
+
+#### Example
+
+Lets convert +13 to -13.
+
+Take the original binary format of the number.
+
+```
++13 = 0b00001101
+```
+
+Invert all of the bits.
+
+```
+00001101
+↓↓↓↓↓↓↓↓
+11110010
+```
+
+And add one.
+
+```
+11110010 + 1 = 11110011
+```
+
+#### findeIndex Example
+
+To understand why `~([].findIndex())` behaves the way it does, we need to look at the two's complement of `-1`.
+
+First, we start with the binary representation of `1`, which is `0b00000001`. Next, we invert all the bits, resulting in `0b11111110`. Finally, we add `1`, giving us `0b11111111`. This is the two's complement representation of `-1`.
+
+Now, when we apply the bitwise **NOT** operator (`~`), we flip all the bits again. This gives us `0b00000000`, which is simply `0`. Which will evaluate to `false`.
+
 ## Bitwise Truth Table
 
 |  X  |  Y  | X & Y | X &#124; Y | X ^ Y | ~(X) |
@@ -279,94 +370,3 @@ console.log(packedColor.toString(2));
 // 0b01010011100110111111010111111111
 // Technically its "1010011100110111111010111111111", JS trims the zeros from the left
 ```
-
-## Bitwise Not (`~`)
-
-The bitwise NOT operator is a "two's compliment" operation. See below. The quick and dirty way to think about is that if the operand is positive: 
-
-> Add one and then flip the sign
-
-`~0 -> -(0 + 1) -> -1`
-
-```js
-~0
-// >> -1
-```
-
-`~342 -> -(342 + 1) -> -343`
-
-```js
-~342
-// >> -343
-```
-
-And if the operand is negative:
-
-> Flip the sign and then subtract one
-
-`~(-1) -> -(-1) - 1 -> 0`
-
-```js
-~(-1)
-// >> 0
-```
-
-```js
-~(-743)
-// >> 742
-```
-
-A fairly common use case is using it to determine if an array index was found.
-
-```js
-const idx = [].findIndex(x => <condition>)
-
-if(~idx) {
-  // ...
-}
-```
-
-Using the "quick and dirty" approach mentioned above, only `-1` results in `0` (¹), making it falsey. So the condition will execute only when an index is found, unlike the more verbose condition `if(idx > -1)`.
-
-**⁽¹⁾** Actually, that's not entirely accurate. Due to how the number system operates, `~Number.MAX_SAFE_INTEGER` will evaluate to `0`. While I believe the likelihood of an array containing `9007199254740991` elements is low, it's still important to point this out.
-
-## Twos Complement
-
-Two's complement is a method for representing both positive and negative integers in binary form. For an n-bit number:
-
-- **Positive numbers** are represented in standard binary format, including leading zeros if necessary.
-- **Negative numbers** are represented by the following steps:
-    1. **Inverting** all the bits of the corresponding positive number.
-    2. **Adding one** to the inverted number.
-
-#### Example
-
-Lets convert +13 to -13.
-
-Take the original binary format of the number.
-
-```
-+13 = 0b00001101
-```
-
-Invert all of the bits.
-
-```
-00001101
-↓↓↓↓↓↓↓↓
-11110010
-```
-
-And add one.
-
-```
-11110010 + 1 = 11110011
-```
-
-#### findeIndex Example
-
-To understand why `~([].findIndex())` behaves the way it does, we need to look at the two's complement of `-1`.
-
-First, we start with the binary representation of `1`, which is `0b00000001`. Next, we invert all the bits, resulting in `0b11111110`. Finally, we add `1`, giving us `0b11111111`. This is the two's complement representation of `-1`.
-
-Now, when we apply the bitwise **NOT** operator (`~`), we flip all the bits again. This gives us `0b00000000`, which is simply `0`. Which will evaluate to `false`.
