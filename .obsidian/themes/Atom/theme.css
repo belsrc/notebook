@@ -347,7 +347,7 @@ pre[class*='language-'] {
   cursor: help !important;
 }
 
-
+/* Fix print version so headers aren't green */
 @media print {
   body {
     --h1-color: var(--text-normal);
@@ -356,5 +356,10 @@ pre[class*='language-'] {
     --h4-color: var(--text-normal);
     --h5-color: var(--text-normal);
     --h6-color: var(--text-normal);
+  }
+
+  /* I always use dark mode, so for print, invert images */
+  img {
+    filter: invert(1) hue-rotate(180deg);
   }
 }
