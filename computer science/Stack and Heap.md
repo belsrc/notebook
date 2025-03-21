@@ -80,12 +80,24 @@ Various techniques have been developed to enhance memory management. For instanc
 
 When a memory allocation request is made, the system's task is to find a block of unused memory large enough to satisfy the request. Memory requests are fulfilled by allocating portions from a large pool known as the heap or free store. At any given time, some sections of the heap are in use, while others remain "free" (unused) and available for future allocations.
 
-### Automated Management: Garbage Collection
+### Automatic Management: Garbage Collection
 
 Garbage collection is a method that automatically identifies memory allocated to objects that are no longer in use by a program and reclaims that memory to a pool of available memory locations. This approach differs from "manual" memory management, where the programmer explicitly writes code to request and release memory. Although automatic garbage collection reduces the workload for programmers and helps prevent certain types of memory allocation errors, it does require its own memory resources and can compete with the application program for processor time.
 
-### Automated Management: Reference Counting
+Prominent Language Examples: Lisp, C#, Java, Go, and JavaScript
+
+### Automatic Management: Reference Counting
 
 Reference counting is a method used to determine when memory is no longer needed by a program. It does this by keeping track of a counter that indicates how many independent pointers refer to a particular piece of memory. Whenever a new pointer is created to point to this memory, the counter increases. Conversely, when a pointer changes its target, or if it is deleted or no longer points to any area, the counter decreases.
 
 When the counter reaches zero, the memory is considered unused and can be freed. Some reference counting systems require programmer intervention, while others are implemented automatically by the compiler. A drawback of reference counting is that circular references can occur, leading to memory leaks. This issue can be addressed in two ways: by introducing a concept called a "weak reference" (which does not affect the reference count but is notified when the memory it points to is no longer valid) or by combining reference counting with garbage collection.
+
+Prominent Language Examples: Objective-C and Swift
+
+### Automatic Management: Ownership
+
+In an ownership and borrowing model, each value has a single **owner**—a variable that is responsible for managing the memory associated with that value. When the owner goes out of scope, the value is automatically deallocated. When ownership is transferred (or moved) from one variable to another, the previous owner becomes invalid. This mechanism helps prevent issues like double frees and invalid memory access. 
+
+You can create references to a value without taking ownership. Borrowing can be either immutable, allowing multiple references, or mutable, permitting only one reference at a time.
+
+Prominent Language Examples: Rust
