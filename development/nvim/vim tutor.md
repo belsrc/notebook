@@ -5,9 +5,11 @@ gardening: 🌳
 reference:
   - https://github.com/pinnheads/neovim-tutor
 ---
+Notes from `:Tutor` .
+
 ## Definitions of Word
 
-This should me noted at the start. There is a difference between a word (usually the lower case command) and WORD (usually the uppercase command).
+This should be noted at the start. There is a difference between a word (usually the lower case command) and WORD (usually the uppercase command).
 
 A "word" is:
 - A sequence of letters, digits, underscores, and some special ASCII characters (as specified in the default value of the `iskeyword` option: `@,48–57,_,192–255`).

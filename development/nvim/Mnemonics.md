@@ -22,7 +22,7 @@ tags:
 - `b` : Backwards "word"
 - `B` : Big Backwards, Backward "WORD"
 - `e` : End "word"
-- `E` : Big End Word, End "WORD"
+- `E` : Big End, End "WORD"
 
 ## Visual `v`
 
@@ -30,7 +30,7 @@ tags:
 
 `viw` : `v`isual `i`nside `w`ord, select just word
 
-`vi'` : `v`isual `i`nside `'`. Can be any symbol.
+`vi'` : `v`isual `i`nside `'`. If not currently in between `''`, will find next set. Can be any symbol.
 
 `va{V` : select the body (above) and the definition (rest of fn), complete fn delete
 
@@ -40,13 +40,43 @@ tags:
 
 `cw` : change word
 
-`ciw` : change inside word (deletes word and enters insert)
+`ciw` : change inside word (deletes word and enters insert). 
 
-`ci{` : change inside {}
+`ci{` : change inside next `{}`. If not currently in between `{}`, will find next set.
 
 `caw` : change around word
 
-`ca{` : change around {}
+`ca{` : change around next `{}` . If not currently in between `{}`, will find next set.
+
+`cf(` : change to next found `(`.
+
+`cap` : change around paragraph. i.e. until next blank line.
+
+Number motions can also be used:
+
+`2ci'` : change inside second pair of `''`.
+
+## Delete `d`
+
+`db` : delete back word
+
+`dw` : delete word
+
+`diw` : delete inside word (deletes word and enters insert). 
+
+`di{` : delete inside next `{}`. If not currently in between `{}`, will find next set.
+
+`daw` : delete around word
+
+`da{` : delete around next `{}` . If not currently in between `{}`, will find next set.
+
+`df(` : delete to next found `(`.
+
+`dap` : delete around paragraph. i.e. until next blank line.
+
+Number motions can also be used:
+
+`2di'` : delete inside second pair of `''`.
 
 ## Goto `g`
 
