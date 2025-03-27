@@ -6,7 +6,6 @@ tags:
 gardening: 🌳
 reference:
   - https://en.wikipedia.org/wiki/Protocol_Buffers
-category: data
 ---
 ## Overview
 
@@ -16,11 +15,9 @@ Data structure schemas (called _messages_) and services are described in a prot
 
 Messages are serialized into a binary wire format which is compact, forward- and backward-compatible, but not self-describing (that is, there is no way to tell the names, meaning, or full datatypes of fields without an external specification). There is no defined way to include or refer to such an external specification (schema) within a Protocol Buffers file. The officially supported implementation includes an ASCII serialization format, but this format—though self-describing—loses the forward- and backward-compatibility behavior, and is thus not a good choice for applications other than human editing and debugging
 
-
 ## Limitations
 
 Protobufs have no single specification. The format is best suited for small data chunks that don't exceed a few megabytes and can be loaded/sent into a memory right away and therefore is not a streamable format. The library doesn't provide compression out of the box. The format also isn't well supported in non–object-oriented languages.
-
 
 ## Example
 
