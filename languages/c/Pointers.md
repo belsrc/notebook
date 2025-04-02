@@ -6,11 +6,7 @@ gardening: 🌱
 date: 2025-02-15
 reference:
 ---
-Pointers are variables that contain an address of a piece of memory.
-
-Your applications memory can be thought of as a large array of these addresses.
-
-So you can think of these pointers are simple array indexes.
+Pointers are variables that contain an address of a piece of memory. Your applications memory can be thought of as a large array of these addresses. So you can think of these pointers as simple array indexes.
 
 ```c
 typedef struct Point {
@@ -63,8 +59,14 @@ typedef struct Mixed {
 int main() {
   mixed_t mix = { x: 24, y: 41, tst: "A", sts: "B", z: 87 };
   
-  printf("x, y, tst, sts, z: %d, %d, %s, %s, %d\n", mix.x, mix.y, mix.tst, mix.sts, mix.z);
-  printf("x, y, tst, sts, z addresses:\n%p\n%p\n%p\n%p\n%p\n", &mix.x, &mix.y, &mix.tst, &mix.sts, &mix.z);
+  printf(
+    "x, y, tst, sts, z: %d, %d, %s, %s, %d\n",
+    mix.x, mix.y, mix.tst, mix.sts, mix.z
+  );
+  printf(
+    "x, y, tst, sts, z addresses:\n%p\n%p\n%p\n%p\n%p\n",
+    &mix.x, &mix.y, &mix.tst, &mix.sts, &mix.z
+  );
   
   int *index = &mix.x;
   
@@ -95,7 +97,7 @@ at index++: 41 - 0x7ffdf6cbc1b4
 at (index++)++ index: -980684792 - 0x7ffdf6cbc1b8
 ```
 
-#### "Polymorphic" Addresses
+## "Polymorphic" Addresses
 
 The address to a structure variable is the address to the first item.
 
@@ -137,3 +139,4 @@ tester(&player.health);
 // Passed value and address: 89 : 0x7fff297cc244
 // Passed value and address: 89 : 0x7fff297cc244
 ```
+

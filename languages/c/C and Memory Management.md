@@ -6,6 +6,8 @@ gardening: 🌱
 date: 2025-02-10
 reference:
   - https://www.youtube.com/watch?v=rJrd2QMVbGM
+  - https://www.tutorialspoint.com/cprogramming/c_data_types.htm
+  - https://en.wikipedia.org/wiki/C_data_types
 ---
 ## App Entry
 
@@ -21,11 +23,19 @@ The return value of the main function is the exit code of the program. `0` means
 
 ## Basic Types
 
-- `int` - Integer: 4 bytes
-- `float` - Floating point number: 4 bytes
-- `double` - Double-precision floating point: 8 bytes
-- `char` - Character: 1 byte
-- `char *` - Array of characters/string: _n_ bytes
+| Type             | Size                | Range                                                   |
+| ---------------- | ------------------- | ------------------------------------------------------- |
+| `char`           | 1 byte / 8 bits     | -128 to 127                                             |
+| `unsigned char`  | 1 byte / 8 bits     | 0 to 255                                                |
+| `short`          | 2 bytes / 16 bits   | -32,768 to 32,767                                       |
+| `unsigned short` | 2 bytes / 16 bits   | 0 to 65,535                                             |
+| `int`            | 4 bytes / 32 bits   | -2,147,483,648 to 2,147,483,647                         |
+| `unsigned int`   | 4 bytes / 32 bits   | 0 to 4,294,967,295                                      |
+| `long`           | 8 bytes / 64 bits   | -9,223,372,036,854,775,807 to 9,223,372,036,854,775,807 |
+| `unsigned long`  | 8 bytes / 64 bits   | 0 to 18,446,744,073,709,551,615                         |
+| `float`          | 4 bytes / 32 bits   | 1.2E-38 to 3.4E+38 (6 decimal places)                   |
+| `double`         | 8 bytes / 64 bits   | 2.3E-308 to 1.7E+308 (15 decimal place)                 |
+| `long double`    | 16 bytes / 128 bits | 34 decimal place                                        |
 
 ## Variables
 
@@ -100,6 +110,7 @@ In C, you have to tell it how to print particular values using format specifiers
 - `%c` - character
 - `%f` - floating point
 - `%s` - string (char *)
+- `%p` - pointer address
 
 [Full Spec](https://cplusplus.com/reference/cstdio/printf/#:~:text=Parameters-,format,-C%20string%20that)
 
@@ -246,7 +257,7 @@ If it is a pointer to a `struct` it is slightly different. In this case you use 
 ```c
 struct Coord coord = { .x = 12, .y = 23, .z = 13 };
 struct Coord *coord_ptr = &coord;
-int x = coord_ptr -> x;
+int x = coord_ptr->x;
 ```
 
 ## Typedef "Aliases"
@@ -293,15 +304,35 @@ int *num_ptr = &num; // num_ptr holds address at num
 int num2 = *num_ptr; // num2 holds the dereferenced num_ptr. num val copy.
 ```
 
+When defining the variable, you need to use `*`.
+
+```c
+int *ptr = malloc(sizeof(int));
+```
+
+If you give a pointer the address of something, you do NOT need to use `*`. 
+
+```c
+ptr = &my_int;
+```
+
+But if you are trying to set the value of the referenced address, then you do.
+
+```c
+*ptr = value;
+```
+
 Pointers always have the same size since they are just memory addresses. And are based on the underlying system architecture.  `4 bytes` on a `32-bit` system and `8 bytes` on a `64-bit` system.
 
 ```c
 int *intPtr;
 char *charPtr;
 double *doublePtr;
+
 printf("int pointer: %zu bytes\n", sizeof(intPtr));
 printf("char pointer: %zu bytes\n", sizeof(charPtr));
 printf("double pointer: %zu bytes\n", sizeof(doublePtr));
+
 // int pointer: 4 bytes
 // char pointer: 4 bytes
 // double pointer: 4 bytes
@@ -337,6 +368,7 @@ When you add an integer to a pointer, the resulting pointer is offset by that in
 | 0x1008  | numbers[2] | numbers + 2 | 3     |
 | 0x100C  | numbers[3] | numbers + 3 | 4     |
 | 0x1010  | numbers[4] | numbers + 4 | 5     |
+
 Array of structures (AoS) are handled as one would expect.
 
 ```c
@@ -364,9 +396,11 @@ The memory size of an array is just $\text{data type size} * n\text{ number of e
 int intArray[10];
 char charArray[10];
 double doubleArray[10];
+
 printf("int array: %zu bytes\n", sizeof(intArray));
 printf("char array: %zu bytes\n", sizeof(charArray));
 printf("double array: %zu bytes\n", sizeof(doubleArray));
+
 // int array: 40 bytes
 // char array: 10 bytes
 // double array: 80 bytes
@@ -561,15 +595,15 @@ typedef union AgeOrName {
 This union can hold _either_ an `int` or a `char*`, but not both at the same time. We provide the list of possible types so the compiler knows the _maximum_ potential memory required.
 
 ```c
-age_or_name_t lane = { .age = 29 };
-printf("age: %d\n", lane.age);
+age_or_name_t user = { .age = 29 };
+printf("age: %d\n", user.age);
 // age: 29
 ```
 
 But what happens if we try to access the `name` field?
 
 ```c
-printf("name: %s\n", lane.name);
+printf("name: %s\n", user.name);
 // name:
 ```
 
@@ -635,3 +669,163 @@ reg.bytes.byte3 = 4;
 
 The struct acts as a lens into the unsigned int's value. Byte by byte.
 
+## Stack and Heap
+
+> [!WARNING]
+> TODO
+## Pointer to pointers
+
+Pointers can hold the address (point to) of other pointers.
+
+```c
+int value;
+int *pointer;
+int **pointer_pointer;
+```
+
+Pointers to pointers are like a treasure map or a scavenger hunt. You start at one pointer and keep following the chain of addresses until you get to the final value.
+
+![](../../images/comp-sci/pointer-pointer-dark.png)
+
+```c
+int main() {
+  int v1 = 1;
+  int v2 = 2;
+  int checkpoint = 0;
+
+  int *ptr = &v1;
+  int **ptr_ptr = &ptr;
+  checkpoint = **ptr_ptr;
+  // checkpoint = 1
+
+  ptr = &v2;
+  checkpoint = **ptr_ptr;
+	// checkpoint = 2
+}
+```
+
+## Array of Pointers
+
+Making  a heap allocated `int` array is pretty easy
+
+```c
+int n = 3;
+int *int_array = malloc(sizeof(int) * n);
+int_array[0] = 1;
+int_array[1] = 2;
+int_array[2] = 3;
+```
+
+An array of pointers is similar and can be used to make an array of strings.
+
+```c
+int n = 3;
+// Each element inside the array (*) is a char pointer (*)
+// so we end up with a char **
+char **string_array = malloc(sizeof(char *) * n);
+string_array[0] = "foo";
+string_array[1] = "bar";
+string_array[2] = "baz";
+
+printf(
+  "Addr: %p | Size: %zu\n",
+  string_array, sizeof(string_array)
+);
+printf(
+  "Addr: %p | Val: %s | Size: %zu\n",
+  string_array[0], string_array[0], sizeof(string_array[0])
+);
+printf(
+	"Addr: %p | Val: %s | Size: %zu\n",
+	string_array[1], string_array[1], sizeof(string_array[1])
+);
+printf(
+	"Addr: %p | Val: %s | Size: %zu\n",
+	string_array[2], string_array[2], sizeof(string_array[2])
+);
+
+// Addr: 0x55b5753e82a0 | Size: 8
+// Addr: 0x55b569c1d008 | Val: foo | Size: 8
+// Addr: 0x55b569c1d00c | Val: bar | Size: 8
+// Addr: 0x55b569c1d010 | Val: bazz | Size: 8
+```
+
+## Void Pointers
+
+A `void *` (void pointer) tells the compiler that this pointer could point to anything. This is why void pointers are also known as "generic pointers". Since void pointers do not have a specific type, they cannot be directly dereferenced or used n pointer arithmetic without casting them to another pointer type first.
+
+```c
+int number = 42;
+void *generic_ptr = &number;
+
+printf("Value of number: %d\n", *generic_ptr);
+// This doesn't work
+
+printf("Value of number: %d\n", *(int *)generic_ptr);
+// This works. Cast to correct type before dereferencing
+```
+
+One use of this is to store generic data in one variable and the type of that data in another variable. This allows you to pass data around without knowing its type at compile time.
+
+```c
+typedef enum DATA_TYPE {
+  INT, FLOAT
+} data_type_t;
+
+void printValue(void *ptr, data_type_t type) {
+  if (type == INT) {
+		printf("Value: %d\n", *(int *)ptr);
+  }
+  else if (type == FLOAT) {
+		printf("Value: %f\n", *(float *)ptr);
+  }
+	// else handle unknown
+}
+
+int number = 42;
+printValue(&number, INT);
+// Value: 42
+
+float decimal = 3.14;
+printValue(&decimal, FLOAT);
+// Value: 3.140000
+```
+
+Void pointers of structs are slightly different.
+
+```c
+typedef enum Kind {
+  INTEGER,
+  FLOAT,
+  BOOL,
+} token_kind;
+
+typedef struct Int {
+  char *name;
+  int value;
+} int_kind;
+
+typedef struct Float {
+  char *name;
+  float value;
+} float_kind;
+
+typedef struct Bool {
+  char *name;
+  unsigned int value;
+} bool_kind;
+
+void zero_out(void *ptr, token_kind kind){
+  if (kind == INTEGER) {
+    ((int_kind *)ptr)->value = 0.0;
+  }
+  else if (kind == FLOAT) {
+    ((float_kind *)ptr)->value = 0.0;
+  }
+  else if (kind == BOOL) {
+    ((bool_kind *)ptr)->value = 0.0;
+  }
+}
+```
+
+In order to set the value on the struct, we need to cast the void pointer to the correct struct pointer type `(int_kind *)ptr`. And then use normal struct dereferencing to the set the value. Since the passed in struct is already a pointer and the `->` handles dereferencing, we don't need to do the normal `*(int *)ptr` like with scalar values. But we do need to add in an additional set of `()`.
