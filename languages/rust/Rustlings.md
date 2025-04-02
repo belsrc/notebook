@@ -52,7 +52,7 @@ x = 453;
 println!("number {}", x); // fine
 ```
 
-Variables can be shadowed. Variable shadowing is when a variable declared within a certain scope has the same name as a variable declared in an outer scope.
+Variables can be shadowed. [Variable shadowing](../../computer%20science/programming%20lang%20theory/Variable%20Shadowing) is when a variable declared within a certain scope has the same name as a variable declared in an outer scope.
 
 ```rust
 fn main() {
