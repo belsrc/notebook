@@ -9,7 +9,14 @@ reference:
   - https://www.nic.uoregon.edu/~khuck/ts/acumem-report/manual_html/ch05s01.html
   - https://en.algorithmica.org/hpc/cpu-cache/cache-lines/
 ---
-- Deeper dive into alignment and cache lines (links in refs)
+> [!NOTE]
+> Deeper dive into alignment and cache lines (links in refs)
+
+> [!NOTE]
+> - Struct alignment is equal to the largest element in the struct
+> - Store small fields out of bounds
+> - Use tagged unions where possible
+
 
 ```c
 	typedef struct Coordinate {
