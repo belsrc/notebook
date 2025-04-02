@@ -2,7 +2,7 @@
 tags:
   - comp-sci
   - memory
-gardening: 🌱
+gardening: 🌳
 date: 2025-03-08
 reference:
   - https://en.wikipedia.org/wiki/Call_stack
