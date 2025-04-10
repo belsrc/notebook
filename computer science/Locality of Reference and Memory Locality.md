@@ -1,6 +1,7 @@
 ---
 tags:
   - comp-sci
+  - memory
 gardening: 🌳
 date: 2025-01-05
 reference:

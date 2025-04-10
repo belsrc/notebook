@@ -1,7 +1,8 @@
 ---
 tags:
   - comp-sci
-gardening: 🌱
+  - memory
+gardening: 🌳
 date: 2025-04-05
 reference:
   - https://en.wikipedia.org/wiki/Endianness
@@ -12,13 +13,13 @@ playground: https://onecompiler.com/c/43dysck2m
 ---
 Endianness is a key concept in computer architecture that describes the order in which a sequence of bytes is stored in memory. In simple terms, it refers to whether the most significant byte (MSB) is stored at the lowest memory address (big-endian) or whether the least significant byte (LSB) is stored first (little-endian).
 
-### Most and Least Significant Byte
+## Most and Least Significant Byte
 
 The **most significant byte (MSB)** is the byte in a multi-byte number that holds the highest order bits, meaning it contributes the greatest value to the overall representation of the number. On the other hand, the **least significant byte (LSB)** contributes the lowest value. 
 
 For example, consider the decimal number 2,984. If we change the last digit, 4, to 5, the number increases by just 1. However, if we change the first digit, 2, to 3, the number increases by 1,000. This principle applies equally to bytes and bits.
 
-### Representation
+## Representation
 
 When working with multi-byte data, like a 32-bit integer, a computer must determine how to arrange these bytes in memory. If we represent a 32-bit integer in hexadecimal as `0x12345678`, it will occupy four consecutive bytes in memory.
 
