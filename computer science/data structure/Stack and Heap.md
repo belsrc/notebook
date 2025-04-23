@@ -29,7 +29,7 @@ int main() {
 }
 ```
 
-![](../images/comp-sci/call-stack-simple-dark.png)
+![](call-stack-simple-dark.png)
 
 If a called subroutine invokes another subroutine, it will push another return address onto the call stack, and this process continues, stacking information as the program dictates.
 
@@ -50,7 +50,7 @@ int main() {
 }
 ```
 
-![](../images/comp-sci/call-stack-recursive-dark.png)
+![](call-stack-recursive-dark.png)
 
 If the stack grows to consume all the allocated space, an error known as a **stack overflow** occurs, often resulting in a program crash. Adding a subroutine's entry to the call stack is sometimes referred to as "winding," while removing entries is known as "unwinding."
 
@@ -74,7 +74,7 @@ int *new_int_array(int size) {
 ```
 
 
-![](../images/comp-sci/heap-memory-dark.png)
+![](heap-memory-dark.png)
 
 Various techniques have been developed to enhance memory management. For instance, virtual memory systems distinguish between the memory addresses utilized by a process and the actual physical addresses. This separation allows multiple processes to run simultaneously and can extend the size of the virtual address space beyond the available RAM by using methods like paging or swapping with secondary storage.
 
