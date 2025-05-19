@@ -1,0 +1,8 @@
+- C
+- [Go](https://go.dev)
+- [Rust](https://www.rust-lang.org)
+- [Zig](https://ziglang.org) *
+- [Odin](https://odin-lang.org)
+- [Roc](https://www.roc-lang.org) *
+- [Gleam](https://gleam.run)
+- 
