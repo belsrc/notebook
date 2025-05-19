@@ -36,6 +36,8 @@ tags:
 
 ## Change `c`
 
+`cc`: change current line
+
 `cb` : change back word
 
 `cw` : change word
