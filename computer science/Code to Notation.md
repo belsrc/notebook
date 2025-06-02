@@ -60,6 +60,25 @@ This corresponds to:
 
 $\text{hasEven} \iff \exists x \in \{1, 3, 4, 7\} : (x \bmod 2 = 0)$
 
+### `Array.filter`
+
+$A = \{x \in S : P(x)\}$
+
+- `S` is the original set/array
+- `P(x)` is the predicate function
+- The result is a new set containing only elements that satisfy the predicate
+
+$\text{array.filter(predicate)} = \{x \in \text{array} : \text{predicate}(x) = \text{true}\}$
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6];
+const evens = numbers.filter(x => x % 2 === 0); // [2, 4, 6]
+```
+
+This corresponds to:
+
+$\text{evens} = \{x \in \{1, 2, 3, 4, 5, 6\} : x \bmod 2 = 0\} = \{2, 4, 6\}$
+
 ### `if` Assignment / `case` Fall Through
 
 $R := x; \quad \forall i \in \{j, j+1, \ldots, n\} : \text{if } A_i \text{ then } R := B_i$
