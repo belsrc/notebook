@@ -216,3 +216,26 @@ switch(true) {
 ```
 
 Given conditions `A₁=false`, `A₂=true`, `A₃=false`, `A₄=true`.
+
+### `if...else`
+
+#### Piecewise Function
+$$
+G = \begin{cases} \forall x \in \{R_1, R_2, \ldots, R_n\} : P(x) & \text{if } C \\ \exists x \in \{R_1, R_2, \ldots, R_n\} : P(x) & \text{otherwise} \end{cases}
+$$
+
+#### Logical Implication
+$$
+G \iff (C \rightarrow \forall x \in \{R_1, R_2, \ldots, R_n\} : P(x)) \land (\neg C \rightarrow \exists x \in \{R_1, R_2, \ldots, R_n\} : P(x))
+$$
+
+#### Set-Based Conditional
+$$
+G = \begin{cases} \text{True} & \text{if } C \land \forall x \in S : P(x) \\ \text{True} & \text{if } \neg C \land \exists x \in S : P(x) \\ \text{False} & \text{otherwise} \end{cases}
+$$
+Where $S = \{R_1, R_2, ..., R_n\}$
+
+#### Algorithmic Notation
+$$
+\text{if } C \text{ then } G := \forall x \in \{R_1, R_2, \ldots, R_n\} : P(x) \text{ else } G := \exists x \in \{R_1, R_2, \ldots, R_n\} : P(x)
+$$
