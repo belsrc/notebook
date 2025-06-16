@@ -11,8 +11,6 @@ reference:
   - https://dev.to/gcanti/functional-design-algebraic-data-types-36kf
   - https://jrsinclair.com/articles/2019/algebraic-data-types-what-i-wish-someone-had-explained-about-functional-programming/
 ---
-# Algebraic Data Types in Programming: A Complete Guide
-
 Algebraic Data Types (ADTs) are one of the most powerful and elegant concepts in programming. They provide a mathematical foundation for modeling data, resulting in more robust, maintainable, and expressive code. Although ADTs are traditionally associated with functional programming languages such as Haskell or ML, they have also been adopted in mainstream languages, including TypeScript, through libraries like `true-myth`.
 
 ## What Are Algebraic Data Types?
