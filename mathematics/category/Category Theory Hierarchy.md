@@ -1,5 +1,3 @@
-I'll create a mermaid diagram showing the hierarchy and relationships in Category Theory. This is a complex topic as these concepts exist at different abstraction levels and have various relationships.The diagram shows the relationships between key concepts in Category Theory. Here's a technical breakdown of the hierarchy:
-
 ## Foundational Level (Orange)
 - **Set**: The basic collection of elements
 - **Setoid**: A set equipped with an equivalence relation (~)
@@ -435,6 +433,7 @@ F(A) ---F(f)---> F(B)
  v                v
 G(A) ---G(f)---> G(B)
 ```
+_[LaTeX](https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKAQQEoQAvqXSZc+QigCM5KrUYs2XAEL8hI7HgJEyk2fWatEIAOI9VwkBg3ii03dX0KjplYNkwoAc3hFQAMwAnCABbJDIQHAgkACZqBjoAIxgGAAVRTQkQBhg-HBAHeUMQAB1imBw6AH1uQQtAkLDqSKRpLMTktOstI2zc-LkDRU4-c38g0MRW5sQAZjj21PSbHpy8gsGjUvKqpVqxhsRYiKjZ+aTFrszetYGnE2HVCgEgA)
 
 **Examples**:
 
