@@ -149,28 +149,46 @@ interface IUser {
   readonly id: number;
 }
 
-// Type alias is "closed" - it refers to exactly this shape
-const processExactUser = (user: ExactUser) => {
-  // TypeScript knows this has exactly name and id
-  const keys = Object.keys(user); // string[]
-  return user;
+// Function that requires exact shape
+const serializeExactUser = (user: ExactUser): string => {
+  // TypeScript knows this will always have exactly these properties
+  const entries: [keyof ExactUser, ExactUser[keyof ExactUser]][] = [
+    ["name", user.name],
+    ["id", user.id]
+  ];
+  return JSON.stringify(Object.fromEntries(entries));
 };
 
-// Interface might have additional properties due to declaration merging
-const processIUser = (user: IUser) => {
-  // TypeScript cannot guarantee this only has name and id
-  const keys = Object.keys(user); // string[]
-  return user;
+// Function that works with interface
+const serializeIUser = (user: IUser): string => {
+  // TypeScript knows this has AT LEAST these properties
+  // but there might be more due to declaration merging
+  const requiredEntries: [keyof IUser, IUser[keyof IUser]][] = [
+    ["name", user.name],
+    ["id", user.id]
+    // After declaration merging, this would also need:
+    // ["email", user.email] // if email is required
+  ];
+  
+  // Safer to use Object.entries to catch all properties
+  return JSON.stringify(user);
 };
 
-// Somewhere else in the codebase:
-declare module './types' {
+// Demonstration of the difference:
+declare module "./types" {
   interface IUser {
-    email?: string; // This changes ALL IUser references retroactively
+    email: string; // Required property added
   }
 }
+
+// Now this breaks:
+const user: IUser = { name: "Alice", id: 1 }; 
+// Error: Property 'email' is missing
+
+// But ExactUser is unaffected:
+const exactUser: ExactUser = { name: "Alice", id: 1 }; // Still valid
 ```
-[Playground](https://www.typescriptlang.org/play/#code/C4TwDgpgBAogHgQwMbAKoGcICcoF4oDeAUFFFhAgCYD2AdgDYhS0IC2EAXFOsFgJa0A5gG4SZCjQZM+lLrQCurAEbZRAX1FEBwbADNk0AJIZshMeSp1GzNp268BI8xKvTZzRSqzqiRAPR+UAAq4NAI9HwI6FB80QBESPTUmJRxUAC0McDiutjRwNRQEIgo1sAAFrHc5QiQREh0PFBgWNRIEOjo8MhomDj4ABTyfVzdKCZYAJR4AHxmpAHBoQDKSPxg2QDWtNQA7vmV0TXRxT3WLOxQCLSUMZRiDbRNmxAg0fgA8koAVhAoAHQvN5DPqTYRQRY8fhCADaAF1nMB5FhaFBhqoiBpfItDLQdFh9O0oKw+IJytkagA3MKUSh8YB8OjhZqtSBYBkdKCUeTQApcv70BBYBAMujE7CCRz1RrZFptDroYx9PBQEHYLhK7DTXBzYgLQIhSCrdbZJDXHbZQTyIXXHS8w5QVxQY42S7XW4yB4yqBA95QL6-AG+tVTcGQhywhGkchIlFovrqTSLZbUdi7crYaAQeiYGKoirQBqUCBKKKcfx+YuJIXQVjUbn0aBxf5+UCQdBpPV5-GEowTeakK6CCAAfjknlUEINDqQNSEnIAggAZJdQTU4ci5ci0drRGOtHp8amMMRqCtqIA)
+[Playground](https://www.typescriptlang.org/play/?target=99&ssl=48&ssc=70&pln=1&pc=1#code/C4TwDgpgBAogHgQwMbAKoGcICcoF4oDeAUFFFhAgCYD2AdgDYhS0IC2EAXFOsFgJa0A5gG4SZCjQZM+lLrQCurAEbZRAX1FEBwbADNk0AJIZshMeSp1GzNp268BI8xKvTZzRSqzqiRAPR+UABi8rQofHRQwAAWCMDiAI7yfOToUBCIKNyxkERIdDzc2HwI9HwAXhDwyGiYOPgAFPJ1XNUoJlgAlFw8-EJ4AHxmpAFQACrgEADKSPxg8QDWtNQA7mkxfGkrfPT0UKUrCCBpsQBu0Bk11jEQmFBgWNSQWMB8t2L5tIUQtA63XABtBYQEDUXSwTK1bAAGghNQ6QJBYLh7TqAF00QC0XgoACxKQAQAiFjsQmw5rYAB0JIgaOh+NxhJkZKgFKwlJkaLEaNEpHIwHkWFoUAAUlMAPIAOUpvUcfF0IAa4qUACsIChKbpHqwYL9+LcGj8-uhOp11JpRiEwq9IjE4lAVtQsAstnwYlBtHoDHkCvE6iUypVjHUcU0WlBg9huvY+oJBsMoKMJpAZnNFss1lFopsoLE0gBBMZQAAyMHzUyLNzuDye2Fe7xGgSU8niN3IUFYfEE0XiKg7TuglHk0GA1CglHV9AQWDiEWF7CwgkcH19iWS5EouuNgOBoPBkawsIPiL3EY6GKxOLxpAJxNsLLZ1NsdIZROZ5LqHMoXJvicC+d0HQcAnJApxnG152wJchFhDYtmoeR6EofZ6HQMdaAgCBZAZUYiQgVgEB2B9P3wwj6GxUZ5XSAidg9NJyCSFIsO5XkoDEUYpgQXRTFHVk7mVNUNSNfV1jHJA4iQaIUL2GtnnrdBnAFIVRQlaVZSEeVFTZM0iA0XxRgAEXw31wLnKBkRucd5W48gwk4fw-BAsDoFYagh3oaBCUpPxQEgdBCQTT0sH0JAjA6BNSFInYegcIRhD-KAACUIEYjd7keOSmCoCdKDENQHPyhyoElVYsxzJQLBdDgfS+eI2S4A8cQIGx2C4Ql8zKUKWRkLgAEYoA0NjRhgLBHiwLgAAUMrrJgAHIovoWa6I7TZ0GXIqACEWxRKEcBzUIuO4lAsOqz5vkhDpWgukN8Gamk2o6vguthHqoH6waONeXYoFOUoZCAA)
 
 ## Codebase Considerations
 
@@ -318,7 +336,7 @@ const sendEmail = (email: Email) => {
   console.log(`Sending to: ${email}`);
 };
 
-// This phantom type pattern is impossible with interfaces
+// This branded type pattern is impossible with interfaces
 // because interfaces always represent runtime structure
 ```
 
