@@ -1,3 +1,10 @@
+---
+tags:
+  - typescript
+gardening: 🌳
+date: 2025-06-20
+---
+
 In TypeScript, `type` and `interface` serve similar purposes but have important semantic and behavioral differences that impact correctness.
 
 ## Fundamental Differences
