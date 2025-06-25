@@ -3,5 +3,8 @@
   "cssTheme": "Atom",
   "monospaceFontFamily": "JetBrainsMono Nerd Font,Dank Mono Nerd Font",
   "textFontFamily": "Helvetica Neue,Segoe UI",
-  "interfaceFontFamily": "Helvetica Neue,Segoe UI"
+  "interfaceFontFamily": "Helvetica Neue,Segoe UI",
+  "enabledCssSnippets": [
+    "tikz-fix"
+  ]
 }
