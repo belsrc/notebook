@@ -425,15 +425,16 @@ type NatTrans<F, G> = {
 
 - Naturality: For $f: A \to B$, we have $G(f) \circ n_A = n_B \circ F(f)$
 
+```tikz
+\usepackage{tikz-cd}
+
+\begin{document}
+\begin{tikzcd}
+F(A) \arrow[d, "\eta_A"] \arrow[r, "F(f)"] & F(B) \arrow[d, "\eta_B"] \\
+G(A) \arrow[r, "G(f)"]                     & G(B)                    
+\end{tikzcd}
+\end{document}
 ```
-F(A) ---F(f)---> F(B)
- |                |
-η_A              η_B
- |                |
- v                v
-G(A) ---G(f)---> G(B)
-```
-_[LaTeX](https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRADEAKAQQEoQAvqXSZc+QigCM5KrUYs2XAEL8hI7HgJEyk2fWatEIAOI9VwkBg3ii03dX0KjplYNkwoAc3hFQAMwAnCABbJDIQHAgkACZqBjoAIxgGAAVRTQkQBhg-HBAHeUMQAB1imBw6AH1uQQtAkLDqSKRpLMTktOstI2zc-LkDRU4-c38g0MRW5sQAZjj21PSbHpy8gsGjUvKqpVqxhsRYiKjZ+aTFrszetYGnE2HVCgEgA)
 
 **Examples**:
 
