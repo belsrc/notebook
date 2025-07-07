@@ -37,6 +37,7 @@ Some relationships are too complex for a simple hierarchy:
 The diagram uses color coding to distinguish between different levels of abstraction in the theory.
 
 ```mermaid
+%%{init: { 'flowchart': {'useMaxWidth':true} } }%%
 graph TD
     %% Basic structures
     Set[Set]
@@ -105,9 +106,6 @@ graph TD
     class Semigroupoid,Category categorical
     class Functor,Endofunctor,ContraFunctor,Bifunctor,Profunctor,NatTrans,ApplicativeFunctor,Monad,Comonad functorial
 ```
-
-> [!NOTE]
-> Add `%%{init: { 'flowchart': {'useMaxWidth':true} } }%%` for print
 
 ## Basic Foundational Structures
 

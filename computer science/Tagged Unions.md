@@ -3,6 +3,13 @@ tags:
   - comp-sci
 gardening: 🌱
 date: 2025-04-09
+reference:
+  - https://saidvandeklundert.net/fortheloveofzig/tagged%20unions
+  - https://mariusschulz.com/blog/tagged-union-types-in-typescript
+  - https://www.geeksforgeeks.org/javascript/what-are-discriminated-union-types/
+  - https://medium.com/@almtechhub/c-c-tagged-discriminated-union-ecd5907610bf
+  - https://en.wikipedia.org/wiki/Tagged_union
+  - https://blog.ryanmartin.me/tagged-unions
 ---
 A tagged union, also known as a variant type, sum type, or discriminated union, is a data structure designed to hold a value that can take on several different, but fixed, types. Each value is "tagged" with an indicator (or tag) that specifies its type, allowing the program to safely inspect and work with the stored data.
 
@@ -17,6 +24,9 @@ One significant benefit of using tagged unions is safety. By explicitly tagging 
 Tagged unions also enable the use of pattern matching, a powerful programming feature that simplifies the process of deconstructing data types. Pattern matching automatically checks the tag and binds the corresponding data, leading to cleaner and more readable code.
 
 Without the tag, traditional unions do not carry type information. As a result, developers must rely on external logic or discipline to determine which part of the union is valid, increasing the risk of errors if the wrong type is assumed. Tagged unions eliminate this risk by associating data with its type information.
+
+> [!NOTE]
+> Add some of the type theory stuff from the wiki page
 
 ## C
 
