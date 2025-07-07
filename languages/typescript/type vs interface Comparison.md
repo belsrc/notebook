@@ -3,6 +3,12 @@ tags:
   - typescript
 gardening: 🌳
 date: 2025-06-20
+references:
+  - https://code.il4.dso.mil/abms/products/hypergiant/jeric2o/-/merge_requests/514#note_137557
+  - https://segmentfault.com/a/1190000039834284/en
+  - https://twitter.com/mattpocockuk/status/1597563037892116480
+  - https://www.totaltypescript.com/type-vs-interface-which-should-you-use
+  - https://www.typescriptlang.org/docs/handbook/declaration-merging.html
 ---
 
 In TypeScript, `type` and `interface` serve similar purposes but have important semantic and behavioral differences that impact correctness.
