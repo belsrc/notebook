@@ -1,3 +1,10 @@
+---
+tags:
+  - math
+  - category-theory
+gardening: 🌱
+date: 2025-07-05
+---
 ## Foundational Level (Orange)
 - **Set**: The basic collection of elements
 - **Setoid**: A set equipped with an equivalence relation (~)
