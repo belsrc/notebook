@@ -27,11 +27,10 @@ WKB data is structured as a sequence of bytes that encode the geometry type, coo
 
 WKB uses a single byte to indicate the byte order ([endianness](../computer%20science/Endianness.md)) of the data:
 
-```typescript
-type ByteOrder = 
-  | 0x00 // Big Endian (most significant byte first)
-  | 0x01 // Little Endian (least significant byte first)
-```
+| **Value** | **Meaning**                                  |
+| --------- | -------------------------------------------- |
+| `0x00`    | Big endian (most significant byte first)     |
+| `0x01`    | Little endian (least significant byte first) |
 
 This design ensures cross-platform compatibility by explicitly declaring the byte ordering convention used throughout the geometry data.
 
