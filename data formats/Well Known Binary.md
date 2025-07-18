@@ -12,13 +12,13 @@ reference:
   - https://loc.gov/preservation/digital/formats/fdd/fdd000549.shtml
   - https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary
 ---
-The Well Known Binary (WKB) format represents a fundamental building block in modern geospatial data processing. Unlike text-based formats such as Well Known Text (WKT) or GeoJSON, WKB provides a compact, efficient binary representation of geometric objects that optimizes both storage space and processing performance.
+The Well-Known Binary (WKB) format is a crucial component in modern geospatial data processing. Unlike text-based formats such as Well-Known Text (WKT) or GeoJSON, WKB offers a compact and efficient binary representation of geometric objects, optimizing both storage space and processing performance.
 
-WKB's design philosophy centers on creating a platform-independent binary format that can represent complex geometric structures while maintaining compatibility across different hardware architectures and software systems.
+The design philosophy behind WKB emphasizes the creation of a platform-independent binary format capable of representing complex geometric structures while ensuring compatibility across various hardware architectures and software systems.
 
 ## Core Structure
 
-WKB data is structured as a sequence of bytes that encode the geometry type, coordinate values, and metadata such as byte order and SRID. The format adheres to a strict specification to ensure interoperability across systems.
+WKB data is organized as a sequence of bytes that represent the geometry type, coordinate values, and metadata such as byte order and SRID. This format follows a strict specification to ensure interoperability among systems.
 
 ```
 ┌─────────────────┬─────────────────┬─────────────────┐
@@ -40,7 +40,7 @@ This design ensures cross-platform compatibility by explicitly declaring the byt
 
 ## Geometry Type Taxonomy
 
-The geometry type is encoded as a 32-bit unsigned integer immediately following the byte order. The value indicates the type of geometry and whether it includes Z or M coordinates. The OGC specification defines standard geometry type codes, with additional ranges for extended types.
+The geometry type is represented as a 32-bit unsigned integer that follows the byte order. This value indicates the type of geometry and specifies whether it includes Z (elevation) or M (measure) coordinates. The Open Geospatial Consortium (OGC) specification defines standard geometry type codes, along with additional ranges for extended types.
 
 ### Basic Geometry Types
 
@@ -86,7 +86,7 @@ Add 3000 for both Z and M
 
 ## Detailed Binary Structure Analysis
 
-Coordinates are encoded as 64-bit double-precision floating-point numbers (IEEE 754). For a 2D point $(x, y)$, the WKB format includes two doubles. For 3D points (Z) or points with measures (M), additional doubles are included.
+Coordinates are represented as 64-bit double-precision floating-point numbers (IEEE 754). For a 2D point $(x, y)$, the WKB format includes two doubles. For 3D points (Z) or points with measures (M), additional doubles are added.
 
 ### Point Geometry
 
