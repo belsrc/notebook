@@ -16,6 +16,14 @@ The Well-Known Binary (WKB) format is a crucial component in modern geospatial d
 
 The design philosophy behind WKB emphasizes the creation of a platform-independent binary format capable of representing complex geometric structures while ensuring compatibility across various hardware architectures and software systems.
 
+### Why WKB?
+
+Let's consider a simple point geometry: `POINT (10.0 20.0)`. In Well-Known Text (WKT), this is represented as a string of characters. However, using a binary representation can significantly reduce its size. The main reasons for using Well-Known Binary (WKB) format include:
+
+1. **Compactness**: WKB offers much smaller file sizes and network payloads compared to text-based formats like WKT.
+2. **Performance**: It allows for faster parsing and serialization through direct byte manipulation, eliminating the overhead of character encoding and decoding.
+3. **Database Integration**: WKB is ideal for direct storage in spatial database columns, which minimizes conversion overhead.
+
 ## Core Structure
 
 WKB data is organized as a sequence of bytes that represent the geometry type, coordinate values, and metadata such as byte order and SRID. This format follows a strict specification to ensure interoperability among systems.
