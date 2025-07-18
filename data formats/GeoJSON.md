@@ -1,6 +1,7 @@
 ---
 tags:
   - gis
+  - data
 gardening: 🌱
 reference:
   - https://datatracker.ietf.org/doc/html/rfc7946
