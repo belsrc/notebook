@@ -1,12 +1,16 @@
 ---
 tags:
   - data
-gardening: 🌱
+  - gis
+gardening: 🌳
 date: 2025-07-17
 reference:
   - https://www.ogc.org/standards/sfa/
   - https://postgis.net/docs/manual-3.0/
   - https://libgeos.org/specifications/wkb/
+  - https://medium.com/@hanxuyang0826/understanding-and-implementing-wkb-in-c-with-postgis-0c5d5e594805
+  - https://loc.gov/preservation/digital/formats/fdd/fdd000549.shtml
+  - https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary
 ---
 The Well Known Binary (WKB) format represents a fundamental building block in modern geospatial data processing. Unlike text-based formats such as Well Known Text (WKT) or GeoJSON, WKB provides a compact, efficient binary representation of geometric objects that optimizes both storage space and processing performance.
 
@@ -27,10 +31,10 @@ WKB data is structured as a sequence of bytes that encode the geometry type, coo
 
 WKB uses a single byte to indicate the byte order ([endianness](../computer%20science/Endianness.md)) of the data:
 
-| **Value** | **Meaning**                                  |
-| --------- | -------------------------------------------- |
-| `0x00`    | Big endian (most significant byte first)     |
-| `0x01`    | Little endian (least significant byte first) |
+```c
+#define WKB_BIG_ENDIAN    0x00  // most significant byte first
+#define WKB_LITTLE_ENDIAN 0x01  // least significant byte first
+```
 
 This design ensures cross-platform compatibility by explicitly declaring the byte ordering convention used throughout the geometry data.
 
@@ -42,15 +46,14 @@ The geometry type is encoded as a 32-bit unsigned integer immediately following 
 
 The WKB specification defines seven fundamental geometry types:
 
-```typescript
-type BasicGeometryType = 
-  | 1 // Point
-  | 2 // LineString  
-  | 3 // Polygon
-  | 4 // MultiPoint
-  | 5 // MultiLineString
-  | 6 // MultiPolygon
-  | 7 // GeometryCollection
+```c
+#define WKB_POINT              1
+#define WKB_LINESTRING         2
+#define WKB_POLYGON            3
+#define WKB_MULTIPOINT         4
+#define WKB_MULTILINESTRING    5
+#define WKB_MULTIPOLYGON       6
+#define WKB_GEOMETRYCOLLECTION 7
 ```
 
 ### Extended Geometry Types
@@ -63,21 +66,22 @@ Add 2000 for M
 Add 3000 for both Z and M
 ```
 
-```typescript
-type ExtendedGeometryType = 
-  | 1001 // PointZ (3D Point)
-  | 1002 // LineStringZ
-  | 1003 // PolygonZ
-  | 1004 // MultiPointZ
-  | 1005 // MultiLineStringZ
-  | 1006 // MultiPolygonZ
-  | 1007 // GeometryCollectionZ
-  | 2001 // PointM (Measured Point)
-  | 2002 // LineStringM
-  | 2003 // PolygonM
-  | 3001 // PointZM (3D + Measured)
-  | 3002 // LineStringZM
-  | 3003 // PolygonZM
+```c
+#define WKB_POINTZ              1001 // 3D Point
+#define WKB_LINESTRINGZ         1002 // 3D LineString
+#define WKB_POLYGONZ            1003 // 3D Polygon
+#define WKB_MULTIPOINTZ         1004 // 3D MultiPoint
+#define WKB_MULTILINESTRINGZ    1005 // 3D MultiLineString
+#define WKB_MULTIPOLYGONZ       1006 // 3D MultiPolygon
+#define WKB_GEOMETRYCOLLECTIONZ 1007 // 3D GeometryCollection
+
+#define WKB_POINTM            2001  // Measured Point
+#define WKB_LINESTRINGM       2002  // Measured LineString
+#define WKB_POLYGONM          2003  // Measured Polygon
+
+#define WKB_POINTZM           3001  // 3D + Measured Point
+#define WKB_LINESTRINGZM      3002  // 3D + Measured LineString
+#define WKB_POLYGONZM         3003  // 3D + Measured Polygon
 ```
 
 ## Detailed Binary Structure Analysis
@@ -104,6 +108,15 @@ A 2D Point represents the simplest geometric object:
 - Offset 5-12: X coordinate (IEEE 754 double)
 - Offset 13-20: Y coordinate (IEEE 754 double)
 
+```c
+const uint8_t point_example[] = {
+    0x01,                                           // Little endian
+    0x01, 0x00, 0x00, 0x00,                         // Point type (1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0x3F, // X = 1.5
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x40  // Y = 2.5
+};
+```
+
 ### LineString Geometry
 
 A LineString contains an ordered sequence of points:
@@ -123,16 +136,27 @@ A LineString contains an ordered sequence of points:
 - Points must form a continuous path
 - First and last points may be identical (closed LineString)
 
+```c
+const uint8_t linestring_example[] = {
+    0x01,                                           // Little endian
+    0x02, 0x00, 0x00, 0x00,                         // LineString type (2)
+    0x02, 0x00, 0x00, 0x00,                         // Point count (2)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 1: X = 0.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 1: Y = 0.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, // Point 2: X = 1.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F  // Point 2: Y = 1.0
+};
+```
+
 ### Polygon Geometry
 
 A Polygon consists of one exterior ring and zero or more interior rings:
 
 ```
-┌─────────┬─────────┬─────────┬─────────────────┐
-│ Order   │ Type    │ Ring    │ Linear Rings    │
-│ (1)     │ (4)     │ Count   │ (variable)      │
-│         │         │ (4)     │                 │
-└─────────┴─────────┴─────────┴─────────────────┘
+┌─────────┬─────────┬────────────┬─────────────────┐
+│ Order   │ Type    │ Ring Count │ Linear Rings    │
+│ (1)     │ (4)     │ (4)        │ (variable)      │
+└─────────┴─────────┴────────────┴─────────────────┘
 ```
 
 **Ring Structure**: Each ring follows the LineString format with additional constraints:
@@ -141,6 +165,25 @@ A Polygon consists of one exterior ring and zero or more interior rings:
 - Minimum of 4 points per ring (3 unique + 1 closing)
 - Exterior ring must be counter-clockwise
 - Interior rings must be clockwise
+
+```c
+const uint8_t polygon_example[] = {
+    0x01,                                           // Little endian
+    0x03, 0x00, 0x00, 0x00,                         // Polygon type (3)
+    0x01, 0x00, 0x00, 0x00,                         // Ring count (1)
+    0x05, 0x00, 0x00, 0x00,                         // Point count in ring (5)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 1: (0,0)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, // Point 2: (1,0)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, // Point 3: (1,1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 4: (0,1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 5: (0,0) - closing
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+```
 
 ### Multi-Geometry Types
 
@@ -155,6 +198,50 @@ Multi-geometry types contain collections of homogeneous geometries:
 ```
 
 Each contained geometry is a complete WKB geometry including its own byte order and type indicators.
+
+```c
+const uint8_t multipoint_example[] = {
+    0x01,                                           // Little endian
+    0x04, 0x00, 0x00, 0x00,                         // MultiPoint type (4)
+    0x02, 0x00, 0x00, 0x00,                         // Geometry count (2)
+    // First Point geometry
+    0x01,                                           // Little endian
+    0x01, 0x00, 0x00, 0x00,                         // Point type (1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // X = 0.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Y = 0.0
+    // Second Point geometry
+    0x01,                                           // Little endian
+    0x01, 0x00, 0x00, 0x00,                         // Point type (1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, // X = 1.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F  // Y = 1.0
+};
+```
+
+## Binary Data Examples
+
+**Point (10.5, 20.25) in Little Endian:**
+
+```
+01 01 00 00 00 00 00 00 00 00 00 25 40 00 00 00 00 00 40 34 40
+│  │           │                                │
+│  │           └─ X coordinate (10.5)           └─ Y coordinate (20.25)
+│  └─ Geometry type (Point = 1)
+└─ Byte order (Little Endian = 0x01)
+```
+
+**LineString with 3 points:**
+
+```
+01 02 00 00 00 03 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 F0 3F 00 00 00 00 00 00 00 40
+00 00 00 00 00 00 00 40 00 00 00 00 00 00 08 40
+│  │           │           │
+│  │           │           └─ Points: (0,0), (1,2), (2,3)
+│  │           └─ Point count (3)
+│  └─ Geometry type (LineString = 2)
+└─ Byte order (Little Endian)
+```
 
 ## Performance Characteristics
 
@@ -194,13 +281,11 @@ Extended WKB supports Z-coordinate for 3D geometries:
 
 M-coordinate support for linear referencing:
 
-```typescript
-type PointM = { x: number; y: number; m: number };
-
-// Applications:
-// - Mile markers on highways
-// - Time-based positioning
-// - Engineering measurements
+```
+┌─────────┬─────────┬─────────┬─────────┬─────────┐
+│ Order   │ Type    │ X       │ Y       │ M       │
+│ (1)     │ (4)     │ (8)     │ (8)     │ (8)     │
+└─────────┴─────────┴─────────┴─────────┴─────────┘
 ```
 
 ### Coordinate Reference Systems
