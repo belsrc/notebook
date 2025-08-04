@@ -85,3 +85,10 @@ Byte 3: 0x12
 
 This system is little-endian.
 ```
+
+Binary representation of the number `6` in a 32-bit system.
+
+```
+00000000 00000000 00000000 00000110 // Big endian
+00000110 00000000 00000000 00000000 // Little endian
+```
