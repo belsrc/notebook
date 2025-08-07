@@ -62,16 +62,24 @@ For example, if a cache line is 64 bytes, and the CPU requests data at address `
 2. **Miss Rate**: Percentage of memory requests not served by the cache.
 3. **Latency**: The time taken to fetch data from the cache compared to main memory (CPU stall).
 
-**Hit Rate:** $H = \frac{\text{Cache Hits}}{\text{Total Memory Accesses}}$
-**Miss Rate:** $M = 1 - H = \frac{\text{Cache Misses}}{\text{Total Memory Accesses}}$
-**Effective Access Time:** $T_{eff} = H \cdot T_{cache} + M \cdot T_{memory}$
+**Hit Rate:**
+$H = \frac{\text{Cache Hits}}{\text{Total Memory Accesses}}$
+
+**Miss Rate:**
+$M = 1 - H = \frac{\text{Cache Misses}}{\text{Total Memory Accesses}}$
+
+**Effective Access Time:**
+$T_{eff} = H \cdot T_{cache} + M \cdot T_{memory}$
 
 Where:
 - $T_{cache}$ is cache access time
 - $T_{memory}$ is memory access time
 
-**Miss Penalty:** $\text{Miss Penalty} = T_{memory} - T_{cache}$
-**Average Memory Access Time (AMAT):** $AMAT = T_{cache} + M \cdot \text{Miss Penalty}$
+**Miss Penalty:**
+$\text{Miss Penalty} = T_{memory} - T_{cache}$
+
+**Average Memory Access Time (AMAT):**
+$AMAT = T_{cache} + M \cdot \text{Miss Penalty}$
 
 ### Example
 
