@@ -31,7 +31,7 @@ The caching mechanism speeds up data processing by reducing the time the CPU spe
 - **Cache Hit:** A cache hit occurs when the CPU requests data that is already stored in the cache. In this case, the CPU can quickly retrieve the data, which is much faster than obtaining it from main memory.
 - **Cache Miss:** A cache miss happens when the requested data is not found in the cache. In this situation, the CPU must fetch the data from the slower main memory. Once the data is retrieved, it may be stored in the cache for future access.
 
-![](../images/comp-sci/cache-hit-miss-dark.png)
+![](../images/comp-sci/cache-hit-miss-dark.png "Cache hit and miss example")
 
 _Simplified example_
 
@@ -48,7 +48,7 @@ Data is transferred between memory and cache in blocks of fixed size, called _c
 
 When a cache line is copied from memory into the cache, a cache entry is created. This entry includes the copied data (Data Block), the requested memory location (Tag) as well as additional meta data. When the processor needs to read from or write to a memory location, it first checks the cache for a corresponding entry. The cache searches for the contents of the requested memory location within any cache lines that may contain that address.
 
-![](../images/comp-sci/cache-line-dark.png)
+![](../images/comp-sci/cache-line-dark.png "Tag, Data, Flags cache line layout")
 
 If the processor finds the memory location in the cache, this is called a cache hit. In this case, the processor can immediately read from or write to the data within the cache line. However, if the memory location is not found in the cache, this is referred to as a cache miss. In the event of a cache miss, the cache allocates a new entry, copies the required data from the main memory, and then fulfills the request using the data now stored in the cache.
 
@@ -61,6 +61,31 @@ For example, if a cache line is 64 bytes, and the CPU requests data at address `
 1. **Hit Rate**: Percentage of memory requests served by the cache.
 2. **Miss Rate**: Percentage of memory requests not served by the cache.
 3. **Latency**: The time taken to fetch data from the cache compared to main memory (CPU stall).
+
+**Hit Rate:** $H = \frac{\text{Cache Hits}}{\text{Total Memory Accesses}}$
+**Miss Rate:** $M = 1 - H = \frac{\text{Cache Misses}}{\text{Total Memory Accesses}}$
+**Effective Access Time:** $T_{eff} = H \cdot T_{cache} + M \cdot T_{memory}$
+
+Where:
+- $T_{cache}$ is cache access time
+- $T_{memory}$ is memory access time
+
+**Miss Penalty:** $\text{Miss Penalty} = T_{memory} - T_{cache}$
+**Average Memory Access Time (AMAT):** $AMAT = T_{cache} + M \cdot \text{Miss Penalty}$
+
+### Example
+
+Given:
+- Cache hit rate: 95%
+- Cache access time: 1 ns
+- Memory access time: 100 ns
+
+$$
+\begin{flalign}
+  & T_{eff} = 0.95 \times 1 + 0.05 \times 100 = 5.95 ns \\
+  & Speed = \frac{100}{5.95} \approx 16.8\text{x}
+\end{flalign}
+$$
 
 ## Eviction Policies
 
@@ -96,11 +121,11 @@ printf("size of Student: %zu\n", sizeof(Student));
 // size of Student: 16
 ```
 
-![](../images/comp-sci/bad-alignment-chart-dark.png)
+![](../images/comp-sci/bad-alignment-chart-dark.png "Bad cache alignment example")
 
 If we examine the memory addresses for each field, it becomes clearer.
 
-![](../images/comp-sci/bad-alignment-size-dark.png)
+![](../images/comp-sci/bad-alignment-size-dark.png "Bad cache alignment padding space")
 
 **Good Alignment**
 
@@ -116,10 +141,10 @@ printf("size of OptStudent: %zu\n", sizeof(OptStudent));
 // size of OptStudent: 12
 ```
 
-![](../images/comp-sci/good-alignment-chart-dark.png)
+![](../images/comp-sci/good-alignment-chart-dark.png "Good cache alignment example")
 And the addresses for the good alignment.
 
-![](../images/comp-sci/good-alignment-size-dark.png)
+![](../images/comp-sci/good-alignment-size-dark.png "Good cache alignment padding space")
 
 A developer can manually add padding to ensure proper alignment, a practice often used in a concept called "Data-oriented Design." However, when adding padding manually, it's important to avoid over-aligning the data. For instance, aligning a 1-byte variable to a 64-byte boundary results in 63 bytes of unused space.
 
@@ -133,6 +158,6 @@ struct PaddedStruct {
 
 ## For Fun: Speed Chart
 
-![](../images/comp-sci/cpu-speeds-dark.png)
+![](../images/comp-sci/cpu-speeds-dark.png "CPU speed chart")
 
 _Full chart: http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/#rabbitref-Wikipedia.BranchPredictor_
