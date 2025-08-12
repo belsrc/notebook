@@ -7,6 +7,7 @@ reference:
   - https://desktop.arcgis.com/en/arcmap/latest/extensions/network-analyst/bearing-and-bearingtol-what-are.htm#:~:text=The%20Bearing%20and%20BearingTol%20fields%20are%20described%20below.,clockwise%20fashion%20from%20true%20north.
   - https://support.esri.com/en-us/gis-dictionary/bearing#:~:text=%5Bmeasurement%2C%20navigation%5D%20The%20horizontal,direction%20clockwise%20through%20360%20degrees.
   - https://atlas.co/gis-use-cases/bearings/#:~:text=This%20involves%20importing%20data%20that,property%20lines%20and%20physical%20features.
+  - https://www.movable-type.co.uk/scripts/latlong.html
 ---
 **Bearing** is a measurement used in surveying and navigation to describe the direction of a line from a specific point. It is an angular measurement, typically expressed in degrees, indicating the direction of one point relative to another. In the context of Geographic Information Systems (GIS), bearing is essential for defining spatial relationships between features, analyzing movement, and performing geoprocessing tasks.
 
