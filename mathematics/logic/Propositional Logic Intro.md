@@ -279,14 +279,12 @@ For a complex formula $\phi$ and truth assignment $v$, we define $v(\phi)$ recur
 
 **Example**: Evaluate $(p \land q) \rightarrow \neg r$ under $v(p) = \top, v(q) = \bot, v(r) = \top$
 
-> [!warning] FIX LaTeX
-
 $$
 \begin{align}
-v((p \land q) \rightarrow \neg r) &= v(p \land q) \rightarrow v(\neg r) \
-&= (v(p) \land v(q)) \rightarrow \neg v(r) \
-&= (\top \land \bot) \rightarrow \neg \top \
-&= \bot \rightarrow \bot \
+v((p \land q) \rightarrow \neg r) &= v(p \land q) \rightarrow v(\neg r) \\
+&= (v(p) \land v(q)) \rightarrow \neg v(r) \\
+&= (\top \land \bot) \rightarrow \neg \top \\
+&= \bot \rightarrow \bot \\
 &= \top
 \end{align}
 $$
@@ -593,10 +591,11 @@ Any propositional formula can be converted to CNF or DNF:
 
 **Example**: Convert $(p \rightarrow q) \land r$ to CNF
 
-
-> [!warning] FIX LaTeX
-
-$$\begin{align} (p \rightarrow q) \land r &\equiv (\neg p \lor q) \land r \quad \text{(material implication)} \ &\equiv (\neg p \lor q) \land r \quad \text{(already in CNF)} \end{align}$$
+$$
+\begin{align}
+(p \rightarrow q) \land r &\equiv (\neg p \lor q) \land r \quad \text{(material implication)} \\
+&\equiv (\neg p \lor q) \land r \quad \text{(already in CNF)}
+\end{align}$$
 
 ## Semantic Consequence and Valid Arguments
 
