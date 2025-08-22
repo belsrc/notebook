@@ -194,7 +194,8 @@ _Example: "It is raining OR it is sunny" is true if it's raining, or if it's sun
 
 #### Exclusive Disjunction ($\oplus$)
 
-Exclusive disjunction (XOR) means "exactly one thing must be true, but not both." It's true when the two parts have different truth values. $\phi \oplus \psi \text{ is true iff exactly one of } \phi \text{ or } \psi \text{ is true}$
+Exclusive disjunction (XOR) means "exactly one thing must be true, but not both." It's true when the two parts have different truth values. 
+$$\phi \oplus \psi \text{ is true iff exactly one of } \phi \text{ or } \psi \text{ is true}$$
 
 |$\phi$|$\psi$|$\phi \oplus \psi$|
 |---|---|---|
@@ -222,12 +223,12 @@ Implication is perhaps the trickiest connective. $\phi \rightarrow \psi$ means "
 
 $$\phi \rightarrow \psi \text{ is false iff } \phi \text{ is true and } \psi \text{ is false}$$
 
-|$\phi$|$\psi$|$\phi \rightarrow \psi$|
-|---|---|---|
-|$\top$|$\top$|$\top$|
-|$\top$|$\bot$|$\bot$|
-|$\bot$|$\top$|$\top$|
-|$\bot$|$\bot$|$\top$|
+| $\phi$ | $\psi$ | $\phi \rightarrow \psi$ |
+| ------ | ------ | ----------------------- |
+| $\top$ | $\top$ | $\top$                  |
+| $\top$ | $\bot$ | $\bot$                  |
+| $\bot$ | $\top$ | $\top$                  |
+| $\bot$ | $\bot$ | $\top$                  |
 
 ```typescript
 const implication = (p: boolean, q: boolean) => !p || q;

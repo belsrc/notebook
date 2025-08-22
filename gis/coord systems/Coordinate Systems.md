@@ -12,6 +12,7 @@ reference:
   - https://en.wikipedia.org/wiki/World_Geodetic_System
   - https://geoinfospot.com/coordinate-systems-explained-wgs84-vs-utm/
   - https://www.fws.gov/r7/nwr/Realty/data/LandMappers/Public/Help/HTML/R7-Public-Land-Mapper-Help.html?Datumsprojectionsandcoordinatesy.html
+  - https://docs.qgis.org/3.34/en/docs/gentle_gis_introduction/coordinate_reference_systems.html#coordinate-reference-system-crs-in-detail
 ---
 Coordinate systems provide the mathematical foundation for all Geographic Information Systems (GIS). A proper understanding of how locations are defined and referenced on the Earth's surface is essential; without it, spatial data loses its meaning, measurements may become inaccurate, and it becomes difficult to integrate different datasets effectively.
 
