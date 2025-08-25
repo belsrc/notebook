@@ -20,8 +20,8 @@ Earth is not a perfect sphere; rather, it is an oblate spheroid, meaning it is f
 
 To address this challenge, geodesists and cartographers have developed a hierarchy of mathematical constructs:
 
-1. Ellipsoid
-2. Datum
+1. [Ellipsoid](./Ellipsoid.md)
+2. [Datum](./Datum.md)
 3. Geographic Coordinate System
 4. Projected Coordinate System
 
