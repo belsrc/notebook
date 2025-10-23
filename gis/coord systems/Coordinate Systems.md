@@ -222,22 +222,39 @@ type GeographicCoordinate = {
   longitude: number;
 };
 
+const EARTH_RADIUS = 6378137; // WGS84 semi-major axis
+const MAX_LATITUDE = 85.05112878; // Max latitude for square Web Mercator
+
+const clampLat = (lat: number) =>
+    Math.max(Math.min(lat, MAX_LATITUDE), -MAX_LATITUDE);
+
 // Convert WGS84 decimal degrees to Web Mercator
 const wgs84ToWebMercator = (coord: GeographicCoordinate): Coordinate => {
-  const earthRadius = 6378137; // WGS84 semi-major axis
-  const x = coord.longitude * (Math.PI / 180) * earthRadius;
-  const y = Math.log(Math.tan((90 + coord.latitude) * Math.PI / 360)) * earthRadius;
-  
+  const clampedLat = clampLat(coord.latitude); 
+  const x = coord.longitude * (Math.PI / 180) * EARTH_RADIUS;
+  const y =
+    Math.log(Math.tan(((90 + clampedLat) * Math.PI) / 360)) * EARTH_RADIUS;
+
   return { x, y };
 };
 
 // Convert Web Mercator back to WGS84
 const webMercatorToWGS84 = (coord: Coordinate): GeographicCoordinate => {
-  const earthRadius = 6378137;
-  const longitude = (coord.x / earthRadius) * (180 / Math.PI);
-  const latitude = (2 * Math.atan(Math.exp(coord.y / earthRadius)) - Math.PI / 2) * (180 / Math.PI);
-  
-  return { latitude, longitude };
+  let longitude = (coord.x / EARTH_RADIUS) * (180 / Math.PI);
+  const latitude =
+    (2 * Math.atan(Math.exp(coord.y / EARTH_RADIUS)) - Math.PI / 2) *
+    (180 / Math.PI);
+
+  // Wrap longitude to [-180, 180]
+  while (longitude > 180) {
+    longitude -= 360;
+  }
+
+  while (longitude < -180) {
+    longitude += 360;
+  }
+
+  return { longitude, latitude };
 };
 
 // UTM Zone calculation
