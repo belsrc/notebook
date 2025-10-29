@@ -9,8 +9,6 @@ reference:
 
 ### Lesson 1.1: Vectors and Geometric Interpretation
 
-#### Core Concept
-
 A **vector** is fundamentally an object that has both *magnitude* (length) and *direction*. We can think of it in multiple equivalent ways:
 
 **Three perspectives on vectors:**
@@ -93,11 +91,9 @@ Position vector = displacement from origin to a point
 
 ## Lesson 1.2: Vector Operations and Properties
 
-#### Core Operations
-
 We can perform two fundamental operations on vectors:
 
-### 1. Vector Addition
+#### 1. Vector Addition
 
 Given $\mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}$ and $\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$
 
@@ -110,7 +106,7 @@ $$\begin{bmatrix} 3 \\ 2 \end{bmatrix} + \begin{bmatrix} 1 \\ 4 \end{bmatrix} = 
 
 ![](../../images/math/linear-addition.png)
 
-### 2. Scalar Multiplication
+#### 2. Scalar Multiplication
 
 Given scalar $c \in \mathbb{R}$ and vector $\mathbf{v}$:
 
@@ -232,3 +228,219 @@ Component-wise addition works because forces in perpendicular directions don't i
 $\begin{bmatrix} 10 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 5 \\ 0 \end{bmatrix} = \begin{bmatrix} 10 \\ 5 \\ 0 \end{bmatrix}$
 
 The x-forces combine independently from y-forces. This **independence of components** is why vector addition models physical reality correctly.
+
+## Lesson 1.3: Linear Combinations and Span
+
+#### Linear Combinations
+
+A **linear combination** of vectors $\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_k}$ is any expression of the form:
+
+$$c_1\mathbf{v_1} + c_2\mathbf{v_2} + \cdots + c_k\mathbf{v_k}$$
+
+where $c_1, c_2, \ldots, c_k$ are scalars (called **coefficients**).
+
+**Example:** Given $\mathbf{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and $\mathbf{v_2} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
+
+These are all linear combinations:
+- $2\mathbf{v_1} + 3\mathbf{v_2} = \begin{bmatrix} 2 \\ 3 \end{bmatrix}$
+- $-1\mathbf{v_1} + 5\mathbf{v_2} = \begin{bmatrix} -1 \\ 5 \end{bmatrix}$
+- $0\mathbf{v_1} + 0\mathbf{v_2} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$ (the zero vector)
+
+Think of vectors as **ingredients** and scalars as **amounts**. A linear combination is a **recipe**:
+
+$$\text{Recipe} = (\text{amount}_1 \times \text{ingredient}_1) + (\text{amount}_2 \times \text{ingredient}_2) + \cdots$$
+
+**Example in $\mathbb{R}^2$:**
+
+Let's say we have:
+- $\mathbf{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ (move 1 unit right)
+- $\mathbf{v_2} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ (move 1 unit up)
+
+Now we make a linear combination: $3\mathbf{v_1} + 2\mathbf{v_2}$
+
+$$3\begin{bmatrix} 1 \\ 0 \end{bmatrix} + 2\begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 3 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 2 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$
+
+**What happened geometrically?**
+1. Scale $\mathbf{v_1}$ by 3: go 3 units right
+2. Scale $\mathbf{v_2}$ by 2: go 2 units up
+3. Add them: end up at position (3, 2)
+
+![](../../images/math/linear-combination.png)
+
+#### More Examples
+
+**Example 1:** Different coefficients, same vectors
+
+Using $\mathbf{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, $\mathbf{v_2} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$:
+
+- $1\mathbf{v_1} + 1\mathbf{v_2} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$
+- $-2\mathbf{v_1} + 3\mathbf{v_2} = \begin{bmatrix} -2 \\ 3 \end{bmatrix}$
+- $0\mathbf{v_1} + 5\mathbf{v_2} = \begin{bmatrix} 0 \\ 5 \end{bmatrix}$
+- $0\mathbf{v_1} + 0\mathbf{v_2} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$ (zero vector always in span)
+
+**Example 2:** Three vectors in $\mathbb{R}^3$
+
+Let:
+- $\mathbf{u} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$ (x-direction)
+- $\mathbf{v} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$ (y-direction)  
+- $\mathbf{w} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}$ (z-direction)
+
+A linear combination: $2\mathbf{u} - 3\mathbf{v} + 4\mathbf{w}$
+
+$$2\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} - 3\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} + 4\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \\ -3 \\ 4 \end{bmatrix}$$
+
+**Example 3:** What if vectors aren't perpendicular?
+
+Let:
+- $\mathbf{v_1} = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$
+- $\mathbf{v_2} = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$
+
+Compute: $2\mathbf{v_1} + 1\mathbf{v_2}$
+
+$$2\begin{bmatrix} 2 \\ 1 \end{bmatrix} + 1\begin{bmatrix} 1 \\ 3 \end{bmatrix} = \begin{bmatrix} 4 \\ 2 \end{bmatrix} + \begin{bmatrix} 1 \\ 3 \end{bmatrix} = \begin{bmatrix} 5 \\ 5 \end{bmatrix}$$
+
+The process is identical! Scale each vector, then add component-wise.
+
+### The Span
+
+The **span** of a set of vectors is the set of ALL possible linear combinations of those vectors.
+
+$$\text{span}\{\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_k}\} = \{c_1\mathbf{v_1} + c_2\mathbf{v_2} + \cdots + c_k\mathbf{v_k} \mid c_i \in \mathbb{R}\}$$
+
+**In plain English:** "The set of all vectors you can create by taking ANY real number coefficients and making a linear combination."
+
+#### Key Word: ALL
+
+The span includes **every possible choice** of coefficients:
+- $c_1 = 0, c_2 = 0$ ✓
+- $c_1 = 1, c_2 = 1$ ✓
+- $c_1 = \pi, c_2 = -\sqrt{2}$ ✓
+- $c_1 = 10^{100}, c_2 = -10^{-100}$ ✓
+
+This is typically an **infinite set** of vectors.
+
+#### Geometric Intuition
+
+##### Case 1: Span of the Zero Vector in $\mathbb{R}^2$
+
+$$\text{span}\left\{\begin{bmatrix} 0 \\ 0 \end{bmatrix}\right\} = \left\{c\begin{bmatrix} 0 \\ 0 \end{bmatrix} \;\middle|\; c \in \mathbb{R}\right\} = \left\{\begin{bmatrix} 0 \\ 0 \end{bmatrix}\right\}$$
+
+No matter what scalar you multiply by, you get the zero vector. 
+
+**Result:** Just a single point (the origin).
+
+![](../../images/math/linear-span-1d.png)
+
+##### Case 2: Span of One Non-Zero Vector in $\mathbb{R}^2$
+
+$$\text{span}\left\{\begin{bmatrix} 2 \\ 1 \end{bmatrix}\right\} = \left\{c\begin{bmatrix} 2 \\ 1 \end{bmatrix} \;\middle|\; c \in \mathbb{R}\right\}$$
+
+What does this look like?
+
+- $c = 0$: $\begin{bmatrix} 0 \\ 0 \end{bmatrix}$ (origin)
+- $c = 1$: $\begin{bmatrix} 2 \\ 1 \end{bmatrix}$
+- $c = 2$: $\begin{bmatrix} 4 \\ 2 \end{bmatrix}$
+- $c = 0.5$: $\begin{bmatrix} 1 \\ 0.5 \end{bmatrix}$
+- $c = -1$: $\begin{bmatrix} -2 \\ -1 \end{bmatrix}$
+- $c = -3$: $\begin{bmatrix} -6 \\ -3 \end{bmatrix}$
+
+All these points lie on a **line** through the origin in the direction of $\mathbf{v}$.
+
+**Result:** A 1-dimensional subspace (a line through origin).
+
+![](../../images/math/linear-span-2d.png)
+
+##### Case 3: Span of Two Vectors (Non-Parallel) in $\mathbb{R}^2$
+
+Let:
+- $\mathbf{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+- $\mathbf{v_2} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
+
+$$\text{span}\{\mathbf{v_1}, \mathbf{v_2}\} = \left\{c_1\begin{bmatrix} 1 \\ 0 \end{bmatrix} + c_2\begin{bmatrix} 0 \\ 1 \end{bmatrix} \;\middle|\; c_1, c_2 \in \mathbb{R}\right\}$$
+
+This equals:
+$$\left\{\begin{bmatrix} c_1 \\ c_2 \end{bmatrix} \;\middle|\; c_1, c_2 \in \mathbb{R}\right\}$$
+
+Since $c_1$ and $c_2$ can be ANY real numbers, this is **every point** in the plane!
+
+**Result:** The entire 2D space $\mathbb{R}^2$.
+
+**Why?** Because $\mathbf{v_1}$ and $\mathbf{v_2}$ point in different (non-parallel) directions. You can "slide" along $\mathbf{v_1}$ to control the x-coordinate and "slide" along $\mathbf{v_2}$ to control the y-coordinate independently.
+
+##### Case 4: Span of Two Vectors (Parallel) in $\mathbb{R}^2$
+
+Let:
+- $\mathbf{v_1} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$
+- $\mathbf{v_2} = \begin{bmatrix} 2 \\ 4 \end{bmatrix}$ (note: $\mathbf{v_2} = 2\mathbf{v_1}$)
+
+$$c_1\mathbf{v_1} + c_2\mathbf{v_2} = c_1\begin{bmatrix} 1 \\ 2 \end{bmatrix} + c_2\begin{bmatrix} 2 \\ 4 \end{bmatrix}$$
+
+But since $\mathbf{v_2} = 2\mathbf{v_1}$:
+
+$$= c_1\mathbf{v_1} + c_2(2\mathbf{v_1}) = (c_1 + 2c_2)\mathbf{v_1}$$
+
+Let $k = c_1 + 2c_2$. Then this is just $k\mathbf{v_1}$ for some scalar $k$.
+
+**Result:** Still just a line (same as span of $\mathbf{v_1}$ alone). The second vector adds no "new directions."
+
+![](../../images/math/linear-span-2d-par.png)
+
+
+**Key insight:** $\mathbf{v_2}$ is **redundant** - it doesn't expand the span because it's already reachable using just $\mathbf{v_1}$.
+
+##### Case 5: Span of Two Vectors (Non-Perpendicular but Non-Parallel) in $\mathbb{R}^2$
+
+Let:
+- $\mathbf{v_1} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+- $\mathbf{v_2} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$
+
+These aren't perpendicular (angle ≠ 90°) and aren't parallel. Can we still span the plane?
+
+Try to reach $\begin{bmatrix} 3 \\ 2 \end{bmatrix}$:
+
+$$c_1\begin{bmatrix} 1 \\ 0 \end{bmatrix} + c_2\begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$
+
+$$\begin{bmatrix} c_1 + c_2 \\ c_2 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$
+
+From second component: $c_2 = 2$  
+From first component: $c_1 + 2 = 3 \Rightarrow c_1 = 1$
+
+Yes! We can reach it: $1\mathbf{v_1} + 2\mathbf{v_2} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$
+
+In fact, we can reach ANY point in $\mathbb{R}^2$ this way.
+
+**Result:** Still the entire plane! Vectors don't need to be perpendicular to span a space - they just need to point in **non-parallel directions**.
+
+#### Key Insight
+
+The span tells us the **dimensionality of the space we can reach**:
+
+In $\mathbb{R}^2$:
+- 0 non-zero vectors → just origin (0D)
+- 1 non-zero vector → line through origin (1D)
+- 2 non-parallel vectors → entire plane (2D)
+
+In $\mathbb{R}^3$:
+- 0 non-zero vectors → just origin (0D)
+- 1 non-zero vector → line through origin (1D)
+- 2 non-parallel vectors → plane through origin (2D)
+- 3 non-coplanar vectors → entire 3D space (3D)
+
+#### Real-World Applications
+
+**Computer Graphics - Color Mixing:**
+```typescript
+type RGB = [number, number, number];
+
+const red: RGB = [1, 0, 0];
+const green: RGB = [0, 1, 0];
+const blue: RGB = [0, 0, 1];
+
+// Any RGB color is a linear combination
+const purple: RGB = [0.5 * 1 + 0 * 0 + 0.5 * 1, 
+                      0.5 * 0 + 0 * 1 + 0.5 * 0,
+                      0.5 * 0 + 0 * 0 + 0.5 * 1];
+// = [0.5, 0, 0.5]
+
+// span{red, green, blue} = all possible RGB colors
+```
