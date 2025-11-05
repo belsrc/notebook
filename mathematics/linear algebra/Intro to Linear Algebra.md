@@ -5,7 +5,7 @@ date: 2025-10-27
 gardening: 🌱
 reference:
 ---
-## PART 1: VECTORS & VECTOR SPACES
+## Part 1: Vectors & Vector Spaces
 
 ### Lesson 1.1: Vectors and Geometric Interpretation
 
@@ -405,7 +405,7 @@ $$\begin{bmatrix} c_1 + c_2 \\ c_2 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \end{b
 From second component: $c_2 = 2$  
 From first component: $c_1 + 2 = 3 \Rightarrow c_1 = 1$
 
-Yes! We can reach it: $1\mathbf{v_1} + 2\mathbf{v_2} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$
+We can reach it: $1\mathbf{v_1} + 2\mathbf{v_2} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$
 
 In fact, we can reach ANY point in $\mathbb{R}^2$ this way.
 
@@ -429,6 +429,7 @@ In $\mathbb{R}^3$:
 #### Real-World Applications
 
 **Computer Graphics - Color Mixing:**
+
 ```typescript
 type RGB = [number, number, number];
 
@@ -444,3 +445,87 @@ const purple: RGB = [0.5 * 1 + 0 * 0 + 0.5 * 1,
 
 // span{red, green, blue} = all possible RGB colors
 ```
+
+#### Questions
+
+**Q1:** Given $\mathbf{v_1} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$ and $\mathbf{v_2} = \begin{bmatrix} 3 \\ 1 \end{bmatrix}$
+Can you express $\mathbf{b} = \begin{bmatrix} 7 \\ 5 \end{bmatrix}$ as a linear combination of $\mathbf{v_1}$ and $\mathbf{v_2}$?
+In other words, find $c_1$ and $c_2$ such that: $c_1\mathbf{v_1} + c_2\mathbf{v_2} = \mathbf{b}$
+
+**A1:** We want: $c_1\begin{bmatrix} 1 \\ 2 \end{bmatrix} + c_2\begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} 7 \\ 5 \end{bmatrix}$
+
+**Step 1:** Write the component equations:
+$$c_1 + 3c_2 = 7 \quad \text{...(equation 1)}$$
+$$2c_1 + c_2 = 5 \quad \text{...(equation 2)}$$
+
+**Step 2:** Solve the system. From equation (1):
+$$c_1 = 7 - 3c_2$$
+
+**Step 3:** Substitute into equation (2):
+$$2(7 - 3c_2) + c_2 = 5$$
+$$14 - 6c_2 + c_2 = 5$$
+$$14 - 5c_2 = 5$$
+$$-5c_2 = -9$$
+$$c_2 = \frac{9}{5}$$
+
+**Step 4:** Find $c_1$:
+
+$$c_1 = 7 - 3 \cdot \frac{9}{5} = 7 - \frac{27}{5} = \frac{35 - 27}{5} = \frac{8}{5}$$
+
+**Verification:**
+$$\frac{8}{5}\begin{bmatrix} 1 \\ 2 \end{bmatrix} + \frac{9}{5}\begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{8}{5} + \frac{27}{5} \\ \frac{16}{5} + \frac{9}{5} \end{bmatrix} = \begin{bmatrix} 7 \\ 5 \end{bmatrix}$$
+
+So $\mathbf{b}$ **is** in $\text{span}\{\mathbf{v_1}, \mathbf{v_2}\}$
+
+**Q2:** What is $\text{span}\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}\right\}$ in $\mathbb{R}^3$? Describe it geometrically.
+**A2:** $$\text{span}\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}\right\} = \left\{c\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \;\middle|\; c \in \mathbb{R}\right\} = \left\{\begin{bmatrix} c \\ 0 \\ 0 \end{bmatrix} \;\middle|\; c \in \mathbb{R}\right\}$$
+This is the **x-axis** - a line through the origin where only the x-coordinate varies.
+
+**Q3:** If $\text{span}\{\mathbf{v_1}, \mathbf{v_2}\} = \mathbb{R}^2$ (the entire plane), what can you conclude about the relationship between $\mathbf{v_1}$ and $\mathbf{v_2}$?
+
+**A3:** If $\text{span}\{\mathbf{v_1}, \mathbf{v_2}\} = \mathbb{R}^2$, then $\mathbf{v_1}$ and $\mathbf{v_2}$ **cannot be parallel**. **Why?** If they were parallel, one would be a scalar multiple of the other (say $\mathbf{v_2} = k\mathbf{v_1}$). Then:
+$$c_1\mathbf{v_1} + c_2\mathbf{v_2} = c_1\mathbf{v_1} + c_2(k\mathbf{v_1}) = (c_1 + kc_2)\mathbf{v_1}$$
+This only gives multiples of $\mathbf{v_1}$ - just a line, not the whole plane!
+
+So for two vectors to span $\mathbb{R}^2$, they must point in **different directions** (non-parallel). We'll formalize this as "linearly independent" in the next lesson.
+
+**Q4:** In a 2D game, you have movement vectors:
+- "forward": $\mathbf{f} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ (north)
+- "strafe-right": $\mathbf{r} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ (east)
+
+If you can only move using linear combinations of these two vectors (like $3\mathbf{f} + 2\mathbf{r}$), when might you have a problem reaching certain positions? What if instead your vectors were:
+
+- "forward": $\mathbf{f} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ (northeast)  
+- "strafe-right": $\mathbf{r} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$ (also northeast, just scaled)
+
+**A4:** With $\mathbf{f} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ (north) and $\mathbf{r} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ (east), you can reach **any position** in the 2D plane:
+- Q1 (northeast): $c_1 > 0, c_2 > 0$
+- Q2 (northwest): $c_1 > 0, c_2 < 0$
+- Q3 (southwest): $c_1 < 0, c_2 < 0$
+- Q4 (southeast): $c_1 < 0, c_2 > 0$
+
+These vectors span $\mathbb{R}^2$.
+
+**Part 2:**
+
+With $\mathbf{f} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and $\mathbf{r} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$: Note that $\mathbf{r} = 2\mathbf{f}$ (parallel!), so:
+$$c_1\mathbf{f} + c_2\mathbf{r} = c_1\begin{bmatrix} 1 \\ 1 \end{bmatrix} + c_2\begin{bmatrix} 2 \\ 2 \end{bmatrix} = (c_1 + 2c_2)\begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
+This is only multiples of $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ - a **diagonal line** through Q1 and Q3 at 45°. You can't reach positions like $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ (pure east) or $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ (pure north). Your movement is confined to that 45° line! In game terms: if "forward" and "strafe" both move you northeast, you can never go purely north or purely east - you're stuck on a diagonal.
+
+#### Exercise
+
+**Problem 1:** Determine if $\mathbf{b} = \begin{bmatrix} 4 \\ 7 \end{bmatrix}$ is in $\text{span}\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix}\right\}$
+Set up and solve the system of equations.
+
+**A:**
+
+**Problem 2:** What is $\text{span}\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}\right\}$ in $\mathbb{R}^3$? Describe geometrically.
+
+**A:**
+
+**Problem 3:** In machine learning, you're doing dimensionality reduction. You have data points in $\mathbb{R}^3$ but want to project them onto a 2D plane for visualization. You choose basis vectors:
+$$\mathbf{b_1} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad \mathbf{b_2} = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}$$
+
+What points in 3D space can be represented using only these two basis vectors? (i.e., what is their span?)
+
+**A:**
