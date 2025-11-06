@@ -10,6 +10,7 @@ reference:
   - http://schemas.opengis.net/filter/2.0/
   - https://www.ogc.org/standards/filter/
   - https://www.iso.org/standard/42137.html
+  - https://portal.ogc.org/files/?artifact_id=8340
 ---
 The OGC Filter Encoding specification defines an XML encoding for expressing query filter expressions. These filters constrain property values of objects to identify specific subsets for operations. The specification evolved from version 1.0.0 through 1.1.0 to 2.0, with each iteration adding capabilities while maintaining backward compatibility concepts.
 
