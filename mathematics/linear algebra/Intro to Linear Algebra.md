@@ -7,15 +7,29 @@ reference:
 ---
 ## Part 1: Vectors & Vector Spaces
 
-### Lesson 1.1: Vectors and Geometric Interpretation
+### Lesson 1.1: Scalars, Vectors and Geometric Interpretation
+
+#### Scalar
+
+A scalar is just a quantity that has magnitude but no direction.
+
+Examples:
+
+Temperature: $25^{\circ}C$
+Mass: $5kg$
+A number like $7$ or $-3.2$
+
+You can think of a scalar as a single “unit” of information — something you can stretch, shrink, or flip in sign.
+
+#### Vector
 
 A **vector** is fundamentally an object that has both *magnitude* (length) and *direction*. We can think of it in multiple equivalent ways:
 
 **Three perspectives on vectors:**
 
 1. **Geometric:** An arrow in space pointing from one location to another
-2. **Algebraic:** An ordered list of numbers (coordinates)
-3. **Abstract:** An element of a vector space (we'll formalize this later)
+2. **Algebraic:** An ordered list of numbers called **components*
+3. **Abstract:** An element of a vector space 
 
 Additionally, the Computer Science perspective.
 - An ordered list, tuple
@@ -24,15 +38,15 @@ Additionally, the Computer Science perspective.
 
 In $\mathbb{R}^n$ (n-dimensional real space), we write vectors as:
 
-$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
 
 **Example in $\mathbb{R}^2$ (2D):**
-$$\mathbf{v} = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$
+$$\vec{v} = \begin{bmatrix} 3 \\ 4 \end{bmatrix}$$
 
-This means: starting from the origin (0,0), move 3 units right and 2 units up.
+This means: starting from the origin $(0,0)$, move 3 units right and 4 units up. Its **magnitude** is $\| \vec{v} \| = \sqrt{3^2 + 4^2} = 5$
 
 **Example in $\mathbb{R}^3$ (3D):**
-$$\mathbf{w} = \begin{bmatrix} 1 \\ -2 \\ 4 \end{bmatrix}$$
+$$\vec{w} = \begin{bmatrix} 1 \\ -2 \\ 4 \end{bmatrix}$$
 
 This means: from origin, move 1 unit along x-axis, -2 units along y-axis, 4 units along z-axis.
 
@@ -45,7 +59,7 @@ This means: from origin, move 1 unit along x-axis, -2 units along y-axis, 4 unit
 
 #### Questions
 
-**Q1:** If I have a vector $\mathbf{p} = \begin{bmatrix} 5 \\ 5 \end{bmatrix}$ representing a position, and I draw it starting from the origin, what direction does it point? (Think about the angle or describe it directionally)
+**Q1:** If I have a vector $\mathbf{p} = \begin{bmatrix} 5 \\ 5 \end{bmatrix}$ representing a position, and I draw it starting from the origin, what direction does it point? 
 
 **A:** 45° northeast. The components are equal, so it bisects the angle.
 
@@ -54,6 +68,8 @@ This means: from origin, move 1 unit along x-axis, -2 units along y-axis, 4 unit
 - Vector B: Arrow from point (0,0) to point (3,2)
 
 **A:** Vectors represent *displacement* (direction + magnitude), not absolute position. Both arrows have the same "movement" of 3 right, 2 up. We say vectors are **translation-invariant** - they can "slide" anywhere while remaining the same vector.
+
+![](../../images/math/linear-same.png)
 
 **Q3:** In machine learning, if you have a data point representing a house as $\begin{bmatrix} 2000 \\ 3 \\ 2 \end{bmatrix}$ (square feet, bedrooms, bathrooms), what does each component represent and why is the vector representation useful?
 
@@ -95,6 +111,8 @@ We can perform two fundamental operations on vectors:
 
 #### 1. Vector Addition
 
+Adding vectors means placing them **tip-to-tail**. Algebraically, you just add the corresponding components.
+
 Given $\mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}$ and $\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$
 
 $$\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}$$
@@ -106,9 +124,13 @@ $$\begin{bmatrix} 3 \\ 2 \end{bmatrix} + \begin{bmatrix} 1 \\ 4 \end{bmatrix} = 
 
 ![](../../images/math/linear-addition.png)
 
+A vector tells you _how to move._ You can think of them as arrows or as instructions from your starting point. Add them is just chaining a series of moves.
+
 #### 2. Scalar Multiplication
 
-Given scalar $c \in \mathbb{R}$ and vector $\mathbf{v}$:
+A **scalar** is just a single number that scales a vector. Multiplying a vector by a scalar $c$ changes its magnitude (length) and potentially its direction (if $c$ is negative). Algebraically, you multiply every component by the scalar.
+
+Given scalar $c \in \mathbb{R}$ and vector $\vec{v}$:
 
 $$c\mathbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}$$
 
@@ -122,6 +144,8 @@ $$3 \begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 3 \times 2 \\ 3 \tim
 - If $c = 0$: produces the zero vector $\mathbf{0}$
 
 ![](../../images/math/linear-multiplication.png)
+
+A scalar is how much you _stretch or shrink_ a movement. It changes _how far_ or _in which direction_ you go, but not the kind of movement you're making.
 
 #### Algebraic Properties
 
@@ -229,7 +253,132 @@ $\begin{bmatrix} 10 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 5 \\ 0 \end{b
 
 The x-forces combine independently from y-forces. This **independence of components** is why vector addition models physical reality correctly.
 
-## Lesson 1.3: Linear Combinations and Span
+## Lesson 1.3: Vector Spaces
+
+A **vector space** (or linear space) is a collection of objects called vectors that can be added together and multiplied by scalars (numbers), following specific rules.
+
+**Formal Definition**: A vector space $V$ over a field $\mathbb{F}$ (typically $\mathbb{R}$ or $\mathbb{C}$) consists of:
+- A set of vectors
+- Two operations: vector addition $(+)$ and scalar multiplication $(\cdot)$
+
+These operations must satisfy **8 axioms** for all vectors $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ and scalars $a, b \in \mathbb{F}$:
+
+#### Addition Axioms
+
+These define the algebraic structure of vectors under _addition_ — specifically, they make $(V, +)$ into an **abelian (commutative) group**.
+
+**Closure:** Adding any two vectors in $V$ produces another vector that is _also_ in $V$. This guarantees the operation $+$ is _well-defined_ — you never “leave” the space by adding its elements.
+$$u + v \in V$$
+
+**Commutativity:** Order of addition doesn’t matter; the result is the same. This gives us flexibility in algebraic manipulation and geometric interpretation.
+$$u + v = v + u$$
+
+**Associativity:** Grouping of vectors doesn’t affect the outcome. This ensures that “sum of several vectors” is unambiguous regardless of how we parenthesize.
+$$(u + v) + w = u + (v + w)$$
+
+**Identity:** There exists a special vector (the **zero vector**) that leaves any vector unchanged when added. The zero vector serves as the **neutral element** under addition.
+$$\exists \mathbf{0} \text{ such that } v + \mathbf{0} = v$$
+
+**Inverse:** Every vector has a corresponding **negative** that cancels it under addition. The inverse ensures that “subtraction” is possible within $V$.
+$$\exists -v \text{ such that } v + (-v) = \mathbf{0}$$
+
+#### Scalar Multiplication Axioms
+
+**Closure:** Multiplying a vector by any scalar from the field produces another vector in $V$.
+$$a \cdot v \in V$$
+
+**Distributivity:** These are **two separate distributive properties** that link vector addition and scalar addition with scalar multiplication. The first distributes scalar multiplication over **vector addition**. The second distributes scalar addition over **scalar multiplication**.
+$$a \cdot (u + v) = a \cdot u + a \cdot v \\ (a + b) \cdot v = a \cdot v + b \cdot v$$
+
+**Compatibility:** Scalar multiplication should respect the multiplication in the underlying field. “Scaling twice” by $a$ and $b$ is equivalent to scaling once by $ab$. The scalar $1$ (multiplicative identity in $F$) acts neutrally.
+$$a \cdot (b \cdot v) = (ab) \cdot v \\ 1 \cdot v = v$$
+
+#### The $\mathbb{R}^n$ Notation
+
+##### What It Means
+
+$\mathbb{R}$ = the set of all real numbers: $\{\ldots, -2.5, -1, 0, 1, \pi, 3.7, \ldots\}$
+
+$\mathbb{R}^n$ = the set of all **ordered n-tuples** of real numbers
+
+More formally:
+
+$$\mathbb{R}^n = \left\{ \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \mid x_1, x_2, \ldots, x_n \in \mathbb{R} \right\}$$
+
+##### Concrete Examples
+
+**$\mathbb{R}^1$**: Just the real number line
+- Elements: $5$, $-3.2$, $\pi$, etc.
+- Dimension: 1
+
+**$\mathbb{R}^2$**: The plane (ordered pairs)
+- Elements: $\begin{bmatrix} 3 \\ -2 \end{bmatrix}$, $\begin{bmatrix} 0 \\ 5.7 \end{bmatrix}$, $\begin{bmatrix} \pi \\ 1 \end{bmatrix}$
+- Dimension: 2
+- Visual: Cartesian coordinate system (x, y)
+
+**$\mathbb{R}^3$**: Three-dimensional space (ordered triples)
+- Elements: $\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$, $\begin{bmatrix} -5 \\ 0 \\ 2.8 \end{bmatrix}$
+- Dimension: 3
+- Visual: 3D coordinates (x, y, z)
+
+**$\mathbb{R}^4$**: Four-dimensional space (can't visualize easily, but mathematically valid!)
+- Elements: $\begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}$
+- Dimension: 4
+- Used in: spacetime in physics, machine learning feature vectors
+
+##### Key Insight
+
+The superscript $n$ tells you:
+1. **How many components** each vector has
+2. **The dimension** of the space
+3. **How many coordinates** you need to specify a point
+
+##### Why "Ordered" Matters
+
+In $\mathbb{R}^2$:
+- $\begin{bmatrix} 3 \\ 5 \end{bmatrix} \neq \begin{bmatrix} 5 \\ 3 \end{bmatrix}$
+
+The position (order) of each number matters! The first is point (3, 5), the second is point (5, 3).
+
+#### Real-World Example
+
+**Example 1**: $\mathbb{R}^3$ - Three-dimensional Euclidean space
+
+Vectors: $\mathbf{v} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}$ where $x, y, z \in \mathbb{R}$
+
+Addition: $\begin{bmatrix} x_1 \\ y_1 \\ z_1 \end{bmatrix} + \begin{bmatrix} x_2 \\ y_2 \\ z_2 \end{bmatrix} = \begin{bmatrix} x_1 + x_2 \\ y_1 + y_2 \\ z_1 + z_2 \end{bmatrix}$
+
+Scalar multiplication: $c \cdot \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} cx \\ cy \\ cz \end{bmatrix}$
+
+This represents physical space, forces, velocities, etc.
+
+**Example 2**: $P_2$ - Polynomials of degree ≤ 2
+
+Vectors are polynomials like $p(x) = ax^2 + bx + c$
+
+Addition: $(2x^2 + 3x + 1) + (x^2 - x + 4) = 3x^2 + 2x + 5$
+
+Scalar multiplication: $3(x^2 + 2x) = 3x^2 + 6x$
+
+This is used in curve fitting, approximation theory, etc.
+
+##### Exercises
+
+**Q1**: Consider the set of all $2 \times 2$ matrices with real entries, with standard matrix addition and scalar multiplication. Is this a vector space? Why or why not?
+
+Yes, the set of all $2 \times 2$ matrices forms a vector space. All 8 axioms hold with standard matrix addition and scalar multiplication. The zero matrix $\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$ serves as the identity.
+
+**Q2**: What about the set of all positive real numbers with operations $a \oplus b = ab$ (multiplication as "addition") and $c \odot a = a^c$ (exponentiation as "scalar multiplication")? Does the identity axiom hold?
+
+Yes, the identity axiom holds! The identity element is $1$ because $a \oplus 1 = a \cdot 1 = a$. (Fun fact: this actually *is* a valid vector space - it's isomorphic to $\mathbb{R}$ with normal operations via the logarithm map!)
+
+**Exercise**: Verify that the zero vector axiom (axiom 4) holds for $\mathbb{R}^2$.
+
+Specifically, show that $\mathbf{0} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$ satisfies $\mathbf{v} + \mathbf{0} = \mathbf{v}$ for any $\mathbf{v} = \begin{bmatrix} x \\ y \end{bmatrix}$.
+
+$\begin{bmatrix} x \\ y \end{bmatrix} + \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} x+0 \\ y+0 \end{bmatrix} = \begin{bmatrix} x \\ y \end{bmatrix}$
+
+## Lesson 1.4: Linear Combinations and Span
 
 #### Linear Combinations
 
