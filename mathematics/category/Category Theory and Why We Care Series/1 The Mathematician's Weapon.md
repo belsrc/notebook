@@ -14,24 +14,23 @@ Henri Poincaré’s quote anchors this idea:
 
 > “Mathematics is the art of giving the same name to different things.”
 
-## 1. Abstraction Illustrated: From People to Structure
+## Abstraction Illustrated: From People to Structure
 
 * Alice and Bob are distinct, yet we can both call them “people”.
 * This is possible because we ignore irrelevant personal details and focus on their *shared internal structure* — what makes something a *person*.
 * This process — **removing unnecessary details to find what’s essential** — is **abstraction**.
 
-## 2. Abstraction in Arithmetic: Rational Numbers
+## Abstraction in Arithmetic: Rational Numbers
 
 To demonstrate abstraction mathematically:
-
-* The video moves to the **number line**, filled with real numbers.
 * Many numbers can be expressed as ratios of integers — the **rational numbers**.
-
-### Example
+- But some can’t (irrationals).
+- The video focuses on rationals and asks:  
+    _Why is the sum of two rational numbers also rational?_
 
 To prove that the **sum of two rational numbers is also rational**, we:
 
-1. Represent rationals abstractly as $\frac{a}{b}$, where $a, b \in \mathbb{Z}$.
+1. Represent rationals abstractly as $\frac{a}{b}$, where $a, b \in \mathbb{Z}$. We aren't specifying which integers they are, since these are details that are completely irrelevant to us.
 2. Add two rationals: $$\frac{a}{b} + \frac{c}{d} = \frac{ad + cb}{bd}$$
 3. Use abstraction again:
    * Replace $ad + cb$ with a new integer $p$,
@@ -39,9 +38,10 @@ To prove that the **sum of two rational numbers is also rational**, we:
      yielding $\frac{p}{q}$, another rational.
 
 Hence, **closure under addition** is proven *abstractly*.
+
 This demonstrates that **elementary algebra** is itself abstraction applied to numbers.
 
-## 3. Abstraction Across Mathematics
+## Abstraction Across Mathematics
 
 Mathematical fields can be viewed as abstraction layers:
 
@@ -51,28 +51,37 @@ Mathematical fields can be viewed as abstraction layers:
 
 These all arise by identifying a shared structure and ignoring implementation details.
 
-## 4. The Next Level: Category Theory — Abstraction of Composition
+## Category Theory — Abstraction of Composition
 
-### 4.1 Composition in Set Theory
+### Composition in Set Theory
 
 * **Sets** are collections of objects.
-  Examples: `People`, `Integers`.
+  Examples: `People` contains every person, `Integers` contains every whole number.
 
-* **Functions** map elements of one set to another:
+* **Functions** are how we relate sets. They map each element of one set to another set:
 
-  * `age: Person → Integer`
-  * `≥18: Integer → Bool`
+  * The function $\text{Age}$ could assign each person in the set $\text{People}$ to a number: $\text{Age}: \text{Person} \rightarrow \text{Integer}$
+  * Another function $\ge 18$ could assign each integer to either true or false depending on if it is greater than or equal to 18: $\ge 18: \text{Integer} \rightarrow \{\text{True}, \text{False}\}$
 
-* Functions can be *composed*: $$(≥18) \circ age : Person \to Bool$$
-  — maps a person directly to whether they are eligible to vote.
+![](../../../images/category/ctwwc-set-fn.png)
 
-### 4.2 The Identity Function
+If we wanted to see if someone was able to vote, we could run the functions in series:
+
+![](../../../images/category/ctwwc-fn-series.png)
+
+But there is a faster way. Whenever we have two functions where the end of one is the same set as the start of the other, we can create a new function that chains them together. This is the _composition_ of $\text{Age}$ and $\ge 18$.
+
+$$(≥18) \circ \text{Age} : \text{Person} \to \{\text{True}, \text{False}\}$$
+
+![](../../../images/category/ctwwc-compose.png)
+
+### The Identity Function
 
 * `id: Person → Person` maps every element to itself.
 * Composing any function with `id` yields the same function. $$id \circ f = f \quad \text{and} \quad f \circ id = f$$
 * Identity acts as the *neutral element* of composition.
 
-## 5. Abstracting Composition Itself → Category Theory
+## Abstracting Composition Itself → Category Theory
 
 We now abstract away all specifics of sets and functions:
 
@@ -92,7 +101,7 @@ A **Category** consists of:
 5. **Identity law**:
    Each object has an identity arrow $id_A$, such that $f \circ id_A = f = id_B \circ f$
 
-## 6. Examples of Categories
+## Examples of Categories
 
 1. **Linear Algebra**:
    * Objects: Vector spaces
@@ -115,7 +124,7 @@ A **Category** consists of:
    * Composition: Transitivity of $\le$
    * Identity: Reflexivity $( a \le a )$
 
-## 7. Universal Proofs: Example with Identity Arrows
+## Universal Proofs: Example with Identity Arrows
 
 Category theory allows one proof to apply universally across fields.
 
@@ -132,7 +141,7 @@ This single proof simultaneously shows:
 * Only one identity function per data type.
 * Only one identity mapping per set.
 
-## 8. Why Category Theory Matters
+## Why Category Theory Matters
 
 Category theory **unifies** mathematics by identifying and reasoning about shared structures like composition, identity, and relationships — independent of their domain (algebra, topology, programming, etc.).
 
