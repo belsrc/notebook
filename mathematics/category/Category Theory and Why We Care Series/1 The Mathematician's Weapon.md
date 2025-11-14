@@ -81,6 +81,8 @@ $$(≥18) \circ \text{Age} : \text{Person} \to \{\text{True}, \text{False}\}$$
 * Composing any function with `id` yields the same function. $$id \circ f = f \quad \text{and} \quad f \circ id = f$$
 * Identity acts as the *neutral element* of composition.
 
+![](../../../images/category/ctwwc-identity.png)
+
 ## Abstracting Composition Itself → Category Theory
 
 We now abstract away all specifics of sets and functions:
@@ -92,16 +94,21 @@ We now abstract away all specifics of sets and functions:
 | Composition of functions | **Composition of arrows** |
 | Identity function        | **Identity arrow**        |
 
+![](../../../images/category/ctwwc-abstract.png)
+
 A **Category** consists of:
 
 1. **Objects** ($A$, $B$, $C$, $…$)
 2. **Arrows** between them ($f$, $g$, $…$)
 3. **Composition rule** (if $f: A \to B$ and $g: B \to C$, then $g \circ f: A \to C$)
 4. **Associativity**: $h \circ (g \circ f) = (h \circ g) \circ f$
-5. **Identity law**:
-   Each object has an identity arrow $id_A$, such that $f \circ id_A = f = id_B \circ f$
+5. **Identity law**: Each object has an identity arrow $id_A$, such that $f \circ id_A = f = id_B \circ f$
 
-## Examples of Categories
+We can have as many objects as we'd like, and define as many arrows between them as necessary.
+
+![](../../../images/category/ctwwc-n-number.png)
+
+## Different areas of Math that form Categories
 
 1. **Linear Algebra**:
    * Objects: Vector spaces
