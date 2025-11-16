@@ -3,8 +3,12 @@ tags:
   - typescript
   - set-theory
 gardening: 🌿
+reference:
+  - https://types.kitlangton.com
 ---
-## Element
+## Set Basics
+
+### Element
 
 ${\in}$ equals an `element of`.
 
@@ -13,15 +17,13 @@ ${\in}$ equals an `element of`.
 $3$ is an element of set $A$
 
 ```ts
-namespace Element {
-  type A = number;
+type A = number;
 
-  // 3 ∈ A
-  const e: A = 3;
-}
+// 3 ∈ A
+const e: A = 3;
 ```
 
-## Not an Element
+### Not an Element
 
 ${\notin}$ equals `not an element of`.
 
@@ -30,15 +32,13 @@ ${\notin}$ equals `not an element of`.
 $4$ is not an element of set $B$
 
 ```ts
-namespace NotElement {
-  type B = string;
+type B = string;
 
-  // 4 ∉ B
-  const e: B = 3; // TS Error
-}
+// 4 ∉ B
+const e: B = 3; // TS Error
 ```
 
-## Subset
+### Subset
 
 $\subseteq$ equals a `subset`
 
@@ -75,7 +75,7 @@ namespace Subset {
 ![image](https://user-images.githubusercontent.com/1832432/193629476-85d4d5c6-3591-44b1-922e-cc0cef639357.png)
 
 
-## Proper Subset
+### Proper Subset
 
 $\subset$ equals a proper subset
 
@@ -105,20 +105,20 @@ namespace ProperSubset {
 ![image](https://user-images.githubusercontent.com/1832432/193629546-58358ad5-df9c-41c8-8082-e53d663e1305.png)
 
 
-## Equality
+### Equality
 
 If $A \subseteq B$ and $B \subseteq A$ then $A = B$
 
 ![image](https://user-images.githubusercontent.com/1832432/193629495-9abec5ed-ac29-483c-b2b6-8ad6f829de5a.png)
 
 
-## Not a Subset
+### Not a Subset
 
 $\not\subset$ equals `not a subset`
 
 $A \not\subset B$ means $A$ is not a subset of $B$
 
-## Union
+### Union
 
 $\cup$ equals `union`
 
@@ -135,18 +135,19 @@ namespace Unions {
   // "a" | "b" | "c" | "d" | "e" | "f"
 }
 ```
+
 Any duplicate elements in the set are removed.
 
 ![image](https://user-images.githubusercontent.com/1832432/193633760-eded8445-8621-4e89-8743-5ebca967a421.png)
 
 
-## Intersection
+### Intersection
 
 $\cap$ equals the intersection
 
 $A \cap B$ is the intersection of set $A$ and set $B$
 
-Intersecting a set $A$ with a set $B$ means extracting the part of $A$ that also belongs to $B$. In other words, elements in common to both
+Intersecting a set $A$ with a set $B$ means extracting the part of $A$ that also belong to $B$. In other words, elements in common to both.
 
 ```ts
 namespace Intersections {
@@ -156,7 +157,8 @@ namespace Intersections {
   type Threes = 3 | 6 | 9 | 12;
   // Threes = {3, 6, 9, 12}
 
-  // Intersecting a set A with a set B means extracting the part of A that also belongs to B.
+  // Intersecting a set A with a set B means extracting the
+  // part of A that also belongs to B.
   // In other words, elements in common to both
 
   type EvensThreeOverlap = Evens & Threes; // 6 | 12
@@ -170,14 +172,16 @@ namespace Intersections {
 ![image](https://user-images.githubusercontent.com/1832432/193633331-82c395fb-6f33-4ec1-88bd-1d9fecc9a009.png)
 
 
-The result of intersecting types that do not overlap is the empty set. A set that does not contain anything. The empty set is called `never` in TS.
+The result of intersecting types that do not overlap is the empty set. A set that does not contain anything.
 
 ```ts
 type EmptySet = string & number;
 // EmptySet = {} or EmptySet = Ø
 ```
 
-## Empty Set
+## Special Sets
+
+### Empty Set
 
 $\emptyset$ equals the empty set, also expressed as {}
 
@@ -210,7 +214,7 @@ type B = A & never;
 // = never
 ```
 
-## Universal Set
+### Universal Set
 
 $\textit{U}$ equals the universal set
 
@@ -242,9 +246,90 @@ type B = A & unknown;
 // = A
 ```
 
-# Back to your regularly scheduled Typescript
+### Singleton
 
-## Common Types
+A singleton is a set that contains **exactly** one element.
+
+> $A = \{x\}$
+
+```typescript
+type A = 'hello'; // {'hello'}
+type B = 4; // {4}
+```
+
+Union and intersection work the same as with other sets.
+
+```typescript
+type A = 1 | 2 | 3;
+type B = 4;
+type C = 1 | 2 | 3 | 4;
+
+type D = A | B;
+// = 1 | 2 | 3 | 4
+
+type E = B & C;
+// = 4
+
+type F = A & B;
+// = never
+```
+
+And may be a subset of another set, in Typescript this is called widening: $\{4\} \rightarrow \{\text{number}\}$.
+
+```typescript
+type Four = 4;
+const fn = (x: number) => x * 2;
+const v: Four = 4;
+const res = fn(v);
+```
+
+### Doubleton
+
+A doubleton is a set that contains **exactly** two elements.
+
+> $A = \{x,y\}$
+
+## Typescript Types
+
+Types are just a label for a set of possible runtime values, like $A = \{1,2,3,4\}$.
+
+### Boolean Type
+
+The boolean type is a doubleton containing the values `true` and `false`.
+
+$\text{boolean} = \{\text{true}, \text{false}\}$
+
+### Number Type
+
+The number type contains all real numbers, from $-\infty$  to $\infty$.
+
+i.e. the number line or all Real numbers $\mathbb{R}$.
+
+$-\infty \;\leftarrow\;-\text{ (-2)}-\text{ (-1)}-\text{(0)}-\text{(1)}-\text{(2) }- \;\rightarrow\; +\infty$
+
+### String Type
+
+The string type contains all possible strings which is effectively infinite.
+
+### Undefined and Null Type
+
+Undefined and null are both singletons containing just `undefined` and `null`, respectively.
+
+$\text{undefined} = \{\text{undefined}\}$
+$\text{null} = \{\text{null}\}$
+
+### Literal Types
+
+Like `undefined` and `null`, literal types are all singletons.
+- `type A = 42` = $\{42\}$
+- `type B = 'hello` = $\{\text{hello}\}$
+- and so.
+
+
+
+---
+> Below needs refined or removed
+### Common Types
 
 Before getting started, some ground work is needed. In Typescript there are some common categories of types. Some, like literals `type a = 42`, can be subsets of others, like `number`. Unions and Intersections also fall under this heading.
 
@@ -288,7 +373,7 @@ type DataStructures =
 // Just like with records, all values share the same type.
 ```
 
-## Object Types [Data Structure]
+### Object Types [Data Structure]
 
 Type objects, like the JS object they represent, are structured in the same way. And, also like the JS object, can have as many properties as is needed. Indexed by unique keys.
 
@@ -323,7 +408,7 @@ But if, for instance, we were getting those from an API response we would be abl
 ![image](https://user-images.githubusercontent.com/1832432/193663454-f8886b6d-c138-4254-8591-ff392fa9d7e0.png)
 
 
-### Property Types
+#### Property Types
 
 Prop types can be accessed similar to accessing prop values using bracket ([]) syntax. Trying to use dot notation will throw however.
 
@@ -343,7 +428,7 @@ This is the same as accessing them each seperately.
 type MakeOrYear = Motorcycle['make'] | Motorcycle['year']; // string | number
 ```
 
-### keyof
+#### keyof
 
 `keyof` functions like `Object.keys` for the object types.
 
@@ -365,7 +450,7 @@ type ValueOf<T> = T[keyof T];
 type MotoValues = ValueOf<Motorcycle>; // string | number
 ```
 
-### Merging Object Types
+#### Merging Object Types
 
 Merging objects using the intersection symbol, unlike the normal behavior of
 
@@ -431,7 +516,7 @@ type KeyOfZ = keyof Z; // 'name'
 
 If that doesn't make sense, the TL:DR is the intersection of two objects is the union of their keys and the union of two objects is the intersecction of their keys. Additionally, Unions and Intersections of objects aren't as performant as Interfaces. Though Interfaces can only be defined statically.
 
-## Record Types [Data Structure]
+### Record Types [Data Structure]
 
 Records are like Objects with the exception that all of the values, of all of the props, must be of the same type.
 
@@ -471,9 +556,9 @@ type TypeOfAgeRecord = AgeRecord[string]; // number
 
 This simultaneously reads all keys assignable to the type `string`. Since all of them are the same type, you get that type back.
 
-## Object Type Helpers
+### Object Type Helpers
 
-### `Partial<T>`
+#### `Partial<T>`
 
 Partial takes an object type and returns a similar object type with all of the property types as optional props `{ a: string } → { a?: string }`.
 
@@ -484,7 +569,7 @@ type PartialA = Partial<A>;
 // { name?: string | undefined, age?: number | undefined }
 ```
 
-### `Required<T>`
+#### `Required<T>`
 
 Required, like Partial, takes an object type but, instead, returns a similar object type with all of the property types as required props `{ a?: string } → { a: string }`.
 
@@ -495,7 +580,7 @@ type RequiredB = Required<B>;
 // { name: string, age: number }
 ```
 
-### `ReadOnly<T>`
+#### `ReadOnly<T>`
 
 ReadOnly, like the above, also takes an object type and returns a similar object type. And as you have probably guess, the difference is that all of the props are readonly.
 
@@ -506,7 +591,7 @@ type ReadOnlyA = Readonly<A>;
 // { readonly name: string, readonly age: number }
 ```
 
-### `Pick<T>`
+#### `Pick<T>`
 
 Pick, those familiar with lodash will probably recognize this. It takes an object type and a key literal (or union of literals) and returns an object type with just those props.
 
@@ -520,7 +605,7 @@ type PickHeightWeight = Pick<C, 'height' | 'weight'>;
 // { height: number, weight: number }
 ```
 
-### `Omit<T>`
+#### `Omit<T>`
 
 Omit is similar to Pick except it does the opposite. It returns an object type with the given keys removed.
 
