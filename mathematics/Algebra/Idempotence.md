@@ -15,7 +15,7 @@ An element $x$ of a set $S$ equipped with a binary operator $\cdot$ is said to b
 
 $x \cdot x = x$
 
-The binary operation $*$ is said to be idempotent if:
+The binary operation $\cdot$ is said to be idempotent if:
 
 $x \cdot x = x \ \forall\  x \in S$
 
