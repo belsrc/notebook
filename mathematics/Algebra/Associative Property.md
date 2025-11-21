@@ -8,13 +8,9 @@ reference:
 ---
 The associative property is a property of some binary operations that means that rearranging the parentheses in an expression will not change the result. Within an expression containing two or more occurrences in a row of the same associative operator, the order in which the operations are performed does not matter as long as the sequence of the operands is not changed. That is, rearranging the parentheses in such an expression will not change its value.
 
-$$
-(2 + 3) + 4 = 2 + (3 + 4) = 9
-$$
+$(2 + 3) + 4 = 2 + (3 + 4) = 9$
 
-$$
-2 \times (3 \times 4) = (2 \times 3) \times 4 = 24
-$$
+$2 \times (3 \times 4) = (2 \times 3) \times 4 = 24$
 
 Even though the parentheses were rearranged on each line, the values of the expressions were not altered. Since this holds true when performing addition and multiplication on an real number, it can be said that "addition and multiplication of real numbers are associative operations."
 
@@ -26,15 +22,11 @@ Many operations are non-associative; some examples include subtraction, exponent
 
 Formally, a binary operation $*$ on a set $S$ is called associative if it satisfies the associative law:
 
-$$
-(x * y) * z = x * (y * z)\text{ }\forall\text{ } x, y, z \in S
-$$
+$(x * y) * z = x * (y * z)\text{ }\forall\text{ } x, y, z \in S$
 
 The associative law can also be expressed in functional notation:
 
-$$
-(f \circ (g \circ h))(x) = ((f \circ g) \circ h)(x)
-$$
+$(f \circ (g \circ h))(x) = ((f \circ g) \circ h)(x)$
 
 If a binary operation is associative, repeated application of the operation produces the same result regardless of how valid pairs of parentheses are inserted in the expression. This is called the generalized associative law.
 
@@ -46,17 +38,13 @@ If a binary operation is associative, repeated application of the operation prod
 
 If the product operation is associative, the generalized associative law says that all these expressions will yield the same result. So unless the expression with omitted parentheses already has a different meaning, the parentheses can be considered unnecessary and the product can be written unambiguously as:
 
-$$
-abcd
-$$
+$abcd$
 
 As the number of elements increases, the number of possible ways to insert the parentheses grows quickly, but they remain unnecessary for disambiguation.
 
 An example where this does not work is the logical biconditional $\leftrightarrow$. It is associative; thus:
 
-$$
-A \leftrightarrow (B \leftrightarrow C) = (A \leftrightarrow B) \leftrightarrow C
-$$
+$A \leftrightarrow (B \leftrightarrow C) = (A \leftrightarrow B) \leftrightarrow C$
 
 But, $A \leftrightarrow B \leftrightarrow C$ most commonly means $(A \leftrightarrow B)$ and $(B \leftrightarrow C)$ which is not equivalent.
 
@@ -75,6 +63,15 @@ $$
     (x + y) + z = x + (y + z) = x + y + x\\
     (xy)z = x(yz) = xyz
   \end{rcases}\text{ }\forall\text{ } x, y, z \in \mathbb{R}
+$$
+
+$$
+  \begin{aligned}
+  \begin{rcases}
+    (x + y) + z = x + (y + z) = x + y + x\\
+    (xy)z = x(yz) = xyz
+  \end{rcases}\text{ }\forall\text{ } x, y, z \in \mathbb{R}
+	\end{aligned}
 $$
 
 - Taking the intersection or the union of sets:
