@@ -24,24 +24,20 @@ Each arrow $f$ has:
 
 ![](../../../images/category/ctwwc-dom-cod.png)
 
-We denote arrows as: $$f : A \to B$$
+We denote arrows as: $f : A \to B$
 where $A = \text{dom}(f)$ and $B = \text{cod}(f)$.
 
 ### Composition
 
 If two arrows are *composable* (i.e. codomain of $f$ equals domain of $g$):
 
-$$
-f : A \to B, \quad g : B \to C
-$$
+$f : A \to B, \quad g : B \to C$
 
 ![](../../../images/category/ctwwc-abstract-series.png)
 
 then there must exist a **composite arrow**
 
-$$
-g \circ f : A \to C
-$$
+$g \circ f : A \to C$
 
 ![](../../../images/category/ctwwc-abstract-compose.png)
 
@@ -53,29 +49,21 @@ Composition must be **associative**.
 
 For all arrows:
 
-$$
-f : A \to B, \quad g : B \to C, \quad h : C \to D
-$$
+$f : A \to B, \quad g : B \to C, \quad h : C \to D$
 
 then
 
-$$
-h \circ (g \circ f) = (h \circ g) \circ f
-$$
+$h \circ (g \circ f) = (h \circ g) \circ f$
 
 ### Identity
 
 For every object $A$, there exists an **identity arrow**
 
-$$
-\text{id}_A : A \to A
-$$
+$\text{id}_A : A \to A$
 
 which acts as a **unit for composition** or more generally, a "do nothing" operation:
 
-$$
-f \circ \text{id}_A = f = \text{id}_B \circ f
-$$
+$f \circ \text{id}_A = f = \text{id}_B \circ f$
 
 for any arrow $f : A \to B$.
 
@@ -86,9 +74,7 @@ for any arrow $f : A \to B$.
 
 Not all collections of objects/arrows can be formalized as **sets** due to **Russell’s paradox** — constructing "the set of all sets that do not contain themselves" leads to contradiction.
 
-$$
-S = \{x \,\vert\, x \notin x\}
-$$
+$S = \{x \,\vert\, x \notin x\}$
 
 Hence, mathematicians distinguish:
 
@@ -116,15 +102,13 @@ So, a category technically consists of **classes** of objects and morphisms.
 * **Associativity:** Function composition is inherently associative.
 * **Identity laws:** For any $f: A \to B$,
 
-$$
-f \circ \text{id}_A = f, \quad \text{id}_B \circ f = f
-$$
+$f \circ \text{id}_A = f, \quad \text{id}_B \circ f = f$
 
 proven by direct substitution:
 
-$$(f \circ \text{id}_A)(x) = f(\text{id}_A(x)) = f(x)$$
+$(f \circ \text{id}_A)(x) = f(\text{id}_A(x)) = f(x)$
 
-$$(\text{id}_B \circ f)(x) = \text{id}_B(f(x)) = f(x)$$
+$(\text{id}_B \circ f)(x) = \text{id}_B(f(x)) = f(x)$
 
 Thus, $\text{Set}$ satisfies all categorical axioms.
 
@@ -139,9 +123,7 @@ Thus, $\text{Set}$ satisfies all categorical axioms.
 
 You can combine "It is sunny" and "Bob is wearing a hat".  $\text{if}$ "it is sunny" $\text{then}$ "Bob is wearing a hat". This is denoted using **implication**.
 
-$$
-\text{It is sunny} \Rightarrow \text{Bob is wearing a hat}
-$$
+$\text{It is sunny} \Rightarrow \text{Bob is wearing a hat}$
 
 In general, for any two propositions $P$ and $Q$ we write "if $P$ is $\text{True}$ then $Q$ is also $\text{True}$" as "$P$ implies $Q$" or just $P \Rightarrow Q$.
 

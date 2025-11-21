@@ -31,7 +31,7 @@ To demonstrate abstraction mathematically:
 To prove that the **sum of two rational numbers is also rational**, we:
 
 1. Represent rationals abstractly as $\frac{a}{b}$, where $a, b \in \mathbb{Z}$. We aren't specifying which integers they are, since these are details that are completely irrelevant to us.
-2. Add two rationals: $$\frac{a}{b} + \frac{c}{d} = \frac{ad + cb}{bd}$$
+2. Add two rationals: $\frac{a}{b} + \frac{c}{d} = \frac{ad + cb}{bd}$
 3. Use abstraction again:
    * Replace $ad + cb$ with a new integer $p$,
    * Replace $bd$ with a new integer $q$,
@@ -71,14 +71,14 @@ If we wanted to see if someone was able to vote, we could run the functions in s
 
 But there is a faster way. Whenever we have two functions where the end of one is the same set as the start of the other, we can create a new function that chains them together. This is the _composition_ of $\text{Age}$ and $\ge 18$.
 
-$$(≥18) \circ \text{Age} : \text{Person} \to \{\text{True}, \text{False}\}$$
+$(≥18) \circ \text{Age} : \text{Person} \to \{\text{True}, \text{False}\}$
 
 ![](../../../images/category/ctwwc-compose.png)
 
 ### The Identity Function
 
 * `id: Person → Person` maps every element to itself.
-* Composing any function with `id` yields the same function. $$id \circ f = f \quad \text{and} \quad f \circ id = f$$
+* Composing any function with `id` yields the same function. $id \circ f = f \quad \text{and} \quad f \circ id = f$
 * Identity acts as the *neutral element* of composition.
 
 ![](../../../images/category/ctwwc-identity.png)
@@ -138,8 +138,8 @@ Category theory allows one proof to apply universally across fields.
 **Proof:** Each object in a category has exactly one identity arrow.
 
 1. Suppose an object has two identities, $id$ and $\bar{id}$.
-2. By the identity law: $$f \circ id = f \quad \text{and} \quad id \circ f = f$$
-3. Substitute $f = \bar{id}$ and rearrange: $$id = \bar{id}$$
+2. By the identity law: $f \circ id = f \quad \text{and} \quad id \circ f = f$
+3. Substitute $f = \bar{id}$ and rearrange: $id = \bar{id}$
    Thus, identities must be unique.
 
 This single proof simultaneously shows:

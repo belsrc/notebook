@@ -27,9 +27,7 @@ In the category $\text{Set}$:
 
 Two sets $A$ and $B$ are said to have the same structure (same number of elements) if there exist functions:
 
-$$
-f: A \to B \quad \text{and} \quad f^{-1}: B \to A
-$$
+$f: A \to B \quad \text{and} \quad f^{-1}: B \to A$
 
 ($f^{-1}$ is read as "the inverse of $f$")
 
@@ -41,9 +39,7 @@ If we start at any shape and find it's corresponding number and then find which 
 
 ![](../../../images/category/ctwwc-inverse-fn-id.png)
 
-$$
-f^{-1} \circ f = \mathrm{id}_A \quad \text{and} \quad f \circ f^{-1} = \mathrm{id}_B
-$$
+$f^{-1} \circ f = \mathrm{id}_A \quad \text{and} \quad f \circ f^{-1} = \mathrm{id}_B$
 
 This defines **isomorphism**: $A \cong B$.
 
@@ -113,9 +109,7 @@ Such definitions are **portable** across categories (e.g., same definition of si
 
 We want an object $A \land B$ with arrows:
 
-$$
-\pi_1: A \land B \to A, \quad \pi_2: A \land B \to B
-$$
+$\pi_1: A \land B \to A, \quad \pi_2: A \land B \to B$
 
 representing that from a proof of $A \land B$, we can extract proofs of both $A$ and $B$.
 
@@ -123,15 +117,11 @@ representing that from a proof of $A \land B$, we can extract proofs of both $A$
 
 For any other proposition $C$ with proofs:
 
-$$
-f_1: C \to A, \quad f_2: C \to B
-$$
+$f_1: C \to A, \quad f_2: C \to B$
 
 there must exist a **unique** arrow $f: C \to A \land B$ such that:
 
-$$
-\pi_1 \circ f = f_1 \quad \text{and} \quad \pi_2 \circ f = f_2
-$$
+$\pi_1 \circ f = f_1 \quad \text{and} \quad \pi_2 \circ f = f_2$
 
 This makes the following diagram **commute**:
 
@@ -153,15 +143,11 @@ Let:
 
 We know that:
 
-$$
-\pi_1 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{String}
-$$
+$\pi_1 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{String}$
 
 and
 
-$$
-\pi_2 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{Integer}
-$$
+$\pi_2 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{Integer}$
 
 the most natural guess of a term is the pair $(\text{String},\text{Integer})$. Since the projection $\pi_1$ takes a pair and returns a $\text{String}$, it would be the function that returns the first element of the pair. And since the projection $\pi_2$ takes a pair and returns an $\text{Integer}$, it would be the function that returns the second element of the pair.
 
@@ -171,21 +157,15 @@ So the pair type $(\text{String},\text{Integer})$ is a valid candidate for the p
 
 For any type $X$ with:
 
-$$
-f_1: X \to \text{String}, \quad f_2: X \to \text{Integer}
-$$
+$f_1: X \to \text{String}, \quad f_2: X \to \text{Integer}$
 
 there exists a **unique function**:
 
-$$
-f(x) = (f_1(x), f_2(x))
-$$
+$f(x) = (f_1(x), f_2(x))$
 
 satisfying:
 
-$$
-\pi_1 \circ f = f_1, \quad \pi_2 \circ f = f_2
-$$
+$\pi_1 \circ f = f_1, \quad \pi_2 \circ f = f_2$
 
 Thus, $(\text{String},\text{Integer})$ is the **categorical product** of $\text{String}$ and $\text{Integer}$.
 
