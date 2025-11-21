@@ -12,9 +12,7 @@ An identity function, also called an identity relation, identity map or identity
 
 Formally, if $X$ is a set, the identity function $f$ on $X$ is defined to be a function with $X$ as its domain and codomain, satisfying:
 
-$$
-f(x) = x \text{ }\forall\text{ } x \in X
-$$
+$f(x) = x \ \forall\  x \in X$
 
 The identity function $f$ on $X$ is often denoted by $id_X$.
 

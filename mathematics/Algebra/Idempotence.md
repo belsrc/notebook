@@ -13,15 +13,11 @@ Idempotence is the property of certain operations whereby they can be applied mu
 
 An element $x$ of a set $S$ equipped with a binary operator $*$ is said to be idempotent under $*$ if:
 
-$$
-x \cdot x = x
-$$
+$x \cdot x = x$
 
 The binary operation $*$ is said to be idempotent if:
 
-$$
-x \cdot x = x \text{ }\forall\text{ } x \in S
-$$
+$x \cdot x = x \ \forall\  x \in S$
 
 ## Idempotent Functions
 
@@ -33,7 +29,7 @@ Constant functions are idempotent.
 
 The identity functions are idempotent. 
 
-The floor $\lfloor\text{ }\rfloor$ , ceiling $\lceil\text{ }\rceil$, and fractional part functions are idempotent.
+The floor $\lfloor\ \rfloor$ , ceiling $\lceil\ \rceil$, and fractional part functions are idempotent.
 
 Neither the property of being idempotent nor that of being not is preserved under function composition. As an example for the former, $f(x) = x \bmod 3$ and $g(x) = \max (x,5)$ are both idempotent, but $f \circ g$ is not, although $g \circ f$ happens to be. As an example for the latter, the negation function $\neg$ on the Boolean domain is not idempotent, but $\neg\circ\neg$ is. Similarly, unary negation $-(\cdot)$ of real numbers is not idempotent, but $-(\cdot) \circ -(\cdot)$ is.
 

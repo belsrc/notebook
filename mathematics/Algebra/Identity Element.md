@@ -10,7 +10,7 @@ An identity element or neutral element of a binary operation is an element that 
 
 ## Definition
 
-Let $(S,*)$ be a set $S$ equipped with a binary operation $*$. Then an element $e$ of $S$ is called left identity if $e * s = s \text{ }\forall\text{ } s \in S$, and a right identity if $s * e = s \text{ }\forall\text{ } s \in S$. If $e$ is both a left identity and a right identity, then it is called a two-sided identity, or simply an identity.
+Let $(S,*)$ be a set $S$ equipped with a binary operation $*$. Then an element $e$ of $S$ is called left identity if $e * s = s \ \forall\  s \in S$, and a right identity if $s * e = s \ \forall\  s \in S$. If $e$ is both a left identity and a right identity, then it is called a two-sided identity, or simply an identity.
 
 An identity with respect to addition is called an additive identity (often denoted as $0$) and an identity with respect to multiplication is called multiplicative identity (often denoted as $1$). In the case of a group for example, the identity element is sometimes simple denoted by the symbol $e$.
 

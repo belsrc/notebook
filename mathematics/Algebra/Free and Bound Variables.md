@@ -13,9 +13,7 @@ In computer science, the term free variable refers to variables used in a functi
 
 A variable is bound, in contrast, if the value of that variable symbol has been bound to a specific value or range of values in the domain of discourse or universe. A variable overall is bound if at least one occurrence of it is bound. For example, consider the following expression in which both variables are bound by logical quantifiers:
 
-$$
-\forall\text{ } y \text{ }\exists\text{ } x \text{ } (x = \sqrt{y})
-$$
+$\forall\  y \ \exists\  x \  (x = \sqrt{y})$
 
 This expression evaluates to false if the domain of $x$ and $y$ is the real numbers, but true if the domain is the complex numbers.
 
@@ -31,38 +29,24 @@ A closed term is one containing no free variables.
 
 ## Examples
 
-$$
-\sum_{k=1}^{10} f(k,n)
-$$
+$\sum_{k=1}^{10} f(k,n)$
 
 $n$ is a free variable and $k$ is a bound variable.
 
-$$
-\int_{0}^{\infty} x^{y-1}e^{-x}dx
-$$
+$\int_{0}^{\infty} x^{y-1}e^{-x}dx$
 
 $y$ is a free variable and $x$ is a bound variable.
 
 ## Variable-binding Operators
 
-$$
-\sum_{x \text{ }\in\text{ } S}
-$$
+$\sum_{x \ \in\  S}$
 
-$$
-\int_{0}^{\infty} ...dx
-$$
+$\int_{0}^{\infty} ...dx$
 
-$$
-\lim_{x \text{ }\to\text{ } 0}
-$$
+$\lim_{x \ \to\  0}$
 
-$$
-\forall\text{ } x
-$$
+$\forall\  x$
 
-$$
-\exists\text{ } x
-$$ 
+$\exists\  x$ 
 
 Are some common variable-binding operators. Each of them binds the variable $x$ for some set $S$.

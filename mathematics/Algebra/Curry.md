@@ -13,9 +13,7 @@ In the prototypical example, one begins with a function $f: (X \times Y) \to Z$ 
 
 In the example, curry itself becomes a function that takes $f$ as an argument and returns a function that maps each $x$ to $f_x$. The function $f$ belongs to the set of functions $(X \times Y) \to Z$. Meanwhile, $f_x$ belongs to the set of functions $Y \to Z$. Thus, something that maps $x$ to $f_x$ will be of the type $X \to [Y \to Z]$. With this notation, $\text{curry}$ is a function that takes objects from the first set and returns objects in the second set.
 
-$$
-\text{curry} : [(X \times Y) \to Z] \to (X \to [Y \to Z])
-$$
+$\text{curry} : [(X \times Y) \to Z] \to (X \to [Y \to Z])$
 
 ```ts
 curry: <X, Y, Z>(fn: (x: X, y: Y) => Z) => (x: X) => (y: Y) => Z
@@ -23,9 +21,7 @@ curry: <X, Y, Z>(fn: (x: X, y: Y) => Z) => (x: X) => (y: Y) => Z
 
 Currying is related to, but not the same as, partial application. The example above can be used to illustrate partial application; it is quite similar. Partial application is the function $\text{apply}$ that takes the pair $f$ and $x$ together as arguments and returns $f_x$. Using the same notation as above, partial application has the signature:
 
-$$
-\text{apply} : ([(X \times Y) \to Z] \times X) \to [Y \to Z]
-$$
+$\text{apply} : ([(X \times Y) \to Z] \times X) \to [Y \to Z]$
 
 ```ts
 apply: <X, Y, Z>(fn: (x: X, y: Y) => Z, x: X) => (y: Y) => Z
@@ -41,47 +37,33 @@ First, there is some notation to be established. The notation $X \to Y$ denotes 
 
 Given a function:
 
-$$
-f : (X \times Y) \to Z
-$$
+$f : (X \times Y) \to Z$
 
 currying constructs a new function
 
-$$
-g : X \to (Y \to Z)
-$$
+$g : X \to (Y \to Z)$
 
 That is, $g$ takes an argument of type $X$ and returns a function of type $Y \to Z$. It is defined by
 
-$$
-g(x)(y) = f(x,y)
-$$
+$g(x)(y) = f(x,y)$
 
 for $x$ of type $X$ and $y$ of type $Y$. We then also write
 
-$$
-\text{curry}(f) = g
-$$
+$\text{curry}(f) = g$
 
 #### Lambda Calculi
 
 In theoretical computer science, currying provides a way to study functions with multiple arguments in a very simple theoretical models, such as the lambda calculus, in which functions only take a single argument. Consider a function $f(x,y)$ taking two arguments and having the type $(X \times Y) \to Z$, which should be understood to mean that $x$ must have the type $X$, $y$ must have the type $Y$ and the function itself returns the type $Z$. The curried form of $f$ if defined as 
 
-$$
-\text{curry}(f) = \lambda x.(\lambda y. (f(x,y)))
-$$
+$\text{curry}(f) = \lambda x.(\lambda y. (f(x,y)))$
 
 Where $\lambda$ is the abstractor of lambda calculus. Since curry takes, as input, functions with the type $(X \times Y) \to Z$, one concludes that the type of curry itself is
 
-$$
-\text{curry} : ((X \times Y) \to Z) \to (X \to (Y \to Z))
-$$
+$\text{curry} : ((X \times Y) \to Z) \to (X \to (Y \to Z))$
 
 The $\to$ operator is often considered right-associative, so the curried function type $X \to (Y \to Z)$ is often written as $X \to Y \to Z$. Conversely, function application is considered to be left-associative, so that $f(x,y)$ is equivalent to
 
-$$
-((\text{curry}(f)x)y) = \text{curry}(f)xy
-$$
+$((\text{curry}(f)x)y) = \text{curry}(f)xy$
 
 That is, the parenthesis are not required to disambiguate the order of the application.
 
@@ -95,9 +77,7 @@ The type-theoretical approach provides a natural complement to the language of c
 
 Under the Curry-Howard correspondence, the existence of currying and uncurrying is equivalent to the logical theorem
 
-$$
-((A \wedge B) \to C) \Leftrightarrow (A \to (B \to C))
-$$
+$((A \wedge B) \to C) \Leftrightarrow (A \to (B \to C))$
 
 (also known as exportation), as tuples (product type) corresponds to conjunction in logic, and function type corresponds to implication.
 
