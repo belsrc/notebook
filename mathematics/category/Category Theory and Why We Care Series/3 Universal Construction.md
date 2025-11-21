@@ -26,9 +26,11 @@ In the category $\text{Set}$:
 * **Arrows:** functions
 
 Two sets $A$ and $B$ are said to have the same structure (same number of elements) if there exist functions:
+
 $$
 f: A \to B \quad \text{and} \quad f^{-1}: B \to A
 $$
+
 ($f^{-1}$ is read as "the inverse of $f$")
 
 ![](../../../images/category/ctwwc-inverse-fn.png)
@@ -110,24 +112,31 @@ Such definitions are **portable** across categories (e.g., same definition of si
 #### Step 1: The Construction
 
 We want an object $A \land B$ with arrows:
+
 $$
 \pi_1: A \land B \to A, \quad \pi_2: A \land B \to B
 $$
+
 representing that from a proof of $A \land B$, we can extract proofs of both $A$ and $B$.
 
 #### Step 2: The Universal Property
 
 For any other proposition $C$ with proofs:
+
 $$
 f_1: C \to A, \quad f_2: C \to B
 $$
+
 there must exist a **unique** arrow $f: C \to A \land B$ such that:
+
 $$
 \pi_1 \circ f = f_1 \quad \text{and} \quad \pi_2 \circ f = f_2
 $$
+
 This makes the following diagram **commute**:
 
 ![](../../../images/category/ctwwc-commute.png)
+
 When all paths from top to bottom yield the same result, we say the diagram **commutes**. And the diagram is called a **commutative diagram**.
 
 #### Step 3: Generalization
@@ -143,13 +152,17 @@ Let:
 * $B = \text{Integer}$
 
 We know that:
+
 $$
 \pi_1 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{String}
 $$
+
 and
+
 $$
 \pi_2 \,:\, \text{String} \,\times\, \text{Integer} \rightarrow \text{Integer}
 $$
+
 the most natural guess of a term is the pair $(\text{String},\text{Integer})$. Since the projection $\pi_1$ takes a pair and returns a $\text{String}$, it would be the function that returns the first element of the pair. And since the projection $\pi_2$ takes a pair and returns an $\text{Integer}$, it would be the function that returns the second element of the pair.
 
 So the pair type $(\text{String},\text{Integer})$ is a valid candidate for the product.
@@ -157,17 +170,23 @@ So the pair type $(\text{String},\text{Integer})$ is a valid candidate for the p
 #### Proof
 
 For any type $X$ with:
+
 $$
 f_1: X \to \text{String}, \quad f_2: X \to \text{Integer}
 $$
+
 there exists a **unique function**:
+
 $$
 f(x) = (f_1(x), f_2(x))
 $$
+
 satisfying:
+
 $$
 \pi_1 \circ f = f_1, \quad \pi_2 \circ f = f_2
 $$
+
 Thus, $(\text{String},\text{Integer})$ is the **categorical product** of $\text{String}$ and $\text{Integer}$.
 
 By symmetry, $(B, A)$ is **isomorphic** to $(A, B)$ via the swap function.

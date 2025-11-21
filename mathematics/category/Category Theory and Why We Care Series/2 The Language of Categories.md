@@ -30,15 +30,19 @@ where $A = \text{dom}(f)$ and $B = \text{cod}(f)$.
 ### Composition
 
 If two arrows are *composable* (i.e. codomain of $f$ equals domain of $g$):
+
 $$
 f : A \to B, \quad g : B \to C
 $$
+
 ![](../../../images/category/ctwwc-abstract-series.png)
 
 then there must exist a **composite arrow**
+
 $$
 g \circ f : A \to C
 $$
+
 ![](../../../images/category/ctwwc-abstract-compose.png)
 
 Composition is **not defined** when domains/codomains don’t align.
@@ -48,10 +52,13 @@ Composition is **not defined** when domains/codomains don’t align.
 Composition must be **associative**.
 
 For all arrows:
+
 $$
 f : A \to B, \quad g : B \to C, \quad h : C \to D
 $$
+
 then
+
 $$
 h \circ (g \circ f) = (h \circ g) \circ f
 $$
@@ -59,13 +66,17 @@ $$
 ### Identity
 
 For every object $A$, there exists an **identity arrow**
+
 $$
 \text{id}_A : A \to A
 $$
+
 which acts as a **unit for composition** or more generally, a "do nothing" operation:
+
 $$
 f \circ \text{id}_A = f = \text{id}_B \circ f
 $$
+
 for any arrow $f : A \to B$.
 
 > [!NOTE]
@@ -97,18 +108,22 @@ So, a category technically consists of **classes** of objects and morphisms.
 
 
 ![](../../../images/category/ctwwc-set-cat.png)
+
 ![](../../../images/category/ctwwc-set-cat-abstract.png)
 
 **Verification:**
 
 * **Associativity:** Function composition is inherently associative.
 * **Identity laws:** For any $f: A \to B$,
+
 $$
 f \circ \text{id}_A = f, \quad \text{id}_B \circ f = f
 $$
+
 proven by direct substitution:
 
 $$(f \circ \text{id}_A)(x) = f(\text{id}_A(x)) = f(x)$$
+
 $$(\text{id}_B \circ f)(x) = \text{id}_B(f(x)) = f(x)$$
 
 Thus, $\text{Set}$ satisfies all categorical axioms.
