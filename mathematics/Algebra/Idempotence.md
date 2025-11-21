@@ -11,7 +11,7 @@ Idempotence is the property of certain operations whereby they can be applied mu
 
 ## Definition
 
-An element $x$ of a set $S$ equipped with a binary operator $*$ is said to be idempotent under $*$ if:
+An element $x$ of a set $S$ equipped with a binary operator $\cdot$ is said to be idempotent under $\cdot$ if:
 
 $x \cdot x = x$
 

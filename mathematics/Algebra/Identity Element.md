@@ -10,15 +10,15 @@ An identity element or neutral element of a binary operation is an element that 
 
 ## Definition
 
-Let $(S,*)$ be a set $S$ equipped with a binary operation $*$. Then an element $e$ of $S$ is called left identity if $e * s = s \ \forall\  s \in S$, and a right identity if $s * e = s \ \forall\  s \in S$. If $e$ is both a left identity and a right identity, then it is called a two-sided identity, or simply an identity.
+Let $(S,\cdot)$ be a set $S$ equipped with a binary operation $\cdot$. Then an element $e$ of $S$ is called left identity if $e \cdot s = s \ \forall\  s \in S$, and a right identity if $s \cdot e = s \ \forall\  s \in S$. If $e$ is both a left identity and a right identity, then it is called a two-sided identity, or simply an identity.
 
 An identity with respect to addition is called an additive identity (often denoted as $0$) and an identity with respect to multiplication is called multiplicative identity (often denoted as $1$). In the case of a group for example, the identity element is sometimes simple denoted by the symbol $e$.
 
 ## Properties
 
-For two elements $\{e,f\}$ with $*$ defined by $e *e = f * e = e$ and $f *f = e * f = f$ then $S = \{e,f\}$, with the equalities given, $S$ is a semigroup. It demonstrates the possibility for $(S,*)$ to have several left identities. In fact, every element can be a left identity. In a similar manner, there can be several left identities. But there is both a right identity and a left identity, then they must be equal, resulting in a single two-sided identity.
+For two elements $\{e,f\}$ with $\cdot$ defined by $e \cdot e = f \cdot e = e$ and $f \cdot f = e \cdot f = f$ then $S = \{e,f\}$, with the equalities given, $S$ is a semigroup. It demonstrates the possibility for $(S,\cdot)$ to have several left identities. In fact, every element can be a left identity. In a similar manner, there can be several left identities. But there is both a right identity and a left identity, then they must be equal, resulting in a single two-sided identity.
 
-Is is also quite possible for $(S,*)$ to have no identity element, such as the case of even integers under the multiplication operation.
+Is is also quite possible for $(S,\cdot)$ to have no identity element, such as the case of even integers under the multiplication operation.
 
 ## Examples
 
