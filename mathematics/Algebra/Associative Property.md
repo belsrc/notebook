@@ -59,19 +59,19 @@ But, $A \leftrightarrow B \leftrightarrow C$ most commonly means $(A \leftrighta
 - In arithmetic, addition and multiplication of real numbers are associative.
 
 $$
+  \begin{align*}
   \begin{rcases}
     (x + y) + z = x + (y + z) = x + y + x\\
     (xy)z = x(yz) = xyz
   \end{rcases}\text{ }\forall\text{ } x, y, z \in \mathbb{R}
+  \end{align*}
 $$
 
 $$
-  \begin{aligned}
   \begin{rcases}
     (x + y) + z = x + (y + z) = x + y + x\\
     (xy)z = x(yz) = xyz
   \end{rcases}\text{ }\forall\text{ } x, y, z \in \mathbb{R}
-	\end{aligned}
 $$
 
 - Taking the intersection or the union of sets:
