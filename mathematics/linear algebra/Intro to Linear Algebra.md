@@ -39,15 +39,23 @@ Additionally, the Computer Science perspective.
 
 In $\mathbb{R}^n$ (n-dimensional real space), we write vectors as:
 
-$$\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+$$
+\vec{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}
+$$
 
 **Example in $\mathbb{R}^2$ (2D):**
-$$\vec{v} = \begin{bmatrix} 3 \\ 4 \end{bmatrix}$$
+
+$$
+\vec{v} = \begin{bmatrix} 3 \\ 4 \end{bmatrix}
+$$
 
 This means: starting from the origin $(0,0)$, move 3 units right and 4 units up. Its **magnitude** is $\| \vec{v} \| = \sqrt{3^2 + 4^2} = 5$
 
 **Example in $\mathbb{R}^3$ (3D):**
-$$\vec{w} = \begin{bmatrix} 1 \\ -2 \\ 4 \end{bmatrix}$$
+
+$$
+\vec{w} = \begin{bmatrix} 1 \\ -2 \\ 4 \end{bmatrix}
+$$
 
 This means: from origin, move 1 unit along x-axis, -2 units along y-axis, 4 units along z-axis.
 
@@ -60,7 +68,7 @@ This means: from origin, move 1 unit along x-axis, -2 units along y-axis, 4 unit
 
 #### Questions
 
-**Q1:** If I have a vector $\mathbf{p} = \begin{bmatrix} 5 \\ 5 \end{bmatrix}$ representing a position, and I draw it starting from the origin, what direction does it point? 
+**Q1:** If there is a vector $\mathbf{p} = \begin{bmatrix} 5 \\ 5 \end{bmatrix}$ representing a position, and it is drawn starting from the origin, what direction does it point? 
 
 **A:** 45° northeast. The components are equal, so it bisects the angle.
 
@@ -85,28 +93,28 @@ The vector form makes the data **computable** rather than just descriptive.
 
 Consider a game where a character is at position $(10, 5)$ and needs to move to position $(13, 9)$.
 
-**Tasks:**
-1. Write the displacement vector $\mathbf{d}$ that represents this movement
+**Questions:**
+**Q**: Write the displacement vector $\mathbf{d}$ that represents this movement.
 
-- $\begin{bmatrix} 13 \\ 9 \end{bmatrix} - \begin{bmatrix} 10 \\ 5 \end{bmatrix} = \begin{bmatrix} 3 \\ 4 \end{bmatrix} = \mathbf{d}$
+**A**: $\begin{bmatrix} 13 \\ 9 \end{bmatrix} - \begin{bmatrix} 10 \\ 5 \end{bmatrix} = \begin{bmatrix} 3 \\ 4 \end{bmatrix} = \mathbf{d}$
 
-2. If the character starts at (0, 0) instead, what position would this same displacement vector $\mathbf{d}$ take them to?
+**Q**: If the character starts at (0, 0) instead, what position would this same displacement vector $\mathbf{d}$ take them to?
 
-- $(3, 4)$
+**A**: $(3, 4)$
 
-3. What does this tell you about the difference between *position* and *displacement*?
+**Q**: What does this tell you about the difference between *position* and *displacement*?
 
+**A**:
 - **Displacement** is *always* a vector (direction + magnitude of movement)
 - **Position** is a *point* in space
 - **Position vector** is the displacement from origin to that point
 
-```
-Position = "where you are" (a point)
-Displacement = "how you moved" (a vector)
-Position vector = displacement from origin to a point
-```
+> [!NOTE]
+> Position = "where you are" (a point)
+> Displacement = "how you moved" (a vector)
+> Position vector = displacement from origin to a point
 
-## Lesson 1.2: Vector Operations and Properties
+### Lesson 1.2: Vector Operations and Properties
 
 We can perform two fundamental operations on vectors:
 
@@ -114,12 +122,13 @@ We can perform two fundamental operations on vectors:
 
 Adding vectors means placing them **tip-to-tail**. Algebraically, you just add the corresponding components.
 
-Given $\mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}$ and $\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$
-
-$$\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}$$
+Given $\mathbf{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}$ and $\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$ is $\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}$
 
 **Example:**
-$$\begin{bmatrix} 3 \\ 2 \end{bmatrix} + \begin{bmatrix} 1 \\ 4 \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \end{bmatrix}$$
+
+$$
+\begin{bmatrix} 3 \\ 2 \end{bmatrix} + \begin{bmatrix} 1 \\ 4 \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \end{bmatrix}
+$$
 
 **Geometric interpretation:** Place the tail of $\mathbf{v}$ at the head of $\mathbf{u}$. The sum is the vector from the tail of $\mathbf{u}$ to the head of $\mathbf{v}$ (tip-to-tail method).
 
@@ -133,10 +142,15 @@ A **scalar** is just a single number that scales a vector. Multiplying a vector 
 
 Given scalar $c \in \mathbb{R}$ and vector $\vec{v}$:
 
-$$c\mathbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}$$
+$$
+c\mathbf{v} = \begin{bmatrix} cv_1 \\ cv_2 \\ \vdots \\ cv_n \end{bmatrix}
+$$
 
 **Example:**
-$$3 \begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 3 \times 2 \\ 3 \times -1 \end{bmatrix} = \begin{bmatrix} 6 \\ -3 \end{bmatrix}$$
+
+$$
+3 \begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 3 \times 2 \\ 3 \times -1 \end{bmatrix} = \begin{bmatrix} 6 \\ -3 \end{bmatrix}
+$$
 
 **Geometric interpretation:** 
 - If $c > 1$: stretches the vector
@@ -198,15 +212,16 @@ const newPosition: Vec3 = [
 
 #### Questions
 
-**Q1:** Compute: $2\begin{bmatrix} 1 \\ 3 \\ -2 \end{bmatrix} + 3\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
+**Q1:** Compute:  $2\begin{bmatrix} 1 \\ 3 \\ -2 \end{bmatrix} + 3\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$
 
 **A:** $2\begin{bmatrix} 1 \\ 3 \\ -2 \end{bmatrix} + 3\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \\ 6 \\ -4 \end{bmatrix} + \begin{bmatrix} 0 \\ 3 \\ 3 \end{bmatrix} = \begin{bmatrix} 2 \\ 9 \\ -1 \end{bmatrix}$
 
 **Q2:** If $\mathbf{u}$ represents velocity "5 m/s east, 3 m/s north" and you double it ($2\mathbf{u}$), what does that mean physically? What about $-1\mathbf{u}$?
 
 **A:** 
-- $2\begin{bmatrix} 5 \\ 3 \end{bmatrix} = \begin{bmatrix} 10 \\ 6 \end{bmatrix}$ : It is moving twice as fast.
-- $-1\begin{bmatrix} 5 \\ 3 \end{bmatrix} = \begin{bmatrix} -5 \\ -3 \end{bmatrix}$ : It's direction is reversed.
+$2\begin{bmatrix} 5 \\ 3 \end{bmatrix} = \begin{bmatrix} 10 \\ 6 \end{bmatrix}$ : It is moving twice as fast.
+
+$-1\begin{bmatrix} 5 \\ 3 \end{bmatrix} = \begin{bmatrix} -5 \\ -3 \end{bmatrix}$ : It's direction is reversed.
 
 Scalar multiplication scales magnitude and (if negative) reverses direction.
 
@@ -214,31 +229,33 @@ Scalar multiplication scales magnitude and (if negative) reverses direction.
 
 **A:** If $\mathbf{T_1}$ and $\mathbf{T_2}$ are **translations** (pure vector additions), then YES, order doesn't matter:
 
-```
-vertex + T₁ + T₂ = vertex + T₂ + T₁  ✓ (commutative)
-```
+$v + T_1 + T_2 = v + T_2 + T_1 \quad \text{✓ (commutative)}$
 
 BUT if they're general transformations (rotations, scaling, shearing), order DOES matter. Rotate a rectangle 45°, then scale by 2× horizontally gives a different result than scaling first, then rotating. Vector addition is commutative, but **transformation composition** (which uses matrix multiplication, coming later) is NOT commutative.
 
 #### Exercise
 
 Given vectors:
-$$\mathbf{a} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, \quad \mathbf{c} = \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix}$$
 
-**Compute:**
-1. $3\mathbf{a} - 2\mathbf{b}$
+$$
+\mathbf{a} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, \quad \mathbf{c} = \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix}
+$$
 
-**A:** $3a - 2b = 3\begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} - 2\begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} = \begin{bmatrix} 6 \\ -3 \\ 9 \end{bmatrix} - \begin{bmatrix} 2 \\ 4 \\ 0 \end{bmatrix} = \begin{bmatrix} 4 \\ -7 \\ 9 \end{bmatrix}$
+**Q**: Compute $3\mathbf{a} - 2\mathbf{b}$
 
-2. $\mathbf{a} + \mathbf{b} + \mathbf{c}$
+**A:**
+$3a - 2b = 3\begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} - 2\begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} = \begin{bmatrix} 6 \\ -3 \\ 9 \end{bmatrix} - \begin{bmatrix} 2 \\ 4 \\ 0 \end{bmatrix} = \begin{bmatrix} 4 \\ -7 \\ 9 \end{bmatrix}$
 
-**A:** $a + b + c = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} + \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} + \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 3 \\ 1 \\ 3 \end{bmatrix} + \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 2 \\ 2 \\ 5 \end{bmatrix}$
+**Q**: Compute $\mathbf{a} + \mathbf{b} + \mathbf{c}$
 
-3. Is there a scalar $k$ such that $k\mathbf{a} = \mathbf{b}$? Why or why not?
+**A:**
+$a + b + c = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} + \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix} + \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 3 \\ 1 \\ 3 \end{bmatrix} + \begin{bmatrix} -1 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 2 \\ 2 \\ 5 \end{bmatrix}$
+
+**Q**: Is there a scalar $k$ such that $k\mathbf{a} = \mathbf{b}$? Why or why not?
 
 **A:** No. For one vector to be a scalar multiple of another, all components must scale by the same factor. When this is true, we say the vectors are parallel or collinear (lie on the same line through the origin).
 
-4. In a physics simulation, you have forces $\mathbf{F_1}$, $\mathbf{F_2}$, $\mathbf{F_3}$ acting on an object. The net force is $\mathbf{F_{net}} = \mathbf{F_1} + \mathbf{F_2} + \mathbf{F_3}$. Why does vector addition model this correctly?
+**Q**: In a physics simulation, you have forces $\mathbf{F_1}$, $\mathbf{F_2}$, $\mathbf{F_3}$ acting on an object. The net force is $\mathbf{F_{net}} = \mathbf{F_1} + \mathbf{F_2} + \mathbf{F_3}$. Why does vector addition model this correctly?
 
 **A:** Forces are vectors because they have:
 - **Magnitude** (strength of force)
@@ -250,7 +267,9 @@ Geometrically, the tip-to-tail method shows this: if force $\mathbf{F_1}$ would 
 
 Component-wise addition works because forces in perpendicular directions don't interfere:
 
-$\begin{bmatrix} 10 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 5 \\ 0 \end{bmatrix} = \begin{bmatrix} 10 \\ 5 \\ 0 \end{bmatrix}$
+$$
+\begin{bmatrix} 10 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 5 \\ 0 \end{bmatrix} = \begin{bmatrix} 10 \\ 5 \\ 0 \end{bmatrix}
+$$
 
 The x-forces combine independently from y-forces. This **independence of components** is why vector addition models physical reality correctly.
 
@@ -269,19 +288,24 @@ These operations must satisfy **8 axioms** for all vectors $\mathbf{u}, \mathbf{
 These define the algebraic structure of vectors under _addition_ — specifically, they make $(V, +)$ into an **abelian (commutative) group**.
 
 **Closure:** Adding any two vectors in $V$ produces another vector that is _also_ in $V$. This guarantees the operation $+$ is _well-defined_ — you never “leave” the space by adding its elements.
+
 $$u + v \in V$$
 
 **Commutativity:** Order of addition doesn’t matter; the result is the same. This gives us flexibility in algebraic manipulation and geometric interpretation.
+
 $$u + v = v + u$$
 
 **Associativity:** Grouping of vectors doesn’t affect the outcome. This ensures that “sum of several vectors” is unambiguous regardless of how we parenthesize.
+
 $$(u + v) + w = u + (v + w)$$
 
 **Identity:** There exists a special vector (the **zero vector**) that leaves any vector unchanged when added. The zero vector serves as the **neutral element** under addition.
-$$\exists \mathbf{0} \text{ such that } v + \mathbf{0} = v$$
+
+$$v + \mathbf{0} = v \ \forall\  v \in V$$
 
 **Inverse:** Every vector has a corresponding **negative** that cancels it under addition. The inverse ensures that “subtraction” is possible within $V$.
-$$\exists -v \text{ such that } v + (-v) = \mathbf{0}$$
+
+$$v + (-v) = \mathbf{0} \ \forall\  v \in V$$
 
 #### Scalar Multiplication Axioms
 
@@ -289,22 +313,31 @@ $$\exists -v \text{ such that } v + (-v) = \mathbf{0}$$
 $$a \cdot v \in V$$
 
 **Distributivity:** These are **two separate distributive properties** that link vector addition and scalar addition with scalar multiplication. The first distributes scalar multiplication over **vector addition**. The second distributes scalar addition over **scalar multiplication**.
-$$a \cdot (u + v) = a \cdot u + a \cdot v \\ (a + b) \cdot v = a \cdot v + b \cdot v$$
+
+$$
+\begin{aligned}
+a \cdot (u + v) = a \cdot u + a \cdot v \\
+(a + b) \cdot v = a \cdot v + b \cdot v
+\end{aligned}
+$$
 
 **Compatibility:** Scalar multiplication should respect the multiplication in the underlying field. “Scaling twice” by $a$ and $b$ is equivalent to scaling once by $ab$. The scalar $1$ (multiplicative identity in $F$) acts neutrally.
+
 $$a \cdot (b \cdot v) = (ab) \cdot v \\ 1 \cdot v = v$$
 
 #### The $\mathbb{R}^n$ Notation
 
 ##### What It Means
 
-$\mathbb{R}$ = the set of all real numbers: $\{\ldots, -2.5, -1, 0, 1, \pi, 3.7, \ldots\}$
+$\mathbb{R}$ = the set of all real numbers: $\{ \ldots, -2.5, -1, 0, 1, \pi, 3.7, \ldots \}$
 
 $\mathbb{R}^n$ = the set of all **ordered n-tuples** of real numbers
 
 More formally:
 
-$$\mathbb{R}^n = \left\{ \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \mid x_1, x_2, \ldots, x_n \in \mathbb{R} \right\}$$
+$$
+\mathbb{R}^n = \left\{\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \mid x_1, x_2, \ldots, x_n \in \mathbb{R} \right\}
+$$
 
 ##### Concrete Examples
 
@@ -337,7 +370,7 @@ The superscript $n$ tells you:
 ##### Why "Ordered" Matters
 
 In $\mathbb{R}^2$:
-- $\begin{bmatrix} 3 \\ 5 \end{bmatrix} \neq \begin{bmatrix} 5 \\ 3 \end{bmatrix}$
+$$\begin{bmatrix} 3 \\ 5 \end{bmatrix} \neq \begin{bmatrix} 5 \\ 3 \end{bmatrix}$$
 
 The position (order) of each number matters! The first is point (3, 5), the second is point (5, 3).
 
@@ -605,25 +638,46 @@ In other words, find $c_1$ and $c_2$ such that: $c_1\mathbf{v_1} + c_2\mathbf{v_
 **A1:** We want: $c_1\begin{bmatrix} 1 \\ 2 \end{bmatrix} + c_2\begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} 7 \\ 5 \end{bmatrix}$
 
 **Step 1:** Write the component equations:
-$$c_1 + 3c_2 = 7 \quad \text{...(equation 1)}$$
-$$2c_1 + c_2 = 5 \quad \text{...(equation 2)}$$
+$$
+\begin{align}
+c_1 + 3c_2 = 7 \quad \text{...(equation 1)} \\
+2c_1 + c_2 = 5 \quad \text{...(equation 2)}
+\end{align}
+$$
 
 **Step 2:** Solve the system. From equation (1):
 $$c_1 = 7 - 3c_2$$
 
 **Step 3:** Substitute into equation (2):
-$$2(7 - 3c_2) + c_2 = 5$$
-$$14 - 6c_2 + c_2 = 5$$
-$$14 - 5c_2 = 5$$
-$$-5c_2 = -9$$
-$$c_2 = \frac{9}{5}$$
+$$
+\begin{align}
+2(7 - 3c_2) + c_2 = 5 \\
+14 - 6c_2 + c_2 = 5 \\
+14 - 5c_2 = 5 \\
+-5c_2 = -9 \\
+c_2 = \frac{9}{5}
+\end{align}
+$$
 
 **Step 4:** Find $c_1$:
 
-$$c_1 = 7 - 3 \cdot \frac{9}{5} = 7 - \frac{27}{5} = \frac{35 - 27}{5} = \frac{8}{5}$$
+$$
+\begin{align}
+c_1 &= 7 - 3 \cdot \frac{9}{5} \\
+&= 7 - \frac{27}{5} \\
+&= \frac{35 - 27}{5} \\
+&= \frac{8}{5}
+\end{align}
+$$
 
 **Verification:**
-$$\frac{8}{5}\begin{bmatrix} 1 \\ 2 \end{bmatrix} + \frac{9}{5}\begin{bmatrix} 3 \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{8}{5} + \frac{27}{5} \\ \frac{16}{5} + \frac{9}{5} \end{bmatrix} = \begin{bmatrix} 7 \\ 5 \end{bmatrix}$$
+$$
+\begin{align}
+&\frac{8}{5}\begin{bmatrix} 1 \\ 2 \end{bmatrix} + \frac{9}{5}\begin{bmatrix} 3 \\ 1 \end{bmatrix} \\
+&= \begin{bmatrix} \frac{8}{5} + \frac{27}{5} \\ \frac{16}{5} + \frac{9}{5} \end{bmatrix} \\
+&= \begin{bmatrix} 7 \\ 5 \end{bmatrix}
+\end{align}
+$$
 
 So $\mathbf{b}$ **is** in $\text{span}\{\mathbf{v_1}, \mathbf{v_2}\}$
 
@@ -659,21 +713,27 @@ These vectors span $\mathbb{R}^2$.
 **Part 2:**
 
 With $\mathbf{f} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and $\mathbf{r} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$: Note that $\mathbf{r} = 2\mathbf{f}$ (parallel!), so:
-$$c_1\mathbf{f} + c_2\mathbf{r} = c_1\begin{bmatrix} 1 \\ 1 \end{bmatrix} + c_2\begin{bmatrix} 2 \\ 2 \end{bmatrix} = (c_1 + 2c_2)\begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
+$$
+\begin{align}
+&c_1\mathbf{f} + c_2\mathbf{r} \\
+&= c_1\begin{bmatrix} 1 \\ 1 \end{bmatrix} + c_2\begin{bmatrix} 2 \\ 2 \end{bmatrix} \\
+&= (c_1 + 2c_2)\begin{bmatrix} 1 \\ 1 \end{bmatrix}
+\end{align}
+$$
 This is only multiples of $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ - a **diagonal line** through Q1 and Q3 at 45°. You can't reach positions like $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ (pure east) or $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ (pure north). Your movement is confined to that 45° line! In game terms: if "forward" and "strafe" both move you northeast, you can never go purely north or purely east - you're stuck on a diagonal.
 
 #### Exercise
 
-**Problem 1:** Determine if $\mathbf{b} = \begin{bmatrix} 4 \\ 7 \end{bmatrix}$ is in $\text{span}\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix}\right\}$
+**Q**: Determine if $\mathbf{b} = \begin{bmatrix} 4 \\ 7 \end{bmatrix}$ is in $\text{span}\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \end{bmatrix}\right\}$
 Set up and solve the system of equations.
 
 **A:**
 
-**Problem 2:** What is $\text{span}\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}\right\}$ in $\mathbb{R}^3$? Describe geometrically.
+**Q**: What is $\text{span}\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}\right\}$ in $\mathbb{R}^3$? Describe geometrically.
 
 **A:**
 
-**Problem 3:** In machine learning, you're doing dimensionality reduction. You have data points in $\mathbb{R}^3$ but want to project them onto a 2D plane for visualization. You choose basis vectors:
+**Q**: In machine learning, you're doing dimensionality reduction. You have data points in $\mathbb{R}^3$ but want to project them onto a 2D plane for visualization. You choose basis vectors:
 $$\mathbf{b_1} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad \mathbf{b_2} = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}$$
 
 What points in 3D space can be represented using only these two basis vectors? (i.e., what is their span?)
