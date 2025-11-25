@@ -1,6 +1,7 @@
 ---
 tags:
   - math
+  - linear-alg
 date: 2025-10-27
 gardening: 🌱
 reference:
