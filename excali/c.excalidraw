@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "text",
-      "version": 50,
-      "versionNonce": 1434265245,
+      "version": 51,
+      "versionNonce": 1885214478,
       "isDeleted": false,
       "id": "jhhDl7y6pulNcJJdXgWeW",
       "fillStyle": "solid",
@@ -26,7 +26,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348015,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -37,12 +37,14 @@
       "containerId": null,
       "originalText": "1. Acquiring memory",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a0",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 94,
-      "versionNonce": 692313523,
+      "version": 95,
+      "versionNonce": 1568483538,
       "isDeleted": false,
       "id": "Th_ymCdbq4FRAHrA52jWL",
       "fillStyle": "solid",
@@ -62,7 +64,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348015,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -73,12 +75,14 @@
       "containerId": null,
       "originalText": "2. Initializing memory",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a1",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 88,
-      "versionNonce": 1673022205,
+      "version": 89,
+      "versionNonce": 585368910,
       "isDeleted": false,
       "id": "8HIXjFhBYq_p7OfXQcYqY",
       "fillStyle": "solid",
@@ -98,7 +102,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348016,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -109,12 +113,14 @@
       "containerId": null,
       "originalText": "3. De-initializing memory",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a2",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 128,
-      "versionNonce": 184790867,
+      "version": 129,
+      "versionNonce": 1900297874,
       "isDeleted": false,
       "id": "KLVXdP2nNcGvVshQjjtRZ",
       "fillStyle": "solid",
@@ -134,7 +140,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348016,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -145,12 +151,14 @@
       "containerId": null,
       "originalText": "4. Freeing memory",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a3",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 54,
-      "versionNonce": 1540350813,
+      "version": 55,
+      "versionNonce": 1662135182,
       "isDeleted": false,
       "id": "vx-CwQCCslNenq-BITPDL",
       "fillStyle": "solid",
@@ -170,7 +178,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348016,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -181,12 +189,14 @@
       "containerId": null,
       "originalText": "malloc",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a4",
+      "autoResize": true
     },
     {
       "type": "arrow",
-      "version": 85,
-      "versionNonce": 626708484,
+      "version": 86,
+      "versionNonce": 790797394,
       "isDeleted": false,
       "id": "GR2YcZt3vmzXreiZLqbVE",
       "fillStyle": "solid",
@@ -208,7 +218,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -225,12 +235,13 @@
           81,
           -1
         ]
-      ]
+      ],
+      "index": "a5"
     },
     {
       "type": "text",
-      "version": 189,
-      "versionNonce": 1947749619,
+      "version": 190,
+      "versionNonce": 1059162574,
       "isDeleted": false,
       "id": "j8t6cv4vCWx8gYAsM-4ol",
       "fillStyle": "solid",
@@ -250,7 +261,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348016,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -261,12 +272,14 @@
       "containerId": null,
       "originalText": "new",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a6",
+      "autoResize": true
     },
     {
       "type": "arrow",
-      "version": 166,
-      "versionNonce": 2097819524,
+      "version": 167,
+      "versionNonce": 1693401618,
       "isDeleted": false,
       "id": "ppBeaOUi-LbQGsGjQQfX-",
       "fillStyle": "solid",
@@ -288,7 +301,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -305,12 +318,13 @@
           221,
           -8
         ]
-      ]
+      ],
+      "index": "a7"
     },
     {
       "type": "arrow",
-      "version": 80,
-      "versionNonce": 1402305212,
+      "version": 81,
+      "versionNonce": 371925006,
       "isDeleted": false,
       "id": "yCCWbfqXo9lmg9tsmEv6m",
       "fillStyle": "solid",
@@ -332,7 +346,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -349,12 +363,13 @@
           68,
           18
         ]
-      ]
+      ],
+      "index": "a8"
     },
     {
       "type": "text",
-      "version": 182,
-      "versionNonce": 840265661,
+      "version": 183,
+      "versionNonce": 228667346,
       "isDeleted": false,
       "id": "mjRszlVXBUU8dFxkBzMLP",
       "fillStyle": "solid",
@@ -374,7 +389,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348016,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -385,12 +400,14 @@
       "containerId": null,
       "originalText": "delete",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "a9",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 105,
-      "versionNonce": 940062355,
+      "version": 106,
+      "versionNonce": 2082991694,
       "isDeleted": false,
       "id": "6RQ0yGNTWZfJIAxxuOQFh",
       "fillStyle": "solid",
@@ -410,7 +427,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348017,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -421,12 +438,14 @@
       "containerId": null,
       "originalText": "free",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aA",
+      "autoResize": true
     },
     {
       "type": "arrow",
-      "version": 74,
-      "versionNonce": 983506564,
+      "version": 75,
+      "versionNonce": 760178066,
       "isDeleted": false,
       "id": "ldIuzP0cgHWCf0djspyak",
       "fillStyle": "solid",
@@ -448,7 +467,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -465,12 +484,13 @@
           87,
           2
         ]
-      ]
+      ],
+      "index": "aB"
     },
     {
       "type": "arrow",
-      "version": 61,
-      "versionNonce": 424344508,
+      "version": 62,
+      "versionNonce": 502330510,
       "isDeleted": false,
       "id": "8TOYepFeuIDISsjxExLZb",
       "fillStyle": "solid",
@@ -492,7 +512,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -509,12 +529,13 @@
           72,
           -3
         ]
-      ]
+      ],
+      "index": "aC"
     },
     {
       "type": "arrow",
-      "version": 109,
-      "versionNonce": 834711044,
+      "version": 110,
+      "versionNonce": 758178642,
       "isDeleted": false,
       "id": "_9G5k9xr7lmW55qD8H6pe",
       "fillStyle": "solid",
@@ -536,7 +557,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -553,12 +574,13 @@
           187,
           32
         ]
-      ]
+      ],
+      "index": "aD"
     },
     {
       "type": "line",
-      "version": 278,
-      "versionNonce": 1248601148,
+      "version": 279,
+      "versionNonce": 624898766,
       "isDeleted": false,
       "id": "nNj9xV-q7A96PS7qBE48h",
       "fillStyle": "solid",
@@ -580,7 +602,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -597,12 +619,13 @@
           8,
           302
         ]
-      ]
+      ],
+      "index": "aE"
     },
     {
       "type": "line",
-      "version": 186,
-      "versionNonce": 2097433988,
+      "version": 187,
+      "versionNonce": 933013778,
       "isDeleted": false,
       "id": "kAuChJDXUJjUpwklk7T-a",
       "fillStyle": "solid",
@@ -624,7 +647,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276050516,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -641,12 +664,13 @@
           12,
           316
         ]
-      ]
+      ],
+      "index": "aF"
     },
     {
       "type": "text",
-      "version": 33,
-      "versionNonce": 1420455965,
+      "version": 34,
+      "versionNonce": 481011982,
       "isDeleted": false,
       "id": "5JSCPFpoW1VjKb_iAw5qK",
       "fillStyle": "solid",
@@ -666,7 +690,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348017,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -677,12 +701,14 @@
       "containerId": null,
       "originalText": "C",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aG",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 23,
-      "versionNonce": 1971973171,
+      "version": 24,
+      "versionNonce": 336180946,
       "isDeleted": false,
       "id": "jwLz__go6kYTio42wA0oS",
       "fillStyle": "solid",
@@ -702,7 +728,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348017,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -713,12 +739,14 @@
       "containerId": null,
       "originalText": "C++",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aH",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 380,
-      "versionNonce": 1904239741,
+      "version": 381,
+      "versionNonce": 1404000078,
       "isDeleted": false,
       "id": "TkA30kYBR6ksg0KdSCAxG",
       "fillStyle": "solid",
@@ -738,7 +766,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348017,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -749,12 +777,14 @@
       "containerId": null,
       "originalText": "1 & 2\ntogether",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "aI",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 324,
-      "versionNonce": 813952467,
+      "version": 325,
+      "versionNonce": 51317906,
       "isDeleted": false,
       "id": "LW-KRXxDQEfadk0qx3uNh",
       "fillStyle": "solid",
@@ -774,7 +804,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348017,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -785,12 +815,14 @@
       "containerId": null,
       "originalText": "3 & 4\ntogether",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "aJ",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 329,
-      "versionNonce": 2086194397,
+      "version": 330,
+      "versionNonce": 1117994382,
       "isDeleted": false,
       "id": "citzRPGcblfS3Seo55C0L",
       "fillStyle": "solid",
@@ -810,7 +842,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348018,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -821,12 +853,14 @@
       "containerId": null,
       "originalText": "Basis of RAII \n(Resource Acquisition Is Initializtion)",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "aK",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 303,
-      "versionNonce": 739031923,
+      "version": 306,
+      "versionNonce": 268449934,
       "isDeleted": false,
       "id": "SGaPtzUnWC-eEsVBMFPXF",
       "fillStyle": "solid",
@@ -836,7 +870,7 @@
       "opacity": 100,
       "angle": 0,
       "x": 284.21313505622373,
-      "y": 800.319289545228,
+      "y": 802.3052271212523,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 140.625,
@@ -846,7 +880,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348019,
+      "updated": 1765082396894,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -857,12 +891,14 @@
       "containerId": null,
       "originalText": "struct foo {\n  FILE *bar;\n}",
       "lineHeight": 1.2,
-      "baseline": 67
+      "baseline": 67,
+      "index": "aL",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 362,
-      "versionNonce": 1959078205,
+      "version": 363,
+      "versionNonce": 1858100174,
       "isDeleted": false,
       "id": "tg9HAfmcFWok5QT9FPV-u",
       "fillStyle": "solid",
@@ -882,7 +918,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348019,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -893,12 +929,14 @@
       "containerId": null,
       "originalText": "If you want to make one that is \nnot on the stack, that is going to\nbe dynaimcally allocated onto the\nheap. C std lib provides #1 & #4.\nWhich is malloc and free. What they\ndo is go to the heap and reserve\nsomething of the size of the struct\nand return it.",
       "lineHeight": 1.25,
-      "baseline": 193
+      "baseline": 193,
+      "index": "aM",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 67,
-      "versionNonce": 74110227,
+      "version": 68,
+      "versionNonce": 551456786,
       "isDeleted": false,
       "id": "Oi-fA4IuruB0fST2VRUhs",
       "fillStyle": "solid",
@@ -918,7 +956,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348020,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -929,12 +967,14 @@
       "containerId": null,
       "originalText": "foo *A = malloc(sizeof(foo)));",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 19,
+      "index": "aN",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 255,
-      "versionNonce": 1814493597,
+      "version": 275,
+      "versionNonce": 624738898,
       "isDeleted": false,
       "id": "G0TkwSRIPjxtCeHFSA1Rj",
       "fillStyle": "solid",
@@ -943,8 +983,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 608,
-      "y": 920,
+      "x": 611.9718751520484,
+      "y": 918.0140624239759,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 375.3397216796875,
@@ -954,7 +994,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348020,
+      "updated": 1765082415150,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -965,12 +1005,14 @@
       "containerId": null,
       "originalText": "You are asking to reserved a place\nin the computers memory for a `foo`.\n\nBut the memory that you get back is\njust garbage. Since #2 was not done.",
       "lineHeight": 1.25,
-      "baseline": 118
+      "baseline": 118,
+      "index": "aO",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 368,
-      "versionNonce": 152353459,
+      "version": 369,
+      "versionNonce": 1786166738,
       "isDeleted": false,
       "id": "vFu_YxUVbXiq7lPortTyy",
       "fillStyle": "solid",
@@ -990,7 +1032,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348020,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1001,12 +1043,14 @@
       "containerId": null,
       "originalText": "free(A);",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 19,
+      "index": "aP",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 437,
-      "versionNonce": 1269808637,
+      "version": 438,
+      "versionNonce": 733626446,
       "isDeleted": false,
       "id": "Mar0tiFFDn4f5gVmEfKux",
       "fillStyle": "solid",
@@ -1026,7 +1070,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348020,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1037,12 +1081,14 @@
       "containerId": null,
       "originalText": "Which is saying you no longer need the\nmemory so put it back into the heap.\nWhich is #4.",
       "lineHeight": 1.25,
-      "baseline": 68
+      "baseline": 68,
+      "index": "aQ",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 120,
-      "versionNonce": 1454435411,
+      "version": 121,
+      "versionNonce": 876819346,
       "isDeleted": false,
       "id": "lhw5IEVcwL9PNsHLM3I7R",
       "fillStyle": "solid",
@@ -1062,7 +1108,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348020,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1073,12 +1119,14 @@
       "containerId": null,
       "originalText": "So you did this then you did whatever\nyou want to do to initialize the object.",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "aR",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 131,
-      "versionNonce": 1516303965,
+      "version": 132,
+      "versionNonce": 191432334,
       "isDeleted": false,
       "id": "gAbIl-VJ0E3ExxmB8Fy2F",
       "fillStyle": "solid",
@@ -1098,7 +1146,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348021,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1109,12 +1157,14 @@
       "containerId": null,
       "originalText": "A->bar = fopen(...);",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 19,
+      "index": "aS",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 107,
-      "versionNonce": 823519731,
+      "version": 108,
+      "versionNonce": 8057170,
       "isDeleted": false,
       "id": "clpCNEVqdHVO6pmKy_kIG",
       "fillStyle": "solid",
@@ -1134,7 +1184,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348021,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1145,12 +1195,14 @@
       "containerId": null,
       "originalText": "There is the initialization. Which is #2.",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aT",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 109,
-      "versionNonce": 51126973,
+      "version": 110,
+      "versionNonce": 233112782,
       "isDeleted": false,
       "id": "BUq5VTfLfBqFa43AJ2zdf",
       "fillStyle": "solid",
@@ -1170,7 +1222,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348021,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1181,12 +1233,14 @@
       "containerId": null,
       "originalText": "When you are done with it, you then\nneed to close it.",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "aU",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 82,
-      "versionNonce": 491402131,
+      "version": 83,
+      "versionNonce": 1920268050,
       "isDeleted": false,
       "id": "RWhvUPvstdP-Ad3FwZrIY",
       "fillStyle": "solid",
@@ -1206,7 +1260,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348021,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1217,12 +1271,14 @@
       "containerId": null,
       "originalText": "fclose(A->bar);",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 19,
+      "index": "aV",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 100,
-      "versionNonce": 1515373341,
+      "version": 103,
+      "versionNonce": 1428301138,
       "isDeleted": false,
       "id": "-b-8hPwxtHep1VHsV0gGX",
       "fillStyle": "solid",
@@ -1231,8 +1287,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 607,
-      "y": 1426,
+      "x": 606.0070312119879,
+      "y": 1426.9929687880121,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 392.0596923828125,
@@ -1242,7 +1298,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348021,
+      "updated": 1765082521163,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1253,12 +1309,14 @@
       "containerId": null,
       "originalText": "Before freeing the memory. Which is #3.",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aW",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 984,
-      "versionNonce": 998525235,
+      "version": 994,
+      "versionNonce": 772978318,
       "isDeleted": false,
       "id": "OPLGrgHwQlWeCZ4ViJEaD",
       "fillStyle": "solid",
@@ -1267,8 +1325,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 817.4621542819945,
-      "y": 1664.7960080886128,
+      "x": 816.4691854939824,
+      "y": 1662.8100705125887,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 351.5625,
@@ -1278,7 +1336,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082559470,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1289,12 +1347,14 @@
       "containerId": null,
       "originalText": "foo *A = malloc(sizeof(foo)));\nA->bar = fopen(...);\nfclose(A->bar);\nfree(A);",
       "lineHeight": 1.2,
-      "baseline": 91
+      "baseline": 91,
+      "index": "aX",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 570,
-      "versionNonce": 1688622973,
+      "version": 571,
+      "versionNonce": 1720232270,
       "isDeleted": false,
       "id": "7uyqCauat7sCkaRr81tRv",
       "fillStyle": "solid",
@@ -1314,7 +1374,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1325,12 +1385,14 @@
       "containerId": null,
       "originalText": "1",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aY",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 585,
-      "versionNonce": 1630186195,
+      "version": 586,
+      "versionNonce": 581687954,
       "isDeleted": false,
       "id": "lDcmBmiPzRM5umyGrUJRK",
       "fillStyle": "solid",
@@ -1350,7 +1412,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1361,12 +1423,14 @@
       "containerId": null,
       "originalText": "2",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aZ",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 545,
-      "versionNonce": 474505181,
+      "version": 546,
+      "versionNonce": 310529934,
       "isDeleted": false,
       "id": "PcTtSPkqWIgZ--rPHhNE1",
       "fillStyle": "solid",
@@ -1386,7 +1450,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1397,12 +1461,14 @@
       "containerId": null,
       "originalText": "3",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "aa",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 578,
-      "versionNonce": 1926486131,
+      "version": 579,
+      "versionNonce": 154581074,
       "isDeleted": false,
       "id": "ZgA3v53KpF4cDH1-evCuj",
       "fillStyle": "solid",
@@ -1422,7 +1488,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1433,12 +1499,14 @@
       "containerId": null,
       "originalText": "4",
       "lineHeight": 1.25,
-      "baseline": 18
+      "baseline": 18,
+      "index": "ab",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 180,
-      "versionNonce": 927620157,
+      "version": 181,
+      "versionNonce": 1424829902,
       "isDeleted": false,
       "id": "2vXcxLEb8fyVDdfgq-RC-",
       "fillStyle": "solid",
@@ -1458,7 +1526,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348022,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1469,12 +1537,14 @@
       "containerId": null,
       "originalText": "So C++ tryed to standize\nthese as a couple",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "ac",
+      "autoResize": true
     },
     {
       "type": "line",
-      "version": 186,
-      "versionNonce": 1510591292,
+      "version": 187,
+      "versionNonce": 505404946,
       "isDeleted": false,
       "id": "ohXLOxtpXHsZAbTlqEfFI",
       "fillStyle": "solid",
@@ -1496,7 +1566,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1513,12 +1583,13 @@
           -21.71632919382853,
           0.19923237792500004
         ]
-      ]
+      ],
+      "index": "ad"
     },
     {
       "type": "line",
-      "version": 246,
-      "versionNonce": 967115708,
+      "version": 247,
+      "versionNonce": 987907086,
       "isDeleted": false,
       "id": "8J3cyYXGIH-EtI6_4dBWv",
       "fillStyle": "solid",
@@ -1540,7 +1611,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1557,12 +1628,13 @@
           -21.71632919382853,
           0.19923237792500004
         ]
-      ]
+      ],
+      "index": "ae"
     },
     {
       "type": "line",
-      "version": 147,
-      "versionNonce": 1648700476,
+      "version": 148,
+      "versionNonce": 241060818,
       "isDeleted": false,
       "id": "z-l91dLTeFyDkwyhp1jg9",
       "fillStyle": "solid",
@@ -1584,7 +1656,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1601,12 +1673,13 @@
           0,
           35.66259564858092
         ]
-      ]
+      ],
+      "index": "af"
     },
     {
       "type": "line",
-      "version": 251,
-      "versionNonce": 1171014844,
+      "version": 252,
+      "versionNonce": 1180340814,
       "isDeleted": false,
       "id": "0oOl5T-hnUWTr8A8q0kAg",
       "fillStyle": "solid",
@@ -1628,7 +1701,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1645,12 +1718,13 @@
           -21.71632919382853,
           0.19923237792500004
         ]
-      ]
+      ],
+      "index": "ag"
     },
     {
       "type": "line",
-      "version": 311,
-      "versionNonce": 1239174460,
+      "version": 312,
+      "versionNonce": 1342767506,
       "isDeleted": false,
       "id": "SDov4Sz08F_xLhUCFQxMO",
       "fillStyle": "solid",
@@ -1672,7 +1746,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1689,12 +1763,13 @@
           -21.71632919382853,
           0.19923237792500004
         ]
-      ]
+      ],
+      "index": "ah"
     },
     {
       "type": "line",
-      "version": 212,
-      "versionNonce": 1339508156,
+      "version": 213,
+      "versionNonce": 1378818190,
       "isDeleted": false,
       "id": "-Hhe7f8PaDvjixQ7N_cMT",
       "fillStyle": "solid",
@@ -1716,7 +1791,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740276159860,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -1733,12 +1808,13 @@
           0,
           35.66259564858092
         ]
-      ]
+      ],
+      "index": "ai"
     },
     {
       "type": "text",
-      "version": 950,
-      "versionNonce": 2118537747,
+      "version": 951,
+      "versionNonce": 2119630674,
       "isDeleted": false,
       "id": "QFeN3bEnNs_BrkwTbWEYT",
       "fillStyle": "solid",
@@ -1758,7 +1834,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348023,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1769,12 +1845,14 @@
       "containerId": null,
       "originalText": "struct foo {\n  FILE *bar;\n  foo();\n  ~foo();\n}",
       "lineHeight": 1.2,
-      "baseline": 115
+      "baseline": 115,
+      "index": "aj",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 113,
-      "versionNonce": 764267677,
+      "version": 114,
+      "versionNonce": 1981339342,
       "isDeleted": false,
       "id": "OgIk7_-Q5CPe6j5CRB3_I",
       "fillStyle": "solid",
@@ -1794,7 +1872,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348023,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1805,12 +1883,14 @@
       "containerId": null,
       "originalText": "So if we expand on the struct to have a \nconstructor `foo` and a destructor `~foo`\n",
       "lineHeight": 1.25,
-      "baseline": 68
+      "baseline": 68,
+      "index": "ak",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 137,
-      "versionNonce": 343447475,
+      "version": 138,
+      "versionNonce": 899630354,
       "isDeleted": false,
       "id": "dhFOz8cm1iNg7CFxAeFAt",
       "fillStyle": "solid",
@@ -1830,7 +1910,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348023,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1841,12 +1921,14 @@
       "containerId": null,
       "originalText": "Calling it `struct` but `struct` and `class`\nhave no difference between those two things.",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "al",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 183,
-      "versionNonce": 2126786813,
+      "version": 184,
+      "versionNonce": 1789971726,
       "isDeleted": false,
       "id": "RQ5UU5dQoS3mFFk4wwOJc",
       "fillStyle": "solid",
@@ -1866,7 +1948,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348023,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1877,12 +1959,14 @@
       "containerId": null,
       "originalText": "The only difference is whether things are \ndeclared public or private by default. So\ndon't let that confuse you. `class` is a \nmeaningless keyword.",
       "lineHeight": 1.25,
-      "baseline": 93
+      "baseline": 93,
+      "index": "am",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 169,
-      "versionNonce": 1670457683,
+      "version": 170,
+      "versionNonce": 1868092114,
       "isDeleted": false,
       "id": "LlgOpI4MJ_m6PlCw4JOSQ",
       "fillStyle": "solid",
@@ -1902,7 +1986,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348023,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1913,12 +1997,14 @@
       "containerId": null,
       "originalText": "So the constructor and destructor are \ndesigned to move #2 and #3 into the \nclass. But inside them you are still doing\nthe same things.",
       "lineHeight": 1.25,
-      "baseline": 93
+      "baseline": 93,
+      "index": "an",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 46,
-      "versionNonce": 946800989,
+      "version": 49,
+      "versionNonce": 1071792078,
       "isDeleted": false,
       "id": "8brJPglITW8mvMysAH1dy",
       "fillStyle": "solid",
@@ -1927,7 +2013,7 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 591.1615613343619,
+      "x": 593.147498910386,
       "y": 2289.9675798103117,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1938,7 +2024,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348024,
+      "updated": 1765082886054,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1949,12 +2035,14 @@
       "containerId": null,
       "originalText": "foo::foo() {\n  bar = fopen(...);\n}\n\nfoo::~foo() {\n  fclose(bar);\n}",
       "lineHeight": 1.2,
-      "baseline": 163
+      "baseline": 163,
+      "index": "ao",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 135,
-      "versionNonce": 283543283,
+      "version": 136,
+      "versionNonce": 1578805394,
       "isDeleted": false,
       "id": "T_rZZ8XJksxkoBnCFmU10",
       "fillStyle": "solid",
@@ -1974,7 +2062,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348024,
+      "updated": 1765082028832,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1985,12 +2073,14 @@
       "containerId": null,
       "originalText": "So in order to be able to do step #1 &#2\nC++ needed a way to signal that. This is \nwhere `new` came in.",
       "lineHeight": 1.25,
-      "baseline": 68
+      "baseline": 68,
+      "index": "ap",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 114,
-      "versionNonce": 1004524989,
+      "version": 116,
+      "versionNonce": 174209554,
       "isDeleted": false,
       "id": "A1FWwWPEWhCjWbWN6FTzZ",
       "fillStyle": "solid",
@@ -1999,7 +2089,7 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 590.0663974058327,
+      "x": 591.0593661938449,
       "y": 2627.2780697972794,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -2010,7 +2100,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740277348024,
+      "updated": 1765082929946,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -2021,11 +2111,15 @@
       "containerId": null,
       "originalText": "And similarly, to be symmetric, they needed\na way to do steps #3 & #4. And that is\nwhere `delete` came from.",
       "lineHeight": 1.25,
-      "baseline": 68
+      "baseline": 68,
+      "index": "aq",
+      "autoResize": true
     }
   ],
   "appState": {
-    "gridSize": null,
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
     "viewBackgroundColor": "#ffffff"
   },
   "files": {}
