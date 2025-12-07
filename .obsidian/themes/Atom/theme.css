@@ -1,3 +1,18 @@
+/*
+https://forum.obsidian.md/t/how-to-easily-change-the-font-of-titles-and-headings/68832/2
+*/
+body {
+  --h1-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --h2-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --h3-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --h4-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --h5-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --h6-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --font-text-override: "JetBrainsMono Nerd Font", "JetBrainsMono", "Dank Mono Nerd Font", "Dank Mono", Menlo, "PT Mono";
+  --font-text: "JetBrainsMono Nerd Font", "JetBrainsMono", "Dank Mono Nerd Font", "Dank Mono", Menlo, "PT Mono";
+  --p-spacing: 1.5rem;
+}
+
 /* Base colors - TODO: are grey 1 and grey 2 used? */
 .theme-dark {
   --accent-h: 219;
