@@ -8,12 +8,6 @@ date: 2025-02-22
 reference:
   - https://www.youtube.com/watch?v=zjkuXtiG1og
 ---
-Memory steps
-1. getting the memory
-2. initializing the memory
-3. de-initializing memory
-4. freeing memory
-
 ![](../../images/c/c-raii.png)
 
 If you want to make one that is not on the stack, that is going to be dynamically allocated onto the heap. C std lib provides #1 & #4. Which is malloc and free. What they do is go to the heap and reserve something of the size of the struct and return it.
