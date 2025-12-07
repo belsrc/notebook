@@ -29,10 +29,10 @@ Let's consider a simple point geometry: `POINT (10.0 20.0)`. In Well-Known Text 
 WKB data is organized as a sequence of bytes that represent the geometry type, coordinate values, and metadata such as byte order and SRID. This format follows a strict specification to ensure interoperability among systems.
 
 ```
-┌─────────────────┬─────────────────┬─────────────────┐
-│  Byte Order     │  Geometry Type  │  Geometry Data  │
-│  (1 byte)       │  (4 bytes)      │  (variable)     │
-└─────────────────┴─────────────────┴─────────────────┘
+┌─────────────┬────────────────────┬────────────────────┐
+│  Byte Order │  Geometry Type     │  Geometry Data     │
+│  (1 byte)   │  (4 bytes)         │  (variable)        │
+└─────────────┴────────────────────┴────────────────────┘
 ```
 
 ## Byte Order Semantics
@@ -101,10 +101,10 @@ Coordinates are represented as 64-bit double-precision floating-point numbers (I
 A 2D Point represents the simplest geometric object:
 
 ```
-┌─────────┬─────────┬─────────┬─────────┐
-│ Order   │ Type    │ X       │ Y       │
-│ (1)     │ (4)     │ (8)     │ (8)     │
-└─────────┴─────────┴─────────┴─────────┘
+┌──────────┬────────────────┬───────────────┬───────────────┐
+│ Order    │ Geometry Type  │ X             │ Y             │
+│ (1 byte) │ (4 bytes)      │ (8 bytes)     │ (8 bytes)     │
+└──────────┴────────────────┴───────────────┴───────────────┘
 ```
 
 **Total Size**: 21 bytes
@@ -118,7 +118,7 @@ A 2D Point represents the simplest geometric object:
 
 ```c
 const uint8_t point_example[] = {
-    0x01,                                           // Little endian
+    0x01,                                           // Little Endian
     0x01, 0x00, 0x00, 0x00,                         // Point type (1)
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0x3F, // X = 1.5
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x40  // Y = 2.5
@@ -130,10 +130,10 @@ const uint8_t point_example[] = {
 A LineString contains an ordered sequence of points:
 
 ```
-┌─────────┬─────────┬─────────┬─────────────────┐
-│ Order   │ Type    │ Count   │ Points          │
-│ (1)     │ (4)     │ (4)     │ (16 * count)    │
-└─────────┴─────────┴─────────┴─────────────────┘
+┌──────────┬───────────────┬───────────────┬───────────────────────┐
+│ Order    │ Geometry Type │ Count         │ Points                │
+│ (1 byte) │ (4 bytes)     │ (4 bytes)     │ (16 bytes * count)    │
+└──────────┴───────────────┴───────────────┴───────────────────────┘
 ```
 
 **Size Calculation**: $21 + 16 \times \text{point\_count}$ bytes
@@ -146,7 +146,7 @@ A LineString contains an ordered sequence of points:
 
 ```c
 const uint8_t linestring_example[] = {
-    0x01,                                           // Little endian
+    0x01,                                           // Little Endian
     0x02, 0x00, 0x00, 0x00,                         // LineString type (2)
     0x02, 0x00, 0x00, 0x00,                         // Point count (2)
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Point 1: X = 0.0
@@ -161,10 +161,10 @@ const uint8_t linestring_example[] = {
 A Polygon consists of one exterior ring and zero or more interior rings:
 
 ```
-┌─────────┬─────────┬────────────┬─────────────────┐
-│ Order   │ Type    │ Ring Count │ Linear Rings    │
-│ (1)     │ (4)     │ (4)        │ (variable)      │
-└─────────┴─────────┴────────────┴─────────────────┘
+┌──────────┬────────────────┬───────────────┬─────────────────┐
+│ Order    │ Geometry Type  │ Ring Count    │ Linear Rings    │
+│ (1 byte) │ (4 bytes)      │ (4 bytes)     │ (variable)      │
+└──────────┴────────────────┴───────────────┴─────────────────┘
 ```
 
 **Ring Structure**: Each ring follows the LineString format with additional constraints:
@@ -176,7 +176,7 @@ A Polygon consists of one exterior ring and zero or more interior rings:
 
 ```c
 const uint8_t polygon_example[] = {
-    0x01,                                           // Little endian
+    0x01,                                           // Little Endian
     0x03, 0x00, 0x00, 0x00,                         // Polygon type (3)
     0x01, 0x00, 0x00, 0x00,                         // Ring count (1)
     0x05, 0x00, 0x00, 0x00,                         // Point count in ring (5)
@@ -198,18 +198,17 @@ const uint8_t polygon_example[] = {
 Multi-geometry types contain collections of homogeneous geometries:
 
 ```
-┌─────────┬─────────┬─────────┬─────────────────┐
-│ Order   │ Type    │ Geom    │ Geometries      │
-│ (1)     │ (4)     │ Count   │ (variable)      │
-│         │         │ (4)     │                 │
-└─────────┴─────────┴─────────┴─────────────────┘
+┌──────────┬────────────────┬───────────────┬─────────────────┐
+│ Order    │ Geometry Type  │ Geom Count    │ Geometries      │
+│ (1 byte) │ (4 bytes)      │ (4 bytes)     │ (variable)      │
+└──────────┴────────────────┴───────────────┴─────────────────┘
 ```
 
 Each contained geometry is a complete WKB geometry including its own byte order and type indicators.
 
 ```c
 const uint8_t multipoint_example[] = {
-    0x01,                                           // Little endian
+    0x01,                                           // Little Endian
     0x04, 0x00, 0x00, 0x00,                         // MultiPoint type (4)
     0x02, 0x00, 0x00, 0x00,                         // Geometry count (2)
     // First Point geometry
@@ -229,26 +228,32 @@ const uint8_t multipoint_example[] = {
 
 **Point (10.5, 20.25) in Little Endian:**
 
-```
-01 01 00 00 00 00 00 00 00 00 00 25 40 00 00 00 00 00 40 34 40
-│  │           │                                │
-│  │           └─ X coordinate (10.5)           └─ Y coordinate (20.25)
-│  └─ Geometry type (Point = 1)
-└─ Byte order (Little Endian = 0x01)
+```c
+const uint8_t point_example[] = {
+    0x01,                                           // Little Endian (1)
+    0x01, 0x00, 0x00, 0x00,                         // Point type (1)
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x25, 0x40, // X = 10.5
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x34, 0x40  // Y = 20.25
+};
 ```
 
 **LineString with 3 points:**
 
-```
-01 02 00 00 00 03 00 00 00 
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 F0 3F 00 00 00 00 00 00 00 40
-00 00 00 00 00 00 00 40 00 00 00 00 00 00 08 40
-│  │           │           │
-│  │           │           └─ Points: (0,0), (1,2), (2,3)
-│  │           └─ Point count (3)
-│  └─ Geometry type (LineString = 2)
-└─ Byte order (Little Endian)
+```c
+const uint8_t linestring_example[] = {
+    0x01,                                           // Little Endian (1)
+    0x02, 0x00, 0x00, 0x00,                         // LineString (2)
+    0x03, 0x00, 0x00, 0x00,                         // Number of Points: 3
+    // First Point geometry
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // X = 0.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Y =  0.0
+    // Second Point geometry
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F, // X = 1.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, // Y = 2.0
+    // Third Point geometry
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, // X = 2.0
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x40  // Y = 3.0
+};
 ```
 
 ## Performance Characteristics
@@ -279,10 +284,10 @@ Binary format advantages:
 Extended WKB supports Z-coordinate for 3D geometries:
 
 ```
-┌─────────┬─────────┬─────────┬─────────┬─────────┐
-│ Order   │ Type    │ X       │ Y       │ Z       │
-│ (1)     │ (4)     │ (8)     │ (8)     │ (8)     │
-└─────────┴─────────┴─────────┴─────────┴─────────┘
+┌──────────┬───────────────┬───────────────┬───────────────┬───────────────┐
+│ Order    │ Geometry Type │ X             │ Y             │ Z             │
+│ (1 byte) │ (4 bytes)     │ (8 bytes)     │ (8 bytes)     │ (8 bytes)     │
+└──────────┴───────────────┴───────────────┴───────────────┴───────────────┘
 ```
 
 ### Measured Geometries
@@ -290,10 +295,10 @@ Extended WKB supports Z-coordinate for 3D geometries:
 M-coordinate support for linear referencing:
 
 ```
-┌─────────┬─────────┬─────────┬─────────┬─────────┐
-│ Order   │ Type    │ X       │ Y       │ M       │
-│ (1)     │ (4)     │ (8)     │ (8)     │ (8)     │
-└─────────┴─────────┴─────────┴─────────┴─────────┘
+┌──────────┬───────────────┬───────────────┬───────────────┬───────────────┐
+│ Order    │ Geometry Type │ X             │ Y             │ M             │
+│ (1 byte) │ (4 bytes)     │ (8 bytes)     │ (8 bytes)     │ (8 bytes)     │
+└──────────┴───────────────┴───────────────┴───────────────┴───────────────┘
 ```
 
 ### Coordinate Reference Systems
@@ -301,10 +306,10 @@ M-coordinate support for linear referencing:
 If a spatial reference system identifier (SRID) is included (e.g., for EPSG codes like 4326 for WGS84), it is encoded as a 32-bit unsigned integer before the geometry data.
 
 ```
-┌─────────┬─────────┬─────────┬─────────────────┐
-│ Order   │ Type    │ SRID    │ Geometry Data   │
-│ (1)     │ (4)     │ (4)     │ (variable)      │
-└─────────┴─────────┴─────────┴─────────────────┘
+┌──────────┬───────────────┬───────────────┬─────────────────┐
+│ Order    │ Geometry Type │ SRID          │ Geometry Data   │
+│ (1 byte) │ (4 bytes)     │ (4 bytes)     │ (variable)      │
+└──────────┴───────────────┴───────────────┴─────────────────┘
 ```
 
 ## Comparison with Alternative Formats
