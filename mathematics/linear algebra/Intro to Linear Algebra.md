@@ -16,9 +16,9 @@ A scalar is just a quantity that has magnitude but no direction.
 
 Examples:
 
-Temperature: $25^{\circ}C$
-Mass: $5kg$
-A number like $7$ or $-3.2$
+- Temperature: $25^{\circ}C$
+- Mass: $5kg$
+- A number like $7$ or $-3.2$
 
 You can think of a scalar as a single “unit” of information — something you can stretch, shrink, or flip in sign.
 

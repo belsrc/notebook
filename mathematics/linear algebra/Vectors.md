@@ -37,11 +37,11 @@ $\vec{v} = \begin{bmatrix} 2 \\ 5 \end{bmatrix}$  and  $\vec{w} = \begin{bmatrix
 
 $\vec{m} = \frac{1}{2} \begin{bmatrix} 6 - 2 \\ 7 - 5 \end{bmatrix}$ = $\begin{bmatrix} 2 \\ 1 \end{bmatrix}$
 
-And if you want to find the vector from the common origin to the $\vec{m}$, you add $\vec{v}$.
+And if you want to find the vector from the common origin to the $\vec{m}$ vector, you add $\vec{v}$.
 
 $\vec{n} = \vec{v} + \frac{1}{2}(\vec{w} - \vec{v})$
 
-$(2, 5) + \frac{1}{2}(6 - 2, 7 - 5) = (4, 6)$
+$\begin{bmatrix} 2 \\ 5 \end{bmatrix} + \frac{1}{2} \begin{bmatrix} 6 - 2 \\ 7 - 5 \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \end{bmatrix}$
 
 Or, short-hand to get $\vec{n}$:
 
