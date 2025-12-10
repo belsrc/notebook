@@ -44,12 +44,14 @@ WKT follows a consistent hierarchical structure using keywords, parentheses, and
 
 ### Coordinate System
 
-WKT uses a right-handed coordinate system where:
+WKT represents coordinates as a tuple $\langle x, y, z, m \rangle$. The interpretation of these axes depends entirely on the **Spatial Reference System (SRS) or Coordinate Reference System (CRS)** that is applied to the geometry.
 
-- **X-axis**: Generally represents longitude or easting
-- **Y-axis**: Generally represents latitude or northing
-- **Z-axis**: Represents elevation or height (optional)
-- **M-dimension**: Represents measure values (optional)
+- **X-axis (1st Dimension)**: **Conventionally** represents longitude or easting in most common CRS definitions (e.g., EPSG:4326 in WKT format examples).
+- **Y-axis (2nd Dimension)**: **Conventionally** represents latitude or northing.
+- **Z-axis (3rd Dimension)**: Represents elevation or height (optional).
+- **M-dimension (4th Dimension)**: Represents measure values (optional).
+
+All coordinate values are represented as standard double-precision floating-point numbers.
 
 ## Geometry Types
 
