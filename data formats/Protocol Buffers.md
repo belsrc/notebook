@@ -14,7 +14,7 @@ The design goals for Protocol Buffers emphasized simplicity and performance. In 
 
 Data structure schemas (called _messages_) and services are described in a proto definition file (`.proto`) and compiled with `protoc`.
 
-Messages are serialized into a binary wire format which is compact, forward- and backward-compatible, but not self-describing (that is, there is no way to tell the names, meaning, or full datatypes of fields without an external specification). There is no defined way to include or refer to such an external specification (schema) within a Protocol Buffers file. The officially supported implementation includes an ASCII serialization format, but this format—though self-describing—loses the forward- and backward-compatibility behavior, and is thus not a good choice for applications other than human editing and debugging.
+Messages are serialized into a compact binary wire format which is forward- and backward-compatible. However, the binary format is **not self-describing**; there is no way to tell the names, meaning, or full datatypes of fields without an external schema specification (the `.proto` file). While implementations often support an ASCII serialization format (called Text Format), this format uses field names instead of field numbers as keys, and is thus **not recommended** for data storage or transmission as it loses the robust forward- and backward-compatibility guarantees of the binary wire format.
 
 ## What Are Protocol Buffers
 
@@ -34,12 +34,12 @@ The key innovation is the use of **field numbers** instead of field names in the
 - Binary log formats for analytics
 
 **Poor Use Cases:**
-- Human-readable configuration (use JSON/YAML)
-- Debugging/logging output (not human-readable)
-- Documents larger than a few MB (not streamable)
-- When you need to query data without deserializing (use Parquet/database)
-- Web browser communication (JSON is native, protobuf requires extra libraries)
-- Quick prototyping where schema changes constantly
+- Human-readable configuration (JSON/YAML/TOML are easier to inspect and edit manually).
+- Debugging/logging output where humans need to read the payloads directly.
+- Very large, monolithic documents where you cannot chunk or frame the data and need true streaming at the format level (design chunked messages or use a stream-oriented format instead).
+- Workloads that require ad hoc querying over raw files without deserialization (use columnar formats like Parquet or a database).
+- Browser-only environments where JSON has native support and introducing Protobuf tooling adds complexity.
+- Rapid prototyping where schemas and fields change frequently and a strict schema is more overhead than benefit.
 
 ## Basic Workflow
 
@@ -186,9 +186,9 @@ message Event {
 ```
 
 **Changes in Edition 2024:**
-- Improved defaults for certain encoding behaviors
-- Better support for modern language features
-- Incremental language improvements
+- Refinements to defaults and behaviors introduced with editions, focusing on consistency and ergonomics.
+- Incremental improvements to language features and options, aimed at smoother use in modern languages and code generators.
+- Continued evolution of JSON and encoding behavior, with the goal of making edition-based schemas easier to integrate and maintain.
 
 ### Feature Flags
 
@@ -295,16 +295,22 @@ message UserProfile {
 
 ### Edition 2024 Improvements
 
-Edition 2024 refined several behaviors and introduced quality-of-life improvements. The changes are incremental and focus on:
+Edition 2024 continues the edition-based evolution started in 2023 by refining defaults, presence rules, and other behaviors. The changes are incremental and primarily focused on quality-of-life improvements for schema authors and tool implementers.
 
 - More consistent UTF-8 validation defaults
 - Better enum semantics
 - Improved JSON encoding behaviors
 - Enhanced compatibility with modern programming languages
 
-**Recommendation:** For new projects started in 2024 or later, use `edition = "2024"`. For existing projects, proto3 remains a solid choice until you're ready to migrate.
+**Practical guidance:**
+
+- For new projects, consider using the latest edition that is fully supported by your toolchain, documentation, and language-specific libraries.
+- For existing proto3 or proto2 codebases, plan migration carefully and verify edition support across compilers, build systems, and runtime libraries before switching.
+- For teams that rely on mature, widely deployed tooling, staying on proto3 until edition support is stable across all dependencies can be a pragmatic choice.
 
 ## Comparison with Other Formats
+
+The following table illustrates typical qualitative trade-offs between common formats. Actual performance and size depend heavily on data shape, tooling, and workload:
 
 | Feature         | Protobuf  | JSON     | XML      | Avro      |
 | --------------- | --------- | -------- | -------- | --------- |
@@ -331,18 +337,20 @@ Given this data:
 - Protobuf: 34 bytes
 - XML: 98 bytes
 
+This is an illustrative example using one simple object; exact byte counts will vary depending on the encoder implementation, options, and character encoding. For real systems, always benchmark with representative data and actual libraries.
+
 ## Limitations
 
-Protobufs have no single specification. The format is best suited for small data chunks that don't exceed a few megabytes and can be loaded/sent into a memory right away and therefore is not a streamable format. The library doesn't provide compression out of the box. The format also isn't well supported in non-object-oriented languages.
+Protocol Buffers is optimized for structured, bounded messages rather than arbitrary, unbounded data streams. A single message is limited to around 2 GB by the standard length-prefix encoding, and parsing very large messages can be memory- and latency-intensive. In practice, large datasets are typically split into many smaller messages and sent via application- or RPC-level streaming instead of a single huge message.
 
 Additional limitations:
-- No polymorphism or inheritance
-- Limited to 2GB message size (due to 32-bit length prefix)
-- No native support for nullable fields in proto3 (requires `google.protobuf.NullValue` wrapper)
-- Schema must be known at compile time
-- Binary format is not human-readable
-- Cannot represent circular references
-- No built-in versioning in the format itself
+- No standardized inheritance/polymorphism model; patterns such as `oneof`, `Any`, or wrapper messages are used to model variant types.
+- No built-in compression; compression must be handled at the transport or application layer.
+- No native support for nullable fields in proto3 (requires `google.protobuf.NullValue` wrapper).
+- The primary workflow assumes a known schema and generated code, although descriptor- and reflection-based dynamic usage is possible and more complex.
+- The binary format is not human-readable, so extra tooling is needed for inspection or debugging.
+- Circular object graphs are not directly representable; identifiers or references must be modeled explicitly in the schema.
+- The wire format does not encode the full schema, so the `.proto` (or descriptors) must be distributed separately.
 
 ## Binary Wire Format
 
