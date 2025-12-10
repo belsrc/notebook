@@ -29,10 +29,10 @@ Let's consider a simple point geometry: `POINT (10.0 20.0)`. In Well-Known Text 
 WKB data is organized as a sequence of bytes that represent the geometry type, coordinate values, and metadata such as byte order and SRID. This format follows a strict specification to ensure interoperability among systems.
 
 ```
-┌─────────────┬────────────────────┬────────────────────┐
-│  Byte Order │  Geometry Type     │  Geometry Data     │
-│  (1 byte)   │  (4 bytes)         │  (variable)        │
-└─────────────┴────────────────────┴────────────────────┘
+┌─────────────┬────────────────────┬───────────────────┬────────────────────┐
+│  Byte Order │  Geometry Type     │  (Optional) SRID  │  Geometry Data     │
+│  (1 byte)   │  (4 bytes)         │  (4 bytes)        │  (variable)        │
+└─────────────┴────────────────────┴───────────────────┴────────────────────┘
 ```
 
 ## Byte Order Semantics
@@ -136,7 +136,7 @@ A LineString contains an ordered sequence of points:
 └──────────┴───────────────┴───────────────┴───────────────────────┘
 ```
 
-**Size Calculation**: $21 + 16 \times \text{point\_count}$ bytes
+**Size Calculation**: $9 + 16 \times \text{point\_count}$ bytes
 
 **Constraints**:
 
