@@ -51,17 +51,17 @@ GML consists of two parts: the schema that describes the document structure and 
 
 ## Version History
 
-GML evolved through multiple versions, with GML 1 and GML 2 being pre-ISO versions, and GML 3.1.1 being the first ISO-conformant version:
-
 | Version | Year | Key Features |
 |---------|------|-------------|
 | GML 1.0 | 2000 | Initial release, based on RDF concepts |
-| GML 2.0 | 2001 | XML Schema based |
+| GML 2.0 | 2001 | Transition to XML Schema (XSD); gained widespread adoption in early WFS |
 | GML 2.1 | 2002 | Enhanced feature schema |
-| GML 3.0 | 2003 | Major expansion of object types |
-| GML 3.1.1 | 2004 | First ISO-conformant version |
-| GML 3.2 | 2007 | ISO 19136:2007 standard |
-| GML 3.3 | 2012+ | Current version |
+| GML 3.0 | 2003 | Major expansion: added topology, coverages, and complex geometries |
+| GML 3.1.1 | 2004 | OGC Standard. Stabilized the 3.0 model; widely used in WFS 1.1 |
+| GML 3.2.1 | 2007 | First ISO Version (ISO 19136:2007). Unified OGC and ISO abstract models. Incompatible with 3.1.1 schemas. |
+| GML 3.3 | 2012+ | Extends GML 3.2.1 with additional features (e.g., TINs, Linear Referencing) but does not replace the core 3.2 schema |
+
+GML 3.2.1 (ISO 19136:2007) remains the widely deployed schema set, while ISO 19136-1:2020 and ISO 19136-2:2015 update and structure the standard text without replacing the 3.2.1 schemas.
 
 ## Core Components
 
@@ -77,11 +77,14 @@ GML defines geometric property elements to associate geometries with features, p
 - `Curve` - General 1-dimensional geometric primitive
 - `Surface` - General 2-dimensional geometric primitive
 
-**Aggregate Types:**
+**Aggregate Types (GML 3.2):**
 - `MultiPoint`
-- `MultiLineString`
-- `MultiPolygon`
+- `MultiCurve` (multi-line concept)
+- `MultiSurface` (multi-polygon concept)
+- `MultiSolid`
 - `MultiGeometry`
+
+These correspond to the familiar multi-point, multi-line, and multi-polygon concepts, but use the GML names `MultiCurve` and `MultiSurface` rather than `MultiLineString` and `MultiPolygon`.
 
 ### Example: Point Feature
 
@@ -217,10 +220,12 @@ GML supports comprehensive CRS definitions using the `srsName` attribute:
   <gml:pos>41.6764 -86.2520</gml:pos>
 </gml:Point>
 
-<!-- Axis order: longitude, latitude for EPSG:4326 in GML 3.2 -->
+<gml:Point srsName="EPSG:4326">
+  <gml:pos>-86.2520 41.6764</gml:pos>
+</gml:Point>
 ```
 
-**Important:** For geographic CRS like EPSG:4326, GML 3.2 uses latitude-longitude axis order as per the URN specification, though implementations may vary.
+**Important:** In GML 3.2, coordinate tuples are expected to follow the axis order defined by the referenced CRS. For EPSG:4326 this definition is latitude, longitude (y, x), even though many legacy systems and services have historically used longitude, latitude. Implementations must check and consistently apply the axis order associated with the `srsName` they use.
 
 ## Advanced Features
 
@@ -252,7 +257,7 @@ Temporal primitives include:
 
 ```xml
 <gml:FeatureCollection gml:id="fc1">
-  <gml:boundedBy> <!-- Mandatory for collections -->
+  <gml:boundedBy> <!-- Recommended / often required by profiles -->
     <gml:Envelope>...</gml:Envelope>
   </gml:boundedBy>
   
@@ -270,6 +275,8 @@ Temporal primitives include:
 
 Feature members can either contain features inline or reference remote features using XLink attributes.
 
+`gml:boundedBy` should provide the spatial extent of the collection where known and is required by some profiles, but the core GML 3.2 schema allows omission when no meaningful bounds can be supplied.
+
 ## XLink Integration
 
 GML uses W3C XLink to create sophisticated links between resources, enabling remote property references and distributed feature storage.
@@ -281,18 +288,18 @@ GML uses W3C XLink to create sophisticated links between resources, enabling rem
 
 ## Conformance Classes
 
-GML 3.2 defines 10 conformance classes for application schemas:
+GML 3.2 defines multiple conformance classes and profiles for application schemas, including:
 
-1. GML application schema
-2. GML Simple Features Profile (Level 0)
-3. GML Simple Features Profile (Level 1)
-4. GML Simple Features Profile (Level 2)
-5. Feature collections
-6. Geometry primitives
-7. Coordinate reference systems
-8. Temporal objects
-9. Coverage objects
-10. Observation and measurement
+- GML application schema fundamentals
+- GML Simple Features Profile (Levels 0, 1, and 2)
+- Feature collections
+- Geometry primitives and aggregates
+- Coordinate reference systems
+- Temporal objects
+- Coverage objects
+- Observation and measurement
+
+The exact grouping and numbering of conformance classes is specified in ISO 19136 and related OGC profile documents (for example, the Simple Features Profile and coverage application schema).
 
 ## Media Type
 
@@ -306,7 +313,14 @@ Content-Type: application/gml+xml; version=3.2
 
 ### KML
 
-KML complements GML as a visualization format for Google Earth, but transforming GML to KML results in significant loss of structure since KML is primarily for 3D portrayal rather than data exchange.
+KML is an OGC encoding standard used to encode and transport geographic content for display in earth browsers and virtual globes such as Google Earth and other 2D/3D clients. Transforming rich GML data into KML typically involves loss of structural and semantic detail because KML is primarily focused on visualization and portrayal rather than full-featured data exchange.
+
+### GeoJSON
+
+GeoJSON is the lightweight alternative to GML for web development.
+
+- **GML**: Used for enterprise data exchange, complex geometries (curves, surfaces), and strict schema validation (WFS).
+- **GeoJSON**: Used for web APIs, mobile apps, and simple feature visualization. It does not support CRS (always WGS84) or advanced topologies.
 
 ### WFS (Web Feature Service)
 
@@ -353,7 +367,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"
 
 ### Feature Identifiers
 
-All GML features require a `gml:id` attribute of type `xs:ID`:
+Most GML feature types are derived from `gml:AbstractGMLType`, which carries a required `gml:id` attribute of type `xs:ID`, and it is best practice for each feature instance to have a unique `gml:id` within the document. Application schemas or profiles can further constrain identifier requirements, but the core model distinguishes between `gml:id`, `gml:identifier`, and `gml:name`.
 
 ```xml
 <Feature gml:id="unique_id_123">
