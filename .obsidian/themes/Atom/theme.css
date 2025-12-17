@@ -11,6 +11,7 @@ body {
   --font-text-override: "JetBrainsMono Nerd Font", "JetBrainsMono", "Dank Mono Nerd Font", "Dank Mono", Menlo, "PT Mono";
   --font-text: "JetBrainsMono Nerd Font", "JetBrainsMono", "Dank Mono Nerd Font", "Dank Mono", Menlo, "PT Mono";
   --p-spacing: 1.5rem;
+  --file-line-width: 65rem;
 }
 
 /* Base colors - TODO: are grey 1 and grey 2 used? */
