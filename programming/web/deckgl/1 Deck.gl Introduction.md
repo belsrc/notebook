@@ -32,11 +32,11 @@ The bottleneck is **CPU-bound iteration**. The CPU must sequentially process eac
 
 ### The Solution: GPU Parallelism
 
-GPUs solve this through **massive parallelism**. A modern GPU has thousands of cores that can execute the same operation on different data simultaneously. This is the **SIMD** (Single Instruction, Multiple Data) paradigm.
+GPUs solve this through **massive parallelism**. A modern GPU has thousands of cores that can execute the same operation on different data simultaneously. This is similar to the **SIMD** (Single Instruction, Multiple Data) paradigm.
 
 ![](../../../images/deckgl/gpu-rendering.png)
 
-The key insight, **move computation from the CPU to the GPU**.
+The key insight is to move computation from the CPU to the GPU.
 
 ### WebGL: Browser's GPU Interface
 
@@ -61,13 +61,13 @@ WebGL is powerful but **extremely low-level**. Rendering a single colored triang
 
 For data visualization specifically, additional challenges arise:
 
-| Challenge              | Description                                                        |
-| ---------------------- | ------------------------------------------------------------------ |
-| **Coordinate Systems** | Geographic coords (lat/lng) → Web Mercator → screen pixels         |
-| **Dynamic Data**       | Data changes; must efficiently update GPU buffers                  |
-| **Interactivity**      | Picking (which point did the user click?) requires reverse mapping |
-| **Layering**           | Multiple visualization layers with proper depth ordering           |
-| **Performance**        | Minimizing draw calls, efficient buffer updates, avoiding stalls   |
+| Challenge              | Description                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| **Coordinate Systems** | Geographic → World (Web Mercator) → Common Space → Clipspace → Screen Pixels |
+| **Dynamic Data**       | Data changes; must efficiently update GPU buffers                            |
+| **Interactivity**      | Picking (which point did the user click?) requires reverse mapping           |
+| **Layering**           | Multiple visualization layers with proper depth ordering                     |
+| **Performance**        | Minimizing draw calls, efficient buffer updates, avoiding stalls             |
 
 ### Deck.gl's Value Proposition
 
@@ -90,7 +90,7 @@ const layer = new ScatterplotLayer({
 
 From this declarative specification, Deck.gl:
 1. Extracts positions by calling `getPosition` on each datum
-2. Packs the data into typed arrays with proper memory layout
+2. Packs accessor results into interleaved typed arrays managed by AttributeManager
 3. Uploads to GPU buffers
 4. Generates or selects appropriate shaders
 5. Manages coordinate transformations
@@ -112,7 +112,7 @@ Deck.gl is organized into distinct subsystems with clear responsibilities.
 The `Deck` class is the entry point and orchestrator. It owns:
 
 1. **The canvas element** (or accepts an existing one)
-2. **The WebGL context** (via luma.gl's `Device`)
+2. The **WebGL/WebGPU** device abstraction (via luma.gl’s `Device` in modern runtimes)
 3. **The animation loop** (requestAnimationFrame-based render cycle)
 4. **References to all subsystems**
 
@@ -313,10 +313,10 @@ When a frame renders, this sequence occurs:
    └─▶ (end viewport loop)
 
 5. Post-Process (if effects enabled)
-   └─▶ Apply screen-space effects (lighting, bloom, etc.)
+   └─▶ Apply screen-space effects (FXAA, bloom, etc.)
 
 6. Picking (if interaction occurred)
-   ├─▶ Re-render to offscreen buffer with color-coded IDs
+   ├─▶ Render (or reuse) an offscreen picking framebuffer with color-coded IDs
    ├─▶ Read pixel at cursor position
    └─▶ Decode picked layer + object index
 ```
@@ -344,7 +344,7 @@ luma.gl is the most critical dependency.
 
 #### Model Class
 
-The Model is the central rendering primitive. It combines:
+The Model class is the primary rendering primitive used by deck.gl’s compatibility layer. It combines:
 - A shader program (vertex + fragment shaders)
 - Geometry (vertex count, draw mode, index buffer)
 - Attributes (vertex buffers)
@@ -386,7 +386,7 @@ model.setUniforms({ uViewProjection: matrix });
 model.draw(renderPass);
 ```
 
-**Every Deck.gl primitive layer creates one or more luma.gl Models.** The layer lifecycle manages these Models, creating them in `initializeState()`, updating their attributes/uniforms in `updateState()`, and destroying them in `finalizeState()`.
+**Every Deck.gl primitive layer backed by one or more luma.gl Models.** The layer lifecycle manages these Models, creating them in `initializeState()`, updating their attributes/uniforms in `updateState()`, and destroying them in `finalizeState()`.
 
 **_(Docs [1](https://luma.gl/docs/api-reference/engine/model))_**
 
@@ -501,7 +501,7 @@ v.dot(otherVector);
 v.cross(otherVector);
 ```
 
-math.gl classes are **mutable** for performance. Methods modify the instance in-place rather than returning new objects. In hot loops (like accessor processing), avoiding allocations is critical.
+Core math.gl vector/matrix classes are **mutable** for performance. Methods modify the instance in-place rather than returning new objects. In hot loops (like accessor processing), avoiding allocations is critical.
 
 ```typescript
 const v = new Vector3();
@@ -554,7 +554,7 @@ for await (const batch of loadInBatches('huge-file.csv', CSVLoader)) {
 
 #### Worker-Based Parsing
 
-loaders.gl runs parsers in **Web Workers** to avoid blocking the main thread.
+loaders.gl can run parsers in **Web Workers** to avoid blocking the main thread.
 
 ![](../../../images/deckgl/loadergl.png)
 
