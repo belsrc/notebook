@@ -105,7 +105,7 @@ Deck.gl is organized into distinct subsystems with clear responsibilities.
 ![](../../../images/deckgl/deckgl-architecture.png)
 
 
-**_Docs_ [1](https://deck.gl/docs/developer-guide/custom-layers/layer-lifecycle) [2](https://deck.gl/docs/developer-guide/custom-layers/primitive-layers) [3](https://deck.gl/docs/developer-guide/custom-layers/attribute-management)**
+**_(Docs [1](https://deck.gl/docs/developer-guide/custom-layers/layer-lifecycle) [2](https://deck.gl/docs/developer-guide/custom-layers/primitive-layers) [3](https://deck.gl/docs/developer-guide/custom-layers/attribute-management))_**
 
 ### Deck Instance
 
@@ -283,6 +283,7 @@ For example, what has to update when a user zooms or pans the map:
 
 When a frame renders, this sequence occurs:
 
+```
 1. Animation Frame
    └─▶ requestAnimationFrame callback fires
 
@@ -318,6 +319,7 @@ When a frame renders, this sequence occurs:
    ├─▶ Re-render to offscreen buffer with color-coded IDs
    ├─▶ Read pixel at cursor position
    └─▶ Decode picked layer + object index
+```
 
 ## vis.gl Ecosystem
 
@@ -514,13 +516,15 @@ The `WebMercatorViewport` class is especially important, it's the foundation for
 
 loaders.gl is a suite of loaders for various data formats, designed for large-scale geospatial data.
 
-`load()`/`parse()` - Entry point
+```
+load()/parse() - Entry point
 └─▶ Loader Selection - by extension, MIME type or explicit
     ├─▶ GeoJson Loader
     ├─▶ Shapefile Loader
     ├─▶ glTF Loader
     ├─▶ Arrow Loader
     └─▶ 3D Tiles
+```
 
 Format Categories:
 - Geospatial Vector: GeoJSON, Shapefile, KML, GPX, WKT/WKB, FlatGeobuf
@@ -607,7 +611,7 @@ new ScatterplotLayer({
 
 ```typescript
 for (feature of features) {
-  positions[i] = getPosition(feature);  // JavaScript
+  positions[i] = getPosition(feature);
 }
 ```
 
