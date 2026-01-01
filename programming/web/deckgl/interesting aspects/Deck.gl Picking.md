@@ -29,9 +29,9 @@ It encodes the given index using a combination of [bitwise AND (`&`)](Bitwise%20
 function encode(index) {
   const target = new Array(3);
 
-  target[0] = (index + 1) & 255;
-  target[1] = ((index + 1) >> 8) & 255;
-  target[2] = ((index + 1) >> 16) & 255;
+  target[0]/*R*/ = (index + 1) & 0xFF;
+  target[1]/*G*/ = ((index + 1) >> 8) & 0xFF;
+  target[2]/*B*/ = ((index + 1) >> 16) & 0xFF;
 
   return target;
 }
