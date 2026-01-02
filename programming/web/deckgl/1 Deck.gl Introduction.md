@@ -325,10 +325,12 @@ When a frame renders, this sequence occurs:
 
 Deck.gl does not implement everything from scratch. It sits atop a stack of companion libraries, each handling a specific domain. Understanding these libraries is essential. All these libraries are maintained under the **vis.gl** umbrella (originally Uber's visualization team, now an independent open governance organization).
 
-**Deck.gl** - Geospatial visualization
-├─▶ **loaders.gl** - Data loading and parsing
-├─▶ **math.gl** - Linear algebra and geospatial
-└─▶ **luma.gl** - WebGL/WebGPU abstraction
+```
+Deck.gl - Geospatial visualization
+├─▶ loaders.gl - Data loading and parsing
+├─▶ math.gl - Linear algebra and geospatial
+└─▶ luma.gl - WebGL/WebGPU abstraction
+```
 
 Other vis.gl libraries:
 - probe.gl - Benchmarking and debugging

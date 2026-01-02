@@ -1,7 +1,7 @@
 ---
 tags:
   - deckgl
-gardening: 🌱
+gardening: 🌳
 date: 2025-12-30
 ---
 ## Deck Instance and Lifecycle
@@ -982,7 +982,7 @@ Picking determines which object is under the cursor. Deck.gl uses **color-based 
 	- Get RGB value
 
 4. Decode color → object index
-	- `index = R * 65536 + G * 256 + B`
+	- `index = R + (G << 8) + (B << 16) - 1`
 
 5. Look up object in layer's data
 	- `datum = layer.props.data[index]`
