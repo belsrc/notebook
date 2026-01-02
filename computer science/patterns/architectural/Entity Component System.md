@@ -1152,7 +1152,7 @@ Entity 1 moved to (34.333333333333336, 34.333333333333336)
 > https://stackblitz.com/edit/vitejs-vite-rykt2trb
 
 > [!WARNING]
-> Personal note: Most of this doesn't need to be based on OOP or class structures. It becomes simpler when using plain objects for components and functions for systems. However, in TypeScript, the class hierarchy makes it easier to demonstrate examples without having to fight the type system. The only exception is the World class.
+> Personal note: Most of this doesn't need to be based on OOP or class structures. It becomes simpler when using plain objects for components and functions for systems. However, in TypeScript, the class hierarchy makes it easier to demonstrate examples. The only exception is the World class.
 
 
 ## Further Optimizations

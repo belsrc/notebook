@@ -2,7 +2,7 @@
 tags:
   - design-pattern
   - comp-sci
-gardening: 🌿
+gardening: 🌳
 date: 2025-12-21
 reference:
   - https://softwaredesignpatterns.azurewebsites.net/eBooks/Design%20Patterns%20Elements%20of%20Reusable%20Object-Oriented%20Software.pdf
@@ -21,51 +21,72 @@ You need to create families of related or dependent objects without specifying t
 - Factory Method: Creates **one** product type through inheritance
 - Abstract Factory: Creates **families** of related products through composition
 
-### Structure Diagram
+## Structure Diagram
+
+```mermaid
+classDiagram
+    direction TB
+
+    %% =======================
+    %% Tier 1 — Factory Root
+    %% =======================
+    class AbstractFactory {
+        <<interface>>
+        +createButton() Button
+        +createCheckbox() Checkbox
+    }
+
+    %% =======================
+    %% Tier 2 — Concrete Factories
+    %% =======================
+    class WindowsFactory {
+        +createButton() Button
+        +createCheckbox() Checkbox
+    }
+
+    class MacFactory {
+        +createButton() Button
+        +createCheckbox() Checkbox
+    }
+
+    AbstractFactory <|.. WindowsFactory
+    AbstractFactory <|.. MacFactory
+
+    %% =======================
+    %% Tier 3 — Abstract Products
+    %% =======================
+    class Button {
+        <<interface>>
+        +render() void
+    }
+
+    class Checkbox {
+        <<interface>>
+        +toggle() void
+    }
+
+    %% =======================
+    %% Tier 4 — Concrete Products
+    %% =======================
+    class WindowsButton { +render() void }
+    class WindowsCheckbox { +toggle() void }
+    class MacButton { +render() void }
+    class MacCheckbox { +toggle() void }
+
+    Button <|.. WindowsButton
+    Button <|.. MacButton
+    Checkbox <|.. WindowsCheckbox
+    Checkbox <|.. MacCheckbox
+
+    %% Factory creation flow
+    WindowsFactory --> Button
+    WindowsFactory --> Checkbox
+    MacFactory --> Button
+    MacFactory --> Checkbox
 
 ```
-                          ┌─────────┐
-                          │ Client  │
-                          └────┬────┘
-                               │ uses
-                               ↓
-                   ┌───────────────────────┐
-                   │  AbstractFactory      │
-                   ├───────────────────────┤
-                   │ + createButton()      │
-                   │ + createCheckbox()    │
-                   │ + createScrollbar()   │
-                   └───────────────────────┘
-                               △
-                               │ implements
-                ┌──────────────┴───────────────┐
-                │                              │
-    ┌───────────┴──────────┐       ┌───────────┴─────────┐
-    │  WindowsFactory      │       │   MacFactory        │
-    └──────────────────────┘       └─────────────────────┘
-                │                              │
-                │                              │
-        Creates │ Windows Family       Creates │ Mac Family
-                │                              │
-    ┌───────────┼───────────┐          ┌───────┼───────┐
-    ↓           ↓           ↓          ↓       ↓       ↓
-┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────┐ ┌─────┐ ┌─────┐
-│ Windows │ │ Windows │ │ Windows │ │ Mac │ │ Mac │ │ Mac │
-│Button   │ │Checkbox │ │Scrollbar│ │ Btn │ │ Chk │ │ Scrl│
-└────┬────┘ └────┬────┘ └────┬────┘ └──┬──┘ └──┬──┘ └──┬──┘
-     │           │           │         │       │       │
-     └───────────┴───────────┼─────────┴───────┴───────┘
-                             │ all implement
-                             ↓
-              ┌──────────────────────────────┐
-              │  Product Interfaces:         │
-              │  • Button                    │
-              │  • Checkbox                  │
-              │  • Scrollbar                 │
-              └──────────────────────────────┘
-```
 
-### Traditional Implementation
+## Traditional Implementation
 
 ```typescript
 // Abstract Product interfaces - define types in the family
@@ -288,7 +309,7 @@ app.demonstrateCompatibility();
 - Products from same family are guaranteed compatible
 - Client depends only on abstract interfaces
 
-### Modern Alternative
+## Modern Alternative
 
 We achieve the same guarantees through:
 1. **Factory objects/records** - Plain objects with factory functions
@@ -437,7 +458,7 @@ const updatedApp = {
 renderApplication(updatedApp);
 ```
 
-### Comparison: Traditional vs Modern
+## Comparison: Traditional vs Modern
 
 | Aspect           | Classes              | Functions/Data       |
 | ---------------- |--------------------- | -------------------- |

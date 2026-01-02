@@ -2,7 +2,7 @@
 tags:
   - design-pattern
   - comp-sci
-gardening: 🌿
+gardening: 🌳
 date: 2025-12-21
 reference:
   - https://softwaredesignpatterns.azurewebsites.net/eBooks/Design%20Patterns%20Elements%20of%20Reusable%20Object-Oriented%20Software.pdf
@@ -19,39 +19,57 @@ You need to create objects without specifying their exact classes, allowing subc
 
 ## Structure Diagram
 
-```
-        ┌────────────────────────────┐
-        │      Creator (Abstract)    │
-        ├────────────────────────────┤
-        │ + factoryMethod(): Product │
-        │ + someOperation(): void    │
-        └────────────────────────────┘
-                       △
-                       │ inherits
-                       │
-         ┌─────────────┴─────────────┐
-         │                           │
-┌────────┴───────────┐  ┌────────────┴─────────┐
-│ ConcreteCreatorA   │  │ ConcreteCreatorB     │
-├────────────────────┤  ├──────────────────────┤
-│ + factoryMethod(): │  │ + factoryMethod():   │
-│   ProductA         │  │   ProductB           │
-└────────────────────┘  └──────────────────────┘
-         │                         │
-         │ creates                 │ creates
-         ↓                         ↓
-┌────────────────────┐  ┌──────────────────────┐
-│    ProductA        │  │    ProductB          │
-└────────────────────┘  └──────────────────────┘
-         △                        △
-         └────────────┬───────────┘
-                      │
-              ┌───────┴────────┐
-              │    Product     │ (Interface)
-              └────────────────┘
+```mermaid
+classDiagram
+    direction TB
+
+    %% =======================
+    %% Tier 1 — Creator Root
+    %% =======================
+    class Creator {
+        <<abstract>>
+        +factoryMethod() Product
+        +someOperation() void
+    }
+
+    %% =======================
+    %% Tier 2 — Concrete Creators
+    %% =======================
+    class ConcreteCreatorA {
+        +factoryMethod() Product
+    }
+
+    class ConcreteCreatorB {
+        +factoryMethod() Product
+    }
+
+    Creator <|-- ConcreteCreatorA
+    Creator <|-- ConcreteCreatorB
+
+    %% =======================
+    %% Tier 3 — Abstract Product
+    %% =======================
+    class Product {
+        <<interface>>
+        +use() void
+    }
+
+    %% =======================
+    %% Tier 4 — Concrete Products
+    %% =======================
+    class ProductA { +use() void }
+    class ProductB { +use() void }
+
+    Product <|.. ProductA
+    Product <|.. ProductB
+
+    %% Creation flow
+    ConcreteCreatorA --> Product
+    ConcreteCreatorB --> Product
+
 ```
 
-### Traditional Implementation
+## Traditional Implementation
 
 ```typescript
 // Product interface - what all created objects must implement
@@ -261,7 +279,7 @@ documentOps.save(doc2);
 documentOps.close(doc2);
 ```
 
-### Discriminated Unions Alternative
+## Discriminated Unions Alternative
 
 ```typescript
 type PDFDoc = {
@@ -333,7 +351,7 @@ const doc = pdfApp.newDocument('report.pdf');
 saveDocument(doc);
 ```
 
-### Comparison: Traditional vs Modern
+## Comparison: Traditional vs Modern
 
 | Aspect           | Inheritance        | HOF/Closures         |
 | ---------------- | ------------------ | -------------------- |

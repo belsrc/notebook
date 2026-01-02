@@ -2,7 +2,7 @@
 tags:
   - design-pattern
   - comp-sci
-gardening: 🌿
+gardening: 🌳
 date: 2025-12-21
 reference:
   - https://softwaredesignpatterns.azurewebsites.net/eBooks/Design%20Patterns%20Elements%20of%20Reusable%20Object-Oriented%20Software.pdf
@@ -18,16 +18,14 @@ You need exactly one instance of a class throughout your application's lifetime,
 
 ## Structure Diagram
 
-```
-┌─────────────────────────────────┐
-│      Singleton                  │
-├─────────────────────────────────┤
-│ - instance: Singleton (static)  │
-│ - constructor() (private)       │
-├─────────────────────────────────┤
-│ + getInstance(): Singleton      │
-│ + operation(): void             │
-└─────────────────────────────────┘
+```mermaid
+classDiagram
+	class Singleton {
+		-static Singleton instance
+		-Singleton()
+		+static Singleton getInstance() Singleton
+		+operation() void
+	}
 ```
 
 ## Traditional Implementation
@@ -135,7 +133,7 @@ const conn2 = databaseConnection.getInstance();
 console.log(conn1 === conn2); // true - same reference
 ```
 
-### Comparison: Traditional vs Modern
+## Comparison: Traditional vs Modern
 
 | Aspect        | Class-based         | Closure/Module       |
 | ------------- | ------------------- | -------------------- |
