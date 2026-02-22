@@ -57,7 +57,7 @@ classDiagram
 ```
 
 
-## Traditional Implementation
+## Traditional Class-Based Implementation
 
 ```typescript
 // Prototype interface - declares clone method
@@ -181,7 +181,7 @@ console.log('\nOriginal email:', seniorDev.contact.email); // john@example.com
 console.log('Clone email:', juniorDev.contact.email); // jane@example.com
 ```
 
-## Modern Alternative
+## Function-Based Alternative
 
 We achieve singleton behavior through:
 - **Immutable data structures** - Copying is built-in
@@ -373,7 +373,7 @@ const newEmployee = cloneAndUpdate(seniorDevPrototype)(
 );
 ```
 
-## Comparison: Traditional vs Modern
+## Comparison: Class vs Function
 
 | Aspect          | Classes             | Functions           |
 | --------------- | ------------------- | ------------------- |

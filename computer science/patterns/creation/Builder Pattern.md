@@ -75,7 +75,7 @@ classDiagram
 ```
 
 
-## Traditional Implementation
+## Traditional Class-Based Implementation
 
 ```typescript
 // Product - complex object being built
@@ -282,7 +282,7 @@ console.log(customPC.specifications());
 - Director (optional) encapsulates common build sequences
 - Final `build()` method returns the product
 
-## Modern Alternative
+## Function-Based Alternative
 
 We achieve builder-like behavior through:
 1. **Function composition** - Composing transformation functions
@@ -431,7 +431,7 @@ const pc = pipe(
 )(emptyComputer);
 ```
 
-## Comparison: Traditional vs Modern
+## Comparison: Class vs Function
 
 | Aspect           | Classes              | Functions             |
 | ---------------- | -------------------- | --------------------- |

@@ -86,7 +86,7 @@ classDiagram
 
 ```
 
-## Traditional Implementation
+## Traditional Class-Based Implementation
 
 ```typescript
 // Abstract Product interfaces - define types in the family
@@ -309,7 +309,7 @@ app.demonstrateCompatibility();
 - Products from same family are guaranteed compatible
 - Client depends only on abstract interfaces
 
-## Modern Alternative
+## Function-Based Alternative
 
 We achieve the same guarantees through:
 1. **Factory objects/records** - Plain objects with factory functions
@@ -458,7 +458,7 @@ const updatedApp = {
 renderApplication(updatedApp);
 ```
 
-## Comparison: Traditional vs Modern
+## Comparison: Class vs Function
 
 | Aspect           | Classes              | Functions/Data       |
 | ---------------- |--------------------- | -------------------- |

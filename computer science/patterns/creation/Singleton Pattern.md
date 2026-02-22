@@ -28,7 +28,7 @@ classDiagram
 	}
 ```
 
-## Traditional Implementation
+## Traditional Class-Based Implementation
 
 ```typescript
 class DatabaseConnection {
@@ -76,7 +76,7 @@ console.log(db1.getConnectionInfo());
 - Static `getInstance()` method
 - Lazy initialization (created on first access)
 
-## Modern Alternative
+## Function-Based Alternative
 
 We achieve singleton behavior through:
 1. **Module-level closure** - JavaScript modules are singletons by default
@@ -133,7 +133,7 @@ const conn2 = databaseConnection.getInstance();
 console.log(conn1 === conn2); // true - same reference
 ```
 
-## Comparison: Traditional vs Modern
+## Comparison: Class vs Function
 
 | Aspect        | Class-based         | Closure/Module       |
 | ------------- | ------------------- | -------------------- |
@@ -145,7 +145,7 @@ console.log(conn1 === conn2); // true - same reference
 | Thread Safety | Requires locking    | Requires locking     |
 | Composability | Limited             | High (HOF)           |
 
-### Problems with Traditional Singleton
+### Problems with Traditional Class-Based Singleton
 
 1. **Global State** - Hidden dependencies, hard to test
 2. **Violates Single Responsibility** - Manages both instance creation AND business logic

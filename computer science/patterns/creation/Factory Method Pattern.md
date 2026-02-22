@@ -69,7 +69,7 @@ classDiagram
 
 ```
 
-## Traditional Implementation
+## Traditional Class-Based Implementation
 
 ```typescript
 // Product interface - what all created objects must implement
@@ -189,7 +189,7 @@ doc2.close();
 - Creator code uses products through interface
 - Decouples creation from usage
 
-## Modern Alternative
+## Function-Based Alternative
 
 We achieve the same decoupling through:
 1. **Higher-order functions** - Functions that return factory functions
@@ -351,7 +351,7 @@ const doc = pdfApp.newDocument('report.pdf');
 saveDocument(doc);
 ```
 
-## Comparison: Traditional vs Modern
+## Comparison: Class vs Function
 
 | Aspect           | Inheritance        | HOF/Closures         |
 | ---------------- | ------------------ | -------------------- |
