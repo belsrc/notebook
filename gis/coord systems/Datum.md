@@ -43,7 +43,7 @@ A complete coordinate reference system consists of:
 3. A map projection (if converting to a flat surface)
 
 ```mermaid
-%%{init: { 'themeVariables': { 'fontSize': '16px' }, 'flowchar': {'useMaxWidth':true} } }%%
+%%{init: { 'themeVariables': { 'fontSize': '16px' }, 'flowchart': {'useMaxWidth':true} } }%%
 flowchart TD
     A[Geographic Location on Earth] --> B[Geodetic Datum]
     B --> C[Reference Ellipsoid]
