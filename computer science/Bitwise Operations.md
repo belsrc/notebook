@@ -8,6 +8,21 @@ reference:
   - https://www.geeksforgeeks.org/introduction-to-bitwise-algorithms-data-structures-and-algorithms-tutorial/
   - https://www.alexhyett.com/bitwise-operators/
 ---
+## Mental Model: Numbers as Bit Arrays
+
+A useful way to reason about bitwise operations is to treat a number's binary representation as an array where each index is a bit position and each element is a `0` or `1`. Bitwise operations then become familiar array transformations applied element-wise.
+
+```typescript
+// A number as an array of bits (conceptual representation)
+type BitArray = readonly boolean[];
+
+// 22 in binary: 00010110
+const num22: BitArray = [false, false, false, true, false, true, true, false];
+
+// 93 in binary: 01011101
+const num93: BitArray = [false, true, false, true, true, true, false, true];
+```
+
 ## Bitwise AND (`&`)
 
 For each bit, if both bits are `1`, the resulting bit is `1`. If either bit or both are `0`, the resulting bit is `0`. In other words, it performs a logical **AND** operation on each individual bit.
@@ -22,6 +37,21 @@ Performing the bitwise **AND** would visually look like:
 
 ```
 22 & 93 === 20
+```
+
+**Array analogy:** Like `Array.prototype.map()` with logical AND on corresponding elements.
+
+```typescript
+const bitwiseAnd = (a: BitArray, b: BitArray): BitArray => {
+  const maxLength = Math.max(a.length, b.length);
+  return Array.from({ length: maxLength }, (_, i) =>
+    (a[i] ?? false) && (b[i] ?? false)
+  );
+};
+
+// 22 & 93 → element-wise AND
+const result = bitwiseAnd(num22, num93);
+// Equivalent to: 22 & 93 === 20
 ```
 
 The **AND** operator (`&`) can also be used to determine whether a number is even or odd. Since the only bit that indicates oddness is the rightmost bit (which is `1`), performing an **AND** operation with `1` will result in `1` for odd numbers and `0` for even numbers.
@@ -65,6 +95,21 @@ Performing the bitwise **OR** would visually look like:
 
 ```
 22 | 93 === 95
+```
+
+**Array analogy:** Like `map()` with logical OR, combining elements from both arrays.
+
+```typescript
+const bitwiseOr = (a: BitArray, b: BitArray): BitArray => {
+  const maxLength = Math.max(a.length, b.length);
+  return Array.from({ length: maxLength }, (_, i) =>
+    (a[i] ?? false) || (b[i] ?? false)
+  );
+};
+
+// 22 | 93 → element-wise OR
+const result = bitwiseOr(num22, num93);
+// Equivalent to: 22 | 93 === 95
 ```
 
 Using the example of user options mentioned earlier, the **OR** operator can be utilized to turn options ON.
@@ -154,6 +199,21 @@ Performing the bitwise XOR would visually look like:
 22 ^ 93 === 75
 ```
 
+**Array analogy:** Like `map()` with strict inequality, `true` when elements differ.
+
+```typescript
+const bitwiseXor = (a: BitArray, b: BitArray): BitArray => {
+  const maxLength = Math.max(a.length, b.length);
+  return Array.from({ length: maxLength }, (_, i) =>
+    (a[i] ?? false) !== (b[i] ?? false)
+  );
+};
+
+// 22 ^ 93 → true only where bits differ
+const result = bitwiseXor(num22, num93);
+// Equivalent to: 22 ^ 93 === 75
+```
+
 While the toggling example mentioned above does work, it's more complex than necessary for simply changing a bit from `1` to `0` or vice versa. Fortunately, the **XOR** operation can handle this for us more effectively.
 
 ```js
@@ -213,6 +273,17 @@ And if the operand is negative:
 ```js
 ~(-743)
 // >> 742
+```
+
+**Array analogy**: Like `map(x => !x)`, flipping every element in the bit array.
+
+```typescript
+const bitwiseNot = (a: BitArray): BitArray => a.map(bit => !bit);
+
+// ~22 in 8-bit representation
+// ~00010110 = 11101001
+const result = bitwiseNot(num22);
+// Equivalent to: ~22 & 0xFF === 233
 ```
 
 A fairly common use case is using it to determine if an array index was found.
@@ -300,6 +371,33 @@ Since it only operates on whole numbers, the result of a shift right on an odd n
 // 6
 ```
 
+**Left shift array analogy**: Like prepending zeros to the array and trimming the end to maintain the original length, the high bits fall off.
+
+```typescript
+const leftShift = (a: BitArray, positions: number): BitArray => {
+  const shifted = [...Array(positions).fill(false), ...a];
+  return shifted.slice(0, a.length);
+};
+
+// 5 << 2: [1,0,1] → [0,0,1,0,1] → trim to [0,0,1] = 4
+// (conceptual 3-bit example; full 32-bit result is 20)
+const result = leftShift([true, false, true], 2);
+console.log(5 << 2); // 20
+```
+
+**Right shift array analogy**: Like removing elements from the front and padding the end with zeros, the low bits fall off.
+
+```typescript
+const rightShift = (a: BitArray, positions: number): BitArray => {
+  const shifted = a.slice(positions);
+  return [...shifted, ...Array(positions).fill(false)];
+};
+
+// 20 >> 2: [1,0,1,0,0] → [1,0,1] padded → [1,0,1,0,0] = 5
+const result = rightShift([false, false, true, false, true], 2);
+console.log(20 >> 2); // 5
+```
+
 ## Using Logical Shift to (Un)Pack RGBA Codes
 
 An RGBA code can be represented as four 8-bit integers that are "packed" together.
@@ -369,4 +467,57 @@ const packedColor = (red << 24) + (green << 16) + (blue << 8) + alpha;
 console.log(packedColor.toString(2));
 // 0b01010011100110111111010111111111
 // Technically its "1010011100110111111010111111111", JS trims the zeros from the left
+```
+
+## Finding Set Bits
+
+A common pattern is iterating over a value's bits to find which positions are set, analogous to finding truthy indices in an array.
+
+```typescript
+// Array approach (conceptual)
+const getSetBitPositionsArray = (bits: BitArray): number[] =>
+  bits
+    .map((bit, index) => (bit ? index : -1))
+    .filter(index => index !== -1);
+
+// Bitwise approach
+const getSetBitPositions = (value: number): number[] => {
+  const positions: number[] = [];
+  let pos = 0;
+  let v = value;
+  while (v > 0) {
+    if (v & 1) positions.push(pos);
+    v >>= 1;
+    pos++;
+  }
+  return positions;
+};
+
+console.log(getSetBitPositions(0b1011)); // [0, 1, 3]
+```
+
+**Brian Kernighan's algorithm** efficiently counts set bits by repeatedly clearing the lowest set bit, analogous to removing the last truthy element from an array one at a time.
+
+```typescript
+// Array analogy: remove last truthy element
+const removeLastTruthy = (bits: boolean[]): boolean[] => {
+  const result = [...bits];
+  for (let i = result.length - 1; i >= 0; i--) {
+    if (result[i]) { result[i] = false; break; }
+  }
+  return result;
+};
+
+// Bitwise: `value & (value - 1)` clears the lowest set bit
+const countSetBits = (value: number): number => {
+  let count = 0;
+  let v = value;
+  while (v > 0) {
+    v &= v - 1;
+    count++;
+  }
+  return count;
+};
+
+console.log(countSetBits(0b1011)); // 3
 ```
