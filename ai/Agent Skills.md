@@ -1,3 +1,10 @@
+---
+tags:
+  - ai
+  - agents
+gardening: 🌳
+date: 2026-02-11
+---
 Skills are modular, self-contained knowledge packages that extend an agent's capabilities with specialized domain expertise, workflows, and tool integrations. Think of skills as "onboarding guides" that transform an agent from a general-purpose agent into a specialized agent equipped with procedural knowledge, reference materials, and reusable assets for specific tasks or domains.
 
 Skills enable agents to perform complex, domain-specific operations by providing:
