@@ -9,7 +9,7 @@ reference:
   - https://docs.claude.com/
   - https://docs.claude.com/en/docs/claude-code/skills
 ---
-## Module 1: What Are Skills?
+## What Are Skills?
 
 Agent Skills are modular capabilities packaged as filesystem artifacts that Claude discovers and invokes autonomously. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
 
@@ -50,7 +50,7 @@ This **progressive disclosure** model means large references incur zero token co
 
 Skills complement all three rather than replacing them.
 
-## Module 2: Creating Your First Skill
+## Creating Your First Skill
 
 ### Minimum viable Skill
 
@@ -108,7 +108,7 @@ description: Helps with documents
 
 Always write in third person. First- or second-person descriptions ("I can help you…", "You can use this to…") cause discovery failures because the description is injected verbatim into the system prompt.
 
-## Module 3: Configuration and Multi-File Skills
+## Configuration and Multi-File Skills
 
 ### Progressive disclosure directory layout
 
@@ -195,7 +195,7 @@ disable-model-invocation: true
 
 Set this for Skills that should only be invoked explicitly via `/deploy-production`, not auto-triggered by Claude based on task context. Useful for destructive or high-stakes operations.
 
-## Module 4: Skills vs. Other Claude Code Features
+## Skills vs. Other Claude Code Features
 
 ### Decision matrix
 
@@ -228,7 +228,7 @@ Set this for Skills that should only be invoked explicitly via `/deploy-producti
 
 Wire a Skill into a subagent to give it specialized domain knowledge with an isolated execution environment. The subagent's `AGENT.md` can explicitly reference a Skill, or the subagent's allowed tools can include `Skill`.
 
-## Module 5: Sharing Skills
+## Sharing Skills
 
 ### Scope hierarchy and priority
 
@@ -302,7 +302,7 @@ Treat third-party Skills like installing software:
 - Malicious Skills can invoke bash, file operations, or code execution as tools
 - Only install Skills from trusted sources; be extra careful in production systems with access to sensitive data
 
-## Module 6: Troubleshooting Skills
+## Troubleshooting Skills
 
 ### Skill won't trigger
 

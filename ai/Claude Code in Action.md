@@ -8,65 +8,7 @@ reference:
   - https://anthropic.skilljar.com/claude-code-in-action
   - https://docs.anthropic.com/en/docs/claude-code
 ---
-# Course Summary
-
-> Free course hosted on Anthropic's Skilljar academy. Targets software developers and teams integrating AI assistance into existing development workflows.
-
-## Module Breakdown
-
-### 1. What is Claude Code?
-
-Foundational concepts covering the architecture of AI coding assistants, how they interact with codebases via tool integration, and the technical foundations enabling code analysis and modification.
-
-- Introduction
-- What is a coding assistant?
-- Claude Code in action
-
-### 2. Getting Hands On
-
-Practical setup and initial use of Claude Code inside a real project.
-
-- Claude Code setup
-- Project setup
-- Adding context
-- Making changes
-
-### 3. Controlling Context
-
-Strategies for maintaining and scoping relevant context across long conversations to keep AI assistance accurate and focused.
-
-### 4. Custom Commands
-
-Building reusable automations and slash-commands to eliminate repetitive prompting for common development tasks.
-
-### 5. MCP Servers with Claude Code
-
-Extending Claude Code's capabilities by integrating external tools via the **Model Context Protocol (MCP)**, including browser automation and specialized dev workflows.
-
-### 6. GitHub Integration
-
-Setting up AI-assisted code review and automating GitHub workflows (PR reviews, issue triage, etc.).
-
-### 7. Hooks and the SDK
-
-The deepest technical section of the course:
-
-|Lesson|Description|
-|---|---|
-|Introducing hooks|What hooks are and when to use them|
-|Defining hooks|Hook configuration and lifecycle|
-|Implementing a hook|Concrete implementation walkthrough|
-|Gotchas around hooks|Edge cases and failure modes|
-|Useful hooks|Practical, real-world examples|
-|Another useful hook|Additional patterns|
-|The Claude Code SDK|Programmatic control of Claude Code for custom tooling|
-
-### 8. Wrapping Up
-
-- Quiz on Claude Code
-- Summary and next steps
-
-## Module 1: What is Claude Code?
+## What is Claude Code?
 
 ### What is a Coding Assistant?
 
@@ -112,7 +54,7 @@ Claude Code is an **agentic** tool, it will autonomously plan, reason, and execu
 - Via the **Claude Agent SDK** (programmatic, Python + TypeScript)
 - In **GitHub Actions** (CI automation)
 
-## Module 2: Getting Hands On
+## Getting Hands On
 
 ### Installation
 
@@ -175,7 +117,7 @@ Within the REPL you can reference project resources directly:
 |`!<shell command>`|Execute command and inject output|
 |`/add-dir <path>`|Add an additional directory to the search scope|
 
-## Module 3: Controlling Context
+## Controlling Context
 
 ### Why Context Management Matters
 
@@ -214,7 +156,7 @@ user settings   (~/.claude/settings.json)
 ```
 
 
-## Module 4: Custom Commands (Skills)
+## Custom Commands (Skills)
 
 ### What a Skill Is
 
@@ -274,7 +216,7 @@ Write a conventional commit message and commit the staged changes.
 
 Skill descriptions are loaded into the context window on startup. The budget is `max(16000, 2% of context window)` characters. Run `/context` to check for truncation warnings.
 
-## Module 5: MCP Servers with Claude Code
+## MCP Servers with Claude Code
 
 ### What MCP Is
 
@@ -326,7 +268,7 @@ claude mcp remove github # Remove a server
 
 Many hosted MCP servers (GitHub, Slack, etc.) use OAuth 2.0. Claude Code handles the flow automatically when you run `/mcp` and select "Authenticate". For servers without dynamic client registration, pass `--client-id` and `--client-secret` at add time.
 
-## Module 6: GitHub Integration
+## GitHub Integration
 
 ### Claude Code GitHub Action
 
@@ -405,7 +347,7 @@ For workflows that need AWS/GCP access (e.g., deploying, querying prod databases
     service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 ```
 
-## Module 7: Hooks and the SDK
+## Hooks and the SDK
 
 ### What Hooks Are
 

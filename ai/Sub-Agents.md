@@ -8,10 +8,9 @@ reference:
   - https://docs.claude.com/
   - https://docs.claude.com/en/docs/claude-code/sub-agents
 ---
-## Module 1: What Are Subagents?
+## What Are Subagents?
 
-Subagents are specialized Claude instances that your main agent can spawn to handle focused subtasks.
-Each one runs in its own context window with a custom system prompt, dedicated tool access, and independent permissions.
+Subagents are specialized Claude instances that your main agent can spawn to handle focused subtasks. Each one runs in its own context window with a custom system prompt, dedicated tool access, and independent permissions.
 When Claude encounters a task matching a subagent's description it delegates automatically; results return to the main conversation when the subagent finishes.
 
 ### Core concept: "Delegate and isolate"
@@ -58,7 +57,7 @@ Subagents are called via the internal **Task tool**. The Task tool must therefor
 
 Skills inject instructions *into* the current conversation. Subagents spawn a *separate* instance and return only results.
 
-## Module 2: Built-in Subagents
+## Built-in Subagents
 
 Claude Code ships three first-class built-in subagents that Claude invokes automatically. They inherit the parent session's permissions plus additional tool restrictions.
 
@@ -100,7 +99,7 @@ The built-in general-purpose agent is always available whenever `Task` is in `al
 
 Beyond the three named agents, Claude Code includes additional helper agents for formatting, linting, and other specific tasks. You do not call them directly.
 
-## Module 3: Creating Custom Subagents
+## Creating Custom Subagents
 
 ### Filesystem-based definition (Claude Code CLI)
 
@@ -197,7 +196,7 @@ claude agents  # prints agents grouped by scope
 
 When multiple subagents share the same name, the higher-priority scope wins. Use `claude agents` to see which definition is active.
 
-## Module 4: Invoking Subagents
+## Invoking Subagents
 
 ### Automatic invocation
 
@@ -274,7 +273,7 @@ Main conversation
 Claude synthesizes all three results
 ```
 
-## Module 5: Nesting Limits
+## Nesting Limits
 
 Subagents cannot spawn other subagents. This constraint is intentional, it prevents runaway nesting and unbounded context consumption.
 
@@ -291,7 +290,7 @@ The exception is the built-in `Plan` subagent, it is explicitly blocked from cal
 
 If you need sustained parallelism or work that exceeds a single context window, use **Agent Teams** instead of nested subagents.
 
-## Module 6: Subagents + Skills
+## Subagents + Skills
 
 Skills and subagents integrate in two directions.
 
@@ -346,7 +345,7 @@ Do you need domain knowledge available from turn 1?
 - Yes → Subagent with skills: [list]
 - No  → Subagent (skills load on demand via Skill tool when subagent triggers them)
 
-## Module 7: Worktree Isolation
+## Worktree Isolation
 
 Subagents support **worktree isolation**, each subagent runs in its own temporary git worktree, preventing concurrent file conflicts:
 
@@ -365,7 +364,7 @@ Worktree isolation is ideal for:
 - Running speculative experiments without touching the main working tree
 - Safe batch modifications that need review before merging
 
-## Module 8: SDK Programmatic Definition
+## SDK Programmatic Definition
 
 When building agents with the Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`), subagents can be defined programmatically via the `agents` parameter, no filesystem files required.
 
@@ -456,7 +455,7 @@ for await (const message of query({
 }
 ```
 
-## Module 9: Resuming Subagents
+## Resuming Subagents
 
 Subagents can be resumed to continue exactly where they left off, including full conversation history and all previous tool calls.
 
@@ -484,7 +483,7 @@ Subagent transcripts are stored separately from the main conversation:
 | Session restart | Transcripts persist; resume using the same `sessionId` |
 | Automatic cleanup | Controlled by `cleanupPeriodDays` setting (default: 30 days) |
 
-## Module 10: Hooks for Subagents
+## Hooks for Subagents
 
 Two hook events are specific to subagent lifecycle:
 
@@ -555,7 +554,7 @@ Hooks themselves can spawn a subagent for verification tasks requiring file acce
 
 Agent hooks use the same `ok` / `reason` response format as prompt hooks, but default timeout is 60s with up to 50 tool-use turns.
 
-## Module 11: Detecting Subagent Invocations (SDK)
+## Detecting Subagent Invocations (SDK)
 
 Subagents appear as `tool_use` blocks with `name: "Task"` in the message stream. Messages originating from within a subagent carry a `parent_tool_use_id` field.
 
@@ -584,7 +583,7 @@ for await (const message of query({ prompt, options })) {
 }
 ```
 
-## Module 12: Troubleshooting
+## Troubleshooting
 
 ### Claude is not delegating to subagents
 
