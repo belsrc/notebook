@@ -16,7 +16,7 @@ reference:
 
 ### 1. What is Claude Code?
 
-Foundational concepts covering the architecture of AI coding assistants — how they interact with codebases via tool integration, and the technical foundations enabling code analysis and modification.
+Foundational concepts covering the architecture of AI coding assistants, how they interact with codebases via tool integration, and the technical foundations enabling code analysis and modification.
 
 - Introduction
 - What is a coding assistant?
@@ -41,7 +41,7 @@ Building reusable automations and slash-commands to eliminate repetitive prompti
 
 ### 5. MCP Servers with Claude Code
 
-Extending Claude Code's capabilities by integrating external tools via the **Model Context Protocol (MCP)** — including browser automation and specialized dev workflows.
+Extending Claude Code's capabilities by integrating external tools via the **Model Context Protocol (MCP)**, including browser automation and specialized dev workflows.
 
 ### 6. GitHub Integration
 
@@ -66,13 +66,11 @@ The deepest technical section of the course:
 - Quiz on Claude Code
 - Summary and next steps
 
----
-
 ## Module 1: What is Claude Code?
 
 ### What is a Coding Assistant?
 
-A coding assistant is an AI agent that interacts with a codebase through a **tool-use system** rather than through passive text generation. The model is given access to a set of tools it can invoke in a loop — the **agent loop** — until it determines the task is complete.
+A coding assistant is an AI agent that interacts with a codebase through a **tool-use system** rather than through passive text generation. The model is given access to a set of tools it can invoke in a loop, the **agent loop**, until it determines the task is complete.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -85,7 +83,7 @@ A coding assistant is an AI agent that interacts with a codebase through a **too
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The model never directly reads your filesystem or runs commands — it requests a tool invocation, and the host process executes it and returns results.
+The model never directly reads your filesystem or runs commands, it requests a tool invocation, and the host process executes it and returns results.
 
 ### Built-in Tools
 
@@ -107,14 +105,12 @@ Claude Code ships with a set of built-in tools covering the core operations need
 
 ### What Claude Code Is (and Is Not)
 
-Claude Code is an **agentic** tool — it will autonomously plan, reason, and execute multi-step tasks across many files. It is not simply autocomplete or a chat panel sitting beside an editor. It operates:
+Claude Code is an **agentic** tool, it will autonomously plan, reason, and execute multi-step tasks across many files. It is not simply autocomplete or a chat panel sitting beside an editor. It operates:
 
 - In the **terminal** (`claude` CLI)
 - As a **VS Code / Cursor extension**
 - Via the **Claude Agent SDK** (programmatic, Python + TypeScript)
 - In **GitHub Actions** (CI automation)
-
----
 
 ## Module 2: Getting Hands On
 
@@ -161,7 +157,7 @@ project-root/
     └── skills/               ← User-level skills
 ```
 
-`CLAUDE.md` is the primary mechanism for injecting persistent project context — coding standards, architectural decisions, team conventions, banned patterns, etc.
+`CLAUDE.md` is the primary mechanism for injecting persistent project context, coding standards, architectural decisions, team conventions, banned patterns, etc.
 
 ### @ Mentions and Context Injection
 
@@ -178,8 +174,6 @@ Within the REPL you can reference project resources directly:
 |`@<filepath>`|Inject file contents into context|
 |`!<shell command>`|Execute command and inject output|
 |`/add-dir <path>`|Add an additional directory to the search scope|
-
----
 
 ## Module 3: Controlling Context
 
@@ -203,7 +197,7 @@ Summarizes the conversation history, replacing raw messages with a condensed sum
 /context
 ```
 
-Shows a breakdown of what is currently in context — skills, agents, slash commands, and a sorted token count — so you can see what's consuming space.
+Shows a breakdown of what is currently in context, skills, agents, slash commands, and a sorted token count, so you can see what's consuming space.
 
 ### Settings Precedence
 
@@ -219,13 +213,12 @@ project settings (.claude/settings.json  /  .mcp.json)
 user settings   (~/.claude/settings.json)
 ```
 
----
 
 ## Module 4: Custom Commands (Skills)
 
 ### What a Skill Is
 
-A **skill** is a Markdown file that defines a reusable prompt template and optional metadata. Storing a skill is equivalent to storing a slash command — the two are unified:
+A **skill** is a Markdown file that defines a reusable prompt template and optional metadata. Storing a skill is equivalent to storing a slash command, the two are unified:
 
 ```
 .claude/skills/<name>/SKILL.md   →  /<name>
@@ -281,8 +274,6 @@ Write a conventional commit message and commit the staged changes.
 
 Skill descriptions are loaded into the context window on startup. The budget is `max(16000, 2% of context window)` characters. Run `/context` to check for truncation warnings.
 
----
-
 ## Module 5: MCP Servers with Claude Code
 
 ### What MCP Is
@@ -334,8 +325,6 @@ claude mcp remove github # Remove a server
 ### OAuth Authentication
 
 Many hosted MCP servers (GitHub, Slack, etc.) use OAuth 2.0. Claude Code handles the flow automatically when you run `/mcp` and select "Authenticate". For servers without dynamic client registration, pass `--client-id` and `--client-secret` at add time.
-
----
 
 ## Module 6: GitHub Integration
 
@@ -416,13 +405,11 @@ For workflows that need AWS/GCP access (e.g., deploying, querying prod databases
     service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 ```
 
----
-
 ## Module 7: Hooks and the SDK
 
 ### What Hooks Are
 
-Hooks are **user-defined shell commands** that execute at specific points in the Claude Code agent lifecycle. They provide **deterministic** side effects that bypass the LLM's decision-making — if you add a hook, it will always run at that lifecycle point, unconditionally.
+Hooks are **user-defined shell commands** that execute at specific points in the Claude Code agent lifecycle. They provide **deterministic** side effects that bypass the LLM's decision-making, if you add a hook, it will always run at that lifecycle point, unconditionally.
 
 > Hooks convert suggestions into application-layer enforcement.
 
@@ -475,7 +462,7 @@ Hooks are stored in `settings.json` (user or project level):
 }
 ```
 
-Configure via the interactive menu (`/hooks`) or by editing the JSON directly. Note: direct edits to `settings.json` do **not** take effect in the running session — restart Claude Code.
+Configure via the interactive menu (`/hooks`) or by editing the JSON directly. Note: direct edits to `settings.json` do **not** take effect in the running session, restart Claude Code.
 
 ### Hook Communication Protocol
 
@@ -493,9 +480,9 @@ Claude Code passes JSON via **stdin** to the hook script. The script communicate
 
 |Code|Meaning|
 |---|---|
-|`0`|Success — proceed normally|
+|`0`|Success, proceed normally|
 |`2`|Block the operation (PreToolUse only)|
-|other|Error — logged, operation may still proceed|
+|other|Error, logged, operation may still proceed|
 
 **stdout JSON fields:**
 
@@ -575,19 +562,18 @@ Hooks run with the same credentials as the current user. Key rules:
 
 - Always quote shell variables: `"$VAR"`, not `$VAR`
 - Check for path traversal: reject paths containing `..`
-- Use absolute paths — `$CLAUDE_PROJECT_DIR` is available for the project root
+- Use absolute paths, `$CLAUDE_PROJECT_DIR` is available for the project root
 - Skip sensitive files: `.env`, `.git/`, key files
 - Default timeout is 60 seconds per hook command
 - Hooks from `settings.json` edits during a session are not hot-reloaded
 
----
 ##  The Claude Agent SDK
 
 > **Note:** The Claude Code SDK was renamed to the **Claude Agent SDK** (`@anthropic-ai/claude-agent-sdk`). Existing `@anthropic-ai/claude-code-sdk` imports continue to work via the migration shim.
 
 ### Core Concept
 
-The SDK exposes the same agent loop that powers the CLI — but as a programmatic async generator you can embed in your own application:
+The SDK exposes the same agent loop that powers the CLI, but as a programmatic async generator you can embed in your own application:
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -767,8 +753,6 @@ const result = query({
 
 Claude decides which subagent to delegate to based on the `description` field. Multiple subagents can run **concurrently**, drastically reducing wall-clock time on multi-part tasks.
 
----
-
 ## Key Architectural Summary
 
 ```
@@ -796,8 +780,6 @@ Claude decides which subagent to delegate to based on the `description` field. M
 └───────────────────────────────────────────────────────────────────┘
 ```
 
----
-
 ## Quick Reference: Important File Paths
 
 ```
@@ -819,8 +801,6 @@ Claude decides which subagent to delegate to based on the `description` field. M
     ├── agents/            Project subagents
     └── commands/          Legacy project commands
 ```
-
----
 
 ## Quick Reference: Common Slash Commands
 

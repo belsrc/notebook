@@ -33,7 +33,7 @@ Subagents are called via the internal **Task tool**. The Task tool must therefor
 │    → Task(subagent_type="test-runner", …)               │
 └────────────┬──────────────────────┬─────────────────────┘
              │ own context window   │ own context window
-             ▼                     ▼
+             ▼                      ▼
 ┌────────────────────┐   ┌────────────────────────┐
 │  code-reviewer     │   │  test-runner           │
 │  tools: Read,Grep  │   │  tools: Bash,Read,Grep │
@@ -57,8 +57,6 @@ Subagents are called via the internal **Task tool**. The Task tool must therefor
 | Hooks | On tool events | N/A | N/A | Reactive, event-driven |
 
 Skills inject instructions *into* the current conversation. Subagents spawn a *separate* instance and return only results.
-
----
 
 ## Module 2: Built-in Subagents
 
@@ -101,8 +99,6 @@ The built-in general-purpose agent is always available whenever `Task` is in `al
 ### Helper agents (invoked automatically)
 
 Beyond the three named agents, Claude Code includes additional helper agents for formatting, linting, and other specific tasks. You do not call them directly.
-
----
 
 ## Module 3: Creating Custom Subagents
 
@@ -201,8 +197,6 @@ claude agents  # prints agents grouped by scope
 
 When multiple subagents share the same name, the higher-priority scope wins. Use `claude agents` to see which definition is active.
 
----
-
 ## Module 4: Invoking Subagents
 
 ### Automatic invocation
@@ -280,8 +274,6 @@ Main conversation
 Claude synthesizes all three results
 ```
 
----
-
 ## Module 5: Nesting Limits
 
 Subagents cannot spawn other subagents. This constraint is intentional, it prevents runaway nesting and unbounded context consumption.
@@ -298,8 +290,6 @@ Not allowed:
 The exception is the built-in `Plan` subagent, it is explicitly blocked from calling `Task` even if `Task` is in the parent's `allowedTools`.
 
 If you need sustained parallelism or work that exceeds a single context window, use **Agent Teams** instead of nested subagents.
-
----
 
 ## Module 6: Subagents + Skills
 
@@ -356,8 +346,6 @@ Do you need domain knowledge available from turn 1?
 - Yes → Subagent with skills: [list]
 - No  → Subagent (skills load on demand via Skill tool when subagent triggers them)
 
----
-
 ## Module 7: Worktree Isolation
 
 Subagents support **worktree isolation**, each subagent runs in its own temporary git worktree, preventing concurrent file conflicts:
@@ -376,8 +364,6 @@ Worktree isolation is ideal for:
 - Parallel implementation of independent features
 - Running speculative experiments without touching the main working tree
 - Safe batch modifications that need review before merging
-
----
 
 ## Module 8: SDK Programmatic Definition
 
@@ -470,8 +456,6 @@ for await (const message of query({
 }
 ```
 
----
-
 ## Module 9: Resuming Subagents
 
 Subagents can be resumed to continue exactly where they left off, including full conversation history and all previous tool calls.
@@ -499,8 +483,6 @@ Subagent transcripts are stored separately from the main conversation:
 | Main conversation compaction | Does not affect subagent transcripts |
 | Session restart | Transcripts persist; resume using the same `sessionId` |
 | Automatic cleanup | Controlled by `cleanupPeriodDays` setting (default: 30 days) |
-
----
 
 ## Module 10: Hooks for Subagents
 
@@ -571,9 +553,7 @@ Hooks themselves can spawn a subagent for verification tasks requiring file acce
 }
 ```
 
-Agent hooks use the same `ok` / `reason` response format as prompt hooks, but default timeout is 60 s with up to 50 tool-use turns.
-
----
+Agent hooks use the same `ok` / `reason` response format as prompt hooks, but default timeout is 60s with up to 50 tool-use turns.
 
 ## Module 11: Detecting Subagent Invocations (SDK)
 
@@ -603,8 +583,6 @@ for await (const message of query({ prompt, options })) {
   if ("result" in message) console.log(message.result);
 }
 ```
-
----
 
 ## Module 12: Troubleshooting
 
@@ -646,8 +624,6 @@ or restart the Claude Code session.
 ### Windows: prompt length limit
 
 On Windows, subagents with very long system prompts may fail due to the 8 191-character command-line limit. Keep prompts concise or use filesystem-based agents for complex instructions.
-
----
 
 ## Quick Reference: Decision Matrix
 

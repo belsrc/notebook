@@ -9,60 +9,6 @@ reference:
   - https://docs.claude.com/
   - https://docs.claude.com/en/docs/claude-code/skills
 ---
-# Course Summary
-
-The course teaches how to build, configure, and distribute **Skills** in Claude Code — reusable Markdown instruction files (`.SKILL.md`) that Claude automatically applies to the appropriate tasks based on context matching. The stated goal is to "teach Claude once" rather than repeating instructions across sessions.
-
----
-## Curriculum
-
-### 1. What Are Skills?
-
-An introduction to the Skills primitive: what they are, how they work conceptually, and how they compare to other Claude Code customization mechanisms (`CLAUDE.md`, hooks, subagents).
-
-### 2. Creating Your First Skill
-
-Hands-on construction of a `SKILL.md` file, covering:
-
-- Frontmatter structure and required fields
-- Writing effective **descriptions** that drive reliable trigger matching
-- Organizing the skill directory using **progressive disclosure** to minimize context window consumption
-
-### 3. Configuration and Multi-File Skills
-
-Advanced configuration options, including:
-
-- Restricting tool access via `allowed-tools`
-- Using **scripts** that execute without consuming context window tokens
-- Structuring multi-file skill layouts
-
-### 4. Skills vs. Other Claude Code Features
-
-A comparative analysis of Skills against the broader Claude Code customization surface (`CLAUDE.md`, hooks, subagents), clarifying when each mechanism is the appropriate choice.
-
-### 5. Sharing Skills
-
-Distribution strategies at multiple scopes:
-
-- **Team-level:** committing Skills to a shared repository
-- **Broader distribution:** packaging Skills as plugins
-- **Enterprise-wide:** deploying via managed settings
-- **Subagent integration:** wiring Skills into custom subagents for isolated, expert task delegation
-
-### 6. Troubleshooting Skills
-
-A diagnostic guide covering common failure modes:
-
-- Skills that fail to trigger
-- Priority conflicts between Skills
-- Runtime errors during execution
-
----
-
-The course content requires authentication, so I can't access the lesson pages directly. Let me try navigating with the browser to see if any content is accessible before the login wall.No browser access available either. Let me try fetching Anthropic's official Claude Code documentation on Skills, which likely covers the same material the course is based on.I can't access the gated course content directly (it requires authentication), but the course is a teaching wrapper around Anthropic's official public documentation. The notes below are synthesized from those primary sources.
-
----
-
 ## Module 1: What Are Skills?
 
 Agent Skills are modular capabilities packaged as filesystem artifacts that Claude discovers and invokes autonomously. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
@@ -73,7 +19,7 @@ Rather than re-explaining a workflow every session, you encode it once in a Skil
 
 ### Architecture
 
-At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read — only their output enters the context window.
+At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read, only their output enters the context window.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -103,8 +49,6 @@ This **progressive disclosure** model means large references incur zero token co
 |Subagents|Isolated, expert Claude instances|Spawned by orchestrator|
 
 Skills complement all three rather than replacing them.
-
----
 
 ## Module 2: Creating Your First Skill
 
@@ -154,17 +98,15 @@ Prefer `processing-pdfs` over `pdf-processor` or `pdf`. The gerund form describe
 The description is injected into the system prompt and is the *only* signal Claude uses for Skill selection when 100+ Skills are available. It must answer two questions: **what** does it do, and **when** should it trigger.
 
 ```yaml
-# Good — specific, trigger-inclusive
+# Good, specific, trigger-inclusive
 description: Analyze Excel spreadsheets, create pivot tables, generate charts.
   Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.
 
-# Bad — vague
+# Bad, vague
 description: Helps with documents
 ````
 
 Always write in third person. First- or second-person descriptions ("I can help you…", "You can use this to…") cause discovery failures because the description is injected verbatim into the system prompt.
-
----
 
 ## Module 3: Configuration and Multi-File Skills
 
@@ -253,8 +195,6 @@ disable-model-invocation: true
 
 Set this for Skills that should only be invoked explicitly via `/deploy-production`, not auto-triggered by Claude based on task context. Useful for destructive or high-stakes operations.
 
----
-
 ## Module 4: Skills vs. Other Claude Code Features
 
 ### Decision matrix
@@ -271,24 +211,22 @@ Set this for Skills that should only be invoked explicitly via `/deploy-producti
 ├─────────────────────────────────────────────────────────────────┤
 │  Do you need an isolated agent with its own context + tools?    │
 │    Yes → Subagent (.claude/agents/my-agent.md)                  │
-│    No  → Skill (.claude/skills/my-skill/SKILL.md)              │
+│    No  → Skill (.claude/skills/my-skill/SKILL.md)               │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ### Subagents vs. Skills
 
-|Dimension|Skills|Subagents|
-|---|---|---|
-|Invocation|Inline — adds context to current conversation|Spawns a new isolated Claude instance|
-|Context isolation|None — shares the current context window|Full isolation, separate context window|
-|State|Stateless instruction injection|Can maintain its own turn-by-turn state|
-|Ideal use|Reference conventions, coding patterns, domain knowledge|Expert delegation, parallel work, sensitive tool scoping|
+| Dimension         | Skills                                                   | Subagents                                                |
+| ----------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| Invocation        | Inline, adds context to current conversation            | Spawns a new isolated Claude instance                    |
+| Context isolation | None, shares the current context window                 | Full isolation, separate context window                  |
+| State             | Stateless instruction injection                          | Can maintain its own turn-by-turn state                  |
+| Ideal use         | Reference conventions, coding patterns, domain knowledge | Expert delegation, parallel work, sensitive tool scoping |
 
 ### Skills + Subagents together
 
 Wire a Skill into a subagent to give it specialized domain knowledge with an isolated execution environment. The subagent's `AGENT.md` can explicitly reference a Skill, or the subagent's allowed tools can include `Skill`.
-
----
 
 ## Module 5: Sharing Skills
 
@@ -297,7 +235,7 @@ Wire a Skill into a subagent to give it specialized domain knowledge with an iso
 ```
 Enterprise managed settings  (highest priority)
   └── ~/.claude/skills/          (personal/user)
-        └── .claude/skills/      (project — shared via git)
+        └── .claude/skills/      (project, shared via git)
               └── plugin skills  (namespaced, no conflicts)
 ```
 
@@ -305,7 +243,7 @@ When Skills share the same name, higher-priority scope wins. Plugin Skills are a
 
 ### Team distribution: commit to repository
 
-The simplest team-sharing mechanism — commit `.claude/skills/` to the project repo. All team members inherit Skills automatically when they clone or pull.
+The simplest team-sharing mechanism, commit `.claude/skills/` to the project repo. All team members inherit Skills automatically when they clone or pull.
 
 ```
 my-project/
@@ -352,7 +290,7 @@ Plugin Skills are invoked as `/my-first-plugin:skill-name`.
 
 ### Enterprise deployment: managed settings
 
-Deploy Skills organization-wide via Anthropic's enterprise managed settings. Managed settings have highest precedence in the scope hierarchy — they override user and project settings. This enforces organizational standards (coding conventions, security policies) without requiring opt-in by individual developers.
+Deploy Skills organization-wide via Anthropic's enterprise managed settings. Managed settings have highest precedence in the scope hierarchy, they override user and project settings. This enforces organizational standards (coding conventions, security policies) without requiring opt-in by individual developers.
 
 ### Security considerations when consuming Skills
 
@@ -363,8 +301,6 @@ Treat third-party Skills like installing software:
 - External URL fetches are high-risk (content could contain injected instructions)
 - Malicious Skills can invoke bash, file operations, or code execution as tools
 - Only install Skills from trusted sources; be extra careful in production systems with access to sensitive data
-
----
 
 ## Module 6: Troubleshooting Skills
 
@@ -449,7 +385,7 @@ Use the BigQuery:bigquery_schema tool...
 
 ### Skills not found on `--add-dir` paths
 
-Skills inside directories added via `--add-dir` are discovered automatically from `.claude/skills/` within that directory. However, `CLAUDE.md` files from `--add-dir` directories are **not** loaded by default — set `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` to enable them.
+Skills inside directories added via `--add-dir` are discovered automatically from `.claude/skills/` within that directory. However, `CLAUDE.md` files from `--add-dir` directories are **not** loaded by default, set `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` to enable them.
 
 ### Iterative debugging methodology (A/B model pattern)
 
@@ -483,8 +419,6 @@ Build evaluations **before** writing extensive Skill documentation:
   ]
 }
 ```
-
----
 
 ## Quick Reference: Skill Authoring Checklist
 
