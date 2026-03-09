@@ -11,7 +11,7 @@ reference:
 ---
 ## What Are Skills?
 
-Agent Skills are modular capabilities packaged as filesystem artifacts that Claude discovers and invokes autonomously. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
+Agent Skills are modular, self-contained knowledge packages that extend an agent's capabilities with specialized domain expertise, workflows, and tool integrations that Claude discovers and invokes autonomously. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
 
 ### Core concept: "Teach once, reuse everywhere"
 
@@ -59,41 +59,31 @@ Skills complement all three rather than replacing them.
 └── SKILL.md
 ```
 
-Every `SKILL.md` has two mandatory parts:
+### Naming convention: gerund form
 
-````yaml
+Prefer `processing-pdfs` over `pdf-processor` or `pdf`. The gerund form describes the *activity*, making the Skill's purpose immediately clear to both humans and Claude.
+
+### Frontmatter (YAML)
+
+```yaml
 ---
-name: processing-pdfs
-description: Extract text and tables from PDF files, fill forms, merge documents.
-  Use when working with PDF files or when the user mentions PDFs, forms, or
-  document extraction.
+name: skill-name
+description: Comprehensive description of what the skill does and when to use it. Include both capabilities and specific triggers/contexts.
+license: Complete terms in LICENSE.txt (optional)
+metadata: (optional)
+  author: organization-name
+  version: "1.0"
 ---
+```
 
-# PDF Processing
-
-## Quick start
-
-Extract text with pdfplumber:
-
-/```python
-import pdfplumber
-with pdfplumber.open("file.pdf") as pdf:
-    text = pdf.pages[0].extract_text()
-/```
-````
-
-### Frontmatter field constraints
+#### Frontmatter field constraints
 
 | Field | Max length | Allowed characters | Notes |
 |---|---|---|---|
 | `name` | 64 chars | `[a-z0-9-]` | Becomes the `/slash-command`; no `anthropic`/`claude` |
 | `description` | 1024 chars | Any except XML tags | Written in **third person**; drives auto-trigger |
 
-### Naming convention: gerund form
-
-Prefer `processing-pdfs` over `pdf-processor` or `pdf`. The gerund form describes the *activity*, making the Skill's purpose immediately clear to both humans and Claude.
-
-### Writing effective descriptions
+#### Writing effective descriptions
 
 The description is injected into the system prompt and is the *only* signal Claude uses for Skill selection when 100+ Skills are available. It must answer two questions: **what** does it do, and **when** should it trigger.
 
@@ -108,25 +98,141 @@ description: Helps with documents
 
 Always write in third person. First- or second-person descriptions ("I can help you…", "You can use this to…") cause discovery failures because the description is injected verbatim into the system prompt.
 
+### Body (Markdown)
+
+Instructions and guidance for using the skill and its bundled resources. The body is loaded into an agent's context only after the skill triggers based on the description.
+
+**Writing guidelines:**
+
+- Use imperative/infinitive form (e.g., "Execute the script", not "The script is executed")
+- Keep under 500 lines to minimize context bloat
+- Include only essential procedural instructions
+- Reference bundled resources with clear guidance on when to use them
+- Prefer concise examples over verbose explanations
+
 ## Configuration and Multi-File Skills
 
-### Progressive disclosure directory layout
+### Progressive Disclosure
 
 ```
 pdf/
-├── SKILL.md              # Overview + quick-start (≤ 500 lines)
-├── FORMS.md              # Form-filling guide
-├── reference.md          # Full API reference
-├── examples.md           # Worked examples
+├── SKILL.md
+├── assets/
+│   └── logo.png
+├── references/
+│   └── workflows.md
 └── scripts/
-    ├── analyze_form.py   # Executed; output enters context
+    ├── analyze_form.py
     ├── fill_form.py
     └── validate.py
 ```
 
 Reference files at most **one level deep** from `SKILL.md`. Deeper nesting causes partial reads (`head -100` style), resulting in incomplete context.
 
-### Degrees of freedom
+Skills use a three-level loading system for context efficiency:
+
+```
+┌──────────────────────────────────────────┐
+│ Level 1: Metadata (Always in context)    │
+│ ────────────────────────────────────     │
+│ - name: "pdf-editor"                     │
+│ - description: "PDF manipulation..."     │
+│ Cost: ~100 words                         │
+└──────────────────────────────────────────┘
+                  ↓
+             Skill triggers?
+                  ↓
+┌──────────────────────────────────────────┐
+│ Level 2: SKILL.md Body (On trigger)      │
+│ ────────────────────────────────────     │
+│ - Core workflows                         │
+│ - Essential instructions                 │
+│ - Resource references                    │
+│ Cost: <5k words                          │
+└──────────────────────────────────────────┘
+                  ↓
+       Specific need identified?
+                  ↓
+┌──────────────────────────────────────────┐
+│ Level 3: Bundled Resources (As needed)   │
+│ ────────────────────────────────────     │
+│ - references/*.md (loaded into context)  │
+│ - scripts/*.py (may execute directly)    │
+│ - assets/* (copied to output)            │
+│ Cost: Unlimited (scripts execute w/o     │
+│       loading into context)              │
+└──────────────────────────────────────────┘
+```
+
+#### Scripts Directory (`scripts/`)
+
+Executable code for tasks requiring deterministic reliability or repeatedly rewritten logic.
+
+**When to include:**
+- Same code pattern is rewritten repeatedly
+- Deterministic execution is critical
+- Complex operations benefit from tested implementations
+
+**Example:** `scripts/rotate_pdf.py` for PDF rotation operations
+
+**Benefits:**
+- Token efficient (may be executed without loading into context)
+- Deterministic behavior
+- Tested and reliable
+
+**Note:** Scripts may still need to be read by agents for patching or environment-specific adjustments.
+
+#### References Directory (`references/`)
+
+Documentation and reference material loaded into context as needed to inform the process.
+
+**When to include:**
+- Documentation that agents should reference while working
+- Detailed specifications too large for SKILL.md
+- Information needed only in specific scenarios
+
+**Examples:**
+- `references/schema.md`: Database schemas and relationships
+- `references/api_docs.md`: API specifications
+- `references/policies.md`: Company policies
+- `references/workflows.md`: Detailed workflow guides
+
+**Benefits:**
+- Keeps SKILL.md lean
+- Loaded only when agents determine it's needed
+- Supports progressive disclosure of information
+
+**Best practices:**
+- For large files (>10k words), include grep search patterns in SKILL.md
+- Information should live in either SKILL.md or references, not both
+- Prefer references for detailed specifications
+- Keep only essential procedural instructions in SKILL.md
+
+#### Assets Directory (`assets/`)
+
+Files used in output but not loaded into context.
+
+**When to include:**
+- Files that will be copied, modified, or used in final output
+- Templates that serve as starting points
+- Brand assets, fonts, or media files
+
+**Examples:**
+- `assets/logo.png`: Brand assets
+- `assets/template.pptx`: PowerPoint templates
+- `assets/frontend-template/`: HTML/React boilerplate
+- `assets/font.ttf`: Typography files
+
+**Use cases:**
+- Templates and boilerplate code
+- Images, icons, and media
+- Sample documents for modification
+
+**Benefits:**
+- Separates output resources from documentation
+- Enables agents to use files without context overhead
+
+### Degrees of Freedom
 
 Match instruction specificity to task fragility:
 
@@ -136,19 +242,70 @@ Medium freedom (pseudocode)       → preferred pattern, some variation
 Low freedom (exact script/flags)  → fragile ops, exact sequence required
 ```
 
-Example of low-freedom instruction for a fragile operation:
+#### High Freedom (Text-based instructions)
 
-````markdown
-## Database migration
+**Use when:**
+- Multiple approaches are valid
+- Decisions depend on runtime context
+- Heuristics guide the approach
 
-Run exactly this script:
+**Example:**
+```markdown
+## API Integration Strategy
 
-\```bash
-python scripts/migrate.py --verify --backup
-\````
+1. Analyze API documentation to identify endpoints
+2. Choose authentication method based on available options
+3. Implement error handling for common failure modes
+4. Add retry logic for transient failures
+```
 
-Do not modify the command or add additional flags.
-````
+#### Medium Freedom (Pseudocode with parameters)
+
+**Use when:**
+- Preferred pattern exists but variation is acceptable
+- Configuration affects behavior
+- Some flexibility benefits different scenarios
+
+**Example:**
+```markdown
+## Database Query Pattern
+
+type QueryOptions = {
+  table: string;
+  filters: Record<string, unknown>;
+  limit?: number;
+};
+
+const query = (options: QueryOptions) => {
+  // 1. Build WHERE clause from filters
+  // 2. Apply LIMIT if specified
+  // 3. Execute query with parameterized values
+  // 4. Return typed results
+};
+```
+
+#### Low Freedom (Specific scripts, few parameters)
+
+**Use when:**
+- Operations are fragile and error-prone
+- Consistency is critical
+- Specific sequence must be followed
+
+**Example:**
+```markdown
+## PDF Form Filling
+
+Always use scripts/fill_pdf_form.py:
+
+python scripts/fill_pdf_form.py \
+  --template template.pdf \
+  --data data.json \
+  --output filled.pdf
+
+Do not attempt manual form filling - the script handles field mapping, data validation, and proper PDF structure preservation.
+```
+
+**Think of agents exploring a path:** A narrow bridge with cliffs needs specific guardrails (low freedom), while an open field allows many routes (high freedom).
 
 ### Restricting tool access via frontmatter
 
@@ -179,9 +336,22 @@ See `scripts/analyze_form.py` for the extraction algorithm.
 
 Execution is preferred: the script code never enters the context window, only its stdout does.
 
-### Token budget
+### Performance Considerations
 
-Keep `SKILL.md` body under **500 lines**. Exceed this threshold and split into referenced files.
+**Minimize SKILL.md size:**
+- Keep under 500 lines when possible
+- Split detailed content into references
+- Use concise examples
+
+**Optimize resource organization:**
+- Group related scripts together
+- Combine related reference documents
+- Avoid duplication across files
+
+**Script execution:**
+- Scripts can execute without loading into context
+- Reduces token usage for deterministic operations
+- Prefer scripts for repeated, complex logic
 
 ### `disable-model-invocation`
 
