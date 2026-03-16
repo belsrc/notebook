@@ -26,7 +26,7 @@ Session N                     Session N+1
 └───────────────────┘         └─────────────────┘
 ```
 
-### `CLAUDE.md` vs `MEMORY.md`
+### `CLAUDE.md`/`AGENTS.md` vs `MEMORY.md`
 
 The manual workaround was writing a `CLAUDE.md` file, a Markdown file _you_ author and maintain, containing persistent context that gets injected at session start.
 
