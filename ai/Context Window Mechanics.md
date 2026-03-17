@@ -27,9 +27,9 @@ This is a statistical average, not a law. Code, JSON, and non-Latin scripts toke
 | Content Type | Tokens per Word (approx.) |
 |---|---|
 | English prose | 1.3 |
-| Python/TypeScript code | 1.5–2.5 |
-| JSON (with whitespace) | 2–4 |
-| Chinese/Japanese | 2–4 (one character ≈ 2 tokens) |
+| Python/TypeScript code | 1.5-2.5 |
+| JSON (with whitespace) | 2-4 |
+| Chinese/Japanese | 2-4 (one character ≈ 2 tokens) |
 | Whitespace/indentation | Often 1 token per indent level |
 
 ## The Context Window
@@ -39,7 +39,7 @@ The **context window** (also: context length, token budget) is the maximum numbe
 | Model | Context Limit (tokens) |
 |---|---|
 | GPT-3 (2020) | 2,048 |
-| GPT-4 (2023) | 8,192 – 128,000 |
+| GPT-4 (2023) | 8,192 - 128,000 |
 | Claude 3 Haiku | 200,000 |
 | Claude 3.5 Sonnet | 200,000 |
 | Gemini 1.5 Pro | 1,000,000 |
@@ -65,16 +65,16 @@ The context window isn't a homogeneous blob. It's partitioned into distinct logi
 │  System Prompt │  Chat History │   Tool Outputs    │  Output   │
 │   (static)     │  (grows each  │ (injected inline) │ (reserve) │
 │                │    turn)      │                   │           │
-│  ~500–5,000 T  │  ~grows...    │  0–50,000+ T      │ up to     │
+│  ~500-5,000 T  │  ~grows...    │  0-50,000+ T      │ up to     │
 │                │               │                   │  max_tok  │
 └────────────────┴───────────────┴───────────────────┴───────────┘
 ```
 
-**System Prompt (Static).** Instructions set by the operator. In Claude.ai this is large, Anthropic injects personality, safety instructions, tool manifests, and memory contents. For API users, this is whatever you pass as `role: "system"`. Typically 500–8,000 tokens in production.
+**System Prompt (Static).** Instructions set by the operator. In Claude.ai this is large, Anthropic injects personality, safety instructions, tool manifests, and memory contents. For API users, this is whatever you pass as `role: "system"`. Typically 500-8,000 tokens in production.
 
 **Conversation History (Dynamic, grows monotonically).** Every user turn and every assistant turn appended verbatim. This is the primary consumption driver. Each exchange costs tokens for the user message plus tokens for the assistant response, and that sum accumulates across every turn in the conversation without any automatic compression.
 
-**Tool / Function Call Outputs (Bursty).** When a model uses tools (code execution, web search, file reads), the raw output is injected back into context. A single web search result can return 5,000–15,000 tokens. A "summarize this PDF" task might consume 80,000 tokens in one turn.
+**Tool / Function Call Outputs (Bursty).** When a model uses tools (code execution, web search, file reads), the raw output is injected back into context. A single web search result can return 5,000-15,000 tokens. A "summarize this PDF" task might consume 80,000 tokens in one turn.
 
 **Output Reserve.** The model needs room to generate. The `max_tokens` parameter reserves this space upfront. A 200,000-token window with `max_tokens` set to 8,192 leaves roughly 191,800 tokens available for input.
 
