@@ -34,7 +34,7 @@ This is a statistical average, not a law. Code, JSON, and non-Latin scripts toke
 
 ## The Context Window
 
-The **context window** (also: context length, token budget) is the maximum number of tokens a transformer model can process simultaneously in a single pass. It is a hard architectural limit set during training and cannot be increased at inference time; serving systems can only choose to use less than the model’s maximum, not more.
+The **context window** (also: context length, token budget) is the maximum number of tokens a transformer model can process simultaneously in a single pass. It is a hard architectural limit set during training and cannot be increased at inference time; serving systems can only choose to use less than the model's maximum, not more.
 
 | Model | Context Limit (tokens) |
 |---|---|
@@ -100,7 +100,7 @@ Turn N:
                                               ↑ approaching limit
 ```
 
-Context is effectively append‑only from the model’s point of view. Serving systems can drop or summarize earlier turns, but the model itself only ever sees a flat, linearized sequence with the older tokens simply missing. The decision of what gets trimmed belongs to the **serving infrastructure**, not the model itself.
+Context is effectively append‑only from the model's point of view. Serving systems can drop or summarize earlier turns, but the model itself only ever sees a flat, linearized sequence with the older tokens simply missing. The decision of what gets trimmed belongs to the **serving infrastructure**, not the model itself.
 
 A typical conversational turn:
 - User message: ~50 tokens
@@ -209,7 +209,7 @@ strength
      of context                      of context
 ```
 
-Information placed in the middle of a large context is statistically less reliable than information at the start or end. This isn’t a bug; it emerges from transformer architecture and positional attention patterns over long sequences, and appears even in untrained networks. Critical information (key constraints, core instructions, primary examples) should go at the start or immediately before the query.
+Information placed in the middle of a large context is statistically less reliable than information at the start or end. This isn't a bug; it emerges from transformer architecture and positional attention patterns over long sequences, and appears even in untrained networks. Critical information (key constraints, core instructions, primary examples) should go at the start or immediately before the query.
 
 ## Full Picture
 
