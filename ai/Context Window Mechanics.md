@@ -14,7 +14,7 @@ reference:
 
 A **token** is the atomic unit of text a language model processes. Not a character, word, or sentence, but a subword unit produced by a tokenization algorithm.
 
-The dominant algorithm is **Byte Pair Encoding (BPE)** and adopted by GPT and Claude-family models. BPE starts from a character-level vocabulary and iteratively merges the most frequent adjacent symbol pairs until a target vocabulary size is reached.
+The dominant algorithm is Byte Pair Encoding (BPE)‑style tokenization, used by GPT‑ and Claude‑family models. BPE starts from a character-level vocabulary and iteratively merges the most frequent adjacent symbol pairs until a target vocabulary size is reached.
 
 A rough heuristic (OpenAI's stated estimate, broadly applicable):
 
@@ -34,7 +34,7 @@ This is a statistical average, not a law. Code, JSON, and non-Latin scripts toke
 
 ## The Context Window
 
-The **context window** (also: context length, token budget) is the maximum number of tokens a transformer model can process simultaneously in a single pass. It is a hard limit baked into the model at training time and cannot be changed at inference.
+The **context window** (also: context length, token budget) is the maximum number of tokens a transformer model can process simultaneously in a single pass. It is a hard architectural limit set during training and cannot be increased at inference time; serving systems can only choose to use less than the model’s maximum, not more.
 
 | Model | Context Limit (tokens) |
 |---|---|
@@ -50,7 +50,7 @@ The constraint comes from the **self-attention mechanism** in transformers. For 
 
 To avoid recomputing those scores from scratch on every generation step, the model caches the intermediate results for every token it has already seen. This cache, called the **KV cache**, is the primary memory consumer during inference, and it grows with every token added to the context.
 
-The problem is that attention is not just expensive per token, it is expensive per *pair* of tokens. A context of 1,000 tokens requires roughly 1,000,000 comparisons. Double the context to 2,000 tokens and you need 4,000,000 comparisons, four times as many, not two. This quadratic relationship between context length and memory means there is a physical ceiling: the point at which the KV cache no longer fits in GPU memory. That ceiling is the context limit.
+The problem is that attention is not just expensive per token, it is expensive per *pair* of tokens. A context of 1,000 tokens requires roughly 1,000,000 comparisons. Double the context to 2,000 tokens and you need 4,000,000 comparisons, four times as many, not two. This quadratic ($O(n^2)$) relationship between context length and computation, combined with the linear growth of the KV cache, creates a physical ceiling: the point at which the KV cache and activations no longer fit in GPU memory. That ceiling is the context limit.
 
 Techniques like sliding window attention (Mistral) and state-space models (Mamba) exist to break this quadratic relationship, but standard GPT and Claude-family models are subject to it.
 
@@ -100,7 +100,7 @@ Turn N:
                                               ↑ approaching limit
 ```
 
-Context is append-only. Earlier turns cannot be removed selectively without breaking conversation coherence. The decision of what gets trimmed belongs to the **serving infrastructure**, not the model itself.
+Context is effectively append‑only from the model’s point of view. Serving systems can drop or summarize earlier turns, but the model itself only ever sees a flat, linearized sequence with the older tokens simply missing. The decision of what gets trimmed belongs to the **serving infrastructure**, not the model itself.
 
 A typical conversational turn:
 - User message: ~50 tokens
@@ -209,7 +209,7 @@ strength
      of context                      of context
 ```
 
-Information placed in the middle of a large context is statistically less reliable than information at the start or end. Not a bug, an artifact of how positional encodings and attention patterns interact across long sequences. Critical information (key constraints, core instructions, primary examples) should go at the start or immediately before the query.
+Information placed in the middle of a large context is statistically less reliable than information at the start or end. This isn’t a bug; it emerges from transformer architecture and positional attention patterns over long sequences, and appears even in untrained networks. Critical information (key constraints, core instructions, primary examples) should go at the start or immediately before the query.
 
 ## Full Picture
 
@@ -245,13 +245,14 @@ Token Sequence  [t₁, t₂, ..., tₙ]
 
 ## Summary
 
-| Concept | Core Fact |
-|---|---|
-| Token | Subword unit from BPE; ~4 characters per token in English |
-| Context window | Hard maximum tokens per forward pass; quadratic memory cost |
-| Consumption | Append-only: system prompt + history + tool outputs + output reserve |
-| Truncation | Infrastructure decision, not model decision; system prompt typically pinned |
-| Degradation modes | Amnesia, instruction drift, hallucinated reconstruction, attention dilution |
-| Lost in the middle | Models attend less reliably to context in the middle of long windows (Liu et al., 2023) |
+| Concept            | Core Fact                                                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Token              | Subword unit from BPE; ~4 characters per token in English                                                                        |
+| Context window     | Hard maximum tokens per forward pass; quadratic memory cost                                                                      |
+| Consumption        | Append-only: system prompt + history + tool outputs + output reserve                                                             |
+| Truncation         | Infrastructure decision, not model decision; system prompt typically pinned                                                      |
+| Degradation modes  | Amnesia, instruction drift, hallucinated reconstruction, attention dilution                                                      |
+| Lost in the middle | Models attend less reliably to context in the middle of long windows (Liu et al., 2023)                                          |
+| External memory    | Techniques (RAG, vector stores, summaries) used to offload state so only the most relevant slice must fit in the context window. |
 
 The context window is finite working memory. Everything that matters for the current task has to fit inside it. When it overflows, the loss is silent, the degradation is structural, and recovery requires either a fresh context or external memory strategies to compress and rehydrate the relevant state.

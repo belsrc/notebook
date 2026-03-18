@@ -50,13 +50,13 @@ From the agent's perspective, domain knowledge is the hardest category of infere
 
 **Applied domain knowledge** is how public concepts get wired together in _your_ system. The agent can often reconstruct this by reading your code or documents, but it's more expensive than public knowledge. It's the "how" and "why" of your specific implementation choices. Why you use `DataFilterExtension` for GPU-side filtering instead of CPU-side predicate evaluation. Why your release process runs a security review in Sprint N-1 rather than Sprint N. The agent might figure this out from context, but it could also guess wrong and a wrong guess in a project plan lands in an executive slide deck.
 
-**Tribal domain knowledge** is the dangerous one. It exists only inside your team's heads. It never appeared in training data. It's naming conventions that diverge from industry norms, business rules encoded as process steps, and overloaded terms that mean something different in your context than in the public domain. The agent has _zero_ ability to infer this. If you don't state it, the agent will substitute its own understanding, confidently and incorrectly
+**Tribal domain knowledge** is the dangerous one. It exists only inside your team's heads. It never appeared in training data. It's naming conventions that diverge from industry norms, business rules encoded as process steps, and overloaded terms that mean something different in your context than in the public domain. The agent has _zero_ ability to infer this. If you don't state it, the agent will substitute its own understanding, confidently and incorrectly.
 
 ### Why this matters for agents specifically
 
 A human junior developer or new PM joining your team absorbs tribal knowledge over weeks through conversation, code review, and osmosis. An agent gets a single context window. It has no hallway conversations, no Slack history, no memory of the PR where someone explained why the `ImplementationConfig` event handlers exist or the meeting where leadership decided that "MVP" in your organization explicitly excludes mobile.
 
-This creates an asymmetry:
+This creates a sharp asymmetry between how humans and agents acquire domain knowledge:
 
 ```
 Human (developer or PM):
