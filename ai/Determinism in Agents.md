@@ -15,7 +15,7 @@ reference:
 
 A system is deterministic if it follows a single, unbreakable track: the same inputs always produce the same outputs, with no internal randomness.
 
-Think of a calculator. If you type $2 + 2$, the answer is always $4$. It doesn't matter if you ask on a Tuesday or if you’ve asked ten times in a row. The "path" from the question to the answer is a straight line with no exits. There is only one possible outcome, and it is 100% predictable.
+Think of a calculator. If you type $2 + 2$, the answer is always $4$. It doesn't matter if you ask on a Tuesday or if you've asked ten times in a row. The "path" from the question to the answer is a straight line with no exits. There is only one possible outcome, and it is 100% predictable.
 
 An agent is different because it operates over many plausible options, not just a single fixed track.
 
@@ -31,7 +31,7 @@ The agent's core is a Large Language Model. LLMs generate text by predicting the
 
 Even when you configure a model to run at temperature zero (the lowest-variance setting), the math still runs on GPU hardware. GPUs handle many calculations in parallel, and the order in which parallel operations complete can shift between runs. Because floating-point arithmetic is not perfectly associative at the hardware level (`(a + b) + c` does not always equal `a + (b + c)` in practice), identical inputs can produce slightly different numbers, which can tip a close prediction toward a different word.
 
-In most real-world GPU inference setups, this isn’t practically fixable; it’s a consequence of parallel floating‑point hardware and performance‑oriented kernels.
+In most real-world GPU inference setups, this isn't practically fixable; it's a consequence of parallel floating‑point hardware and performance‑oriented kernels.
 
 Imagine a judge scoring a gymnastics routine. They will give roughly the same score each time for the same performance, but probably not the exact same score down to three decimal places. The variation is small, it exists, and it compounds across many decisions.
 

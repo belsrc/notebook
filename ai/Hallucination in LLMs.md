@@ -103,7 +103,7 @@ The model learned that the pattern "The capital of France is ___" was almost alw
 └───────────────────────────────────────────────────────────────┘
 ```
 
-The model has no explicit fact-checker and no built-in concept of “I know this” vs. “I do not know this.” It only has: "given this sequence, what token is most likely to follow?"
+The model has no explicit fact-checker and no built-in concept of "I know this" vs. "I do not know this." It only has: "given this sequence, what token is most likely to follow?"
 
 ## Why Hallucination Follows Directly from This
 
@@ -221,7 +221,7 @@ Run the same query multiple times (with some variation in phrasing or temperatur
 
 **Retrieval-Augmented Grounding** :
 
-Pair the LLM with a document retrieval system (**retrieval-augmented generation, or RAG**). The model generates claims, and an automated checker asks: "is this claim supported by the retrieved source?" This converts an open-ended generation problem into a bounded entailment check, which is significantly easier.
+Pair the LLM with a document retrieval system (**retrieval-augmented generation, or RAG**). The model generates claims, and an automated checker asks: "is this claim supported by the retrieved source?" This converts an open-ended generation problem into a bounded entailment check, which is significantly easier.
 
 This is the architectural basis of modern "grounded" AI systems (search-augmented chat, document Q&A tools).
 
