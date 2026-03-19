@@ -1,0 +1,150 @@
+---
+tags:
+  - ai
+  - agents
+gardening: 🌳
+date: 2026-03-19
+reference:
+  - https://arxiv.org/pdf/2504.21848
+  - https://en.wikipedia.org/wiki/Degrees_of_freedom_(statistics)
+  - https://corporatefinanceinstitute.com/resources/data-science/degrees-of-freedom/
+  - https://agenta.ai/blog/prompt-drift
+---
+## What is a "degree of freedom"?
+
+When you ask a contractor to "build a deck," you've left a lot open: wood species, railing style, board orientation, stain color, joist spacing. Each one of those open questions is a **degree of freedom**. The contractor will make a call at each one, and those calls may or may not match what you had in your head.
+
+In agent tasks, a degree of freedom is any point where the agent must choose between two or more valid approaches and you haven't specified which one to pick.
+
+## Why multiplication, not addition?
+
+Degrees of freedom multiply. They don't add.
+
+Say you ask an agent to write a company announcement email. Even that simple task has several open decisions:
+
+```
+Degree of freedom A: Tone        → formal or conversational   (2 options)
+Degree of freedom B: Length      → brief or detailed          (2 options)
+Degree of freedom C: Opening     → celebrate, inform, or ask  (3 options)
+```
+
+Your instinct might be: "Three choices, so maybe a handful of possibilities." But each choice stacks on top of every other:
+
+```
+                      Formal             Conversational
+                  ┌───────────────────┬───────────────────┐
+   Brief          │ formal + brief    │ casual + brief    │
+                  ├───────────────────┼───────────────────┤
+   Detailed       │ formal + detailed │ casual + detailed │
+                  └───────────────────┴───────────────────┘
+
+   2 × 2 = 4 combinations, before touching the opening line.
+   Add the 3 opening styles: 4 × 3 = 12 total combinations.
+```
+
+Each uncollapsed choice multiplies the whole space. Six decisions with two or three options each puts you in the hundreds of valid-but-different outcomes. You wanted one of those. The agent picks one. Without guidance, those are rough odds.
+
+## How the agent decides at each fork
+
+The agent doesn't freeze when it hits a fork. It looks for the strongest available signal and commits. Think of it as a priority stack:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  Priority 1: You told it explicitly                          │
+│                                                              │
+│    "Write in a formal tone. Always."                         │
+│    Fork closed. The agent proceeds with certainty.           │
+├──────────────────────────────────────────────────────────────┤
+│  Priority 2: Prior work shows a pattern                      │
+│                                                              │
+│    The agent reads five previous announcements from your     │
+│    company. All formal, all brief. It follows the pattern.   │
+│    Fork mostly closed. Very low residual risk.               │
+├──────────────────────────────────────────────────────────────┤
+│  Priority 3: General knowledge from training                 │
+│                                                              │
+│    "Most corporate announcements use a formal tone."         │
+│    Weak signal. May or may not match your preference.        │
+│    Fork weakly closed.                                       │
+├──────────────────────────────────────────────────────────────┤
+│  Priority 4: The agent's own judgment                        │
+│                                                              │
+│    No signal. The agent picks whatever feels reasonable.     │
+│    Fork open. This is where drift happens.                   │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Drift** is the key word here. It doesn't mean the agent did something random. It means the output diverged from _your_ intent, and neither of you knew the fork was open until you read the result. The agent wasn't confused. It resolved every fork it found; it just resolved some of them on weaker signals than you would have chosen.
+
+## "Collapsing" a degree of freedom
+
+To **collapse** a degree of freedom is to remove it from the agent's decision space before it gets there. You do that by supplying the answer in advance: an explicit instruction, existing examples it can reference, or established guidelines it can read.
+
+Suppose you ask an agent to "write a project status report." Six decisions sit open:
+
+```
+Before supplying context:
+  Audience assumption    3 options  (executives? team? clients?)
+  Tone                   2 options  (formal? conversational?)
+  Structure              3 options  (narrative? bullet points? table?)
+  Problem framing        3 options  (neutral? solutions-first? risks-first?)
+  Length                 2 options  (summary? full detail?)
+  Call to action         2 options  (include one? omit?)
+  ──────────────────────────────────────────────────────────────
+  Total: 3×2×3×3×2×2 = 216 possible reports
+```
+
+Now hand the agent a standard reporting template and a few past reports. Five forks close immediately:
+
+```
+After supplying context:
+  Audience assumption    1 option   (template header says "executives")
+  Tone                   1 option   (past reports are consistently formal)
+  Structure              1 option   (template defines the structure)
+  Problem framing        3 options  <-- still open
+  Length                 1 option   (template has defined sections)
+  Call to action         1 option   (every past report ends with next steps)
+  ──────────────────────────────────────────────────────────────
+  Total: 1×1×1×3×1×1 = 3 possible reports
+```
+
+One more instruction, "Lead with risks before proposing solutions," and the last fork closes.
+
+## The two-sided problem
+
+Over-specify and you create noise. Telling the agent [things it could figure out](./AI%20Inference.md) from context wastes effort and can actually get in the way of it reasoning well from what you've already given it.
+
+Under-specify and you leave forks open. Open forks produce drift.
+
+The filter is straightforward:
+
+```
+Is it inferable from existing context or examples?
+  YES --> Don't say it. Let the agent infer.
+  NO  --> Is it a fork the agent will hit?
+            YES --> Collapse it with an explicit instruction.
+            NO  --> Skip it. It's irrelevant.
+```
+
+The practical work is figuring out which forks are actually open. A well-documented set of standards, consistent past examples, and a clear statement of purpose all close forks passively, before you've written a single instruction.
+
+## The same problem at every scale
+
+Degrees of freedom show up at every level of a task. What changes is the cost of the agent getting it wrong:
+
+```
+┌──────────────┬──────────────────────────────┬─────────────────────────────┐
+│ Level        │ Example fork                 │ Cost if the agent           │
+│              │                              │ chooses wrong               │
+├──────────────┼──────────────────────────────┼─────────────────────────────┤
+│ Wording      │ "staff" vs "team"            │ Trivial. Easy to fix.       │
+│ Section      │ Include risks or omit them   │ Moderate. Rework needed.    │
+│ Structure    │ One document vs three        │ High. Significant rework.   │
+│ Strategy     │ Reassure stakeholders vs     │ High. Wrong message sent,   │
+│              │ escalate urgency             │ difficult to walk back.     │
+└──────────────┴──────────────────────────────┴─────────────────────────────┘
+```
+
+Put the most effort into closing the high-cost forks. A wrong word is a two-second fix. A wrong strategic framing might not surface until the document is already in front of the people it was meant to inform.
+
+The forks worth closing are the [ones the agent can't resolve from context](./Domain%20Knowledge.md) alone: your organization's specific standards, strategic framing it doesn't have visibility into, priority calls that aren't obvious from the materials. Those are the forks that, left open, produce output you'll spend your time undoing.

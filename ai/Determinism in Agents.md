@@ -1,0 +1,175 @@
+---
+tags:
+  - ai
+  - agents
+gardening: 🌳
+date: 2026-03-19
+reference:
+  - https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms
+  - https://mbrenndoerfer.com/writing/why-llms-are-not-deterministic
+  - https://aclanthology.org/2025.eval4nlp-1.12.pdf
+  - https://developer.nvidia.com/blog/controlling-floating-point-determinism-in-nvidia-cccl/
+  - https://autonomoustech.ca/blog/training-llms-to-do-what-you-want-part-1/
+---
+## What Does "Deterministic" Mean?
+
+A system is deterministic if it follows a single, unbreakable track: the same inputs always produce the same outputs, with no internal randomness.
+
+Think of a calculator. If you type $2 + 2$, the answer is always $4$. It doesn't matter if you ask on a Tuesday or if you’ve asked ten times in a row. The "path" from the question to the answer is a straight line with no exits. There is only one possible outcome, and it is 100% predictable.
+
+An agent is different because it operates over many plausible options, not just a single fixed track.
+
+When you ask a person (or an AI agent) for a dinner recommendation, they don't look for a single "correct" answer in a database. Instead, they look at a wide field of options and choose one based on the current context.
+
+Nothing is broken when the answer changes. The system is simply weighing different probabilities.
+
+## Why Agents Cannot Be Fully Deterministic
+
+The agent's core is a Large Language Model. LLMs generate text by predicting the next most likely word given everything before it. That prediction is not a lookup table. It is a massive numerical calculation, and those calculations introduce variation at four distinct layers.
+
+### Layer 1: The Model Itself
+
+Even when you configure a model to run at temperature zero (the lowest-variance setting), the math still runs on GPU hardware. GPUs handle many calculations in parallel, and the order in which parallel operations complete can shift between runs. Because floating-point arithmetic is not perfectly associative at the hardware level (`(a + b) + c` does not always equal `a + (b + c)` in practice), identical inputs can produce slightly different numbers, which can tip a close prediction toward a different word.
+
+In most real-world GPU inference setups, this isn’t practically fixable; it’s a consequence of parallel floating‑point hardware and performance‑oriented kernels.
+
+Imagine a judge scoring a gymnastics routine. They will give roughly the same score each time for the same performance, but probably not the exact same score down to three decimal places. The variation is small, it exists, and it compounds across many decisions.
+
+### Layer 2: Context Variance
+
+Every agent run reads some collection of files, documentation, conversation history, and tool outputs. That is the context. Even when the task description is identical, the context almost certainly is not. Files changed. New commits landed. A dependency updated. The same task on Monday versus Friday is a materially different input, even if the instructions look the same.
+
+Two chefs given "make a good pasta dish, use what is in the kitchen" will produce different results if the kitchen stocks cream and mushrooms on Monday but tomatoes and basil on Friday. Same instruction, different output, and both are correct.
+
+### Layer 3: Path Dependence
+
+An agent does not read everything at once. It calls tools in sequence: reads a file, then another file, then searches for something. The order it encounters information shapes the approach it commits to. Read File A first, encounter Pattern X, build on X. On another run, read File B first, encounter Pattern Y, build on Y. By the time it sees both files, it has already anchored to one approach.
+
+Two investigators arriving at the same crime scene at different times will form different theories, even examining identical evidence. First impressions create anchors.
+
+### Layer 4: Uncollapsed Decisions
+
+This is where you actually have leverage. Whenever the agent faces a choice that nothing specifies, it resolves it by judgment. Name this variable `result` or `output`? Use an early return or a nested block? Put helper functions before or after the main function?
+
+Each unspecified choice is a degree of freedom. Every degree of freedom the agent resolves by judgment is a place where two runs can diverge.
+
+Ask someone to "write a summary of this article" and there are hundreds of small choices to make: how long, which points to emphasize, what tone. Each unconstrained choice can go differently. Tell them instead "write two sentences in a neutral tone, starting with the main claim," and most of those choices are already made.
+
+## The Practical Goal: Convergence, Not Identical Output
+
+Since true determinism is effectively unreachable, the real question is: across many runs of the same task, how often does the agent produce acceptable output?
+
+That property is convergence. The goal is not identical output every time. It is functionally correct output every time, even if variable names or whitespace differ between runs.
+
+```
+Convergence Spectrum
+
+  Low                                                   High
+  ├───────────┬────────────┬───────────────┬────────────┤
+  Chaotic     Unreliable   Consistent      Tight        Theoretically
+                           Structure       Variance     Deterministic
+
+  Different   Correct      Same approach,  Same output, Identical
+  answer      ~60% of      different       cosmetic     every
+  every run   the time     details         noise only   time (impossible)
+```
+
+Tight Variance is the target. Every run produces code you would approve, even though no two runs are character-for-character identical.
+
+## How Uncollapsed Decisions Compound
+
+Convergence does not degrade linearly as you add uncollapsed decisions. It degrades multiplicatively.
+
+Suppose each unspecified choice has a 90% chance of the agent landing somewhere acceptable. One choice: 90%. Two choices: 81% (90% × 90%). Three: about 73%. Ten: about 35%. Twenty: about 12%.
+
+```
+Uncollapsed Decisions     Approximate Convergence
+─────────────────────────────────────────────────
+        0                       ~95%
+        1-2                     ~80%
+        3-5                     ~40%
+        6-10                    ~10%
+        10+                     ~0%
+```
+
+The numbers are illustrative, not measured. But the shape is real. Each additional unconstrained decision roughly halves reliability. Removing decisions from the agent's plate before it starts is the highest-leverage thing you can do.
+
+## Two Kinds of "Same Output"
+
+### Behavioral Sameness
+
+Two outputs are behaviorally the same if they *do* the same thing: pass the same tests, satisfy the same types, produce the same runtime result. The code can look quite different and still be behaviorally identical. This is what you actually care about.
+
+### Textual Sameness
+
+Two outputs are textually the same if they are character-for-character identical.
+
+This mostly does not matter for correctness, but it does matter for caching, diff size, and review noise. If an agent fixes a bug but also renames a variable, reorders imports, and adjusts whitespace, the pull request diff is harder to read. A reviewer has to pick through cosmetic changes to find the actual change. Correct code, slower review.
+
+```
+┌────────────────────────────────────────────────────┐
+│  Run 1:                                            │
+│    const totalCost = items.reduce(sum, 0)          │
+│                                                    │
+│  Run 2:                                            │
+│    const cost = items.reduce(sum, 0)               │
+│                                                    │
+│  Behaviorally identical? YES.                      │
+│  Textually identical?    NO. ("totalCost"/"cost")  │
+│  Problem? Only in review. The code is correct.     │
+└────────────────────────────────────────────────────┘
+```
+
+## Strategies for Improving Convergence
+
+Ordered by impact.
+
+### 1. Collapse Decisions Explicitly
+
+Write rules. Establish naming conventions. A `CLAUDE.md` file that says "all filter functions use the naming pattern `filterBy<Property>`" eliminates an entire class of judgment calls. Every constraint written down is a decision the agent no longer makes.
+
+### 2. Provide Examples
+
+An example beats a rule because it collapses many decisions at once. If the agent sees an existing `filterByStatus.ts` next to the file it is creating, naming conventions, error handling, documentation style, and code organization are already answered. A rule tells the agent what to do. An example shows it.
+
+You can describe how to tie a bow tie in words, but showing someone a finished bow tie while they try eliminates a hundred small questions that a verbal description struggles to answer.
+
+### 3. Narrow the Task Scope
+
+"Add a `take` function following the same pattern as `filter`" has far fewer open decisions than "build out the list package with common operations." The narrower task also means fewer files to read, which reduces context variance. Both Layer 2 and Layer 4 improve at the same time.
+
+### 4. Control Tool-Use Ordering
+
+Some agent frameworks let you define which tools are available at which stages. Ensuring the agent reads the canonical reference file *before* anything else reduces path dependence. The canonical source sets the frame; everything else gets read in that context.
+
+### 5. Normalize Cosmetic Variance Mechanically
+
+Do not try to constrain the agent into producing perfectly formatted output. Run a formatter and linter (Prettier, ESLint) as a post-processing step after every agent run. That handles whitespace, import order, and minor style inconsistencies cheaply, without fighting Layer 1 noise.
+
+```
+┌──────────────────────────────────────────────────────┐
+│  STRATEGY STACK (bottom = highest leverage)          │
+│                                                      │
+│  ┌────────────────────────────────────┐              │
+│  │ Post-run formatter / linter        │ textual      │
+│  ├────────────────────────────────────┤              │
+│  │ Controlled tool ordering           │ path         │
+│  ├────────────────────────────────────┤              │
+│  │ Narrow task scope                  │ context      │
+│  ├────────────────────────────────────┤              │
+│  │ Canonical examples                 │ decisions    │
+│  ├────────────────────────────────────┤              │
+│  │ Explicit rules and constraints     │ decisions    │
+│  └────────────────────────────────────┘              │
+│                                                      │
+│  Each layer handles what the layer below it misses.  │
+└──────────────────────────────────────────────────────┘
+```
+
+## The Mental Model
+
+Determinism in agents is about shrinking the space of possible outputs until every output in that space is acceptable. Identical output twice is not the goal. Acceptable output every time is.
+
+A useful diagnostic: if you reject agent output not because it is wrong but because it is not what you would have written, you are looking at a [degrees‑of‑freedom](./Degree%20of%20Freedom%20in%20Agent%20Tasks.md) problem. Something was left unspecified. Either add a constraint that closes it, provide an example that demonstrates the preferred approach, or decide the variance is acceptable and move on.
+
+The agent resolves by judgment everything you did not specify. The work is deciding, deliberately, what you want to leave to it.
