@@ -114,11 +114,74 @@ Within the REPL you can reference project resources directly:
 > Run the tests for !`git diff --name-only HEAD~1`
 ```
 
-|Syntax|Effect|
-|---|---|
-|`@<filepath>`|Inject file contents into context|
-|`!<shell command>`|Execute command and inject output|
-|`/add-dir <path>`|Add an additional directory to the search scope|
+| Syntax             | Effect                                          |
+| ------------------ | ----------------------------------------------- |
+| `@<filepath>`      | Inject file contents into context               |
+| `!<shell command>` | Execute command and inject output               |
+| `/add-dir <path>`  | Add an additional directory to the search scope |
+
+## Permissions
+
+By default, Claude Code prompts before running anything sensitive. Permissions let you pre-approve the safe operations and permanently deny the dangerous ones, so the agent stops interrupting you for decisions you've already made.
+
+### How permissions are stored
+
+Two settings files, two jobs. Don't mix them up.
+
+```
+~/.claude/settings.json         <- API key, proxy URL, model config
+.claude/settings.json           <- permissions (commit this)
+.claude/settings.local.json     <- personal permission overrides (gitignore this)
+```
+
+Permissions go in the project-level `.claude/settings.json`, not in your global `~/.claude/settings.json`.
+
+### Allow and deny lists
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Edit(**)",
+      "Bash(npm run *)",
+      "Bash(git *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force)"
+    ]
+  }
+}
+```
+
+Patterns use glob syntax. `deny` wins when both lists match a given operation.
+
+### Managing permissions in session
+
+```
+/permissions                        # Inspect current allow/deny lists
+/permissions add Bash(npm test)     # Pre-approve a specific command
+/permissions add Bash(git *)        # Pre-approve a glob
+```
+
+`/permissions` writes back to `.claude/settings.json` automatically. Direct edits to the file are not hot-reloaded, so restart Claude Code after editing by hand.
+
+### Settings precedence
+
+The same merge order from [Settings Precedence](#settings-precedence) applies to permissions:
+
+```
+programmatic options
+      |
+local settings  (.claude/settings.local.json)
+      |
+project settings (.claude/settings.json)
+      |
+user settings   (~/.claude/settings.json)
+```
+
+A deny at a higher level cannot be overridden by an allow below it.
 
 ## Controlling Context
 
