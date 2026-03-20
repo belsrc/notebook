@@ -7,12 +7,15 @@ date: 2026-02-20
 reference:
   - https://anthropic.skilljar.com/claude-code-in-action
   - https://docs.anthropic.com/en/docs/claude-code
+  - https://code.claude.com/docs/en/quickstart
+  - https://github.com/anthropics/claude-code-action
+  - https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
 ---
 ## What is Claude Code?
 
 ### What is a Coding Assistant?
 
-A coding assistant is an AI agent that interacts with a codebase through a **tool-use system** rather than through passive text generation. The model is given access to a set of tools it can invoke in a loop, the **agent loop**, until it determines the task is complete.
+A coding assistant is an AI agent that interacts with a codebase through a **tool-use system** rather than through passive text generation. The model is given access to a set of tools it can invoke in a loop (the **agent loop**) until it determines the task is complete.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -25,11 +28,11 @@ A coding assistant is an AI agent that interacts with a codebase through a **too
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The model never directly reads your filesystem or runs commands, it requests a tool invocation, and the host process executes it and returns results.
+The model never directly reads your filesystem or runs commands. It requests a tool invocation, and the host process executes it and returns results.
 
 ### Built-in Tools
 
-Claude Code ships with a set of built-in tools covering the core operations needed for software development:
+Claude Code ships with built-in tools covering the core operations needed for software development:
 
 |Tool|Purpose|
 |---|---|
@@ -47,7 +50,7 @@ Claude Code ships with a set of built-in tools covering the core operations need
 
 ### What Claude Code Is (and Is Not)
 
-Claude Code is an **agentic** tool, it will autonomously plan, reason, and execute multi-step tasks across many files. It is not simply autocomplete or a chat panel sitting beside an editor. It operates:
+Claude Code is an **agentic** tool. It autonomously plans and executes multi-step tasks across many files. It's not inline autocomplete or a sidebar chat. It operates:
 
 - In the **terminal** (`claude` CLI)
 - As a **VS Code / Cursor extension**
@@ -139,7 +142,7 @@ Summarizes the conversation history, replacing raw messages with a condensed sum
 /context
 ```
 
-Shows a breakdown of what is currently in context, skills, agents, slash commands, and a sorted token count, so you can see what's consuming space.
+Shows a breakdown of what is currently in context: skills, agents, slash commands, and a sorted token count, so you can see what's consuming space.
 
 ### Settings Precedence
 
@@ -155,12 +158,11 @@ project settings (.claude/settings.json  /  .mcp.json)
 user settings   (~/.claude/settings.json)
 ```
 
-
 ## Custom Commands (Skills)
 
 ### What a Skill Is
 
-A **skill** is a Markdown file that defines a reusable prompt template and optional metadata. Storing a skill is equivalent to storing a slash command, the two are unified:
+A **skill** is a Markdown file that defines a reusable prompt template and optional metadata. Storing a skill is equivalent to storing a slash command; the two are unified:
 
 ```
 .claude/skills/<name>/SKILL.md   →  /<name>
@@ -351,7 +353,7 @@ For workflows that need AWS/GCP access (e.g., deploying, querying prod databases
 
 ### What Hooks Are
 
-Hooks are **user-defined shell commands** that execute at specific points in the Claude Code agent lifecycle. They provide **deterministic** side effects that bypass the LLM's decision-making, if you add a hook, it will always run at that lifecycle point, unconditionally.
+Hooks are **user-defined shell commands** that execute at specific points in the Claude Code agent lifecycle. They provide **deterministic** side effects outside the LLM's decision-making: if you add a hook, it runs at that lifecycle point unconditionally.
 
 > Hooks convert suggestions into application-layer enforcement.
 
@@ -404,7 +406,7 @@ Hooks are stored in `settings.json` (user or project level):
 }
 ```
 
-Configure via the interactive menu (`/hooks`) or by editing the JSON directly. Note: direct edits to `settings.json` do **not** take effect in the running session, restart Claude Code.
+Configure via the interactive menu (`/hooks`) or by editing the JSON directly. Note: direct edits to `settings.json` do **not** take effect in the running session; restart Claude Code.
 
 ### Hook Communication Protocol
 
@@ -504,7 +506,7 @@ Hooks run with the same credentials as the current user. Key rules:
 
 - Always quote shell variables: `"$VAR"`, not `$VAR`
 - Check for path traversal: reject paths containing `..`
-- Use absolute paths, `$CLAUDE_PROJECT_DIR` is available for the project root
+- Use absolute paths; `$CLAUDE_PROJECT_DIR` is available for the project root
 - Skip sensitive files: `.env`, `.git/`, key files
 - Default timeout is 60 seconds per hook command
 - Hooks from `settings.json` edits during a session are not hot-reloaded
@@ -515,7 +517,7 @@ Hooks run with the same credentials as the current user. Key rules:
 
 ### Core Concept
 
-The SDK exposes the same agent loop that powers the CLI, but as a programmatic async generator you can embed in your own application:
+The SDK exposes the same agent loop that powers the CLI as a programmatic async generator you can embed in your own application:
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -693,7 +695,7 @@ const result = query({
 });
 ```
 
-Claude decides which subagent to delegate to based on the `description` field. Multiple subagents can run **concurrently**, drastically reducing wall-clock time on multi-part tasks.
+Claude picks which subagent to delegate to based on the `description` field. Multiple subagents can run **concurrently**, which cuts wall-clock time on multi-part tasks.
 
 ## Key Architectural Summary
 
@@ -746,20 +748,20 @@ Claude decides which subagent to delegate to based on the `description` field. M
 
 ## Quick Reference: Common Slash Commands
 
-|Command|Effect|
-|---|---|
-|`/help`|Show all available commands|
-|`/context`|Show context breakdown with token counts|
-|`/compact`|Summarize history to reclaim context|
-|`/clear`|Clear conversation history|
-|`/hooks`|Interactive hook configuration|
-|`/mcp`|Show MCP server status / authenticate|
-|`/model`|Switch active model|
-|`/config`|Open configuration menu|
-|`/add-dir <path>`|Add an extra directory to scope|
-|`/resume`|Resume a previous session|
-|`/export`|Export current conversation|
-|`/output-style`|Switch output style (Default / Explanatory / Learning)|
-|`/agents`|Manage subagents|
-|`/vim`|Enable Vim keybindings|
-|`/debug`|Claude-assisted session debugging|
+| Command           | Effect                                                 |
+| ----------------- | ------------------------------------------------------ |
+| `/help`           | Show all available commands                            |
+| `/context`        | Show context breakdown with token counts               |
+| `/compact`        | Summarize history to reclaim context                   |
+| `/clear`          | Clear conversation history                             |
+| `/hooks`          | Interactive hook configuration                         |
+| `/mcp`            | Show MCP server status / authenticate                  |
+| `/model`          | Switch active model                                    |
+| `/config`         | Open configuration menu                                |
+| `/add-dir <path>` | Add an extra directory to scope                        |
+| `/resume`         | Resume a previous session                              |
+| `/export`         | Export current conversation                            |
+| `/output-style`   | Switch output style (Default / Explanatory / Learning) |
+| `/agents`         | Manage subagents                                       |
+| `/vim`            | Enable Vim keybindings                                 |
+| `/debug`          | Claude-assisted session debugging                      |
