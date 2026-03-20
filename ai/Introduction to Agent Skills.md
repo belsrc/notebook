@@ -11,7 +11,7 @@ reference:
 ---
 ## What Are Skills?
 
-Agent Skills are modular, self-contained knowledge packages that extend an agent's capabilities with specialized domain expertise, workflows, and tool integrations that Claude discovers and invokes autonomously. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
+Agent Skills are reusable knowledge packages that extend Claude's capabilities with domain expertise, workflows, and tool integrations, loaded on demand. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
 
 ### Core concept: "Teach once, reuse everywhere"
 
@@ -19,7 +19,7 @@ Rather than re-explaining a workflow every session, you encode it once in a Skil
 
 ### Architecture
 
-At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read, only their output enters the context window.
+At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read; only their output enters the context window.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -61,7 +61,7 @@ Skills complement all three rather than replacing them.
 
 ### Naming convention: gerund form
 
-Prefer `processing-pdfs` over `pdf-processor` or `pdf`. The gerund form describes the *activity*, making the Skill's purpose immediately clear to both humans and Claude.
+Prefer `processing-pdfs` over `pdf-processor` or `pdf`. Gerund form names describe an activity, which makes triggers more obvious to both humans and Claude.
 
 ### Frontmatter (YAML)
 
@@ -166,29 +166,26 @@ Skills use a three-level loading system for context efficiency:
 
 #### Scripts Directory (`scripts/`)
 
-Executable code for tasks requiring deterministic reliability or repeatedly rewritten logic.
+Scripts handle code that needs deterministic execution or gets rewritten repeatedly across tasks.
 
 **When to include:**
-- Same code pattern is rewritten repeatedly
-- Deterministic execution is critical
-- Complex operations benefit from tested implementations
+- Code that gets rewritten the same way across tasks
+- Operations where exact, consistent output is required
+- Logic too complex to regenerate reliably on every invocation
 
 **Example:** `scripts/rotate_pdf.py` for PDF rotation operations
 
-**Benefits:**
-- Token efficient (may be executed without loading into context)
-- Deterministic behavior
-- Tested and reliable
+Scripts execute without loading into context, keeping token usage down. They are also testable and version-controlled, which reduces the risk of silent regressions.
 
 **Note:** Scripts may still need to be read by agents for patching or environment-specific adjustments.
 
 #### References Directory (`references/`)
 
-Documentation and reference material loaded into context as needed to inform the process.
+Documentation loaded into context on demand.
 
 **When to include:**
-- Documentation that agents should reference while working
-- Detailed specifications too large for SKILL.md
+- Documentation that agents should consult while working
+- Detailed specifications too large for `SKILL.md`
 - Information needed only in specific scenarios
 
 **Examples:**
@@ -197,16 +194,11 @@ Documentation and reference material loaded into context as needed to inform the
 - `references/policies.md`: Company policies
 - `references/workflows.md`: Detailed workflow guides
 
-**Benefits:**
-- Keeps SKILL.md lean
-- Loaded only when agents determine it's needed
-- Supports progressive disclosure of information
-
 **Best practices:**
-- For large files (>10k words), include grep search patterns in SKILL.md
-- Information should live in either SKILL.md or references, not both
+- For large files (>10k words), include grep search patterns in `SKILL.md`
+- Information should live in either `SKILL.md` or `references/`, not both
 - Prefer references for detailed specifications
-- Keep only essential procedural instructions in SKILL.md
+- Keep only essential procedural instructions in `SKILL.md`
 
 #### Assets Directory (`assets/`)
 
@@ -223,14 +215,7 @@ Files used in output but not loaded into context.
 - `assets/frontend-template/`: HTML/React boilerplate
 - `assets/font.ttf`: Typography files
 
-**Use cases:**
-- Templates and boilerplate code
-- Images, icons, and media
-- Sample documents for modification
-
-**Benefits:**
-- Separates output resources from documentation
-- Enables agents to use files without context overhead
+Assets stay out of the context window entirely; agents copy or reference them directly as files.
 
 ### Degrees of Freedom
 
@@ -288,8 +273,8 @@ const query = (options: QueryOptions) => {
 
 **Use when:**
 - Operations are fragile and error-prone
-- Consistency is critical
-- Specific sequence must be followed
+- Consistency is required
+- A specific sequence must be followed
 
 **Example:**
 ```markdown
@@ -304,8 +289,6 @@ python scripts/fill_pdf_form.py \
 
 Do not attempt manual form filling - the script handles field mapping, data validation, and proper PDF structure preservation.
 ```
-
-**Think of agents exploring a path:** A narrow bridge with cliffs needs specific guardrails (low freedom), while an open field allows many routes (high freedom).
 
 ### Restricting tool access via frontmatter
 
@@ -336,22 +319,9 @@ See `scripts/analyze_form.py` for the extraction algorithm.
 
 Execution is preferred: the script code never enters the context window, only its stdout does.
 
-### Performance Considerations
+### Performance considerations
 
-**Minimize SKILL.md size:**
-- Keep under 500 lines when possible
-- Split detailed content into references
-- Use concise examples
-
-**Optimize resource organization:**
-- Group related scripts together
-- Combine related reference documents
-- Avoid duplication across files
-
-**Script execution:**
-- Scripts can execute without loading into context
-- Reduces token usage for deterministic operations
-- Prefer scripts for repeated, complex logic
+Keep `SKILL.md` under 500 lines. Move detailed content to `references/`. Scripts run without entering the context window, so prefer them for repeated or complex logic. They cost tokens only once, when written, not each time they run.
 
 ### `disable-model-invocation`
 
@@ -396,7 +366,7 @@ Set this for Skills that should only be invoked explicitly via `/deploy-producti
 
 ### Skills + Subagents together
 
-Wire a Skill into a subagent to give it specialized domain knowledge with an isolated execution environment. The subagent's `AGENT.md` can explicitly reference a Skill, or the subagent's allowed tools can include `Skill`.
+Wire a Skill into a subagent to give it domain knowledge with an isolated execution environment. The subagent's `AGENT.md` can explicitly reference a Skill, or the subagent's allowed tools can include `Skill`.
 
 ## Sharing Skills
 
@@ -413,7 +383,7 @@ When Skills share the same name, higher-priority scope wins. Plugin Skills are a
 
 ### Team distribution: commit to repository
 
-The simplest team-sharing mechanism, commit `.claude/skills/` to the project repo. All team members inherit Skills automatically when they clone or pull.
+Commit `.claude/skills/` to the project repo. Team members pick up Skills automatically on clone or pull.
 
 ```
 my-project/
@@ -460,7 +430,7 @@ Plugin Skills are invoked as `/my-first-plugin:skill-name`.
 
 ### Enterprise deployment: managed settings
 
-Deploy Skills organization-wide via Anthropic's enterprise managed settings. Managed settings have highest precedence in the scope hierarchy, they override user and project settings. This enforces organizational standards (coding conventions, security policies) without requiring opt-in by individual developers.
+Deploy Skills organization-wide via Anthropic's enterprise managed settings. Managed settings take highest precedence, overriding user and project settings, which makes them useful for coding conventions or security policies that should apply universally without requiring per-developer opt-in.
 
 ### Security considerations when consuming Skills
 
@@ -555,7 +525,7 @@ Use the BigQuery:bigquery_schema tool...
 
 ### Skills not found on `--add-dir` paths
 
-Skills inside directories added via `--add-dir` are discovered automatically from `.claude/skills/` within that directory. However, `CLAUDE.md` files from `--add-dir` directories are **not** loaded by default, set `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` to enable them.
+Skills inside directories added via `--add-dir` are discovered automatically from `.claude/skills/` within that directory. However, `CLAUDE.md` files from `--add-dir` directories are **not** loaded by default; set `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` to enable them.
 
 ### Iterative debugging methodology (A/B model pattern)
 
