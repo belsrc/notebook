@@ -7,19 +7,21 @@ date: 2026-02-23
 reference:
   - https://docs.claude.com/
   - https://docs.claude.com/en/docs/claude-code/sub-agents
+  - https://platform.claude.com/docs/en/agent-sdk/subagents
+  - https://shipyard.build/blog/claude-code-subagents-guide/
+  - https://dev.to/bhaidar/the-task-tool-claude-codes-agent-orchestration-system-4bf2
 ---
 ## What Are Subagents?
 
-Subagents are specialized Claude instances that your main agent can spawn to handle focused subtasks. Each one runs in its own context window with a custom system prompt, dedicated tool access, and independent permissions.
-When Claude encounters a task matching a subagent's description it delegates automatically; results return to the main conversation when the subagent finishes.
+Subagents are specialized Claude instances that your main agent spawns to handle focused subtasks in separate, isolated contexts. Each one runs in its own context window with a custom system prompt, dedicated tool access, and independent permissions. When Claude encounters a task matching a subagent's description, it delegates automatically. Results return to the main conversation once the subagent finishes.
 
 ### Core concept: "Delegate and isolate"
 
-Rather than cram every operation into one ever-growing context window, you push focused work into subagents. Exploration noise, verbose test output, and domain-specific instructions live in the subagent's context, not yours.
+Rather than cram every operation into one ever-growing context window, you delegate focused work into subagents so each one carries only the context it actually needs. Exploration noise, verbose test output, and domain-specific instructions live in the subagent's context, not yours.
 
 ### How Claude Code invokes subagents
 
-Subagents are called via the internal **Task tool**. The Task tool must therefore appear in `allowedTools` / `tools` for subagent delegation to be possible.
+In Claude Code, subagents run on top of the Task-based orchestration layer, so `Task` must appear in the orchestrator’s `allowedTools` for delegation to work.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -59,11 +61,11 @@ Skills inject instructions *into* the current conversation. Subagents spawn a *s
 
 ## Built-in Subagents
 
-Claude Code ships three first-class built-in subagents that Claude invokes automatically. They inherit the parent session's permissions plus additional tool restrictions.
+Claude Code includes three built-in subagents that Claude invokes automatically. They inherit the parent session's permissions plus any additional tool restrictions.
 
 ### Explore
 
-A fast, read-only codebase search agent.
+Explore is a fast, read-only codebase search agent used for file discovery and code understanding without making changes.
 
 ```
 Purpose:  File discovery, code search, codebase understanding
@@ -76,7 +78,7 @@ Delegating to Explore keeps codebase-scan output out of the main context. The or
 
 ### Plan
 
-A research agent used inside **plan mode** to gather context before a plan is presented to the user. Cannot spawn further subagents (no Task tool).
+Plan is a research-only agent used inside plan mode to gather context before Claude proposes a plan to the user. Cannot spawn further subagents (no Task tool).
 
 ```
 Purpose:  Pre-plan codebase research
@@ -86,7 +88,7 @@ Nesting:  Prevented, plan subagent cannot spawn sub-subagents
 
 ### General-purpose
 
-A capable multi-step agent for tasks requiring both exploration and modification.
+The general-purpose agent handles multi-step tasks that require both exploration and modifications, and is available whenever the Task layer is enabled.
 
 ```
 Purpose:  Complex research, multi-step operations, code changes
@@ -133,19 +135,19 @@ actionable feedback on quality, security, and best practices.
 
 #### All frontmatter fields
 
-| Field | Required | Description |
-|---|---|---|
-| `name` | Yes | Identifier used in logs and explicit invocation |
-| `description` | Yes | Natural-language trigger; Claude reads this to decide when to delegate |
-| `tools` | No | Allowlist. Omit to inherit all tools from parent |
-| `disallowedTools` | No | Denylist. Takes precedence over inherited tools |
-| `model` | No | `sonnet` \| `opus` \| `haiku` \| `inherit`. Defaults to `inherit` |
-| `permissionMode` | No | Override permission mode for this subagent |
-| `maxTurns` | No | Cap the agent's turn limit |
-| `skills` | No | Preload specific skills into the subagent at startup |
-| `hooks` | No | Hooks configuration scoped to this subagent |
-| `memory` | No | Memory settings for this subagent |
-| `background` | No | `true` to always run as a background task |
+| Field             | Required | Description                                                                                                                                                        |
+| ----------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`            | Yes      | Identifier used in logs and explicit invocation                                                                                                                    |
+| `description`     | Yes      | Natural-language trigger; Claude reads this to decide when to delegate                                                                                             |
+| `tools`           | No       | Allowlist. Omit to inherit all tools from parent                                                                                                                   |
+| `disallowedTools` | No       | Denylist. Takes precedence over inherited tools                                                                                                                    |
+| `model`           | No       | `sonnet` \| `opus` \| `haiku` \| `inherit`. Defaults to `inherit`                                                                                                  |
+| `permissionMode`  | No       | `default` \| `acceptEdits` \| `bypassPermissions` \| `plan`. Overrides the session-level permission mode for this subagent only                                    |
+| `maxTurns`        | No       | Cap the agent's turn limit                                                                                                                                         |
+| `skills`          | No       | Preload specific skills into the subagent at startup                                                                                                               |
+| `hooks`           | No       | Inline hooks configuration scoped only to this subagent. Uses the same structure as `.claude/settings.json` hooks. See [Hooks for Subagents](#hooks-for-subagents) |
+| `memory`          | No       | Controls whether the subagent reads/writes MEMORY.md files. See [Memory settings](#memory-settings) below                                                          |
+| `background`      | No       | `true` to always run as a background task                                                                                                                          |
 
 #### Tool allowlist vs denylist
 
@@ -161,6 +163,39 @@ disallowedTools: Write, Edit
 tools: Read, Bash
 disallowedTools: Bash(rm *), Bash(sudo *)
 ```
+
+Prefer a tight allowlist plus targeted denylist entries for high-risk tools; this keeps accidental destructive commands out of reach even if prompts go off-script.
+
+#### Memory settings
+
+The `memory` field controls whether the subagent reads and writes MEMORY.md files at startup and shutdown.
+
+```yaml
+memory:
+  read: true    # load MEMORY.md into context at startup (default: true)
+  write: true   # allow the subagent to update MEMORY.md on completion (default: true)
+```
+
+Setting `write: false` is useful for read-only or exploratory agents that should not modify persistent memory. Setting both to `false` gives the subagent a fully amnesiac context with no memory I/O.
+
+#### Inline hooks
+
+The `hooks` frontmatter field embeds hook configuration directly in the agent file instead of in `.claude/settings.json`. The structure is identical to the session-level hooks format:
+
+```yaml
+---
+name: verified-implementer
+description: Implements features and verifies tests pass before finishing
+tools: Read, Edit, Write, Bash
+hooks:
+  Stop:
+    - hooks:
+        - type: command
+          command: "npm test 2>&1 | tail -20"
+---
+```
+
+Inline hooks take effect only when this subagent runs. They do not affect the main session or other subagents.
 
 ### Creating subagents via the `/agents` command
 
@@ -239,7 +274,6 @@ Force a specific subagent by mentioning it by name in your prompt:
 - AskUserQuestion tool calls silently fail
 - Can be resumed in foreground if it needs input
 
-
 Force background with frontmatter:
 
 ```yaml
@@ -260,7 +294,7 @@ Multiple subagents can run concurrently. Claude decides whether to run tasks in 
 "Run the style-checker, security-scanner, and test-coverage agents simultaneously."
 ```
 
-Each independent subagent gets its own context window, its own tool budget, and returns its result independently.
+Each subagent gets its own context window and tool budget, and returns results independently.
 
 ```
 Main conversation
@@ -273,9 +307,62 @@ Main conversation
 Claude synthesizes all three results
 ```
 
+## Subagent Result Format
+
+When a subagent finishes, the Task tool delivers its output to the orchestrator as a plain string: the text of the subagent's final assistant turn.
+
+In the SDK stream, this appears as a `tool_result` block paired with the original `tool_use` block for the `Task` call:
+
+```
+orchestrator message stream
+  └── tool_use  { id: "tu_abc", name: "Task", input: { subagent_type: "code-reviewer", ... } }
+  └── tool_result { tool_use_id: "tu_abc", content: "<subagent's final text output>" }
+```
+
+The result is always a string. There is no structured schema enforced by the runtime. If you need structured output (JSON, a pass/fail signal, a file path), instruct the subagent explicitly in its system prompt:
+
+```yaml
+---
+name: test-runner
+description: Runs the test suite and returns structured results
+tools: Bash, Read
+---
+
+You are a test runner. After running the tests, you MUST respond with only
+a JSON object in this exact shape and nothing else:
+
+{
+  "passed": <number>,
+  "failed": <number>,
+  "errors": [{ "test": "<name>", "message": "<error>" }]
+}
+```
+
+The orchestrator can then parse `message.result` as JSON. Without this contract, the subagent may return a human-readable summary that is hard to process programmatically.
+
+## Token and Cost Implications
+
+Each subagent invocation is a separate API call with its own context window, which has direct cost consequences.
+
+```
+Main session:       [system prompt + conversation history]        → billed
+Subagent A:         [subagent system prompt + task + tool calls]  → billed separately
+Subagent B:         [subagent system prompt + task + tool calls]  → billed separately
+```
+
+A parallel workload with three subagents and one orchestrator produces four concurrent billing streams, one for each active context. Each subagent's input token count includes its full system prompt, the task description passed by the orchestrator, and every tool result accumulated during its run. Long tool outputs (a grep over a large codebase, a full test log) can drive up token counts fast.
+
+Practical controls:
+
+- **Narrow the tools list.** A subagent with only `Read` and `Grep` cannot accumulate Bash output. If the task does not need execution, remove Bash.
+- **Set `maxTurns`.** Uncapped subagents can run many tool-use rounds. A code reviewer probably needs 10-20 turns, not 100.
+- **Use `haiku` for high-volume, low-complexity tasks.** A subagent that classifies files or extracts metadata does not need Sonnet.
+- **Keep system prompts lean.** See [System prompt length vs. skills preloading](#system-prompt-length-vs-skills-preloading) below.
+- **Return compact summaries.** Instruct subagents to return findings as structured summaries rather than quoting full file contents back to the orchestrator.
+
 ## Nesting Limits
 
-Subagents cannot spawn other subagents. This constraint is intentional, it prevents runaway nesting and unbounded context consumption.
+Subagents cannot spawn other subagents. This keeps subagent topologies flat and makes it easier to reason about cost and failure modes.
 
 ```
 Allowed:
@@ -286,9 +373,26 @@ Not allowed:
   Orchestrator  →  Task(subagent-A)  →  Task(sub-sub-agent)  ✗
 ```
 
-The exception is the built-in `Plan` subagent, it is explicitly blocked from calling `Task` even if `Task` is in the parent's `allowedTools`.
+The exception is the built-in `Plan` subagent. It is explicitly blocked from calling `Task` even if `Task` appears in the parent's `allowedTools`.
 
 If you need sustained parallelism or work that exceeds a single context window, use **Agent Teams** instead of nested subagents.
+
+## Agent Teams
+
+Agent Teams coordinate multiple Claude Code sessions that need to share state or hand off work across session boundaries. They differ from subagents in lifetime and communication model:
+
+| | Subagents | Agent Teams |
+|---|---|---|
+| Lifetime | Single session | Persist across sessions |
+| Communication | Return value only (string result) | Shared state / message passing |
+| Nesting | Flat (one level) | Peer-to-peer or hierarchical |
+| Use case | Isolated subtask within a session | Long-running workflows, pipelines |
+
+Agent Teams are defined and coordinated at the application layer, not inside `.claude/agents/`. Each agent is typically a full Claude Code session, and shared state lives in external storage (files, a database, a message queue) that each session reads and writes.
+
+A minimal pattern: a dispatcher session writes task definitions to a shared JSON file, and worker sessions poll for and claim tasks by updating that file. A `SubagentStop` hook or a separate orchestration loop routes results back.
+
+Use Agent Teams when a single session's context window is too small for the work, when work must survive session restarts, or when agents need to coordinate as peers rather than through a single blocking orchestrator.
 
 ## Subagents + Skills
 
@@ -334,7 +438,7 @@ You are a Python specialist. Apply the preloaded style and testing conventions
 to all code you write or review.
 ```
 
-In a regular session, skill descriptions load at startup but bodies load on demand. In a preloaded subagent, **full skill content is injected immediately**, useful when you need the subagent ready without an extra round-trip to read the skill file.
+In a regular session, skill descriptions load at startup but bodies load on demand. With a preloaded subagent, **full skill content is injected at turn 1**. This avoids a round-trip to read the skill file when you need the subagent ready immediately.
 
 ### Decision: which direction?
 
@@ -345,9 +449,41 @@ Do you need domain knowledge available from turn 1?
 - Yes → Subagent with skills: [list]
 - No  → Subagent (skills load on demand via Skill tool when subagent triggers them)
 
+### System prompt length vs. skills preloading
+
+Every token in a subagent's system prompt is billed on every invocation. A 4,000-token system prompt on a subagent called 50 times costs 200,000 input tokens before the subagent does any actual work.
+
+The `skills` frontmatter field handles this. Instead of embedding large blocks of conventions, style guides, or domain knowledge directly in the system prompt, extract them into skill files and let the subagent load them on demand:
+
+```
+Without skills preloading:
+  system prompt = role instructions + 3,000 tokens of Python style guide
+  → billed 3,000 tokens on every invocation, even if the subagent
+    only reformats a one-line comment
+
+With skills preloading (skills: [python-style-guide]):
+  system prompt = role instructions  (short)
+  skill content injected at turn 1 via Skill tool call
+  → same effective context, but the skill body is loaded once
+    per session, not once per invocation
+```
+
+Use direct embedding in the system prompt for:
+- Short role definitions (under ~300 tokens)
+- Instructions that must be available before the first tool call
+- Rules that cannot be expressed as a reusable skill
+
+Use `skills` preloading for:
+- Style guides, coding conventions, or domain references over ~500 tokens
+- Content shared across multiple subagents (define once, load anywhere)
+- Content that may need to be updated independently of the agent definition
+
+On Windows, the combined system prompt passed through the command line is capped at 8,191 characters. Skill preloading sidesteps this limit because skill content is injected inside the conversation, not as part of the initial command.
+
+
 ## Worktree Isolation
 
-Subagents support **worktree isolation**, each subagent runs in its own temporary git worktree, preventing concurrent file conflicts:
+Subagents support **worktree isolation**: each subagent runs in its own temporary git worktree, which prevents concurrent file conflicts.
 
 ```yaml
 ---
@@ -359,14 +495,16 @@ isolation: worktree
 
 From the CLI you can also pass `--worktree` (`-w`) when starting Claude to scope the entire session to a worktree.
 
-Worktree isolation is ideal for:
+Worktree isolation is useful for:
 - Parallel implementation of independent features
 - Running speculative experiments without touching the main working tree
 - Safe batch modifications that need review before merging
 
 ## SDK Programmatic Definition
 
-When building agents with the Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`), subagents can be defined programmatically via the `agents` parameter, no filesystem files required.
+When building agents with the Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`), subagents can be defined programmatically via the `agents` parameter. No filesystem files required.
+
+In SDK contexts you’ll see the Agent tool name used for subagent invocation; it sits on top of the same Task-style orchestration engine used by Claude Code.
 
 ### TypeScript example
 
@@ -426,7 +564,7 @@ for await (const message of query({
 | `tools` | `string[]` | No | Allowlist. Omit to inherit parent tools |
 | `model` | `'sonnet' \| 'opus' \| 'haiku' \| 'inherit'` | No | Defaults to main model if omitted |
 
-**Do not include `Task` in a subagent's `tools` array**, subagents cannot spawn sub-subagents.
+**Do not include `Task` in a subagent's `tools` array.** Subagents cannot spawn sub-subagents.
 
 Programmatically defined agents take precedence over filesystem agents with the same name.
 
@@ -455,9 +593,40 @@ for await (const message of query({
 }
 ```
 
+## Error Handling
+
+When a subagent fails, the Task tool returns an error result to the orchestrator as a `tool_result` with `is_error: true` and a description of what went wrong. The main conversation continues. The orchestrator decides whether to retry, fall back, or surface the failure.
+
+Common failure modes:
+
+| Failure | What the orchestrator sees | Notes |
+|---|---|---|
+| `maxTurns` reached | Result string with partial output | Subagent stopped after hitting the turn cap. Partial work may still be useful. |
+| Tool call denied | Error result describing the denied tool | Usually a permission not pre-approved for a background subagent. Resume in foreground to retry. |
+| Model error / timeout | Error result with provider error message | Transient. Retry with the same `sessionId` if resumable, or re-invoke with a fresh call. |
+| Subagent explicitly gives up | Normal result string stating it could not complete | Not an error at the protocol level. Detect by inspecting the result text or using a `SubagentStop` prompt hook. |
+
+In the SDK, check `is_error` on the `tool_result` block to distinguish a failed subagent from one that returned an empty result:
+
+```typescript
+for await (const message of query({ prompt, options })) {
+  if ("message" in message && message.message.content) {
+    for (const block of message.message.content) {
+      if (block.type === "tool_result" && block.is_error) {
+        console.error("Subagent failed:", block.content);
+        // decide whether to retry or abort
+      }
+    }
+  }
+  if ("result" in message) console.log(message.result);
+}
+```
+
+Use the `SubagentStop` prompt hook to add LLM-evaluated verification on top of the protocol-level error check. The hook can inspect the subagent's output and return `{"decision": "block", "reason": "..."}` if the work is incomplete even when no protocol error was raised.
+
 ## Resuming Subagents
 
-Subagents can be resumed to continue exactly where they left off, including full conversation history and all previous tool calls.
+Subagents can be resumed from where they stopped: full conversation history and all prior tool calls are preserved.
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -532,7 +701,7 @@ Intercept subagent invocations before they start:
 
 ### Agent-based hooks
 
-Hooks themselves can spawn a subagent for verification tasks requiring file access or command execution:
+Hooks can spawn a subagent for verification tasks that need file access or command execution:
 
 ```json
 {
@@ -622,7 +791,7 @@ or restart the Claude Code session.
 
 ### Windows: prompt length limit
 
-On Windows, subagents with very long system prompts may fail due to the 8 191-character command-line limit. Keep prompts concise or use filesystem-based agents for complex instructions.
+On Windows, subagents with very long system prompts may fail due to the 8,191-character command-line limit. Keep prompts concise or use filesystem-based agents for complex instructions.
 
 ## Quick Reference: Decision Matrix
 
