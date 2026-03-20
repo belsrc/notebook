@@ -8,18 +8,20 @@ reference:
   - https://anthropic.skilljar.com/introduction-to-agent-skills
   - https://docs.claude.com/
   - https://docs.claude.com/en/docs/claude-code/skills
+  - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+  - https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf
 ---
 ## What Are Skills?
 
-Agent Skills are reusable knowledge packages that extend Claude's capabilities with domain expertise, workflows, and tool integrations, loaded on demand. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
+Agent Skills are reusable knowledge packages that extend Claude's capabilities with domain expertise, workflows, and tool integrations that load on demand. Each Skill is a directory containing a `SKILL.md` entry point plus optional supporting files.
 
 ### Core concept: "Teach once, reuse everywhere"
 
-Rather than re-explaining a workflow every session, you encode it once in a Skill. Claude loads it on demand.
+Rather than re-explaining a workflow every session, encode it once in a Skill and let Claude load it on demand.
 
 ### Architecture
 
-At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read; only their output enters the context window.
+At startup, only the YAML frontmatter `name` and `description` fields from all Skills are pre-loaded into the system prompt. The full `SKILL.md` body and any referenced files are read on-demand via `bash` tool calls when a Skill is triggered. Executable scripts are _run_, not read; by default, only their output enters the context window.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -48,7 +50,7 @@ This **progressive disclosure** model means large references incur zero token co
 |Hooks|Shell commands on tool events|Reactive, event-driven|
 |Subagents|Isolated, expert Claude instances|Spawned by orchestrator|
 
-Skills complement all three rather than replacing them.
+Skills complement all three mechanisms rather than replacing them.
 
 ## Creating Your First Skill
 
@@ -85,7 +87,7 @@ metadata: (optional)
 
 #### Writing effective descriptions
 
-The description is injected into the system prompt and is the *only* signal Claude uses for Skill selection when 100+ Skills are available. It must answer two questions: **what** does it do, and **when** should it trigger.
+The description is injected into the system prompt and is the *only* signal Claude uses for Skill selection when 100+ Skills are available. It must answer two questions: **what** the Skill does and when it should trigger.
 
 ```yaml
 # Good, specific, trigger-inclusive
@@ -105,7 +107,7 @@ Instructions and guidance for using the skill and its bundled resources. The bod
 **Writing guidelines:**
 
 - Use imperative/infinitive form (e.g., "Execute the script", not "The script is executed")
-- Keep under 500 lines to minimize context bloat
+- Keep SKILL.md under 500 lines to minimize context usage
 - Include only essential procedural instructions
 - Reference bundled resources with clear guidance on when to use them
 - Prefer concise examples over verbose explanations
@@ -231,7 +233,7 @@ Low freedom (exact script/flags)  → fragile ops, exact sequence required
 
 **Use when:**
 - Multiple approaches are valid
-- Decisions depend on runtime context
+- Decisions depend on runtime context and user goals
 - Heuristics guide the approach
 
 **Example:**
@@ -303,7 +305,7 @@ allowed-tools:
 ---
 ````
 
-This prevents Claude from exercising write or execute tools while the Skill is active. Note: `allowed-tools` frontmatter only applies in the Claude Code CLI. In the Agent SDK, use the `allowedTools` option in query configuration instead.
+This prevents Claude from exercising tools not listed in allowed-tools while the Skill is active. Note: `allowed-tools` frontmatter only applies in the Claude Code CLI. In the Agent SDK, use the `allowedTools` option in query configuration instead.
 
 ### Scripts: execute vs. read
 
@@ -321,7 +323,7 @@ Execution is preferred: the script code never enters the context window, only it
 
 ### Performance considerations
 
-Keep `SKILL.md` under 500 lines. Move detailed content to `references/`. Scripts run without entering the context window, so prefer them for repeated or complex logic. They cost tokens only once, when written, not each time they run.
+Keep `SKILL.md` under 500 lines. Move detailed content to `references/`. Scripts run without entering the context window, so prefer them for repeated or complex logic. They cost tokens only when authored or read, not each time they run.
 
 ### `disable-model-invocation`
 
