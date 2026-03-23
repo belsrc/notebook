@@ -247,6 +247,91 @@ Detection and mitigation are closely related. The following deployment patterns 
 
 No single method eliminates hallucination. The practical approach for high-stakes deployments is grounded retrieval to reduce the opportunity for hallucination, followed by automated NLI or self-consistency checks, followed by human review of flagged claims.
 
+## The Reliability Spectrum
+
+Knowing hallucination happens is only part of it. The useful question is *where* it tends to occur, so you know which outputs need close reading and which don't. Applying maximum scrutiny to everything defeats the point. Either you burn time on low-risk outputs, or you start skimming everything and stop catching the problems that actually matter.
+
+The spectrum below maps task categories to their hallucination risk profile. Risk here means the likelihood that an output contains a confident, plausible, wrong claim that would survive a casual review.
+
+### Low Risk: Structural and Transformational Tasks
+
+These tasks ask the model to operate on content you have already provided, applying a well-defined transformation with a verifiable output. The model is not reaching into its training data for facts; it is rearranging or reformatting what it was given.
+
+**Examples:**
+- Reformatting a JSON payload into a different schema
+- Extracting and listing all `TODO` comments from a file
+- Converting a TypeScript `interface` to a `type`
+- Summarizing a document you provided into bullet points
+- Generating a diff description from an actual diff
+- Translating inline comments from one language to another
+
+**Review posture:** Spot-check structure and completeness. The failure mode here is omission or misformatting, not fabrication. A quick scan is sufficient.
+
+### Low-to-Moderate Risk: Code Generation in Familiar Domains
+
+When generating code in a domain the model knows well (standard TypeScript patterns, React component structure, vitest test scaffolding), the output is usually syntactically correct and idiomatically reasonable. The risk is not random invention; it is subtle misalignment with your team's specific conventions, constraints, or architectural decisions that the model was not told about.
+
+**Examples:**
+- Generating a React component from a spec
+- Writing a vitest test suite for a provided function
+- Adding JSDoc to an existing function signature
+- Implementing a utility function from a type signature and description
+
+**Review posture:** Verify against your conventions and constraints explicitly. Check that the output does not violate anything in your `CLAUDE.md` or skill definitions. The model will produce code that looks correct to an outside reviewer but may violate a team-specific invariant. This is the tribal knowledge gap described in [Domain Knowledge](./Domain%20Knowledge.md).
+
+### Moderate Risk: Analysis and Diagnosis
+
+Tasks that ask the model to draw conclusions from provided material (reviewing code for issues, diagnosing a bug, identifying accessibility violations, surfacing risks in a plan) ground it in real content you supplied, but the conclusions it reaches are inferences, not transformations. A plausible-sounding finding can be wrong.
+
+**Examples:**
+- Code review findings (correctness, performance, security)
+- Bug diagnosis from a stack trace and code snippet
+- Accessibility audit against WCAG criteria
+- Risk identification in a project brief
+- Performance analysis of a provided function
+
+**Review posture:** Treat findings as hypotheses, not verdicts. Every flagged issue should be independently confirmed before acting on it. Pay particular attention to severity claims; the model may overstate or understate the impact of an issue with equal confidence.
+
+### Moderate-to-High Risk: Code Generation in Unfamiliar Domains
+
+When the task involves a domain that is narrow, specialized, or specific to your codebase (geospatial math, custom rendering pipelines, a proprietary internal API, a framework the model has limited training data on), the model loses its grounding in known-good patterns. It will generate syntactically valid code that may be semantically wrong in ways that are not immediately obvious.
+
+**Examples:**
+- Implementing coordinate projection or datum transformation logic
+- Writing queries against an internal or niche API
+- Generating code that interacts with a custom internal abstraction
+- Working with a library that postdates the model's training data
+- Implementing domain-specific algorithms (signal processing, financial calculations, aviation math)
+
+**Review posture:** Treat output as a draft that requires expert review, not a solution. For safety-critical domains, require a second engineer to review independently. Do not rely on the output compiling or tests passing as evidence of correctness; wrong geospatial math compiles fine.
+
+### High Risk: Factual Claims, Citations, and References
+
+Any output that asserts a specific fact, cites a source, references a version number, quotes a specification, or makes a numeric claim is high-risk territory. This is where hallucination is hardest to catch: the model produces specific-sounding claims with no hedging to tip you off, and they are wrong.
+
+**Examples:**
+- "The WCAG 2.1 AA contrast ratio requirement for body text is 3:1" (wrong; it is 4.5:1 at standard sizes)
+- "This function was introduced in React 18.2" (may be fabricated)
+- "According to RFC 7946, GeoJSON coordinates are ordered..." (may misquote the RFC)
+- Package version numbers in generated documentation
+- API endpoint paths cited from memory rather than provided source material
+- Statistical claims without a provided data source
+
+**Review posture:** Verify every specific claim against a primary source before the output leaves your hands. Do not accept a cited source as real without checking it exists. Do not accept a version number, ratio, or specification reference without confirming it. This category of hallucination is the one most likely to survive into a stakeholder document or production codebase undetected.
+
+### High Risk: Open-Ended Generation Without Grounding
+
+Tasks that ask the model to produce original content from scratch, without a provided document, codebase, or structured input to work from, give the model nothing to anchor to. It draws entirely from training data, which is a wide-open invitation to fabricate. The output may be fluent, well-structured, and entirely invented.
+
+**Examples:**
+- "Write a technical spec for this feature" with no existing design artifacts
+- "Draft a risk register for this project" without a provided brief
+- "What are the performance characteristics of library X?" without a provided benchmark
+- Generating acceptance criteria for a ticket described only in one sentence
+- Producing architecture recommendations without access to the existing system
+
+**Review posture:** Treat the output as a starting point for your own thinking, not a deliverable. It is useful for overcoming blank-page paralysis and generating options to react to. It is not useful as a source of factual claims about your system, your codebase, or the external world.
+
 ## Summary
 
 ```
@@ -275,3 +360,26 @@ No single method eliminates hallucination. The practical approach for high-stake
 ```
 
 **Do not treat LLM output as a primary source. Treat it as a first draft, and verify claims in proportion to the cost of being wrong.**
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│                     RELIABILITY SPECTRUM                          │
+│                                                                   │
+│  Low                                                     High     │
+│  Risk ◄──────────────────────────────────────────────► Risk       │
+│                                                                   │
+│  Structural /    Code gen,      Analysis /    Factual    Open-    │
+│  Transform-      familiar       Diagnosis     claims,   ended     │
+│  ational         domain                       citations  gen.     │
+│                                                                   │
+│  Spot-check      Verify         Treat as      Verify    Starting  │
+│  structure       conventions    hypotheses    every     point     │
+│                                               claim     only      │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+The practical question before reviewing any AI output is: **which part of this spectrum did the model have to operate in to produce this output?** A generated test suite for a function you provided sits near the left. A sprint summary that cites velocity figures from tickets the model was not given sits near the right.
+
+Most real outputs span multiple zones. A code review that correctly identifies a structural issue but invents a nonexistent CVE number operates in both the moderate and high-risk bands simultaneously.
+
+The review discipline is not uniform across the output. It is targeted at the parts of the output that required the model to reach furthest from what it was given.
