@@ -5,6 +5,14 @@ tags:
 gardening: 🌳
 date: 2026-03-23
 reference:
+  - https://github.com/Fission-AI/OpenSpec
+  - https://www.youtube.com/watch?v=mViFYTwWvcM
+  - https://www.youtube.com/watch?v=7UMiGPeC0qc
+  - https://blog.promptlayer.com/how-json-schema-works-for-structured-outputs-and-tool-integration/
+  - https://swagger.io/specification/
+  - https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html
+  - https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/
+  - https://heeki.medium.com/using-spec-driven-development-with-claude-code-4a1ebe5d9f29
 ---
 ## The Problem Before the Solution
 
@@ -12,7 +20,7 @@ Before we can appreciate Spec Driven Development (SDD), we need to understand th
 
 Imagine you ask a contractor to "build you a house." No blueprints, no dimensions, no material list. The contractor starts building. Three weeks later, they hand you a two-bedroom ranch when you needed a four-bedroom colonial. Everyone worked hard. Nothing was malicious. The outcome was still a disaster.
 
-This is the **vague instruction problem**, and it has existed in software development since the beginning. Traditional software responses to this problem gave us requirements documents, user stories, and acceptance criteria: written contracts describing what the software must do before a single line of code is written.
+This is the vague instruction problem, and it has existed in software development since the earliest days. Traditional software responses to this problem gave us requirements documents, user stories, and acceptance criteria: written contracts describing what the software must do before a single line of code is written.
 
 Hold that mental model and apply it to AI.
 
@@ -20,7 +28,7 @@ Hold that mental model and apply it to AI.
 
 When you give a task to a human engineer, they have a lifetime of context to fill in the gaps. They know what a "login form" looks like. They know that "export data" probably means a CSV file. They will ask clarifying questions when something is genuinely ambiguous.
 
-AI models, particularly Large Language Models (LLMs), behave differently. They are **completion engines**. Their job is to produce the most statistically plausible continuation of whatever text you gave them. When your instruction is vague, they do not pause and ask for clarification; they guess. And they guess confidently.
+AI models, particularly Large Language Models (LLMs), behave differently. They are **completion engines** that predict the next tokens that are most probable given the input text. When your instruction is vague, they do not pause and ask for clarification; they guess. And they guess confidently.
 
 Consider this prompt:
 
@@ -73,8 +81,6 @@ A specification for an AI agent is not a paragraph of instructions. It is a stru
 
 ### Role and Scope
 
-This section answers: *What is this agent, and what is it explicitly NOT?*
-
 Defining what an agent does is easy. Defining what it refuses to do is the part most teams skip. In AI systems, **negative space is as important as positive definition**. An agent without clearly defined refusals will attempt to handle anything that looks vaguely related to its purpose, often badly.
 
 **Weak:**
@@ -101,8 +107,6 @@ Scope OUT:
 The `Scope OUT` section is not boilerplate. It is functional. When this spec is included in an agent's system prompt, the agent has explicit permission to say "I can't help with that" rather than fabricating a path forward.
 
 ### Inputs and Outputs
-
-This section describes the data contract: what does the agent receive, and what is it expected to produce?
 
 Be as concrete as possible. Vague input descriptions produce vague outputs.
 
@@ -144,7 +148,7 @@ The constraint column is critical. Without it, an agent might call `update_payme
 
 ### Behavioral Rules
 
-This section codifies policies as explicit, unambiguous statements. Think of it as if-then logic written in plain language.
+Think behavioral rules as if-then logic written in plain language.
 
 ```
 Behavioral Rules:
@@ -167,7 +171,7 @@ Rules like these are extremely difficult to reverse-engineer from observed agent
 
 ### Success and Failure Criteria
 
-This section defines how you evaluate whether the agent is working correctly. Without it, "does the agent work?" is a matter of opinion.
+Success criteria defines how you evaluate whether the agent is working correctly. Without it, "does the agent work?" is a matter of opinion.
 
 ```
 Success Criteria:
@@ -214,7 +218,7 @@ The spec is not a document you write and then set aside. It is the source of you
 
 **The evaluation suite** runs the spec's success and failure criteria against the agent using synthetic test cases. If the agent produces a fabricated invoice, a test fails.
 
-This is the core discipline of SDD: **the spec is not documentation about the agent; it is the agent**.
+This is the core discipline of SDD: **the spec is not just documentation about the agent; it is the blueprint that defines the agent.**
 
 ## A Complete Worked Example
 
@@ -224,7 +228,7 @@ Let's walk through SDD end-to-end with a concrete scenario.
 
 ### Step 1: Write the Spec First
 
-```
+```markdown
 # GitHub Triage Agent - Specification v1.0
 
 ## Role and Scope
@@ -302,7 +306,7 @@ Scope OUT:
 
 The system prompt is not a creative rewrite of the spec. It is a faithful translation.
 
-```
+```markdown
 You are an automated GitHub issue triage agent for the certes/platform
 repository. Your job is to classify, label, and respond to new issues.
 
@@ -461,7 +465,7 @@ Writing a spec without building tests for its success and failure criteria gives
 
 Everything discussed so far describes SDD as a discipline: a set of practices you apply manually. [OpenSpec]([github.com/Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec)) is an open-source framework that automates those practices. It turns the workflow into a structured, repeatable system that lives inside your project repository.
 
-The core problem OpenSpec addresses is that AI coding assistants are powerful but unpredictable when requirements live only in chat history. That is exactly the failure mode from [Why AI Makes This Problem Worse](#Why%20AI%20Makes%20This%20Problem%20Worse). OpenSpec's response is to give every change its own folder of structured artifacts, agreed upon before any code is written.
+The core problem OpenSpec addresses is that AI coding assistants are powerful but unpredictable when requirements live only in chat history. That is exactly the failure mode from [Why AI Makes This Problem Worse](#why-ai-makes-this-problem-worse). OpenSpec's response is to give every change its own folder of structured artifacts, agreed upon before any code is written.
 
 ### The Filesystem as Spec Store
 
@@ -470,17 +474,15 @@ OpenSpec's foundational design decision is that specs are files, not database re
 ```
 your-project/
 ├── openspec/
-│   ├── project.md          ← persistent project worldview (see 10.2)
-│   ├── AGENTS.md           ← persistent agent behavioral rules
 │   ├── specs/              ← accumulated specifications (grows over time)
 │   │   └── auth/
 │   │       └── spec.md
 │   └── changes/            ← active and archived change proposals
 │       ├── add-dark-mode/  ← one folder per in-flight change
-│       │   ├── proposal.md
-│       │   ├── specs/
-│       │   ├── design.md
-│       │   └── tasks.md
+│       │   ├── proposal.md ← why we're doing this, what's changing
+│       │   ├── specs/      ← requirements and scenarios
+│       │   ├── design.md   ← technical approach
+│       │   └── tasks.md    ← implementation checklist
 │       └── archive/        ← completed changes moved here
 │           └── 2025-01-23-add-dark-mode/
 ```
@@ -491,11 +493,11 @@ This structure is tool-agnostic. It is plain Markdown and directories. Any AI as
 
 Two files in the OpenSpec structure map directly to the SDD concepts from earlier sections.
 
-**`openspec/project.md`** is the persistent "worldview" document. Developers should exhaustively describe the tech stack (specifying versions to prevent AI from using outdated syntax) and architecture patterns (for example: "all database access must go through the Repository layer; Controller direct queries are strictly forbidden").
+**`openspec/project.md`** is the persistent "worldview" document. Developers should thoroughly describe the tech stack (specifying versions to prevent AI from using outdated syntax) and architecture patterns (for example: "all database access must go through the Repository layer; Controller direct queries are strictly forbidden").
 
-This is the equivalent of the Role and Scope section from [Role and Scope](#Role%20and%20Scope), but project-wide rather than per-agent. It establishes the invariants that every change must respect.
+This is the equivalent of the Role and Scope section from [Role and Scope](#role-and-scope), but project-wide rather than per-agent. It establishes the invariants that every change must respect.
 
-**`openspec/AGENTS.md`** contains behavioral rules for the AI assistants working in the project. This maps to the Behavioral Rules section from [Behavioral Rules](#Behavioral%20Rules), but at the project level rather than the feature level.
+**`openspec/AGENTS.md`** contains behavioral rules for the AI assistants working in the project. This maps to the Behavioral Rules section from [Behavioral Rules](#behavioral-rules), but at the project level rather than the feature level.
 
 Together, these two files solve a problem that individual per-agent specs do not: they provide context continuity across sessions. A fresh AI context window that reads `project.md` and `AGENTS.md` before starting work has the same foundational constraints as every previous session.
 
@@ -514,7 +516,7 @@ The core workflow unit in OpenSpec is a **change**: a self-contained folder repr
 └───────────────────────────────────────────────────────────────┘
 ```
 
-This maps directly to the anatomy of a spec from [The Anatomy of a Good Spec for AI](#The%20Anatomy%20of%20a%20Good%20Spec%20for%20AI):
+This maps directly to the anatomy of a spec from [The Anatomy of a Good Spec for AI](#the-anatomy-of-a-good-spec-for-ai):
 
 | SDD Section              | OpenSpec Artifact  |
 |--------------------------|--------------------|
@@ -562,15 +564,15 @@ The human review step between `propose` and `apply` is where the SDD discipline 
 
 For teams that want finer-grained control, an expanded workflow breaks `propose` into incremental steps:
 
-```
-/opsx:new       → creates the change folder with an empty scaffold
-/opsx:continue  → creates the next artifact in dependency order
-/opsx:ff        → fast-forwards to create all artifacts at once
-/opsx:verify    → validates that implementation matches the spec
-/opsx:sync      → updates spec files without archiving
+```bash
+/opsx:new       `#→ creates the change folder with an empty scaffold`
+/opsx:continue  `#→ creates the next artifact in dependency order`
+/opsx:ff        `#→ fast-forwards to create all artifacts at once`
+/opsx:verify    `#→ validates that implementation matches the spec`
+/opsx:sync      `#→ updates spec files without archiving`
 ```
 
-Traditional workflows force you through phases: planning, then implementation, then done. The OPSX approach treats these as fluid actions rather than rigid phase gates, so you can update any artifact at any time.
+Traditional workflows force you through phases: planning, then implementation, then done. The OPSX approach treats these as fluid actions rather than rigid phase gates; you can update any artifact at any time.
 
 ### Delta Specs: Tracking What Changed
 
