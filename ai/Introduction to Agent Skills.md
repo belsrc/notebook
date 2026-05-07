@@ -41,6 +41,23 @@ At startup, only the YAML frontmatter `name` and `description` fields from all S
 
 This **progressive disclosure** model means large references incur zero token cost until accessed.
 
+## How instruction order works
+
+When Claude Code uses a Skill, the request is not handled as one flat block of text. The current prompt and any extra instructions are read first, so they can shape what the Skill is expected to do. If a Skill is relevant, Claude then loads that Skill’s body and applies it alongside the request.
+
+A simple way to think about the flow is:
+
+1. Claude reads its built-in instructions (System Prompt).
+2. It reads any always-on project or workspace guidance (Global `CLAUDE.md`, local `CLAUDE.md` & MCP definitions).
+3. It reads the current request, including extra instructions and file paths.
+4. If the request calls for a Skill, Claude loads the Skill.
+5. It then uses the Skill together with the original request.
+
+This ordering matters. For example, a request like `/skill-name Before running the skill, load something/file/path` is intended to influence how the Skill is activated, not to come after the Skill has already run. In practice, the instruction must be available before the Skill is applied so it can affect the setup and execution of the task.
+
+![](../../images/ai/simplistic-skill-load.png)
+_(Extremely simplistic mental model of skill invocation)_
+
 ### Skills vs. other Claude Code customization
 
 |Mechanism|What it does|Invocation|
