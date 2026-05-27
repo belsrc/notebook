@@ -6,31 +6,31 @@
   - [ ] Transformer architecture
   - [ ] Autoregressive token prediction
   - [ ] Attention mechanism
-  - [x] KV cache mechanics ([Context Window Mech](./Context%20Window%20Mechanics.md))
-  - [x] Why position in context matters ([Context Window Mech](./Context%20Window%20Mechanics.md))
+  - [x] KV cache mechanics ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
+  - [x] Why position in context matters ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
 - [-] Prompt Engineering
   - [ ] System vs. user vs. assistant turns
   - [ ] Few-shot examples & format anchoring
   - [ ] Chain-of-thought prompting
   - [ ] XML/structured output tagging
-  - [x] Negative space prompting ([AI Inference](./AI%20Inference.md))
+  - [x] Negative space prompting ([1.3 AI Inference](1.3%20AI%20Inference.md))
   - [ ] Prompt sensitivity & brittleness
 - [x] Token Economics
-  - [x] What a token is (BPE, tokenization) ([Context Window Mech](./Context%20Window%20Mechanics.md))
-  - [x] Input vs. output token pricing ([Token Econ](./Token%20Economics.md))
-  - [x] KV cache cost implications ([Token Econ](./Token%20Economics.md))
-  - [x] Cost modeling for multi-step agents ([Token Econ](./Token%20Economics.md) + [Sub-Agents](./Sub-agents.md))
+  - [x] What a token is (BPE, tokenization) ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
+  - [x] Input vs. output token pricing ([Token Econ](1.1%20Token%20Economics.md))
+  - [x] KV cache cost implications ([Token Econ](1.1%20Token%20Economics.md))
+  - [x] Cost modeling for multi-step agents ([Token Econ](1.1%20Token%20Economics.md) + [Sub-Agents](3.4%20Sub-Agents.md))
 - [-] Context Windows
-  - [x] Hard limits & what happens at the boundary ([Context Window Mech](./Context%20Window%20Mechanics.md))
-  - [x] Lost-in-the-middle degradation ([Context Window Mech](./Context%20Window%20Mechanics.md))
-  - [x] Context as working memory ([Context Window Mech](./Context%20Window%20Mechanics.md))
+  - [x] Hard limits & what happens at the boundary ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
+  - [x] Lost-in-the-middle degradation ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
+  - [x] Context as working memory ([Context Window Mech](1.2%20Context%20Window%20Mechanics.md))
   - [ ] Prefix caching strategies
 - [-] Sampling
   - [ ] Temperature
   - [ ] Top-p (nucleus sampling)
   - [ ] Top-k
   - [ ] Per-step sampling strategies
-  - [x] Determinism requirements for agents ([Determinism in Agents](./Determinism%20in%20Agents.md))
+  - [x] Determinism requirements for agents ([3.2 Determinism in Agents](3.2%20Determinism%20in%20Agents.md))
 
 ### Tier 1 · Agent Concepts
 
