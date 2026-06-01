@@ -97,19 +97,19 @@
 **MODULE 9: Agent Architectures**
 ═══════════════════════════════════════════════════════════
 
-- [x] **9.1  Defining "Agent".** Perception-action loop, the spectrum from workflow → agent (Anthropic's framing). Why the word is contested.
-- [x] **9.2  The ReAct Pattern.** Interleaved reasoning and action: $\text{Thought} \to \text{Action} \to \text{Observation} \to \text{Thought} \to \ldots$
-- [x] **9.3  Plan-and-Execute.** Two-stage: planner produces task graph, executor walks it. Trade-offs vs ReAct.
-- [x] **9.4  Reflection and Self-Critique.** Self-Refine, Reflexion, critic models. The pattern: act → critique → revise.
-- [x] **9.5  Tree of Thoughts and Search-Based Reasoning.** Exploration over thought trees with backtracking; the connection to classical search.
-- [ ] **9.6  Multi-Agent Systems.** Orchestrator-worker, debate, role-specialized agents. When this helps and when it adds latency without value.
-- [ ] **9.7  The Anthropic Taxonomy.** Augmented LLM → prompt chaining → routing → parallelization → orchestrator-workers → evaluator-optimizer → autonomous agent. Know each and when to choose it.
+- [~] **9.1  Defining "Agent".** Perception-action loop, the spectrum from workflow → agent (Anthropic's framing). Why the word is contested.
+- [~] **9.2  The ReAct Pattern.** Interleaved reasoning and action: $\text{Thought} \to \text{Action} \to \text{Observation} \to \text{Thought} \to \ldots$
+- [~] **9.3  Plan-and-Execute.** Two-stage: planner produces task graph, executor walks it. Trade-offs vs ReAct.
+- [~] **9.4  Reflection and Self-Critique.** Self-Refine, Reflexion, critic models. The pattern: act → critique → revise.
+- [~] **9.5  Tree of Thoughts and Search-Based Reasoning.** Exploration over thought trees with backtracking; the connection to classical search.
+- [~] **9.6  Multi-Agent Systems.** Orchestrator-worker, debate, role-specialized agents. When this helps and when it adds latency without value.
+- [~] **9.7 The Anthropic Taxonomy.** Augmented LLM → prompt chaining → routing → parallelization → orchestrator-workers → evaluator-optimizer → autonomous agent. Know each and when to choose it.
 
 ═══════════════════════════════════════════════════════════
 **MODULE 10: Agent Engineering Patterns**
 ═══════════════════════════════════════════════════════════
 
-- [ ] **10.1  Context Engineering as a Discipline.** Distinct from prompt engineering: managing what is in context, when, and why. Context as the single most important agent design surface.
+- [~] **10.1  Context Engineering as a Discipline.** Distinct from prompt engineering: managing what is in context, when, and why. Context as the single most important agent design surface.
 - [ ] **10.2  Subagent Spawning and Context Isolation.** The Stripe Minions pattern, Claude Code's subagents, why isolated contexts prevent premature design and reduce token cost.
 - [ ] **10.3  Artifact Chaining.** Phase-separated work where each phase outputs an artifact consumed by the next. Decouples context windows; enables auditing.
 - [ ] **10.4  Developer-in-the-Loop Workflows.** Local CLI tool → skill wrapper → agent layering. Structured JSON output from CLI tools to reduce token cost via filtering, grouping, deduplication.
@@ -171,4 +171,3 @@
 - [ ] **15.3  Coding Agents.** Claude Code, Cursor, Aider, Devin, SWE-agent. Architectural differences. Why coding is the canonical agent domain.
 - [ ] **15.4  Long-Horizon Agents.** Persistent state, multi-day tasks, the open problem of error compounding over long trajectories.
 - [ ] **15.5  Open Research Problems.** Reliable reasoning, robust tool use, scalable oversight, interpretability of agent decisions, alignment of increasingly capable systems.
-- [ ] **15.6  Capstone Synthesis.** Choose a non-trivial agent system from your work context; explain every architectural decision, trace failure modes, propose improvements. Mastery is demonstrated by being able to design from first principles, not by reciting patterns.
