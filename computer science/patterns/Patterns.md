@@ -30,8 +30,8 @@ gardening: 🌳
 **[Iterator](./behavioral/Iterator%20Pattern.md)**: Walks a collection without exposing its internal structure
 **[Mediator](./behavioral/Mediator%20Pattern.md)**: Routes all inter-object communication through a central hub
 **[Memento](./behavioral/Memento%20Pattern.md)**: Snapshots and later restores an object's private state
-**Observer**: Notifies subscribed listeners when state changes
-**State**: Delegates behavior to a swappable state object
-**Strategy**: Injects an algorithm as a replaceable dependency
-**Template Method**: Fixes an algorithm's skeleton; subclasses fill the variable steps
-**Visitor**: Adds an operation to a type hierarchy without modifying it
+**[Observer](./behavioral/Observer%20Pattern.md)**: Notifies subscribed listeners when state changes
+**[State](./behavioral/State%20Pattern.md)**: Delegates behavior to a swappable state object
+**[Strategy](./behavioral/Strategy%20Pattern.md)**: Injects an algorithm as a replaceable dependency
+**[Template Method](./behavioral/Template%20Method%20Pattern.md)**: Fixes an algorithm's skeleton; subclasses fill the variable steps
+**[Visitor](./behavioral/Visitor%20Pattern.md)**: Adds an operation to a type hierarchy without modifying it
