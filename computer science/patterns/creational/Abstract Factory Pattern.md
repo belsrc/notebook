@@ -5,8 +5,9 @@ tags:
 gardening: 🌳
 date: 2025-12-21
 reference:
-  - https://softwaredesignpatterns.azurewebsites.net/eBooks/Design%20Patterns%20Elements%20of%20Reusable%20Object-Oriented%20Software.pdf
   - https://refactoring.guru/design-patterns/abstract-factory
+  - https://github.com/deepakkum21/Books/blob/master/Design%20Patterns%20-%20Elements%20of%20Reusable%20Object%20Oriented%20Software%20-%20GOF.pdf
+  - https://en.wikipedia.org/wiki/Abstract_factory_pattern
 ---
 ## What & Why
 

@@ -5,6 +5,9 @@ tags:
 gardening: 🌿
 date: 2026-06-06
 reference:
+  - https://github.com/deepakkum21/Books/blob/master/Design%20Patterns%20-%20Elements%20of%20Reusable%20Object%20Oriented%20Software%20-%20GOF.pdf
+  - https://refactoring.guru/design-patterns/adapter
+  - https://en.wikipedia.org/wiki/Adapter_pattern
 ---
 ## What & Why
 
